@@ -30,6 +30,8 @@ const secParse = _ => {
     let d = [];
     let data = fetch(MY_URL);
 
+    data = JSON.parse(data)
+
     data.forEach(item => {
         d.push({
             title: item.title,
