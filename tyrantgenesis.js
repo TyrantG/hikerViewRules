@@ -43,7 +43,7 @@ const secParse = _ => {
             writeFile(temp_name, JSON.stringify(rule.rule));
             d.push({
                 title: rule.title,
-                url: "rule://"+temp_name,
+                url: "rule://"+base64Encode("海阔视界，首页频道合集￥home_rule_url￥"+temp_name).replace(/\n/g, ''),
                 col_type: 'text_2'
             })
         })
