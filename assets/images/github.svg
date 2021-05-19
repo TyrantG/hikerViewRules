@@ -1,11 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="495" height="195" viewBox="0 0 495 195" fill="none">
-        <style>
-          .header {
-            font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
-            fill: #70a5fd;
-            animation: fadeInAnimation 0.8s ease-in-out forwards;
-          }
-          
+    <style>
+    .header {
+        font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
+        fill: #70a5fd;
+        animation: fadeInAnimation 0.8s ease-in-out forwards;
+    } 
     .stat {
       font: 600 14px 'Segoe UI', Ubuntu, "Helvetica Neue", Sans-Serif; fill: #38bdae;
     }

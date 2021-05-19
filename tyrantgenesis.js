@@ -13,8 +13,10 @@ const baseParse = _ => {
 
     eval(script);
 
+    fy_bridge_app.showPic("https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight")
+
     d.push({
-        pic_url: BASE_URL+"assets/images/github.svg",
+        pic_url: "https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight",
         url: "web://https://github.com/TyrantG",
         col_type: 'pic_1',
     });
