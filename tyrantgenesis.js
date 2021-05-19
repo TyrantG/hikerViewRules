@@ -41,7 +41,7 @@ const secParse = _ => {
         item.rules.forEach(rule => {
             d.push({
                 title: rule.title,
-                url: "rule://"+rule.url,
+                url: "rule://"+rule.rule,
                 col_type: 'text_2'
             })
         })
