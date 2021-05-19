@@ -16,7 +16,7 @@ const baseParse = _ => {
     d.push({
         pic_url: "https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight#ignoreImg=false#",
         url: "web://https://github.com/TyrantG",
-        col_type: 'pic_1_full',
+        col_type: 'pic_1',
     });
 
     GROUP_RULES.forEach(rule => {
