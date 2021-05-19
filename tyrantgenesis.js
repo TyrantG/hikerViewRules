@@ -32,16 +32,18 @@ const secParse = _ => {
 
     data = JSON.parse(data)
 
-    data.forEach(item => {
+    data.forEach((item, index) => {
         d.push({
             title: item.title,
             col_type: 'long_text'
         })
 
-        item.rules.forEach(rule => {
+        item.rules.forEach((rule, key) => {
+            let temp_name = 'hiker://files/TyrantG/temp/' + index + '/' + key + '/tmp.json'
+            writeFile(temp_name, JSON.stringify(rule.rule));
             d.push({
                 title: rule.title,
-                url: "rule://"+JSON.stringify(rule.rule),
+                url: "rule://"+temp_name,
                 col_type: 'text_2'
             })
         })
