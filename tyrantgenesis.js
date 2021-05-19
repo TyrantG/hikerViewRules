@@ -14,13 +14,9 @@ const baseParse = _ => {
     eval(script);
 
     d.push({
-        pic_url: "https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight",
-        url: "https://github.com/TyrantG",
-        col_type: 'pic_1_full'
-    });
-
-    d.push({
-        col_type: 'line_blank'
+        pic_url: "https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight#ignoreImg=false#",
+        url: "web://https://github.com/TyrantG",
+        col_type: 'pic_1_full',
     });
 
     GROUP_RULES.forEach(rule => {
