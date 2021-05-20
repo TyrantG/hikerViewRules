@@ -76,7 +76,7 @@ const secParse = _ => {
     setHomeResult(res);
 }
 
-const getFormatDate = _ => {
+/* const getFormatDate = _ => {
     var date = new Date();
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
@@ -97,7 +97,7 @@ const getSign = (script, rid, did, tt) => {
     eval(func_ub9)
 
     let res = ub98484234()
-    let v = res.match(/v=(\d+)/)[0].replace("v=", '')
+    let v = res.match(/v=(\d+)/)[0]
     let rb = hex_md5(rid + did + tt + v)
 
     let func_sign = res.replace(/return rt;}\);?/, 'return rt;}')
@@ -105,9 +105,9 @@ const getSign = (script, rid, did, tt) => {
     func_sign = func_sign.replace('CryptoJS.MD5(cb).toString()', '"' + rb + '"')
     eval(func_sign)
 
-    let params = sign(rid, did, tt)/*  + "&ver=219032101&rid={}&rate=-1&rid="+rid */
+    let params = sign(rid, did, tt) + "&ver=219032101&rid={}&rate=-1&rid="+rid
     return params
-}
+} */
 
 const categoryParse = _ =>{
     let res = {};
@@ -151,35 +151,3 @@ const searchParse = () => {
     res.data = d;
     setHomeResult(res);
 }
-
-const sb = _ => {
-    let res = {};
-    let d = [];
-    let params = {}
-    const html = getResCode();
-    const script = parseDomForHtml(html, "script&&Html");
-
-    const cookie = fetch('https://passport.douyu.com/lapi/did/api/get?client_id=25&_='+params.tt+'&callback=axiosJsonpCallback1', {headers: {referer: "https://m.douyu.com/"}})
-
-    const did = cookie.match(/"did":".*"/)
-
-    params.rid = /* parseInt(MY_URL.replace("https://m.douyu.com/", "")) */"6985688"
-    // params.v = "2501"+getFormatDate()
-    params.tt = /* Date.parse(new Date()).toString().substr(0,10) */"1621503905"
-    params.did = /* did[0].replace("\"did\":\"", "").replace("\"", "") */ "10000000000000000000000000001501"
-
-
-
-
-    let param_body = getSign(script, params.rid, params.did, params.tt)
-    setError(param_body)
-
-
-    const stream_json = fetch('https://m.douyu.com/api/room/ratestream', {headers:{'content-type':'application/json'}, body: param_body, method:'POST', withHeader: true})
-    
-
-
-    res.data = d;
-    setHomeResult(res);
-}
-sb()
