@@ -139,28 +139,16 @@ const searchParse = () => {
     const html = getResCode();
     const list = JSON.parse(html).data
     
-    if (list.anchor) {
-        list.anchor.forEach(item => {
-            d.push({
-                title: item.roomName,
-                desc: item.nickname,
-                pic_url: item.roomSrc,
-                url: "https://m.douyu.com/"+item.roomId
-            })
+    list.list.forEach(item => {
+        d.push({
+            title: item.roomName,
+            desc: item.nickname,
+            pic_url: item.roomSrc,
+            url: "https://m.douyu.com/"+item.roomId
         })
+    })
         
-    }
-    if (list.room) {
-        list.room.forEach(item => {
-            d.push({
-                title: item.roomName,
-                desc: item.nickname,
-                pic_url: item.roomSrc,
-                url: "https://m.douyu.com/"+item.roomId
-            })
-        })
-        
-    }
+    
     res.data = d;
     setHomeResult(res);
 }
