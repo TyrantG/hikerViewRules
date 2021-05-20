@@ -10,7 +10,10 @@ const baseParse = _ => {
         d.push({
             title: element.cate2Info[0].cate2Name,
             pic_url: element.icon,
-            url: $(category_url).rule(_ => categoryParse()),
+            url: $(category_url).rule(_ => {
+                eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+                categoryParse()
+            }),
             col_type: 'icon_2'
         })
         d.push({
@@ -117,7 +120,10 @@ const categoryParse = _ =>{
             title: item.roomName,
             desc: item.nickname,
             pic_url: item.roomSrc,
-            url: $("https://m.douyu.com/"+item.rid).rule(_ => secParse()),
+            url: $("https://m.douyu.com/"+item.rid).rule(_ => {
+                eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+                secParse()
+            }),
             col_type: 'movie_2'
         })
     })
