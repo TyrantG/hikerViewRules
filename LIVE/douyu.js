@@ -76,7 +76,7 @@ const secParse = _ => {
     setHomeResult(res);
 }
 
-/* const getFormatDate = _ => {
+const getFormatDate = _ => {
     var date = new Date();
     var month = date.getMonth() + 1;
     var strDate = date.getDate();
@@ -97,7 +97,7 @@ const getSign = (script, rid, did, tt) => {
     eval(func_ub9)
 
     let res = ub98484234()
-    let v = res.match(/v=(\d+)/)[0]
+    let v = res.match(/v=(\d+)/)[0].replace("v=", '')
     let rb = hex_md5(rid + did + tt + v)
 
     let func_sign = res.replace(/return rt;}\);?/, 'return rt;}')
@@ -107,7 +107,7 @@ const getSign = (script, rid, did, tt) => {
 
     let params = sign(rid, did, tt) + "&ver=219032101&rid={}&rate=-1&rid="+rid
     return params
-} */
+}
 
 const categoryParse = _ =>{
     let res = {};
@@ -147,7 +147,9 @@ const searchParse = () => {
             url: "https://m.douyu.com/"+item.roomId
         })
     })
-        
+
+    let sb = fetch("https://m.douyu.com/api/search/liveRoom", {body: "limit=10&offset=fypage@-1@*10@&sk=**", 'method': 'POST'})
+    setError(MY_URL)
     
     res.data = d;
     setHomeResult(res);
