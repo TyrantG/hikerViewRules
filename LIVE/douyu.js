@@ -141,8 +141,8 @@ const searchParse = () => {
     
     list.list.forEach(item => {
         d.push({
-            title: item.roomName,
-            desc: item.nickname,
+            title: "主播："+item.nickname,
+            desc: item.roomName,
             pic_url: item.roomSrc,
             url: "https://m.douyu.com/"+item.roomId
         })
