@@ -26,6 +26,12 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
 <script>
+    const newPage = (search) => {
+        fy_bridge_app.toDetailPage(`搜索：${search}`, $(search).rule(_ => {
+            eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+            searchParse()
+        }))
+    }
     new Vue({
         el: '#app',
         data() {
@@ -40,10 +46,7 @@
                     return false
                 }
                 const searchUrl = `https://m.douyu.com/api/search/anchor?limit=10&offset=fypage@-1@*10@&sk=${this.search};POST`
-                fy_bridge_app.toDetailPage(`搜索：${this.search}`, $(searchUrl).rule(_ => {
-                    eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
-                    searchParse()
-                }))
+                newPage(searchUrl)
             },
         },
     });
