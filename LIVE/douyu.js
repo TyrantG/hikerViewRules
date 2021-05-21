@@ -9,7 +9,7 @@ const baseParse = _ => {
 
     d.push({
         desc: '36',
-        url: "http://192.168.5.141:8080/douyu-search.html",
+        url: fetch('hiker://files/TyrantG/public/js/douyu-search.html'),
         col_type:"x5_webview_single",
     })
 
