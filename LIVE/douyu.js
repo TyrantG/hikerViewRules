@@ -7,11 +7,11 @@ const baseParse = _ => {
     const list_json = fetch("https://m.douyu.com/api/home/mix");
     const list = JSON.parse(list_json)
 
-    d.push({
+    /*d.push({
         desc: '96 && float',
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-search.html?time='+(new Date()).getTime(),
         col_type:"x5_webview_single",
-    })
+    })*/
 
     list.data.forEach(element => {
         let category_url = "https://m.douyu.com/api/room/list?page=fypage&type="+element.shortName
