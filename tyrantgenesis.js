@@ -20,7 +20,7 @@ const baseParse = _ => {
     });*/
     d.push({
         desc: '240',
-        url: BASE_URL+"https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight",
+        url: "https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight",
         col_type:"x5_webview_single",
     })
 
