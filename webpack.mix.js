@@ -29,12 +29,12 @@ mix.js('vue/app.js', 'public/js')
     'node_modules/quill/dist/quill.bubble.css',
 ], 'public/css/app.css')*/
 mix.setPublicPath('public')
-mix.webpackConfig({
+/*mix.webpackConfig({
     output: {
         publicPath: rootPath,
-        chunkFilename: /*process.env.NODE_ENV === 'development' ? 'js/[name].js' : */'js/[name].[chunkhash].js',
+        chunkFilename: 'js/[name].[chunkhash].js',
     }
 })
-mix.setResourceRoot(rootPath)
+mix.setResourceRoot(rootPath)*/
 // .extract(['vue', 'axios', 'element-ui', 'vue-quill-editor', 'vuedraggable', 'quill', 'dayjs'])
 mix.sourceMaps()
