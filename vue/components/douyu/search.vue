@@ -50,12 +50,15 @@ export default {
   },
   methods: {
     hikerSearch() {
+      putVar('chooseOption', this.chooseOption)
       if (! this.search) {
         this.$message.error('请输入搜索内容！')
         return false
+      } else {
+        this.$message.success(getVar('chooseOption'))
+        return false
       }
       const searchUrl = `https://m.douyu.com/api/search/${this.chooseOption}?limit=10&offset=fypage@-1@*10@&sk=${this.search};POST`
-      putVar('chooseOption', this.chooseOption)
       fy_bridge_app.newPage(`搜索：${this.search}`, $(searchUrl).rule(_ => {
 
       }))
