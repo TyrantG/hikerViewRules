@@ -8,7 +8,7 @@ const baseParse = _ => {
     const list = JSON.parse(list_json)
 
     d.push({
-        desc: '90 && float',
+        desc: '96 && float',
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-search.html',
         col_type:"x5_webview_single",
     })
