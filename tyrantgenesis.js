@@ -19,8 +19,8 @@ const baseParse = _ => {
         col_type: 'pic_1_full',
     });*/
     d.push({
-        desc: 'auto',
-        url: BASE_URL+"assets/images/github.svg",
+        desc: '240',
+        url: BASE_URL+"https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight",
         col_type:"x5_webview_single",
     })
 
