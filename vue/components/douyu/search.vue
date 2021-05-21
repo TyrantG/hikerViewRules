@@ -15,9 +15,12 @@ export default {
   },
   methods: {
     hikerSearch() {
+      putVar('sb', 1)
       if (! this.search) {
-        Notify({ type: 'warning', message: '通知内容' });
+        Notify({ type: 'warning', message: '请输入搜索内容！' });
         return false
+      } else {
+        Notify({ type: 'warning', message: getVar('sb') });
       }
       const searchUrl = `https://m.douyu.com/api/search/anchor?limit=10&offset=fypage@-1@*10@&sk=${this.search};POST`
       fy_bridge_app.newPage(`搜索：${this.search}`, $(searchUrl).rule(_ => {
