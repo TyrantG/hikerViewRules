@@ -18,11 +18,11 @@ const baseParse = _ => {
         url: "web://https://github.com/TyrantG",
         col_type: 'pic_1_full',
     });*/
-    d.push({
-        desc: '200',
-        url: "https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight",
-        col_type:"x5_webview_single",
-    })
+    // d.push({
+    //     desc: '200',
+    //     url: "https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight",
+    //     col_type:"x5_webview_single",
+    // })
 
     GROUP_RULES.forEach(rule => {
         d.push({
