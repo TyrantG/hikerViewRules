@@ -1,61 +1,25 @@
 <template>
   <div>
-    <el-input placeholder="请输入内容" v-model="search" clearable :size="size">
-      <el-select :style="`width: ${selectWidth}`" slot="prepend" v-model="chooseOption">
-        <el-option
-            v-for="item in options"
-            :key="item.type"
-            :label="item.label"
-            :value="item.type">
-        </el-option>
-      </el-select>
-      <el-button slot="append" icon="el-icon-search" @click="hikerSearch">{{searchText}}</el-button>
-    </el-input>
+    <van-search class="douyu-search" v-model="search" placeholder="请输入搜索关键词" @search="hikerSearch" />
   </div>
 </template>
 
 <script>
+import { Notify } from 'vant';
 export default {
   name: "search",
-  props: {
-    options: {
-      type: Array,
-      default: () => []
-    },
-    defaultOption: {
-      type: String,
-      default: ''
-    },
-    searchText: {
-      type: String,
-      default: '搜索'
-    },
-    selectWidth: {
-      type: String,
-      default: '90px'
-    },
-    size: {
-      type: String,
-      default: 'medium'
-    }
-  },
-  mounted() {
-    this.chooseOption = this.defaultOption
-  },
   data() {
     return {
       search: '',
-      chooseOption: '',
     }
   },
   methods: {
     hikerSearch() {
-      // putVar('chooseOption', this.chooseOption)
       if (! this.search) {
-        this.$message.error('请输入搜索内容！')
+        Notify({ type: 'warning', message: '通知内容' });
         return false
       }
-      const searchUrl = `https://m.douyu.com/api/search/${this.chooseOption}?limit=10&offset=fypage@-1@*10@&sk=${this.search};POST`
+      const searchUrl = `https://m.douyu.com/api/search/anchor?limit=10&offset=fypage@-1@*10@&sk=${this.search};POST`
       fy_bridge_app.newPage(`搜索：${this.search}`, $(searchUrl).rule(_ => {
         eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
         searchParse()
@@ -66,5 +30,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+.douyu-search {
+  margin-top: 36px;
+}
 </style>
