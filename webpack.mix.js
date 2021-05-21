@@ -1,7 +1,8 @@
 const mix = require('laravel-mix')
 const fs = require('fs')
 
-const rootPath = process.env.NODE_ENV === 'development' ? './' : '/public/static/admin/vue/'
+// const rootPath = process.env.NODE_ENV === 'development' ? './' : '/public/static/admin/vue/'
+const rootPath = './'
 
 const deleteFile = path => {
     let files = [];
@@ -21,7 +22,7 @@ const deleteFile = path => {
 
 if (process.env.NODE_ENV !== 'development') deleteFile('public/js')
 
-mix.js('src/app.js', 'public/js')
+mix.js('vue/app.js', 'public/js')
 /*mix.styles([
     'node_modules/quill/dist/quill.core.css',
     'node_modules/quill/dist/quill.snow.css',

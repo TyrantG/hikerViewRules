@@ -42,5 +42,8 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "dependencies": {
+    "vant": "^2.12.19"
+  }
 }

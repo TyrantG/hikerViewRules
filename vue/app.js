@@ -1,17 +1,17 @@
 import Vue from 'vue'
 import store from './store'
 // element ui
-require('./components/element-ui')
+require('./element-ui')
 
 Vue.config.productionTip = false
 
 // Quill
-import  VueQuillEditor from 'vue-quill-editor'
+// import  VueQuillEditor from 'vue-quill-editor'
 // require styles 引入样式
 /*import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'*/
-Vue.use(VueQuillEditor)
+// Vue.use(VueQuillEditor)
 
 // axios
 import axios from 'axios'
@@ -31,7 +31,7 @@ Vue.prototype.$api = {}
 import api from './api/index'
 Vue.use(api)
 
-// Vue.component('form-builder', require('./components/FormBuilder').default);
+Vue.component('douyu-search-block', require('./components/douyu/search').default);
 
 // 定义实例
 const app = new Vue({
