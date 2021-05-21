@@ -50,11 +50,12 @@ export default {
   },
   methods: {
     hikerSearch() {
-      putVar('chooseOption', this.chooseOption)
+      // putVar('chooseOption', this.chooseOption)
       if (! this.search) {
         this.$message.error('请输入搜索内容！')
         return false
       } else {
+        this.$message.warning(this.chooseOption)
         this.$message.success(getVar('chooseOption'))
         return false
       }
