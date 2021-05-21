@@ -9,7 +9,7 @@ const baseParse = _ => {
 
     d.push({
         desc: '36',
-        url: 'hiker://files/TyrantG/public/douyu-search.html',
+        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-search.html',
         col_type:"x5_webview_single",
     })
 
