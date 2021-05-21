@@ -7,8 +7,6 @@ const baseParse = _ => {
     const list_json = fetch("https://m.douyu.com/api/home/mix");
     const list = JSON.parse(list_json)
 
-    eval(fetch('hiker://files/TyrantG/public/js/app.js'))
-
     d.push({
         desc: '150 && float',
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-search.html',
