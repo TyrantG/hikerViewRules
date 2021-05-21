@@ -54,44 +54,12 @@ export default {
       if (! this.search) {
         this.$message.error('请输入搜索内容！')
         return false
-      } else {
-        this.$message.warning(this.chooseOption)
-        this.$message.success(getVar('chooseOption'))
-        return false
       }
       const searchUrl = `https://m.douyu.com/api/search/${this.chooseOption}?limit=10&offset=fypage@-1@*10@&sk=${this.search};POST`
       fy_bridge_app.newPage(`搜索：${this.search}`, $(searchUrl).rule(_ => {
-
+        eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+        searchParse()
       }))
-    },
-    searchParse() {
-      let res = {};
-      let d = [];
-      const html = getResCode();
-      const list = JSON.parse(html).data
-
-      if (getVar('chooseOption') == 'video') {
-        list.list.forEach(item => {
-          d.push({
-            title: item.title,
-            desc: item.roomName,
-            pic_url: item.videoPic,
-            url: "https://vmobile.douyu.com/show/"+item.hashID
-          })
-        })
-      } else {
-        list.list.forEach(item => {
-          d.push({
-            title: item.nickname,
-            desc: item.roomName,
-            pic_url: item.roomSrc,
-            url: "https://m.douyu.com/"+item.roomId
-          })
-        })
-      }
-
-      res.data = d;
-      setHomeResult(res);
     },
   },
 }
