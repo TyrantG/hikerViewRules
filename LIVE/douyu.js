@@ -8,7 +8,7 @@ const baseParse = _ => {
     const list = JSON.parse(list_json)
 
     d.push({
-        desc: '100',
+        desc: '150&&float',
         url: 'http://11.dev.tyrantg.com/douyu-search.html',
         col_type:"x5_webview_single",
     })
