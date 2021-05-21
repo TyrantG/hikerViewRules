@@ -19,7 +19,7 @@ const baseParse = _ => {
         col_type: 'pic_1_full',
     });*/
     d.push({
-        desc: '240',
+        desc: '200',
         url: "https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight",
         col_type:"x5_webview_single",
     })
