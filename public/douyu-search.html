@@ -25,10 +25,9 @@
 <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
 <script>
     function newPage (search) {
-        fy_bridge_app.newPage(`搜索：${search}`, $(search).rule(_ => {
-            eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
-            searchParse()
-        }))
+        vant.Notify({ type: 'success', message: fy_bridge_app.toDetailPage });
+
+        fy_bridge_app.toDetailPage(`搜索：${search}`, search, '123', `eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'));searchParse()`, '')
     }
     new Vue({
         el: '#app',
@@ -39,10 +38,6 @@
         },
         methods: {
             hikerSearch() {
-                if (fy_bridge_app === undefined) {
-                    vant.Notify({ type: 'warning', message: JSON.parse(fy_bridge_app) });
-                    return false
-                }
                 if (! this.search) {
                     vant.Notify({ type: 'warning', message: '请输入搜索内容！' });
                     return false
