@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-input placeholder="请输入内容" v-model="search" :size="size">
+    <el-input placeholder="请输入内容" v-model="search" clearable :size="size">
       <el-select :style="`width: ${selectWidth}`" slot="prepend" v-model="chooseOption">
         <el-option
             v-for="item in options"
@@ -9,7 +9,7 @@
             :value="item.type">
         </el-option>
       </el-select>
-      <el-button slot="append" icon="el-icon-search" @click="search">{{searchText}}</el-button>
+      <el-button slot="append" icon="el-icon-search" @click="hikerSearch">{{searchText}}</el-button>
     </el-input>
   </div>
 </template>
@@ -49,9 +49,10 @@ export default {
     }
   },
   methods: {
-    search() {
+    hikerSearch() {
       if (! this.search) {
         this.$message.error('请输入搜索内容！')
+        return false
       }
       const searchUrl = `https://m.douyu.com/api/search/${this.chooseOption}?limit=10&offset=fypage@-1@*10@&sk=${this.search};POST`
       putVar('chooseOption', this.chooseOption)
