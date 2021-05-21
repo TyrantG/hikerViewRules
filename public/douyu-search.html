@@ -38,9 +38,6 @@
                 if (! this.search) {
                     vant.Notify({ type: 'warning', message: '请输入搜索内容！' });
                     return false
-                } else {
-                    vant.Notify({ type: 'success', message: getVar('sb') });
-                    return false
                 }
                 const searchUrl = `https://m.douyu.com/api/search/anchor?limit=10&offset=fypage@-1@*10@&sk=${this.search};POST`
                 fy_bridge_app.toDetailPage(`搜索：${this.search}`, $(searchUrl).rule(_ => {
