@@ -118,7 +118,7 @@ const searchParse = () => {
     const html = getResCode();
     const list = JSON.parse(html).data
 
-    if (getVar('chooseOption') && getVar('chooseOption') == 'video') {
+    /*if (getVar('chooseOption') && getVar('chooseOption') == 'video') {
         list.list.forEach(item => {
             d.push({
                 title: item.title,
@@ -128,7 +128,7 @@ const searchParse = () => {
                 col_type: 'movie_2'
             })
         })
-    } else {
+    } else {*/
         list.list.forEach(item => {
             d.push({
                 title: item.nickname,
@@ -138,7 +138,7 @@ const searchParse = () => {
                 col_type: 'movie_2'
             })
         })
-    }
+    // }
 
     res.data = d;
     setHomeResult(res);
