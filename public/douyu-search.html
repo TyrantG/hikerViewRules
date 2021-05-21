@@ -41,6 +41,7 @@
             hikerSearch() {
                 if (fy_bridge_app === undefined) {
                     vant.Notify({ type: 'warning', message: JSON.parse(fy_bridge_app) });
+                    return false
                 }
                 if (! this.search) {
                     vant.Notify({ type: 'warning', message: '请输入搜索内容！' });
