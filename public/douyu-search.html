@@ -6,14 +6,10 @@
     <title>TyrantGenesis 自制组件</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"/>
     <style>
-        html {
+        html, body {
             margin: 0;
             padding: 0;
-            height: 150px;
-        }
-        body {
             height: 100%;
-            /*margin: 8px;*/
         }
         .douyu-search {
             margin-top: 36px;
@@ -27,7 +23,8 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
 <script>
-    const newPage = (search) => {
+    function newPage (search) {
+        alert('123')
         fy_bridge_app.toDetailPage(`搜索：${search}`, $(search).rule(_ => {
             eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
             searchParse()
