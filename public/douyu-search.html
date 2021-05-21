@@ -24,7 +24,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
 <script>
     function newPage (search) {
-        alert(JSON.stringify(fy_bridge_app))
+        alert(getVar('sb'))
         fy_bridge_app.newPage(`搜索：${search}`, $(search).rule(_ => {
             eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
             searchParse()
