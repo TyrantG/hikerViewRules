@@ -43,7 +43,7 @@
                     return false
                 }
                 const searchUrl = `https://m.douyu.com/api/search/anchor?limit=10&offset=fypage@-1@*10@&sk=${this.search};POST`
-                fy_bridge_app.newPage(`搜索：${this.search}`, $(searchUrl).rule(_ => {
+                fy_bridge_app.toDetailPage(`搜索：${this.search}`, $(searchUrl).rule(_ => {
                     eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
                     searchParse()
                 }))
