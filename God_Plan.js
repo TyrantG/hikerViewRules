@@ -41,6 +41,10 @@ const eroticmovies_xyz = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/eroticmovies.xyz.js?t="+time, 'hiker://files/TyrantG/GHS/eroticmovies.xyz.js')
 }
 
+const eporner = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/eporner?t="+time, 'hiker://files/TyrantG/GHS/eporner.js')
+}
+
 const aktool = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/aktools.js?t="+time, 'hiker://files/TyrantG/TOOL/aktool.js')
 }
