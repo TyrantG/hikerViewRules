@@ -18,7 +18,7 @@
     "data": [
       {
         "title": "明日方舟",
-        "rule": [
+        "rules": [
           {
             "title": "明日方舟工具箱",
             "rule": {"title":"明日方舟工具箱","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"https://www.bigfun.cn/tools/aktools/","col_type":"","class_name":"","class_url":"","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/TOOL/aktool.js'))\nbaseParse()","search_url":"","searchFind":"","detail_col_type":"","detail_find_rule":"","sdetail_col_type":"","sdetail_find_rule":"","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\naktool()"}
