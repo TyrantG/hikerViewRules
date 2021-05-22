@@ -26,7 +26,7 @@ const baseParse = _ => {
             video_list.push(sources[p].src)
           }
 
-          return video_list.shift()
+          return "https://s5-n1-c2-fr-cdn.eporner.com" + video_list.shift().replace(/https.*\/com\/, "")
           //return parseDomForHtml(list[list.length-1], 'a&&href');
         })
       });
