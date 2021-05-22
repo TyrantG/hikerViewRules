@@ -27,4 +27,8 @@ const yande_re = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/yande.re.js", 'hiker://files/TyrantG/GHS/yande.re.js')
 }
 
+const pornhub = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/pornhub.js", 'hiker://files/TyrantG/GHS/pornhub.js')
+}
+
 /* Customize Function */
