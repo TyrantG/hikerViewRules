@@ -20,11 +20,11 @@ const secParse = _ => {
   let res = {};
   let d = [];
   const html = getResCode();
-  const desc = parseDomForHtml(html, "#content");
 
   d.push({
-    pic_url: parseDomForHtml(desc, ".highres-show&&href"),
-    url: parseDomForHtml(desc, ".highres-show&&href")
+    pic_url: parseDomForHtml(html, ".highres-show&&href"),
+    url: parseDomForHtml(html, ".highres-show&&href"),
+    col_type: 'image_1_full'
   })
   res.data = d;
   setHomeResult(res);
@@ -38,6 +38,8 @@ const searchParse = _ => {
 
   list.forEach(element => {
     d.push({
+      title: '',
+      desc: '',
       pic_url: parseDomForHtml(element, ".preview&&src"),
       url: "https://yande.re"+parseDomForHtml(element, "a&&href")
     })
