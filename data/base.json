@@ -47,7 +47,7 @@
         "title": "图片站",
         "rules": [
           {
-            "title": "yande.re",
+            "title": "yande.re ❌ （高清待修）",
             "rule": {"title":"yande.re","author":"TyrantGenesis","url":"https://yande.re/post?page=fypage","version":1,"col_type":"pic_3","class_name":"","class_url":"","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/yande.re.js'))\nbaseParse()","search_url":"https://yande.re/post?page=fypage&tags=**","titleColor":"#bdb2ff","group":"⑳TyrantG","searchFind":"js:\neval(fetch('hiker://files/TyrantG/GHS/yande.re.js'))\nsearchParse()","detail_col_type":"pic_1_full","detail_find_rule":"","sdetail_col_type":"\npic_1","sdetail_find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/yande.re.js'))\nsecParse()","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nyande_re()"}
           }
         ]
@@ -68,7 +68,7 @@
             "rule": {"title":"spankbang","author":"TyrantGenesis","url":"https://spankbang.com/fyclass/fypage/","version":2,"col_type":"movie_3","class_name":"最新&热门&最受欢迎","class_url":"new_videos&trending_videos&most_popular","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/spankbang.js'))\nbaseParse()","search_url":"https://spankbang.com/s/**/fypage/","titleColor":"#bdb2ff","group":"⑳TyrantG","searchFind":"js:\neval(fetch('hiker://files/TyrantG/GHS/spankbang.js'))\nsearchParse()","detail_col_type":"movie_1","detail_find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/spankbang.js'))\nsecParse()","sdetail_col_type":"movie_1","sdetail_find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/spankbang.js'))\nsecParse()","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nspankbang()"}
           },
           {
-            "title": "eroticmovies.xyz ❌ （待修）",
+            "title": "eroticmovies.xyz ❌ （视频源挂了等网站恢复）",
             "rule": {"title":"eroticmovies.xyz","author":"TyrantGenesis","url":"https://eroticmovies.xyz/fyAll/page/fypage","version":1,"col_type":"movie_2","class_name":"最新&热门","class_url":"new&top","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"tr&&td;\nh2&&a&&Text;\nimg[alt]&&src;\n;\na&&Attrhref","search_url":"","titleColor":"#bdb2ff","group":"⑳TyrantG","searchFind":"","detail_col_type":"pic_1","detail_find_rule":"js:\nvar res = {};\nvar d = [];\nvar html = getResCode();\n\nvar des_title = parseDomForHtml(html, 'h1&&Text');\nvar des_pic = parseDom(html, 'img[title]&&src');\nvar des_desc = parseDomForHtml(html, '[id=fileDescription]&&Text');\n\nvar fetch_video = fetch(parseDomForHtml(html, 'iframe&&src'))\n\njsArr = parseDomForArray(fetch_video, 'script')\n var url = ''\njsArr.forEach(item => {\n  if (/src: '.*',/.test(item)) {\n\turl = item.match(/src: '.*',/)\n  }\n})\n\n//setError(url[0])\n\nd.push({\n\ttitle: des_title,\n   desc: des_desc,\n   pic_url: des_pic,\n\turl: url[0].replace(/src: '/, '').replace(/'/, '')+\"#isVideo=true#\",\n\tcol_type: 'pic_1'\n});\n\nres.data = d;\nsetHomeResult(res);","sdetail_col_type":"movie_1","sdetail_find_rule":"","ua":"mobile","preRule":""}
           }
         ]
