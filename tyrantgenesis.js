@@ -15,7 +15,7 @@ const baseParse = _ => {
         let fst_rule_list = []
         rule.data.forEach(item => {
             item.rules.forEach(each => {
-                fst_rule_list.push(JSON.stringify(each.rule))
+                fst_rule_list.push(each.rule)
             })
         })
 
@@ -28,7 +28,7 @@ const baseParse = _ => {
         rule.data.forEach(item => {
             let fnd_rule_list = []
             item.rules.forEach(each => {
-                fnd_rule_list.push(JSON.stringify(each.rule))
+                fnd_rule_list.push(each.rule)
             })
             d.push({
                 title: item.title,
