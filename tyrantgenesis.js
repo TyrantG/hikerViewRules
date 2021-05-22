@@ -5,9 +5,17 @@ const rule_password = "海阔视界规则分享，当前分享的是：小程序
 const baseParse = _ => {
     let res = {};
     let d = [];
+    let data
     const script = fetch(MY_URL);
     const data_json = fetch('hiker://files/TyrantG/data/base.json');
-    const data = JSON.parse(data_json)
+
+    if (data_json instanceof Object || data_json instanceof Array) {
+        data = data_json
+    } else {
+        data = JSON.parse(data_json)
+    }
+    setError(data)
+
     let fst_rule_list = []
     let snd_rule_list = []
 
