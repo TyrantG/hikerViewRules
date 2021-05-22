@@ -10,10 +10,6 @@
             "rule": {"title":"斗鱼直播","author":"TyrantGenesis","url":"https://m.douyu.com","version":1,"col_type":"movie_2","class_name":"","class_url":"","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))\nbaseParse()","search_url":"https://m.douyu.com/api/search/anchor?limit=10&offset=fypage@-1@*10@&sk=**;POST","titleColor":"#bdb2ff","group":"⑳TyrantG","searchFind":"js:\neval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))\nsearchParse()","detail_col_type":"movie_1","detail_find_rule":"js:\neval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))\nsecParse()","sdetail_col_type":"movie_1","sdetail_find_rule":"*","ua":"pc","preRule":"/*var*/\n\n\n/*local*/\nlet local_douyu_rule = fetch('hiker://files/TyrantG/LIVE/douyu.js');\n// let local_douyu_html = fetch('hiker://files/TyrantG/public/douyu-search.html');\n\n/*fetch*/\nlet douyu_rule = fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/douyu.js\");\n// let douyu_html = fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/douyu-search.html\");\n\n/*writeFile*/\nif (!local_douyu_rule || local_douyu_rule != douyu_rule) writeFile(\"hiker://files/TyrantG/LIVE/douyu.js\", douyu_rule)\n// if (!local_douyu_html || local_douyu_html != douyu_html) writeFile(\"hiker://files/TyrantG/public/douyu-search.html\", douyu_html)"}
           }
         ]
-      },
-      {
-        "title": "国外",
-        "rules": []
       }
     ]
   },

@@ -13,6 +13,12 @@ const baseParse = _ => {
 
     eval(script);
 
+    d.push({
+        pic_url: 'https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight',
+        url: "https://github.com/TyrantG",
+        col_type: 'pic_full'
+    });
+
     data.forEach(rule => {
         fst_rule_list = []
         rule.data.forEach(item => {
