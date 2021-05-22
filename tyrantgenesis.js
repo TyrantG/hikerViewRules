@@ -13,12 +13,6 @@ const baseParse = _ => {
 
     eval(script);
 
-    d.push({
-        pic_url: 'https://camo.githubusercontent.com/988a6c144525f4242fa90067a7e8649ba302c93fe31a4a57be1d2da7543c044a/68747470733a2f2f6769746875622d726561646d652d73746174732e76657263656c2e6170702f6170693f757365726e616d653d547972616e74472673686f775f69636f6e733d74727565267468656d653d746f6b796f6e69676874',
-        url: "https://github.com/TyrantG",
-        col_type: 'pic_1'
-    });
-
     data.forEach(rule => {
         fst_rule_list = []
         rule.data.forEach(item => {

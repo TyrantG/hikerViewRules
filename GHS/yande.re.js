@@ -7,7 +7,7 @@ const baseParse = _ => {
   list.forEach(element => {
     d.push({
       pic_url: parseDomForHtml(element, ".preview&&src"),
-      url: "https://yande.re"+parseDomForHtml(element, "a&&href"),
+      url: $("https://yande.re"+parseDomForHtml(element, "a&&href")).lazyRule(_ => parseDomForHtml(fetch(input), ".highres-show&&href")),
       col_type: 'pic_3'
     })
   });
