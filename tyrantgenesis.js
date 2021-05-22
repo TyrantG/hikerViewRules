@@ -10,16 +10,27 @@ const baseParse = _ => {
     eval(script);
 
     data.forEach(rule => {
+        let fst_rule_list = []
+        rule.data.forEach(item => {
+            item.rules.forEach(each => {
+                fst_rule_list.push(each.rule)
+            })
+        })
+
         d.push({
             title: rule.title,
-            // url: rule.url,
+            url: "rule://"+base64Encode(JSON.stringify(fst_rule_list)).replace(/\n/g, ''),
             col_type: 'text_center_1'
         });
 
         rule.data.forEach(item => {
+            let fnd_rule_list = []
+            item.rules.forEach(each => {
+                fnd_rule_list.push(each.rule)
+            })
             d.push({
                 title: item.title,
-                // url: rule.url,
+                url: "rule://"+base64Encode(JSON.stringify(fnd_rule_list)).replace(/\n/g, ''),
                 col_type: 'text_2'
             });
             item.rules.forEach(each => {
