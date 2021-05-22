@@ -73,7 +73,7 @@
           },
           {
             "title": "Eporner",
-            "rule": {"title":"eporner","author":"","version":0,"url":"https://www.eporner.com/cat/fyAll/fypage/","col_type":"movie_2","class_name":"1080&4K","class_url":"hd-1080p&4k-porn","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/eporner.js'))\nbaseParse()","searchFind":"js:\neval(fetch('hiker://files/TyrantG/GHS/eporner.js'))\nbaseParse()","search_url":"https://www.eporner.com/search/**/fypage/","titleColor":"#fff20c00","group":"①常用","detail_col_type":"movie_1","detail_find_rule":"","sdetail_col_type":"movie_1","sdetail_find_rule":"","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\neporner()"}
+            "rule": {"title":"eporner","author":"TyrantGenesis","version":"1","url":"https://www.eporner.com/cat/fyAll/fypage/","col_type":"movie_2","class_name":"1080&4K","class_url":"hd-1080p&4k-porn","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/eporner.js'))\nbaseParse()","searchFind":"js:\neval(fetch('hiker://files/TyrantG/GHS/eporner.js'))\nbaseParse()","search_url":"https://www.eporner.com/search/**/fypage/","titleColor":"#bdb2ff","group":"⑳TyrantG","detail_col_type":"movie_1","detail_find_rule":"","sdetail_col_type":"movie_1","sdetail_find_rule":"","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\neporner()"}
           }
         ]
       }
