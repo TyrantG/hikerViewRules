@@ -45,4 +45,8 @@ const prts = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/prts.js?t="+time, 'hiker://files/TyrantG/TOOL/prts.js')
 }
 
+const ys_map = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/ys_map.js?t="+time, 'hiker://files/TyrantG/TOOL/ys_map.js')
+}
+
 /* Customize Function */
