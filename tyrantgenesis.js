@@ -14,9 +14,9 @@ const baseParse = _ => {
     eval(script);
 
     d.push({
-        pic_url: 'https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight',
+        pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/github.svg',
         url: "https://github.com/TyrantG",
-        col_type: 'pic_full'
+        col_type: 'pic_1_full'
     });
 
     data.forEach(rule => {
