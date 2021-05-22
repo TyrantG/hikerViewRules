@@ -38,7 +38,7 @@ const spankbang = _ => {
 }
 
 const aktool = _ => {
-  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/aktool.js?t="+time, 'hiker://files/TyrantG/TOOL/aktool.js')
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/aktools.js?t="+time, 'hiker://files/TyrantG/TOOL/aktool.js')
 }
 
 const prts = _ => {
