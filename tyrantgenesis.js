@@ -18,11 +18,11 @@ const baseParse = _ => {
                 fst_rule_list.push(each.rule)
             })
         })
-        writeFile(`hiker://files/Temporary/${rule.title}.json`, JSON.stringify(fst_rule_list));
+        writeFile("hiker://files/TyrantG/Temporary/"+rule.title+".json", JSON.stringify(fst_rule_list));
 
         d.push({
             title: rule.title,
-            url: "rule://"+base64Encode(collection_password+`hiker://files/Temporary/${rule.title}.json`).replace(/\n/g, ''),
+            url: "rule://"+base64Encode(collection_password+"hiker://files/TyrantG/Temporary/"+rule.title+".json").replace(/\n/g, ''),
             col_type: 'text_center_1'
         });
 
@@ -31,10 +31,10 @@ const baseParse = _ => {
             item.rules.forEach(each => {
                 fnd_rule_list.push(each.rule)
             })
-            writeFile(`hiker://files/Temporary/${rule.title}/${rule.title}.json`, JSON.stringify(fst_rule_list));
+            writeFile("hiker://files/Temporary/"+rule.title+"/"+item.title+".json", JSON.stringify(fst_rule_list));
             d.push({
                 title: item.title,
-                url: "rule://"+base64Encode(collection_password+`hiker://files/Temporary/${rule.title}/${rule.title}.json`).replace(/\n/g, ''),
+                url: "rule://"+base64Encode(collection_password+"hiker://files/Temporary/"+rule.title+"/"+item.title+".json").replace(/\n/g, ''),
                 col_type: 'text_2'
             });
             item.rules.forEach(each => {
