@@ -8,11 +8,13 @@ const baseParse = _ => {
     const script = fetch(MY_URL);
     const data_json = fetch('hiker://files/TyrantG/data/base.json');
     const data = JSON.parse(data_json)
+    let fst_rule_list = []
+    let snd_rule_list = []
 
     eval(script);
 
     data.forEach(rule => {
-        let fst_rule_list = []
+        fst_rule_list = []
         rule.data.forEach(item => {
             item.rules.forEach(each => {
                 fst_rule_list.push(each.rule)
@@ -27,14 +29,14 @@ const baseParse = _ => {
         });
 
         rule.data.forEach(item => {
-            let fnd_rule_list = []
+            snd_rule_list = []
             item.rules.forEach(each => {
-                fnd_rule_list.push(each.rule)
+                snd_rule_list.push(each.rule)
             })
-            writeFile("hiker://files/Temporary/"+rule.title+"/"+item.title+".json", JSON.stringify(fst_rule_list));
+            writeFile("hiker://files/TyrantG/Temporary/"+rule.title+"/"+item.title+".json", JSON.stringify(snd_rule_list));
             d.push({
                 title: item.title,
-                url: "rule://"+base64Encode(collection_password+"hiker://files/Temporary/"+rule.title+"/"+item.title+".json").replace(/\n/g, ''),
+                url: "rule://"+base64Encode(collection_password+"hiker://files/TyrantG/Temporary/"+rule.title+"/"+item.title+".json").replace(/\n/g, ''),
                 col_type: 'text_2'
             });
             item.rules.forEach(each => {
