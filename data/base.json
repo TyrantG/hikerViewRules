@@ -53,6 +53,15 @@
         ]
       },
       {
+        "title": "动画站",
+        "rules": [
+          {
+            "title": "ohentai",
+            "rule": {"title":"yande.re","author":"TyrantGenesis","url":"https://yande.re/post?page=fypage","version":1,"col_type":"pic_3","class_name":"","class_url":"","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/yande.re.js'))\nbaseParse()","search_url":"https://yande.re/post?page=fypage&tags=**","titleColor":"#bdb2ff","group":"⑳TyrantG","searchFind":"js:\neval(fetch('hiker://files/TyrantG/GHS/yande.re.js'))\nsearchParse()","detail_col_type":"pic_1_full","detail_find_rule":"","sdetail_col_type":"\npic_1","sdetail_find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/yande.re.js'))\nsecParse()","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nyande_re()"}
+          }
+        ]
+      },
+      {
         "title": "视频站",
         "rules": [
           {
