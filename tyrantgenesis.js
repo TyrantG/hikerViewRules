@@ -1,4 +1,6 @@
 const BASE_URL = "https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/"
+const collection_password = "海阔视界，首页频道合集￥home_rule_url￥"
+const rule_password = "海阔视界规则分享，当前分享的是：小程序￥home_rule_v2￥"
 
 const baseParse = _ => {
     let res = {};
@@ -19,7 +21,7 @@ const baseParse = _ => {
 
         d.push({
             title: rule.title,
-            url: "rule://"+base64Encode(JSON.stringify(fst_rule_list)).replace(/\n/g, ''),
+            url: "rule://"+base64Encode(collection_password+JSON.stringify(fst_rule_list)).replace(/\n/g, ''),
             col_type: 'text_center_1'
         });
 
@@ -30,13 +32,13 @@ const baseParse = _ => {
             })
             d.push({
                 title: item.title,
-                url: "rule://"+base64Encode(JSON.stringify(fnd_rule_list)).replace(/\n/g, ''),
+                url: "rule://"+base64Encode(collection_password+JSON.stringify(fnd_rule_list)).replace(/\n/g, ''),
                 col_type: 'text_2'
             });
             item.rules.forEach(each => {
                 d.push({
                     title: each.title,
-                    url: "rule://"+base64Encode(each.rule).replace(/\n/g, ''),
+                    url: "rule://"+base64Encode(rule_password+each.rule).replace(/\n/g, ''),
                     col_type: 'flex_button'
                 })
             })
