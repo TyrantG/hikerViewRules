@@ -35,4 +35,8 @@ const spankbang = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/spankbang.js", 'hiker://files/TyrantG/GHS/spankbang.js')
 }
 
+const aktool = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/aktool.js", 'hiker://files/TyrantG/TOOL/aktool.js')
+}
+
 /* Customize Function */
