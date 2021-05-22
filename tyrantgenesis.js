@@ -13,12 +13,12 @@ const baseParse = _ => {
         d.push({
             title: rule.title,
             // url: rule.url,
-            col_type: 'text_1'
+            col_type: 'text_1_center'
         });
 
         rule.data.forEach(item => {
             d.push({
-                title: rule.title,
+                title: item.title,
                 // url: rule.url,
                 col_type: 'text_2'
             });
