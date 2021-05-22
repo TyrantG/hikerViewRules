@@ -39,4 +39,8 @@ const aktool = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/aktool.js", 'hiker://files/TyrantG/TOOL/aktool.js')
 }
 
+const prts = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/prts.js", 'hiker://files/TyrantG/TOOL/prts.js')
+}
+
 /* Customize Function */

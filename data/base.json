@@ -25,7 +25,7 @@
           },
           {
             "title": "PRTS Wiki",
-            "rule": {"title":"PRTS Wiki","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"http://prts.wiki/w/%E9%A6%96%E9%A1%B5","col_type":"","class_name":"","class_url":"","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/TOOL/prts.js'))\nbaseParse()","search_url":"","searchFind":"","detail_col_type":"","detail_find_rule":"","sdetail_col_type":"","sdetail_find_rule":"","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\naktool()"}
+            "rule": {"title":"PRTS Wiki","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"http://prts.wiki/w/%E9%A6%96%E9%A1%B5","col_type":"","class_name":"","class_url":"","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/TOOL/prts.js'))\nbaseParse()","search_url":"","searchFind":"","detail_col_type":"","detail_find_rule":"","sdetail_col_type":"","sdetail_find_rule":"","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nprts()"}
           }
         ]
       }
