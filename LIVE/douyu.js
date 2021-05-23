@@ -149,13 +149,14 @@ const cateGroupParse = _ => {
     let list_json = fetch(MY_URL)
     let list = JSON.parse(list_json).data
     list.cate2Info.forEach(cate2 => {
+        let category_url = "https://m.douyu.com/api/room/list?page=fypage&type="+cate2.shortName
         d.push({
             title:cate2.cate2Name,
             pic_url:cate2.icon,
-            /*url: $("https://m.douyu.com/list/room?type="+cate2.shortName).rule(_ => {
+            url: $(category_url).rule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
                 categoryParse()
-            }),*/
+            }),
             col_type:"icon_round_4"
         });
     });
