@@ -18,7 +18,10 @@ const baseParse = _ => {
 
           const url = "https://www.eporner.com/xhr/video/"+id+"?hash="+hash_func(hash)+"&domain=www.eporner.com&fallback=false&embed=false&supportedFormats=dash,mp4&_="+(new Date()).getTime()
 
-          const sources = JSON.parse(fetch(url)).sources.mp4
+          const json = JSON.parse(fetch(url))
+          const sources = json.sources.mp4
+
+          const server = json.backupServers[0].replace('https://dash-', '')
 
           let video_list = []
 
@@ -26,8 +29,7 @@ const baseParse = _ => {
             video_list.push(sources[p].src)
           }
 
-          return /*"https://s5-n1-c2-fr-cdn.eporner.com" + */video_list.shift()/*.replace(/https.*com/, "")*/
-          //return parseDomForHtml(list[list.length-1], 'a&&href');
+          return server + video_list.shift().replace(/https.*com/, "")
         })
       });
     }}catch(e){}
