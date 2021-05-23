@@ -10,6 +10,12 @@ const godWriteFile = (fetch_file, local_file) => {
   if (!local || local !== fetch) writeFile(local_file, fetch)
 }
 
+const godSaveFile = (fetch_file, local_file) => {
+  let local = request(local_file);
+  let fetch = request(fetch_file);
+  if (!local) writeFile(local_file, fetch)
+}
+
 const time = (new Date()).getTime()
 
 /* Base Function */
@@ -19,11 +25,17 @@ const time = (new Date()).getTime()
 const tyrantgenesis = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/data/base.json?t="+time, 'hiker://files/TyrantG/data/base.json')
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/tyrantgenesis.js?t="+time, 'hiker://files/TyrantG/tyrantgenesis.js')
+  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/css/element-ui.css", 'hiker://files/TyrantG/public/css/element-ui.css')
+  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/vue.min.js", 'hiker://files/TyrantG/public/js/vue.min.js')
+  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
 }
 
 const douyu_live = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/douyu.js?t="+time, 'hiker://files/TyrantG/LIVE/douyu.js')
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/douyu-tabs.html?t="+time, 'hiker://files/TyrantG/public/douyu-tabs.html')
+  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/css/element-ui.css", 'hiker://files/TyrantG/public/css/element-ui.css')
+  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/vue.min.js", 'hiker://files/TyrantG/public/js/vue.min.js')
+  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
 }
 
 const yande_re = _ => {

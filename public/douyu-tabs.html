@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>TyrantGenesis 自制组件</title>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="./css/element-ui.css">
     <style>
         html, body {
             margin: 0;
@@ -30,8 +30,8 @@
         <el-radio-button :label="item.id" v-for="item in tabs" :key="item.id">{{item.title}}</el-radio-button>
     </el-radio-group>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="./js/vue.min.js"></script>
+<script src="./js/element-ui.js"></script>
 <script>
     new Vue({
         el: '#app',
