@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TyrantGenesis 自制播放器</title>
+</head>
+<body>
+<script>
+  const url = "wss://danmuproxy.douyu.com:8503/"
+  const ws = new WebSocket(url)
+  const heartbeat = "\x14\x00\x00\x00\x14\x00\x00\x00\xb1\x02\x00\x00\x74\x79\x70\x65\x40\x3d\x6d\x72\x6b\x6c\r\n\x2f\x00"
+  const heartbeatInterval = 60
+
+  const getQueryVariable = variable => {
+    let query = window.location.search.substring(1)
+    let vars = query.split("&");
+    for (let i=0;i<vars.length;i++) {
+      let pair = vars[i].split("=");
+      if(pair[0] === variable) return pair[1]
+    }
+    return false
+  }
+
+  const pack = bytes => {
+    let chars = [];
+    console.log("Packing " + bytes);
+    for(let i = 0, n = bytes.length; i < n;) {
+      chars.push(((bytes[i++] & 0xff) << 8) | (bytes[i++] & 0xff));
+    }
+    console.log("Packing done. ("+String.fromCharCode.apply(null, chars)+")");
+    return String.fromCharCode.apply(null, chars);
+  }
+
+  const rid = getQueryVariable('rid')
+  const room = "https://m.douyu.com/"+rid
+  let reg_datas = []
+  let data = 'type@=loginreq/roomid@='+room+'/'
+  let s = pack('i', 9 + data.length)
+  console.log(s)
+  /*s += "\xb1\x02\x00\x00"
+  s += data.encode('ascii') + b'\x00'
+  reg_datas.append(s)
+  data = f'type@=joingroup/rid@={room_id}/gid@=-9999/'*/
+
+</script>
+</body>
+</html>
