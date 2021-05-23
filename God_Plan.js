@@ -23,6 +23,7 @@ const tyrantgenesis = _ => {
 
 const douyu_live = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/douyu.js?t="+time, 'hiker://files/TyrantG/LIVE/douyu.js')
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/douyu-tab.html?t="+time, 'hiker://files/TyrantG/public/douyu-tab.html')
 }
 
 const yande_re = _ => {

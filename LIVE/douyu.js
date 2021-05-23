@@ -4,6 +4,12 @@ const baseParse = _ => {
     let res = {};
     let d = [];
 
+    d.push({
+        desc: '48 && float',
+        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-tab.html?time='+(new Date()).getTime(),
+        col_type:"x5_webview_single",
+    })
+
     const list_json = fetch("https://m.douyu.com/api/home/mix");
     const list = JSON.parse(list_json)
 
@@ -136,6 +142,24 @@ const searchParse = () => {
 
     res.data = d;
     setHomeResult(res);
+}
+
+const cateGroupParse = _ => {
+    let d = []
+    let list_json = fetch(MY_URL)
+    let list = JSON.parse(list_json).data
+    list.cate2Info.forEach(cate2 => {
+        d.push({
+            title:cate2.cate2Name,
+            pic_url:cate2.icon,
+            url: $("https://m.douyu.com/list/room?type="+cate2.shortName).rule(_ => {
+                eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+                categoryParse()
+            }),
+            col_type:"icon_round_4"
+        });
+    });
+    setResult(d);
 }
 
 const getSign = (script, rid, did, tt) => {
