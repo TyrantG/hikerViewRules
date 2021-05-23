@@ -6,7 +6,7 @@ const baseParse = _ => {
 
     d.push({
         desc: '48 && float',
-        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-tab.html?time='+(new Date()).getTime(),
+        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-tabs.html?time='+(new Date()).getTime(),
         col_type:"x5_webview_single",
     })
 
