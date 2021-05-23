@@ -21,7 +21,7 @@ const baseParse = _ => {
           const json = JSON.parse(fetch(url))
           const sources = json.sources.mp4
 
-          const server = json.backupServers[0].replace('https://dash-', '')
+          // const server = json.backupServers[0].replace('https://dash-', '')
 
           let video_list = []
 
@@ -29,7 +29,8 @@ const baseParse = _ => {
             video_list.push(sources[p].src)
           }
 
-          return server + video_list.shift().replace(/https.*com/, "")
+          return "https://s5-n1-c2-fr-cdn.eporner.com" + video_list.shift().replace(/https.*com/, "")
+          //return parseDomForHtml(list[list.length-1], 'a&&href');
         })
       });
     }}catch(e){}
