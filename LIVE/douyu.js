@@ -152,10 +152,10 @@ const cateGroupParse = _ => {
         d.push({
             title:cate2.cate2Name,
             pic_url:cate2.icon,
-            url: $("https://m.douyu.com/list/room?type="+cate2.shortName).rule(_ => {
+            /*url: $("https://m.douyu.com/list/room?type="+cate2.shortName).rule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
                 categoryParse()
-            }),
+            }),*/
             col_type:"icon_round_4"
         });
     });
