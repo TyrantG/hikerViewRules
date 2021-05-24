@@ -6,9 +6,8 @@
 </head>
 <body>
 <script>
-  const url = "wss://danmuproxy.douyu.com:8503/"
-  const ws = new WebSocket(url)
-  const heartbeat = "\x14\x00\x00\x00\x14\x00\x00\x00\xb1\x02\x00\x00\x74\x79\x70\x65\x40\x3d\x6d\x72\x6b\x6c\r\n\x2f\x00"
+  const url = "wss://danmuproxy.douyu.com:8506/"
+  const heartbeat = "\x14\x00\x00\x00\x14\x00\x00\x00\xb1\x02\x00\x00\x74\x79\x70\x65\x40\x3d\x6d\x72\x6b\x6c\x2f\x00"
   const heartbeatInterval = 60
 
   const getQueryVariable = variable => {
@@ -21,26 +20,46 @@
     return false
   }
 
-  const pack = bytes => {
-    let chars = [];
-    console.log("Packing " + bytes);
-    for(let i = 0, n = bytes.length; i < n;) {
-      chars.push(((bytes[i++] & 0xff) << 8) | (bytes[i++] & 0xff));
+  function stringToUint8Array(str){
+    var arr = [];
+    for (var i = 0, j = str.length; i < j; ++i) {
+      arr.push(str.charCodeAt(i));
     }
-    console.log("Packing done. ("+String.fromCharCode.apply(null, chars)+")");
-    return String.fromCharCode.apply(null, chars);
+
+    var tmpUint8Array = new Uint8Array(arr);
+    return tmpUint8Array
+  }
+
+  function toAscii(string) {
+    let res = ''
+    for(let i = string.length-1;i>=0;i--){
+      let str = string.charAt(i);
+      let code = str.charCodeAt();
+      res += code;
+    }
+    return res
   }
 
   const rid = getQueryVariable('rid')
   const room = "https://m.douyu.com/"+rid
   let reg_datas = []
-  let data = 'type@=loginreq/roomid@='+room+'/'
-  let s = pack('i', 9 + data.length)
-  console.log(s)
-  /*s += "\xb1\x02\x00\x00"
-  s += data.encode('ascii') + b'\x00'
-  reg_datas.append(s)
-  data = f'type@=joingroup/rid@={room_id}/gid@=-9999/'*/
+  let data_login = 'type@=loginreq/roomid@='+rid+'/'
+  let hex_16 = "\\x"+(9+data_login.length).toString(16)+"\x00\x00\x00"
+
+  let data_group = 'type@=joingroup/rid@='+rid+'/gid@=-9999/'
+
+  const ws = new WebSocket(url)
+
+  ws.onopen = (res, err) => {
+    console.log(res, err)
+    ws.send(stringToUint8Array(hex_16+hex_16+"\xb1\x02\x00\x00"+data_login+"\x00"))
+    // ws.send(stringToUint8Array(data_group))
+  }
+  ws.onmessage = (res, err) => {
+    console.log(res, err)
+  }
+
+
 
 </script>
 </body>
