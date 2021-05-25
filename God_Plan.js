@@ -74,4 +74,8 @@ const ys_map = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/ys_map.js?t="+time, 'hiker://files/TyrantG/TOOL/ys_map.js')
 }
 
+const zczc = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/zczc.js?t="+time, 'hiker://files/TyrantG/TOOL/zczc.js')
+}
+
 /* Customize Function */

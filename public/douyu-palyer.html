@@ -44,7 +44,7 @@
   const room = "https://m.douyu.com/"+rid
   let reg_datas = []
   let data_login = 'type@=loginreq/roomid@='+rid+'/'
-  let hex_16 = "\\x"+(9+data_login.length).toString(16)+"\x00\x00\x00"
+  let hex_16 = /*"\\x"+(9+data_login.length).toString(16)+*/"\26\x00\x00\x00"
 
   let data_group = 'type@=joingroup/rid@='+rid+'/gid@=-9999/'
 
