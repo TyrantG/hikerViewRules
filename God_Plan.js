@@ -58,6 +58,10 @@ const eporner = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/eporner.js?t="+time, 'hiker://files/TyrantG/GHS/eporner.js')
 }
 
+const _7719 = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/7719.js?t="+time, 'hiker://files/TyrantG/GHS/7719.js')
+}
+
 const ohentai = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/ohentai.js?t="+time, 'hiker://files/TyrantG/GHS/ohentai.js')
 }

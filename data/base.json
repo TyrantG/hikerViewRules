@@ -92,6 +92,10 @@
           {
             "title": "Eporner",
             "rule": {"title":"eporner","author":"TyrantGenesis","version":"1","url":"https://www.eporner.com/cat/fyAll/fypage/","col_type":"movie_2","class_name":"1080&4K","class_url":"hd-1080p&4k-porn","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/eporner.js'))\nbaseParse()","searchFind":"js:\neval(fetch('hiker://files/TyrantG/GHS/eporner.js'))\nbaseParse()","search_url":"https://www.eporner.com/search/**/fypage/","titleColor":"#bdb2ff","group":"⑳TyrantG","detail_col_type":"movie_1","detail_find_rule":"","sdetail_col_type":"movie_1","sdetail_find_rule":"","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\neporner()"}
+          },
+          {
+            "title": "7719",
+            "rule": {"title":"7719","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"http://www.7719.me/index.php/vod/type/id/fyclass/page/fypage.html","col_type":"movie_2","class_name":"日本无 码&精品国产&麻豆合集&中文字幕&亚洲情 色&制服师生&美乳巨乳&萝莉少女&人 妻熟女&明星淫梦&强 奸乱 伦&偷 拍自拍&风骚寡妇&欧美性 爱","class_url":"1&2&63&3&4&5&60&61&62&41&49&50&51&53","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/GHS/7719.js'))\nbaseParse()","search_url":"http://www.7719.me/index.php/vod/search/page/fypage/wd/**.html","searchFind":"js:\neval(fetch('hiker://files/TyrantG/GHS/7719.js'))\nbaseParse()","detail_col_type":"","detail_find_rule":"","sdetail_col_type":"","sdetail_find_rule":"","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\n_7719()"}
           }
         ]
       }
