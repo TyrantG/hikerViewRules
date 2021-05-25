@@ -65,15 +65,15 @@ const secParse = _ => {
     const stream_json = fetch('https://m.douyu.com/api/room/ratestream', {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
     const stream = JSON.parse(stream_json).data
 
-    const url = $(stream.url).rule(_ => {
+    const url = $(stream.url).rule((data) => {
         let d = [];
         d.push({
             desc: '100% && float',
-            url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(MY_URL),
+            url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-player.html?time='+(new Date()).getTime()+'&rid='+data.rid+'&source='+encodeURIComponent(MY_URL),
             col_type:"x5_webview_single",
         })
         setResult(d);
-    })
+    }, {rid})
 
     d.push({
         title: $ROOM.roomName,
