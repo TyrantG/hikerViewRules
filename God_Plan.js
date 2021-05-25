@@ -62,6 +62,10 @@ const _7719 = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/7719.js?t="+time, 'hiker://files/TyrantG/GHS/7719.js')
 }
 
+const shuiguopai = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/shuiguopai.js?t="+time, 'hiker://files/TyrantG/GHS/shuiguopai.js')
+}
+
 const ohentai = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/ohentai.js?t="+time, 'hiker://files/TyrantG/GHS/ohentai.js')
 }
