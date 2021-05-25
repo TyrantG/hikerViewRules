@@ -73,7 +73,7 @@ const secParse = _ => {
             col_type:"x5_webview_single",
         })
         setResult(d);
-    }, {rid})
+    }, {rid: rid})
 
     d.push({
         title: $ROOM.roomName,
