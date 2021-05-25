@@ -7,7 +7,7 @@ const baseParse = _ => {
     d.push({
         desc: '48 && float',
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-tabs.html?time='+(new Date()).getTime(),
-        col_type:"x5_webview_single",
+        col_type:"x5_webview_single"
     })
 
     const list_json = fetch("https://m.douyu.com/api/home/mix");
@@ -66,29 +66,31 @@ const secParse = _ => {
     const stream = JSON.parse(stream_json).data
 
     const url = $(stream.url).rule(_ => {
+        let d = [];
         d.push({
             desc: '100% && float',
             url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(MY_URL),
             col_type:"x5_webview_single",
         })
+        setResult(d);
     })
 
     d.push({
         title: $ROOM.roomName,
         pic_url: $ROOM.roomSrc,
         desc: $ROOM.desc,
-        url,
+        url: url,
         col_type: 'pic_1'
     })
     d.push({
         pic_url: $ROOM.avatar,
         title: $ROOM.nickname,
-        url,
+        url: url,
         col_type: 'icon_2_round'
     })
     d.push({
         title: "观看直播",
-        url,
+        url: url,
         col_type: 'icon_2'
     })
 
