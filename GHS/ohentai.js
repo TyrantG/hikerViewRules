@@ -21,7 +21,7 @@ const secParse = _ => {
       d.push({
         title: parseDomForHtml(list[j], '.videotitle&&Text'),
         pic_url: "https://ohentai.org/"+parseDomForHtml(list[j], 'img&&data-cfsrc').replace(/\s/g, '%20'),
-        url: $("https://ohentai.org/"+parseDomForHtml(list[j],'a&&href')).replace(/\s/g, '%20').lazyRule(_ => {
+        url: $("https://ohentai.org/"+parseDomForHtml(list[j],'a&&href').replace(/\s/g, '%20')).lazyRule(_ => {
           const data = fetch(input).match(/sources: \[\{\"file\"\:\".*\"\}\],/)
 
           if (data) {
