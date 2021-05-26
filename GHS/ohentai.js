@@ -16,7 +16,7 @@ const secParse = _ => {
   let d = [];
   const list = parseDomForArray(getResCode(), '.videobrickwrap&&.videobrick');
 
-  setError(parseDom(list[0], 'img&&Html'))
+  setError(parseDom(list[0], 'img&&src'))
   /*for (let j in list) {
     d.push({
       title: parseDomForHtml(list[j], '.videotitle&&Text'),
