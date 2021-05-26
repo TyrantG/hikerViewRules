@@ -16,11 +16,11 @@ const secParse = _ => {
   let d = [];
   try{
     const list = parseDomForArray(getResCode(), '.videobrickwrap&&.videobrick');
-    setError(list[0])
+
     for (let j in list) {
       d.push({
         title: parseDomForHtml(list[j], '.videotitle&&Text'),
-        pic_url: "https://ohentai.org/"+parseDomForHtml(list[j], 'img&&data-cfsrc').replace(/\s/g, '%20'),
+        pic_url: "https://ohentai.org/"+parseDomForHtml(list[j], 'img&&src').replace(/\s/g, '%20'),
         url: $("https://ohentai.org/"+parseDomForHtml(list[j],'a&&href').replace(/\s/g, '%20')).lazyRule(_ => {
           const data = fetch(input).match(/sources: \[\{\"file\"\:\".*\"\}\],/)
 
