@@ -14,7 +14,7 @@ const baseParse = _ => {
 
 const secParse = _ => {
   let d = [];
-  const list = parseDomForArray(getResCode(), '.videobrickwrap&&.videobrick');
+  const list = parseDomForArray(getResCode(), '.videobrickwrap&&.videobrick||.videobrick&&.interlink');
 
   setError(parseDomForHtml(list[0], 'img&&src'))
   /*for (let j in list) {
