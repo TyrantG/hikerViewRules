@@ -5,7 +5,7 @@ const baseParse = _ => {
     for (let j in list) {
       d.push({
         title: parseDomForHtml(list[j], '.tagtext&&Text'),
-        url: "https://ohentai.org/"+encodeURIComponent(parseDomForHtml(list[j],'a&&href'))+"&p=fypage"
+        url: "https://ohentai.org/"+parseDomForHtml(list[j],'a&&href').replace(/\s/g, '%20')+"&p=fypage"
       });
     }}catch(e){}
 
@@ -20,8 +20,8 @@ const secParse = _ => {
     for (let j in list) {
       d.push({
         title: parseDomForHtml(list[j], '.videotitle&&Text'),
-        pic_url: "https://ohentai.org/"+encodeURIComponent(parseDomForHtml(list[j], 'img&&data-cfsrc')),
-        url: $("https://ohentai.org/"+encodeURIComponent(parseDomForHtml(list[j],'a&&href'))).lazyRule(_ => {
+        pic_url: "https://ohentai.org/"+parseDomForHtml(list[j], 'img&&data-cfsrc').replace(/\s/g, '%20'),
+        url: $("https://ohentai.org/"+parseDomForHtml(list[j],'a&&href')).replace(/\s/g, '%20').lazyRule(_ => {
           const data = fetch(input).match(/sources: \[\{\"file\"\:\".*\"\}\],/)
 
           if (data) {
