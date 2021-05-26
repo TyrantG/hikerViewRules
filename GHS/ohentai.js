@@ -16,11 +16,16 @@ const secParse = _ => {
   let d = [];
   const list = parseDomForArray(getResCode(), '.videobrickwrap&&.videobrick||.videobrick&&.interlink');
 
-  setError(parseDomForHtml(list[0], 'img&&src'))
-  /*for (let j in list) {
+  for (let j in list) {
+    let a
+    try {
+      a = "https://ohentai.org/"+parseDomForHtml(list[0], 'img&&data-cfsrc').replace(/\s/g, '%20')
+    }catch(e) {
+      a = "https://ohentai.org/img/video_placeholder.png"
+    }
     d.push({
       title: parseDomForHtml(list[j], '.videotitle&&Text'),
-      pic_url: "https://ohentai.org/"+parseDomForHtml(list[j], 'img&&src').replace(/\s/g, '%20'),
+      pic_url: a,
       url: $("https://ohentai.org/"+parseDomForHtml(list[j],'a&&href').replace(/\s/g, '%20')).lazyRule(_ => {
         const data = fetch(input).match(/sources: \[\{\"file\"\:\".*\"\}\],/)
 
@@ -32,7 +37,7 @@ const secParse = _ => {
       }),
       col_type: "movie_2"
     });
-  }*/
+  }
 
   setResult(d);
 }
