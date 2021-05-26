@@ -14,27 +14,25 @@ const baseParse = _ => {
 
 const secParse = _ => {
   let d = [];
-  try{
-    const list = parseDomForArray(getResCode(), '.videobrickwrap&&.videobrick');
+  const list = parseDomForArray(getResCode(), '.videobrickwrap&&.videobrick');
 
-    setError("https://ohentai.org/"+parseDomForHtml(list[j], 'img&&src'))
-    for (let j in list) {
-      d.push({
-        title: parseDomForHtml(list[j], '.videotitle&&Text'),
-        pic_url: "https://ohentai.org/"+parseDomForHtml(list[j], 'img&&src').replace(/\s/g, '%20'),
-        url: $("https://ohentai.org/"+parseDomForHtml(list[j],'a&&href').replace(/\s/g, '%20')).lazyRule(_ => {
-          const data = fetch(input).match(/sources: \[\{\"file\"\:\".*\"\}\],/)
+  setError("https://ohentai.org/"+parseDomForHtml(list[j], 'img&&src')).replace(/\s/g, '%20')
+  for (let j in list) {
+    d.push({
+      title: parseDomForHtml(list[j], '.videotitle&&Text'),
+      pic_url: "https://ohentai.org/"+parseDomForHtml(list[j], 'img&&src').replace(/\s/g, '%20'),
+      url: $("https://ohentai.org/"+parseDomForHtml(list[j],'a&&href').replace(/\s/g, '%20')).lazyRule(_ => {
+        const data = fetch(input).match(/sources: \[\{\"file\"\:\".*\"\}\],/)
 
-          if (data) {
-            return data[0].replace(/sources: \[\{\"file\"\:\"/, '').replace(/\"\}\],/, '')
-          } else {
-            return "取值失败"
-          }
-        }),
-        col_type: "movie_2"
-      });
-    }
-  }catch(e){}
+        if (data) {
+          return data[0].replace(/sources: \[\{\"file\"\:\"/, '').replace(/\"\}\],/, '')
+        } else {
+          return "取值失败"
+        }
+      }),
+      col_type: "movie_2"
+    });
+  }
 
   setResult(d);
 }
