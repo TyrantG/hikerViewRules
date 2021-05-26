@@ -19,13 +19,14 @@ const secParse = _ => {
   for (let j in list) {
     let a
     try {
-      a = "https://ohentai.org/"+parseDomForHtml(list[0], 'img&&data-cfsrc').replace(/\s/g, '%20')
+      // a = parseDomForHtml(list[0], 'img&&data-cfsrc')
+      a = parseDomForHtml(list[0], 'img&&data-cfsrc')
     }catch(e) {
-      a = "https://ohentai.org/img/video_placeholder.png"
+      a = "img/video_placeholder.png"
     }
     d.push({
       title: parseDomForHtml(list[j], '.videotitle&&Text'),
-      pic_url: a,
+      pic_url: "https://ohentai.org/"+a.replace(/\s/g, '%20'),
       url: $("https://ohentai.org/"+parseDomForHtml(list[j],'a&&href').replace(/\s/g, '%20')).lazyRule(_ => {
         const data = fetch(input).match(/sources: \[\{\"file\"\:\".*\"\}\],/)
 
