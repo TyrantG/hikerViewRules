@@ -5,7 +5,7 @@ const baseParse = _ => {
     for (let j in list) {
       d.push({
         title: parseDomForHtml(list[j], '.tagtext&&Text'),
-        url: "https://ohentai.org/"+parseDomForHtml(list[j],'a&&href')+"&p=fypage"
+        url: "https://ohentai.org/"+parseDomForHtml(list[j],'a&&href').replace(' ', '%20')+"&p=fypage"
       });
     }}catch(e){}
 
