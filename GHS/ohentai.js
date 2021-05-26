@@ -16,7 +16,7 @@ const secParse = _ => {
   let d = [];
   const list = parseDomForArray(getResCode(), '.videobrickwrap&&.videobrick');
 
-  setError("https://ohentai.org/"+parseDomForHtml(list[0], 'img&&src')).replace(/\s/g, '%20')
+  setError("https://ohentai.org/"+parseDomForHtml(list[0], 'img&&src').replace(/\s/g, '%20'))
   for (let j in list) {
     d.push({
       title: parseDomForHtml(list[j], '.videotitle&&Text'),
