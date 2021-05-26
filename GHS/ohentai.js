@@ -20,7 +20,7 @@ const secParse = _ => {
     for (let j in list) {
       d.push({
         title: parseDomForHtml(list[j], '.videotitle&&Text'),
-        pic_url: parseDomForHtml(list[j], 'img&&src'),
+        pic_url: "https://ohentai.org/"+parseDomForHtml(list[j], 'img&&data-cfsrc').replace(' ', '%20'),
         url: $("https://ohentai.org/"+parseDomForHtml(list[j],'a&&href')).lazyRule(_ => {
           const data = fetch(input).match(/sources: \[\{\"file\"\:\".*\"\}\],/)
 
@@ -32,7 +32,8 @@ const secParse = _ => {
         }),
         col_type: "movie_2"
       });
-    }}catch(e){}
+    }
+  }catch(e){}
 
   setResult(d);
 }
