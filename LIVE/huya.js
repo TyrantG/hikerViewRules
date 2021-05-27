@@ -22,7 +22,7 @@ const baseParse = _ => {
             url: $(group_url).rule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
                 categoryParse(index)
-            }),
+            }, {index: index}),
             col_type: 'text_center_1'
         })
         videoDom.forEach(item => {
