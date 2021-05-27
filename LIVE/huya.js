@@ -32,7 +32,7 @@ const baseParse = _ => {
                 pic_url: parseDomForHtml(item, "img&&src"),
                 url: $(parseDomForHtml(item, "a&&href")).lazyRule(_ => {
                     eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                    return secParse()
+                    return secParse(input)
                 }),
                 col_type: 'movie_2'
             })
@@ -43,7 +43,7 @@ const baseParse = _ => {
     setHomeResult(res);
 }
 
-const secParse = _ => {
+const secParse = input => {
     let html = fetch(input)
     let script = parseDomForHtml(html, "body&&script&&Html")
     eval(script)
@@ -67,9 +67,9 @@ const categoryParse = _ =>{
             title: item.introduction,
             desc: item.nick,
             pic_url: item.screenshot,
-            url: $("https://m.huya.com/"+item.profileRoom).rule(_ => {
+            url: $("https://m.huya.com/"+item.profileRoom).lazyRule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                secParse()
+                secParse(input)
             }),
             col_type: 'movie_2'
         })
