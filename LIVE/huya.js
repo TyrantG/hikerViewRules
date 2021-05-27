@@ -31,7 +31,7 @@ const baseParse = _ => {
             current_cate = "l"
         }
 
-        let group_url = "https://m.huya.com&id="+current_cate+'?p=fypage'
+        let group_url = "https://m.huya.com/g/"+current_cate+"&id="+current_cate+'?p=fypage'
         let videoDom = cate.vItems.value
 
         d.push({
