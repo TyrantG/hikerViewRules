@@ -24,14 +24,15 @@ const baseParse = _ => {
     const cate_list = json.gameList
 
     list.forEach((cate, index) => {
-        let group = cate.sName, current_cate
+        let group = cate.sName, current_cate, cate_id
         try {
-            current_cate = "g/"+cate_list.find(item => item.gameFullName === group).gid
+            cate_id = cate_list.find(item => item.gameFullName === group).gid
+            current_cate = "g/"+cate_id
         } catch (e) {
             current_cate = "l"
         }
 
-        let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+current_cate
+        let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+cate_id
         let videoDom = cate.vItems.value
 
         d.push({
@@ -77,7 +78,7 @@ const categoryParse = index =>{
     let d = [];
     let id = getQueryVariable(MY_URL, 'id')
     let page = getQueryVariable(MY_URL, 'page')
-    const url = index === 0 ? "https://m.huya.com/cache.php?m=Live&do=ajaxGetProfileLive&page="+page+"&pageSize=16" : "https://m.huya.com/cache.php?m=Game&do=ajaxGetGameLive&gameId="+id+"&page="+page+"&pageSize=16"
+    const url = index === 0 ? "https://m.huya.com/cache.php?m=Live&do=ajaxGetProfileLive&page="+page+"&pageSize=120" : "https://m.huya.com/cache.php?m=Game&do=ajaxGetGameLive&gameId="+id+"&page="+page+"&pageSize=120"
     const html = fetch(url, {headers:{"User-Agent":MOBILE_UA}});
     const list = JSON.parse(html).gameList ? JSON.parse(html).gameList : JSON.parse(html).profileList
 
