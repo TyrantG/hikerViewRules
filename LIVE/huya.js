@@ -10,7 +10,8 @@ const baseParse = _ => {
         col_type:"x5_webview_single"
     })*/
 
-    const list = parseDomForArray(getResCode(), ".ssr-wrapper&&.list-area")
+    const list = parseDomForArray(getResCode(), ".list-area")
+    setError(list.length)
 
     list.forEach(cate => {
         let group = parseDomForHtml(cate, ".recom-top-title&&Text")
@@ -29,7 +30,7 @@ const baseParse = _ => {
             d.push({
                 title: parseDomForHtml(item, ".title&&Text"),
                 desc: parseDomForHtml(item, ".nick&&Text"),
-                pic_url: parseDomForHtml(item, ".pic-con&&src"),
+                pic_url: parseDomForHtml(item, ".img&&src"),
                 url: $(parseDomForHtml(item, "a&&href")).lazyRule(_ => {
                     eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
                     return secParse()
