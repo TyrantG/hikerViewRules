@@ -32,8 +32,7 @@ const baseParse = _ => {
                 pic_url: parseDomForHtml(item, ".pic-con&&src"),
                 url: $(parseDomForHtml(item, "a&&href")).lazyRule(_ => {
                     eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                    setError(secParse(input))
-                    // return secParse(input)
+                    return secParse(input)
                 }),
                 col_type: 'movie_2'
             })
@@ -71,7 +70,7 @@ const categoryParse = index =>{
             pic_url: item.screenshot,
             url: $("https://m.huya.com/"+item.profileRoom).lazyRule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                secParse(input)
+                return secParse(input)
             }),
             col_type: 'movie_2'
         })
