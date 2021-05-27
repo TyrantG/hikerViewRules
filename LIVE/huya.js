@@ -25,36 +25,62 @@ const baseParse = _ => {
 
     list.forEach((cate, index) => {
         let group = cate.sName, current_cate, cate_id
+
+        if (index === 0) {
+            current_cate = "l"
+            d.push({
+                title: group,
+                url: $(group_url).rule(params => {
+                    eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
+                    categoryParse(params.index)
+                }, {index: index}),
+                col_type: 'text_center_1'
+            })
+            videoDom.forEach(item => {
+                d.push({
+                    title: item.sTitle,
+                    desc: item.sNickName,
+                    pic_url: item.sCoverUrl,
+                    url: $(item.sAction).lazyRule(_ => {
+                        eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
+                        return secParse(input)
+                    }),
+                    col_type: 'movie_2'
+                })
+            })
+        }
         try {
             cate_id = cate_list.find(item => item.gameFullName === group).gid
             current_cate = "g/"+cate_id
+
+            let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+cate_id
+            let videoDom = cate.vItems.value
+
+            d.push({
+                title: group,
+                url: $(group_url).rule(params => {
+                    eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
+                    categoryParse(params.index)
+                }, {index: index}),
+                col_type: 'text_center_1'
+            })
+            videoDom.forEach(item => {
+                d.push({
+                    title: item.sTitle,
+                    desc: item.sNickName,
+                    pic_url: item.sCoverUrl,
+                    url: $(item.sAction).lazyRule(_ => {
+                        eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
+                        return secParse(input)
+                    }),
+                    col_type: 'movie_2'
+                })
+            })
         } catch (e) {
-            current_cate = "l"
+            
         }
 
-        let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+cate_id
-        let videoDom = cate.vItems.value
 
-        d.push({
-            title: group,
-            url: $(group_url).rule(params => {
-                eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                categoryParse(params.index)
-            }, {index: index}),
-            col_type: 'text_center_1'
-        })
-        videoDom.forEach(item => {
-            d.push({
-                title: item.sTitle,
-                desc: item.sNickName,
-                pic_url: item.sCoverUrl,
-                url: $(item.sAction).lazyRule(_ => {
-                    eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                    return secParse(input)
-                }),
-                col_type: 'movie_2'
-            })
-        })
     })
 
     res.data = d;
