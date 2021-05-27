@@ -69,7 +69,6 @@ const categoryParse = index =>{
     let id = MY_URL.split('/').pop()
     const url = index === 0 ? "https://m.huya.com/cache.php?m=Live&do=ajaxGetProfileLive&page=fypage&pageSize=16" : "https://m.huya.com/cache.php?m=Game&do=ajaxGetGameLive&gameId="+id+"&page=fypage&pageSize=16"
     const html = fetch(url, {headers:{"User-Agent":MOBILE_UA}});
-    setError(index)
     const list = JSON.parse(html).gameList ? JSON.parse(html).gameList : JSON.parse(html).profileList
 
     list.forEach(item => {
