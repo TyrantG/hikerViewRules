@@ -14,11 +14,11 @@ const baseParse = _ => {
     const list = json.recommendList
     const cate_list = json.gameList
 
-    setError(cate_list.find(item => item.gameFullName === list[2].sName).gid)
     list.forEach((cate, index) => {
         let group = cate.sName
         try {
-            let current_cate = cate_list.find(item => item.gameFullName === group)
+            let current_cate = cate_list.find(item => item.gameFullName === group).gid
+            setError(current_cate)
         } catch (e) {
             let current_cate = "l"
         }
