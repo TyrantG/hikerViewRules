@@ -32,7 +32,8 @@ const baseParse = _ => {
                 pic_url: parseDomForHtml(item, ".pic-con&&src"),
                 url: $(parseDomForHtml(item, "a&&href")).lazyRule(_ => {
                     eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                    return secParse(input)
+                    setError(secParse(input))
+                    // return secParse(input)
                 }),
                 col_type: 'movie_2'
             })
@@ -46,7 +47,6 @@ const baseParse = _ => {
 const secParse = input => {
     let html = fetch(input, {headers:{"User-Agent":MOBILE_UA}})
     let script = parseDomForHtml(html, "body&&script&&Html")
-    setError(script)
     eval(script)
     let live_url = base64Decode(liveLineUrl)
     if (live_url.match(/replay/)) {
