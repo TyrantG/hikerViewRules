@@ -9,10 +9,10 @@ const baseParse = _ => {
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-tabs.html?time='+(new Date()).getTime(),
         col_type:"x5_webview_single"
     })*/
+    const html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}});
+    const list = parseDomForArray(html, ".ssr-wrapper&&.list-area")
 
-    const list = parseDomForArray(getResCode(), ".ssr-wrapper&&.list-area")
-
-    list.forEach(cate => {
+    list.forEach((cate, index) => {
         let group = parseDomForHtml(cate, ".recom-top-title&&Text")
         let group_url = parseDomForHtml(cate, ".arrow-wrap&&href")
         let videoDom = parseDomForArray(cate, ".game-list-wrap&&.g-link")
@@ -21,7 +21,7 @@ const baseParse = _ => {
             title: group,
             url: $(group_url).rule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                categoryParse()
+                categoryParse(index)
             }),
             col_type: 'text_center_1'
         })
@@ -55,11 +55,12 @@ const secParse = input => {
     }
 }
 
-const categoryParse = _ =>{
+const categoryParse = index =>{
     let res = {};
     let d = [];
     let id = MY_URL.split('/').pop()
-    const html = fetch("https://m.huya.com/cache.php?m=Game&do=ajaxGetGameLive&gameId="+id+"&page=fypage&pageSize=16", {headers:{"User-Agent":MOBILE_UA}});
+    const url = index === 0 ? "https://m.huya.com/cache.php?m=Live&do=ajaxGetProfileLive&page=fypage&pageSize=16" : "https://m.huya.com/cache.php?m=Game&do=ajaxGetGameLive&gameId="+id+"&page=fypage&pageSize=16"
+    const html = fetch(url, {headers:{"User-Agent":MOBILE_UA}});
     const list = JSON.parse(html).profileList
 
     list.forEach(item => {
