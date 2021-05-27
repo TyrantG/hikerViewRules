@@ -61,6 +61,8 @@ const categoryParse = _ =>{
     const html = fetch("https://m.huya.com/cache.php?m=Game&do=ajaxGetGameLive&gameId="+id+"&page=fypage&pageSize=16");
     const list = JSON.parse(html).profileList
 
+    setError(list)
+
     list.forEach(item => {
         d.push({
             title: item.introduction,
@@ -135,12 +137,12 @@ const getRealUrl = (live_url) => {
     let r = i.split('/').pop()
     let s = r.replace(/\.(flv|m3u8)/, '')
     let c_tmp = b.split('&').filter(n => n)
-    let c = []
+    // let c = []
     let n = {}
     let c_tmp2 = []
     c_tmp.forEach((tmp, index) => {
         if (index < 3) {
-            c.push(tmp)
+            // c.push(tmp)
             n[tmp.split('=')[0]] = tmp.split('=')[1]
         } else {
             c_tmp2.push(tmp)
