@@ -46,6 +46,7 @@ const baseParse = _ => {
 const secParse = input => {
     let html = fetch(input, {headers:{"User-Agent":MOBILE_UA}})
     let script = parseDomForHtml(html, "body&&script&&Html")
+    setError(script)
     eval(script)
     let live_url = base64Decode(liveLineUrl)
     if (live_url.match(/replay/)) {
