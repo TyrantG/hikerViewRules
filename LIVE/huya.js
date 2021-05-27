@@ -31,9 +31,9 @@ const baseParse = _ => {
             current_cate = "l"
         }
 
-        let group_url = "https://m.huya.com/"+current_cate+"&id="+current_cate+'?p=fypage'
+        let group_url = "https://m.huya.com/"+current_cate+"&id="+current_cate+"?p=fypage"
         let videoDom = cate.vItems.value
-
+        setError(group_url)
         d.push({
             title: group,
             url: $(group_url).rule(params => {
