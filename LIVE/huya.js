@@ -19,9 +19,9 @@ const baseParse = _ => {
 
         d.push({
             title: group,
-            url: $(group_url).rule(_ => {
+            url: $(group_url).rule(params => {
                 eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                categoryParse(index)
+                categoryParse(params.index)
             }, {index: index}),
             col_type: 'text_center_1'
         })
