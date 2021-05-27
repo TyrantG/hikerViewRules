@@ -20,7 +20,8 @@ const baseParse = _ => {
         d.push({
             title: group,
             url: $(group_url).rule(_ => {
-
+                eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
+                categoryParse()
             }),
             col_type: 'text_center_1'
         })
@@ -60,8 +61,6 @@ const categoryParse = _ =>{
     let id = MY_URL.split('/').pop()
     const html = fetch("https://m.huya.com/cache.php?m=Game&do=ajaxGetGameLive&gameId="+id+"&page=fypage&pageSize=16");
     const list = JSON.parse(html).profileList
-
-    setError(list)
 
     list.forEach(item => {
         d.push({
