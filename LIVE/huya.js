@@ -50,7 +50,7 @@ const secParse = _ => {
     if (live_url.match(/replay/)) {
         return base64Decode(liveLineUrl)
     } else {
-        return getUrl(live_url)
+        return getRealUrl(live_url)
     }
 }
 
@@ -130,7 +130,7 @@ const cateGroupParse = _ => {
     setResult(d);
 }
 
-const getUrl = (live_url) => {
+const getRealUrl = (live_url) => {
     let [i, b] = live_url.split('?')
     let r = i.split('/').pop()
     let s = r.replace(/\.(flv|m3u8)/, '')
