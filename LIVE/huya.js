@@ -31,7 +31,7 @@ const baseParse = _ => {
                 pic_url: parseDomForHtml(item, ".pic-con&&src"),
                 url: $(parseDomForHtml(item, "a&&href")).lazyRule(_ => {
                     eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                    secParse()
+                    return secParse()
                 }),
                 col_type: 'movie_2'
             })
