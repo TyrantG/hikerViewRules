@@ -11,7 +11,7 @@
           },
           {
             "title": "虎牙直播",
-            "rule": {"title":"虎牙直播","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"https://m.huya.com","col_type":"","class_name":"","class_url":"","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/LIVE/huya.js'))\nbaseParse()","search_url":"","searchFind":"","detail_col_type":"","detail_find_rule":"","sdetail_col_type":"","sdetail_find_rule":"","ua":"","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nhuya_live()"}
+            "rule": {"title":"虎牙直播","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"https://m.huya.com","col_type":"","class_name":"","class_url":"","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/LIVE/huya.js'))\nbaseParse()","search_url":"","searchFind":"","detail_col_type":"","detail_find_rule":"","sdetail_col_type":"","sdetail_find_rule":"","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nhuya_live()"}
           }
         ]
       }
