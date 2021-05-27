@@ -44,7 +44,7 @@ const baseParse = _ => {
 }
 
 const secParse = input => {
-    let html = fetch(input)
+    let html = fetch(input, {headers:{"User-Agent":MOBILE_UA}})
     let script = parseDomForHtml(html, "body&&script&&Html")
     eval(script)
     let live_url = base64Decode(liveLineUrl)
@@ -59,7 +59,7 @@ const categoryParse = _ =>{
     let res = {};
     let d = [];
     let id = MY_URL.split('/').pop()
-    const html = fetch("https://m.huya.com/cache.php?m=Game&do=ajaxGetGameLive&gameId="+id+"&page=fypage&pageSize=16");
+    const html = fetch("https://m.huya.com/cache.php?m=Game&do=ajaxGetGameLive&gameId="+id+"&page=fypage&pageSize=16", {headers:{"User-Agent":MOBILE_UA}});
     const list = JSON.parse(html).profileList
 
     list.forEach(item => {
