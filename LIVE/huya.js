@@ -15,12 +15,11 @@ const baseParse = _ => {
     const cate_list = json.gameList
 
     list.forEach((cate, index) => {
-        let group = cate.sName
+        let group = cate.sName, current_cate
         try {
-            let current_cate = cate_list.find(item => item.gameFullName === group).gid
-            setError(current_cate)
+            current_cate = cate_list.find(item => item.gameFullName === group).gid
         } catch (e) {
-            let current_cate = "l"
+            current_cate = "l"
         }
 
         let group_url = "https://m.huya.com/g/"+current_cate
