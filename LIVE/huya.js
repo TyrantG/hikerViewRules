@@ -26,12 +26,12 @@ const baseParse = _ => {
     list.forEach((cate, index) => {
         let group = cate.sName, current_cate
         try {
-            current_cate = cate_list.find(item => item.gameFullName === group).gid
+            current_cate = "g/"+cate_list.find(item => item.gameFullName === group).gid
         } catch (e) {
             current_cate = "l"
         }
 
-        let group_url = "https://m.huya.com/g/"+current_cate+"&id="+current_cate+'?p=fypage'
+        let group_url = "https://m.huya.com/"+current_cate+"&id="+current_cate+'?p=fypage'
         let videoDom = cate.vItems.value
 
         d.push({
