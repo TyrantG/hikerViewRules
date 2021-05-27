@@ -135,27 +135,15 @@ const searchParse = () => {
     const html = getResCode();
     const list = JSON.parse(html).data
 
-    /*if (getVar('chooseOption') && getVar('chooseOption') == 'video') {
-        list.list.forEach(item => {
-            d.push({
-                title: item.title,
-                desc: item.roomName,
-                pic_url: item.videoPic,
-                url: "https://vmobile.douyu.com/show/"+item.hashID,
-                col_type: 'movie_2'
-            })
+    list.list.forEach(item => {
+        d.push({
+            title: item.nickname,
+            desc: item.roomName,
+            pic_url: item.roomSrc,
+            url: "https://m.douyu.com/"+item.roomId,
+            col_type: 'movie_2'
         })
-    } else {*/
-        list.list.forEach(item => {
-            d.push({
-                title: item.nickname,
-                desc: item.roomName,
-                pic_url: item.roomSrc,
-                url: "https://m.douyu.com/"+item.roomId,
-                col_type: 'movie_2'
-            })
-        })
-    // }
+    })
 
     res.data = d;
     setHomeResult(res);
