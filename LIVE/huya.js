@@ -9,13 +9,21 @@ const baseParse = _ => {
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-tabs.html?time='+(new Date()).getTime(),
         col_type:"x5_webview_single"
     })*/
-    const html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}});
-    const list = parseDomForArray(html, ".ssr-wrapper&&.list-area")
+    const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
+    const json = JSON.parse(list_json)
+    const list = json.recommendList
+    const cate_list = json.gameList
 
     list.forEach((cate, index) => {
-        let group = parseDomForHtml(cate, ".recom-top-title&&Text")
-        let group_url = parseDomForHtml(cate, ".arrow-wrap&&href")
-        let videoDom = parseDomForArray(cate, ".game-list-wrap&&.g-link")
+        let group = cate.sName
+        try {
+            let current_cate = cate_list.find(item => item.gameFullName === group).gid
+        } catch (e) {
+            let current_cate = "l"
+        }
+
+        let group_url = "https://m.huya.com/g/"+current_cate
+        let videoDom = cate.vItems.value
 
         d.push({
             title: group,
@@ -27,10 +35,10 @@ const baseParse = _ => {
         })
         videoDom.forEach(item => {
             d.push({
-                title: parseDomForHtml(item, ".title&&Text"),
-                desc: parseDomForHtml(item, ".nick&&Text"),
-                pic_url: parseDomForHtml(item, ".pic-con&&src"),
-                url: $(parseDomForHtml(item, "a&&href")).lazyRule(_ => {
+                title: item.sTitle,
+                desc: item.sNickName,
+                pic_url: item.sCoverUrl,
+                url: $(item.sAction).lazyRule(_ => {
                     eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
                     return secParse(input)
                 }),
