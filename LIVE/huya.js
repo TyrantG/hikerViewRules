@@ -28,6 +28,9 @@ const baseParse = _ => {
 
         if (index === 0) {
             current_cate = "l"
+
+            let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+cate_id
+            let videoDom = cate.vItems.value
             d.push({
                 title: group,
                 url: $(group_url).rule(params => {
@@ -77,7 +80,7 @@ const baseParse = _ => {
                 })
             })
         } catch (e) {
-            
+
         }
 
 
