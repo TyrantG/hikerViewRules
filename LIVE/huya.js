@@ -74,7 +74,7 @@ const baseParse = _ => {
                     pic_url: item.sCoverUrl,
                     url: $(item.sAction).rule(_ => {
                         eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                        secParse(input)
+                        secParse()
                     }),
                     col_type: 'movie_2'
                 })
@@ -145,7 +145,7 @@ const categoryParse = index =>{
             pic_url: item.screenshot,
             url: $("https://m.huya.com/"+item.profileRoom).rule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                secParse(input)
+                secParse()
             }),
             col_type: 'movie_2'
         })
