@@ -167,9 +167,9 @@
         },
         mounted() {
             this.rules = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.rules'))
-            let collections = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.collections_count'))
+            let collections = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.collections'))
             this.collections_count = collections.length
-            let apps = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.apps_count'))
+            let apps = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.apps'))
             this.apps_count = apps.length
         },
         methods: {
