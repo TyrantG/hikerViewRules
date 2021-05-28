@@ -64,12 +64,18 @@ const baseParse = _ => {
 
 const homePage = _ => {
     let rules = getLastRules(12);
-    putVar('rules', JSON.stringify(rules))
+    let collections = fetch("hiker://collection");
+    if (collections) collections = JSON.parse(collections)
+    let apps = fetch("hiker://home");
+    if (apps) collections = JSON.parse(apps)
+    putVar('tyrantgenesis.home.collections_count', collections.length)
+    putVar('tyrantgenesis.home.apps_count', apps.length)
+    putVar('tyrantgenesis.home.rules', JSON.stringify(rules))
 
     let d = [];
 
     d.push({
-        desc: '99% && float',
+        desc: '100% && float',
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/Home.html?time='+(new Date()).getTime(),
         col_type:"x5_webview_single"
     })

@@ -130,11 +130,11 @@
     <div class="image-box">
         <div class="image-box-col" style="margin-right: 6px" @click="collection">
             <el-image style="width: 100%; height: 100px; border-radius: 4px" :src="banners[1]" fit="cover"></el-image>
-            <div class="fix">我的收藏</div>
+            <div class="fix">我的收藏({{collections_count}})</div>
         </div>
         <div class="image-box-col" style="margin-left: 6px" @click="home">
             <el-image style="width: 100%; height: 100px; border-radius: 4px" :src="banners[2]" fit="cover"></el-image>
-            <div class="fix">我的频道</div>
+            <div class="fix">我的小程序({{apps_count}})</div>
         </div>
     </div>
     <el-collapse class="collapse" v-model="active">
@@ -160,11 +160,15 @@
                     "https://images.squarespace-cdn.com/content/v1/55c8073fe4b02a74ffe18e48/1486451534686-2PLZDX4E3L5OIZD36NAW/ke17ZwdGBToddI8pDm48kCTuQe70-akU7c_UUDYAjiUUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dld_Wd7VQHcOT93iMwvqToX0yPhomxH518d_g53hgF7UOpYghpI-Ha_TwZsqqmJXng/better_tomorrow_by_yuumei-daa3fwv.jpg?format=1500w"
                 ],
                 active: [1, 2],
-                rules: []
+                rules: [],
+                collections_count: 0,
+                apps_count: 0,
             }
         },
         mounted() {
-            this.rules = JSON.parse(fy_bridge_app.getVar('rules'))
+            this.rules = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.rules'))
+            this.collections_count = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.collections_count'))
+            this.apps_count = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.apps_count'))
         },
         methods: {
             scrollEvent() {
