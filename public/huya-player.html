@@ -226,7 +226,6 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
                   let map = new (TafMx.UriMapping[msg.iUri])();
                   map.readFrom(stream);
                   if (map.sContent !== undefined){
-                    console.log(map.tUserInfo)
                     self.dataList.push({
                       avatar: map.tUserInfo.ic,
                       user: map.tUserInfo.sNickName,
