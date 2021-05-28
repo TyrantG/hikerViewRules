@@ -53,6 +53,7 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
 <div class="box">
   <div class="prism-player player" id="player-con"></div>
   <div class="barrage-scroll" id="app">
+    {{_info}}
     <div class="barrage-item" v-for="item in dataList">
       <img class="avatar" :src="item.avatar" alt="" /><span class="username">{{item.user}}:</span><span class="content">{{item.content}}</span>
     </div>
