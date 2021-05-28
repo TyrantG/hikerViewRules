@@ -63,9 +63,8 @@ const baseParse = _ => {
 }
 
 const homePage = _ => {
-    let subscribeRecords = getHomeSub();
-    setError(subscribeRecords)
-    // let getLastRules = getLastRules(12);
+    let rules = getLastRules(12);
+    putVar('rules', JSON.stringify(rules))
 
     let d = [];
 

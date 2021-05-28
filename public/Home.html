@@ -82,6 +82,14 @@
         .collapse {
             margin: 8px;
         }
+        .tag-box {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .tag-box .tag {
+            margin: 6px 8px;
+        }
     </style>
 </head>
 <body>
@@ -94,7 +102,7 @@
             <el-image style="width: 100%; height: 100%; border-radius: 4px" :src="item" fit="cover"></el-image>
         </el-carousel-item>
     </el-carousel>
-    <div class="TyrantGenesis" @click="tyrantgenesis">TyrantGenesis</div>
+    <div class="TyrantGenesis" @click="toRule('TyrantGenesis订阅')">TyrantGenesis</div>
     <div class="input-with-select el-input el-input-group el-input-group--append" @click="search">
         <div class="el-input__inner" style="color: #dcdfe6">请输入搜索关键词</div>
         <div class="el-input-group__append"><button type="button" class="el-button el-button--default"><i class="el-icon-search"></i></button></div>
@@ -128,8 +136,8 @@
         </div>
     </div>
     <el-collapse class="collapse" v-model="active">
-        <el-collapse-item title="常用首页" :name="1">
-            <el-tag>不知道咋取</el-tag>
+        <el-collapse-item title="常用首页" :name="1" class="tag-box">
+            <el-tag class="tag" v-for="(item, index) in rules" :key="index" @click="toRule(item.title)">{{item.title}}</el-tag>
         </el-collapse-item>
         <el-collapse-item title="Github 摸鱼记录" :name="2">
             <el-image class="svg" src="https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight"></el-image>
@@ -151,13 +159,12 @@
                     "https://images.squarespace-cdn.com/content/v1/55c8073fe4b02a74ffe18e48/1439588321093-ULDW7LHT0UGLUP8EP85J/ke17ZwdGBToddI8pDm48kD6g6d_8IznzvwGE9lO5DQoUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dkohZJiDdrI1I8fvN-mvKNK5lz5E2twVKTvGuJDiNEjuG6v6ULRah83RgHXAWD5lbQ/with_you_by_yuumei-d8f3a5d.jpg?format=1500w",
                     "https://images.squarespace-cdn.com/content/v1/55c8073fe4b02a74ffe18e48/1486451534686-2PLZDX4E3L5OIZD36NAW/ke17ZwdGBToddI8pDm48kCTuQe70-akU7c_UUDYAjiUUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYy7Mythp_T-mtop-vrsUOmeInPi9iDjx9w8K4ZfjXt2dld_Wd7VQHcOT93iMwvqToX0yPhomxH518d_g53hgF7UOpYghpI-Ha_TwZsqqmJXng/better_tomorrow_by_yuumei-daa3fwv.jpg?format=1500w"
                 ],
-                active: [1, 2]
+                active: [1, 2],
+                rules: []
             }
         },
         mounted() {
-            window.addEventListener('scroll', () => {
-                // this.scrollEvent()
-            }, false)
+            this.rules = JSON.parse(fy_bridge_app.getVar('rules'))
         },
         methods: {
             scrollEvent() {
@@ -194,8 +201,8 @@
             home() {
                 location.href = "hiker://home"
             },
-            tyrantgenesis() {
-                location.href = "hiker://home@TyrantGenesis订阅"
+            toRule(title) {
+                location.href = "hiker://home@"+title
             },
         },
     })
