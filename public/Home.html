@@ -11,7 +11,7 @@
     <style>
         @font-face {
             font-family: "AlexBrush";
-            src: url("file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/fonts/AlexBrush-Regular.ttf");
+            src: url("./fonts/AlexBrush-Regular.ttf");
         }
         html, body {
             margin: 0;
@@ -104,7 +104,7 @@
             <el-image style="width: 100%; height: 100%; border-radius: 4px" :src="item" fit="cover"></el-image>
         </el-carousel-item>
     </el-carousel>
-    <div class="TyrantGenesis" @click="toRule('TyrantGenesis订阅')">TyrantGenesis</div>
+    <!--<div class="TyrantGenesis" @click="toRule('TyrantGenesis订阅')">TyrantGenesis</div>-->
     <div class="input-with-select el-input el-input-group el-input-group--append" @click="search">
         <div class="el-input__inner" style="color: #dcdfe6">请输入搜索关键词</div>
         <div class="el-input-group__append"><button type="button" class="el-button el-button--default"><i class="el-icon-search"></i></button></div>
@@ -193,7 +193,8 @@
                 location.href = "hiker://download"
             },
             setting() {
-                location.href = "hiker://settingMore"
+                // location.href = "hiker://setting
+                this.$message.warning('暂未开放设置页面');
             },
             collection() {
                 location.href = "hiker://collection"
