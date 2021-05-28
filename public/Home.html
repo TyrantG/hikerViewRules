@@ -25,6 +25,9 @@
         .ele-blind {
             display: none;
         }
+        .el-message {
+            min-width: 300px; !important;
+        }
         .carousel {
             margin: 8px;
             border-radius: 4px;
@@ -196,7 +199,10 @@
             },
             setting() {
                 // location.href = "hiker://setting
-                this.$message.warning('暂未开放设置页面');
+                this.$message.warning({
+                    message: '暂未开放设置页面',
+                    duration: 0
+                });
             },
             collection() {
                 location.href = "hiker://collection"
