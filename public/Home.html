@@ -170,6 +170,7 @@
         },
         mounted() {
             this.rules = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.rules'))
+            alert(this.rules.length)
         },
         methods: {
             scrollEvent() {
@@ -199,10 +200,7 @@
             },
             setting() {
                 // location.href = "hiker://setting
-                this.$message.warning({
-                    message: '暂未开放设置页面',
-                    duration: 0
-                });
+                this.$message.warning('暂未开放设置页面');
             },
             collection() {
                 location.href = "hiker://collection"
