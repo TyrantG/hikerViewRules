@@ -116,7 +116,6 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
       this._main_user_id.sHuYaUA = "webh5&1.0.0&websocket"
 
       this.ws = new WebSocket(url)
-      alert(this.ws)
       this.ws.onopen = (res, err) => {
         this._get_chat_list();
         this._ping_timer = setInterval(this.sendPingReq.bind(this), 30 * 1000)
