@@ -72,9 +72,9 @@ const baseParse = _ => {
                     title: item.sTitle,
                     desc: item.sNickName,
                     pic_url: item.sCoverUrl,
-                    url: $(item.sAction).lazyRule(_ => {
+                    url: $(item.sAction).rule(_ => {
                         eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                        return secParse(input)
+                        secParse(input)
                     }),
                     col_type: 'movie_2'
                 })
@@ -90,16 +90,42 @@ const baseParse = _ => {
     setHomeResult(res);
 }
 
-const secParse = input => {
-    let html = fetch(input, {headers:{"User-Agent":MOBILE_UA}})
+const secParse = _ => {
+    let rid = MY_URL.split('/').pop()
+    let html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}})
     let script = parseDomForHtml(html, "body&&script&&Html")
     eval(script)
     let live_url = base64Decode(liveLineUrl)
-    if (live_url.match(/replay/)) {
-        return base64Decode(liveLineUrl)
-    } else {
-        return getRealUrl(live_url)
+    let source
+    try {
+        if (live_url.match(/replay/)) {
+            source = base64Decode(liveLineUrl)
+        } else {
+            source = getRealUrl(live_url)
+        }
+    } catch (e) {
+
     }
+
+    let info = {};
+    let subsid_array = html.match(/var SUBSID = '(.*)';/);
+    let topsid_array = html.match(/var TOPSID = '(.*)';/);
+    let yyuid_array = html.match(/ayyuid: '(.*)',/);
+    let anthor_nick = html.match(/var ANTHOR_NICK = '(.*)';/)
+    info.subsid = subsid_array[1] === '' ? 0 : parseInt(subsid_array[1]);
+    info.topsid = topsid_array[1] === '' ? 0 : parseInt(topsid_array[1]);
+    info.yyuid = parseInt(yyuid_array[1]);
+    info.sGuid = "";
+    info.anthor_nick = anthor_nick[1] === '' ? '' : anthor_nick[1];
+
+    let d = [];
+    d.push({
+        desc: '100% && float',
+        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-player.html?time='+(new Date()).getTime()+'&rid='+data.rid+'&source='+encodeURIComponent(MY_URL)+'&info='+encodeURIComponent(JSON.stringify(info)),
+        col_type:"x5_webview_single",
+    })
+    setResult(d);
+
 }
 
 const categoryParse = index =>{
@@ -116,9 +142,9 @@ const categoryParse = index =>{
             title: item.introduction,
             desc: item.nick,
             pic_url: item.screenshot,
-            url: $("https://m.huya.com/"+item.profileRoom).lazyRule(_ => {
+            url: $("https://m.huya.com/"+item.profileRoom).rule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                return secParse(input)
+                secParse(input)
             }),
             col_type: 'movie_2'
         })

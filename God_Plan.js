@@ -43,13 +43,13 @@ const douyu_live = _ => {
 
 const huya_live = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/huya.js?t="+time, 'hiker://files/TyrantG/LIVE/huya.js')
-  /*godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/douyu-tabs.html?t="+time, 'hiker://files/TyrantG/public/douyu-tabs.html')
-  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/douyu-player.html?t="+time, 'hiker://files/TyrantG/public/douyu-player.html')
+  // godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/douyu-tabs.html?t="+time, 'hiker://files/TyrantG/public/douyu-tabs.html')
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/huya-player.html?t="+time, 'hiker://files/TyrantG/public/huya-player.html')
   godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/css/element-ui.css", 'hiker://files/TyrantG/public/css/element-ui.css')
   godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/css/aliplayer-min.css", 'hiker://files/TyrantG/public/css/aliplayer-min.css')
   godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/vue.min.js", 'hiker://files/TyrantG/public/js/vue.min.js')
   godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/aliplayer-min.js", 'hiker://files/TyrantG/public/js/aliplayer-min.js')
-  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')*/
+  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
 }
 
 const yande_re = _ => {
