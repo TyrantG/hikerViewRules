@@ -61,3 +61,19 @@ const baseParse = _ => {
     res.data = d;
     setHomeResult(res);
 }
+
+const homePage = _ => {
+    let subscribeRecords = getHomeSub();
+    setError(subscribeRecords)
+    // let getLastRules = getLastRules(12);
+
+    let d = [];
+
+    d.push({
+        desc: '100% && float',
+        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/Home.html?time='+(new Date()).getTime(),
+        col_type:"x5_webview_single"
+    })
+
+    setResult(d);
+}

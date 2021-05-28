@@ -4,6 +4,7 @@ const baseParse = _ => {
 
     for (let i = 0; i < 4; i++) {
         d.push({
+            title: '我的歌单',
             pic_url: "http://p3.music.126.net/tBTNafgjNnTL1KlZMt7lVA==/18885211718935735.jpg",
             col_type: 'icon_round_4'
         });

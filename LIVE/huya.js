@@ -26,7 +26,7 @@ const baseParse = _ => {
     list.forEach((cate, index) => {
         let group = cate.sName, current_cate, cate_id
 
-        if (index === 0) {
+        /*if (index === 0) {
             current_cate = "l"
 
             let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+cate_id
@@ -51,7 +51,7 @@ const baseParse = _ => {
                     col_type: 'movie_2'
                 })
             })
-        }
+        }*/
         try {
             cate_id = cate_list.find(item => item.gameFullName === group).gid
             current_cate = "g/"+cate_id
@@ -79,11 +79,7 @@ const baseParse = _ => {
                     col_type: 'movie_2'
                 })
             })
-        } catch (e) {
-
-        }
-
-
+        } catch (e) {}
     })
 
     res.data = d;
