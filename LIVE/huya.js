@@ -94,6 +94,7 @@ const secParse = _ => {
     let rid = MY_URL.split('/').pop()
     let html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}})
     let script = parseDomForHtml(html, "body&&script&&Html")
+    setError(script)
     eval(script)
     let live_url = base64Decode(liveLineUrl)
     let source
@@ -121,7 +122,7 @@ const secParse = _ => {
     let d = [];
     d.push({
         desc: '100% && float',
-        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-player.html?time='+(new Date()).getTime()+'&rid='+data.rid+'&source='+encodeURIComponent(source)+'&info='+encodeURIComponent(JSON.stringify(info)),
+        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(source)+'&info='+encodeURIComponent(JSON.stringify(info)),
         col_type:"x5_webview_single",
     })
     setResult(d);
