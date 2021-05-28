@@ -73,6 +73,7 @@ const homePage = _ => {
     putVar('tyrantgenesis.collections', collections)
     putVar('tyrantgenesis.apps', apps)*/
     putVar('tyrantgenesis.rules', JSON.stringify(rules))
+    setError(getVar('tyrantgenesis.rules'))
 
     let d = [];
 
