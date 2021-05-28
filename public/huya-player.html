@@ -76,7 +76,6 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
 
   const rid = getQueryVariable('rid')
   const source = decodeURIComponent(getQueryVariable('source'))
-  alert(decodeURIComponent(getQueryVariable('info')))
   const info = JSON.parse(decodeURIComponent(getQueryVariable('info')))
 
   const player = new Aliplayer({
@@ -118,6 +117,7 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
 
       this.ws = new WebSocket(url)
       this.ws.onopen = (res, err) => {
+        alert(123)
         this._get_chat_list();
         this._ping_timer = setInterval(this.sendPingReq.bind(this), 30 * 1000)
       }
