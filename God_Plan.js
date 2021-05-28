@@ -23,6 +23,7 @@ const time = (new Date()).getTime()
 /* Customize Function */
 
 const home_page = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/tyrantgenesis.js?t="+time, 'hiker://files/TyrantG/tyrantgenesis.js')
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/Home.html?t="+time, 'hiker://files/TyrantG/public/Home.html')
   godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/fonts/AlexBrush-Regular.ttf", 'hiker://files/TyrantG/public/fonts/AlexBrush-Regular.ttf')
   godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/vue.min.js", 'hiker://files/TyrantG/public/js/vue.min.js')

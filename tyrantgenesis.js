@@ -67,11 +67,6 @@ const homePage = _ => {
     hikerRules.forEach(item => {
         rules.push(item.title)
     })
-    /*let collections = fetch("hiker://collection");
-    let apps = fetch("hiker://home");
-
-    putVar('tyrantgenesis.collections', collections)
-    putVar('tyrantgenesis.apps', apps)*/
     putVar('tyrantgenesis.rules', JSON.stringify(rules))
 
     let d = [];
