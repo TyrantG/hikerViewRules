@@ -63,7 +63,10 @@ const baseParse = _ => {
 }
 
 const homePage = _ => {
-    let rules = getLastRules(12);
+    let hikerRules = getLastRules(12), rules = []
+    hikerRules.forEach(item => {
+        rules.push(item.title)
+    })
     /*let collections = fetch("hiker://collection");
     let apps = fetch("hiker://home");
 

@@ -142,7 +142,7 @@
     </div>
     <el-collapse class="collapse" v-model="active">
         <el-collapse-item title="常用首页" :name="1" class="tag-box">
-            <el-tag class="tag" v-for="(item, index) in rules" :key="index" @click="toRule(item.title)">{{item.title}}</el-tag>
+            <el-tag class="tag" v-for="(item, index) in rules" :key="index" @click="toRule(item)">{{item}}</el-tag>
         </el-collapse-item>
         <el-collapse-item title="Github 摸鱼记录" :name="2">
             <el-image class="svg" src="https://github-readme-stats.vercel.app/api?username=TyrantG&show_icons=true&theme=tokyonight"></el-image>
@@ -170,7 +170,6 @@
         },
         mounted() {
             this.rules = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.rules'))
-            alert(this.rules.length)
         },
         methods: {
             scrollEvent() {
