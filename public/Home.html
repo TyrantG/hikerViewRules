@@ -166,10 +166,11 @@
             }
         },
         mounted() {
-            this.rules = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.rules'))
-            let collections = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.collections'))
+            this.rules = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.rules'))
+            let collections = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.collections'))
+            this.$message(fy_bridge_app.getVar('tyrantgenesis.collections'))
+            let apps = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.apps'))
             this.collections_count = collections.length
-            let apps = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.apps'))
             this.apps_count = apps.length
         },
         methods: {

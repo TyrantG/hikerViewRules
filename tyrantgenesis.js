@@ -67,9 +67,9 @@ const homePage = _ => {
     let collections = fetch("hiker://collection");
     let apps = fetch("hiker://home");
 
-    putVar('tyrantgenesis.home.collections', collections)
-    putVar('tyrantgenesis.home.apps', apps)
-    putVar('tyrantgenesis.home.rules', JSON.stringify(rules))
+    putVar('tyrantgenesis.collections', collections)
+    putVar('tyrantgenesis.apps', apps)
+    putVar('tyrantgenesis.rules', JSON.stringify(rules))
 
     let d = [];
 
