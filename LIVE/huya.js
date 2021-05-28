@@ -93,7 +93,7 @@ const baseParse = _ => {
 const secParse = _ => {
     let rid = MY_URL.split('/').pop()
     let html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}})
-    let script = parseDomForHtml(html, "body&&script&&Html")
+    let script = parseDomForHtml(html, ".type-live&&script&&Html")
     setError(script)
     eval(script)
     let live_url = base64Decode(liveLineUrl)
