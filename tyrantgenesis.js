@@ -64,11 +64,11 @@ const baseParse = _ => {
 
 const homePage = _ => {
     let rules = getLastRules(12);
-    let collections = fetch("hiker://collection");
+    /*let collections = fetch("hiker://collection");
     let apps = fetch("hiker://home");
 
     putVar('tyrantgenesis.collections', collections)
-    putVar('tyrantgenesis.apps', apps)
+    putVar('tyrantgenesis.apps', apps)*/
     putVar('tyrantgenesis.rules', JSON.stringify(rules))
 
     let d = [];
