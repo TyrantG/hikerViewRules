@@ -65,11 +65,10 @@ const baseParse = _ => {
 const homePage = _ => {
     let rules = getLastRules(12);
     let collections = fetch("hiker://collection");
-    if (collections) collections = JSON.parse(collections)
     let apps = fetch("hiker://home");
-    if (apps) apps = JSON.parse(apps)
-    putVar('tyrantgenesis.home.collections_count', collections.length)
-    putVar('tyrantgenesis.home.apps_count', apps.length)
+
+    putVar('tyrantgenesis.home.collections', collections)
+    putVar('tyrantgenesis.home.apps', apps)
     putVar('tyrantgenesis.home.rules', JSON.stringify(rules))
 
     let d = [];
