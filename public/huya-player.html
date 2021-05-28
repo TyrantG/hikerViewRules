@@ -120,6 +120,9 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
         this._get_chat_list();
         this._ping_timer = setInterval(this.sendPingReq.bind(this), 30 * 1000)
       }
+      this.ws.onerror = (err) => {
+        alert(err)
+      }
       this.ws.onmessage = this._on_mes.bind(this)
     },
     methods: {
