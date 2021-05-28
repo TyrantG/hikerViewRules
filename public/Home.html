@@ -170,6 +170,7 @@
         },
         mounted() {
             this.rules = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.rules'))
+            this.$message(this.rules.length)
         },
         methods: {
             scrollEvent() {
