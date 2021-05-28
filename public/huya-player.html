@@ -193,7 +193,7 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
           command.writeTo(stream)
           this.wx.send(stream.getBuffer())
         } catch (err) {
-          console.log('嘤嘤嘤')
+          console.log(err)
         }
       },
       _on_mes(data) {
