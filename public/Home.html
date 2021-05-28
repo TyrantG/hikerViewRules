@@ -167,8 +167,8 @@
         },
         mounted() {
             this.rules = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.rules'))
-            this.collections_count = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.collections_count'))
-            this.apps_count = JSON.parse(fy_bridge_app.getVar('tyrantgenesis.home.apps_count'))
+            this.collections_count = fy_bridge_app.getVar('tyrantgenesis.home.collections_count')
+            this.apps_count = fy_bridge_app.getVar('tyrantgenesis.home.apps_count')
         },
         methods: {
             scrollEvent() {
