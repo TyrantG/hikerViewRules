@@ -124,6 +124,7 @@ const secParse = _ => {
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(source)+'&info='+encodeURIComponent(JSON.stringify(info)),
         col_type:"x5_webview_single",
     })
+    setError('huya-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(source)+'&info='+encodeURIComponent(JSON.stringify(info)))
     setResult(d);
 
 }
