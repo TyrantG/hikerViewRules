@@ -21,7 +21,7 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
       height: 100%;
     }
     .player {
-      height: 300px;
+      height: 273px;
     }
     .barrage-scroll {
       height: calc(100% - 300px);
@@ -76,6 +76,7 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
 
   const rid = getQueryVariable('rid')
   const source = decodeURIComponent(getQueryVariable('source'))
+  alert(decodeURIComponent(getQueryVariable('info')))
   const info = JSON.parse(decodeURIComponent(getQueryVariable('info')))
 
   const player = new Aliplayer({
