@@ -59,7 +59,7 @@
       getData() {
         this.category = JSON.parse(fy_bridge_app.getVar('tab-panel'))
         this.baseUrl = fy_bridge_app.getVar('tab-base_url')
-        // this.currentTab = fy_bridge_app.getVar('tab-current')
+        this.currentTab = fy_bridge_app.getVar('tab-current')
         let choose = this.getQueryVariable('filters')
         if (choose) this.choose = choose.split(',').map(_ => parseInt(_))
       },
@@ -75,8 +75,7 @@
         this.$forceUpdate()
       },
       tabClick(e) {
-        alert(e.name)
-        // fy_bridge_app.putVar('tab-current', e)
+        fy_bridge_app.putVar('tab-current', e.name)
       },
       chooseTab(index, key, status) {
         // if (! status) {
