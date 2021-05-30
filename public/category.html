@@ -25,7 +25,7 @@
 <body>
 <div id="app">
   <el-tabs type="border-card" v-model="currentTab" @tab-click="tabClick">
-    <el-tab-pane v-for="(item, index) in category" :key="index" :label="item.name">
+    <el-tab-pane v-for="(item, index) in category" :key="index" :label="item.name" :name="index">
       <el-tag class="tab" v-for="(tab, key) in item.list" :key="key" size="mini" :type="tab.choose ? `danger` : ''" @click="chooseTab(index, key, tab.choose)">{{tab.name}}</el-tag>
     </el-tab-pane>
   </el-tabs>
