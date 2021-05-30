@@ -59,7 +59,6 @@
         this.category = JSON.parse(fy_bridge_app.getVar('tab-panel'))
         this.baseUrl = fy_bridge_app.getVar('tab-base_url')
         let choose = this.getQueryVariable('filters')
-        alert(choose)
         if (choose) this.choose = choose.split(',').map(_ => parseInt(_))
       },
       initData() {
@@ -86,7 +85,7 @@
           })
           this.$forceUpdate()
 
-          fy_bridge_app.putVar('tab-url', this.baseUrl+'?filters='+this.choose.join(','))
+          fy_bridge_app.putVar('tab-url', 'https://www.acfun.cn/bangumilist?filters='+this.choose.join(','))
           fy_bridge_app.refreshPage()
         // }
       },

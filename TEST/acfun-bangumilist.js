@@ -4,10 +4,11 @@ const baseParse = _ => {
   const categories = parseDomForArray(category_html, '.ac-menu&&.ac-menu-filter')
   let category_list = []
 
+  putVar('tab-url', '')
   const true_url = getVar('tab-url') || MY_URL
 
   const filters = getUrlParams(true_url, MY_URL, 'filters') || ''
-  setError(filters)
+
   categories.forEach(category => {
     let sub_list = []
     let category_sub = parseDomForArray(category, '.ac-menu-filter-content&&.ac-menu-filter-item')
@@ -27,7 +28,7 @@ const baseParse = _ => {
 
   d.push({
     desc: '132 && float',
-    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html?filters='+filters+'&url='+MY_URL,
+    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html?filters='+filters,
     col_type:"x5_webview_single"
   })
 
