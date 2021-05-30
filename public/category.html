@@ -59,6 +59,7 @@
         this.category = JSON.parse(fy_bridge_app.getVar('tab-panel'))
         this.baseUrl = fy_bridge_app.getVar('tab-base_url')
         let choose = this.getQueryVariable('filters')
+        alert(choose)
         if (choose) this.choose = choose.split(',').map(_ => parseInt(_))
       },
       initData() {
