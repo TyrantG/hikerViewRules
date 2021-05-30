@@ -25,6 +25,12 @@ const baseParse = _ => {
   putVar('tab-panel', JSON.stringify(category_list))
   putVar('tab-filters', filters)
 
+  d.push({
+    desc: '132 && float',
+    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html',
+    col_type:"x5_webview_single"
+  })
+
   const list = parseDomForArray(category_html, '.ac-mod-ul&&.ac-mod-li')
 
   list.forEach(item => {
