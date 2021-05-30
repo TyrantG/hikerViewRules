@@ -6,7 +6,7 @@ const baseParse = _ => {
 
   const base_url = MY_URL.split('?')[0]
 
-  const pageNum = getUrlParams(MY_URL, 'pageNum')
+  const pageNum = getUrlParams(MY_URL, 'pageNum') || 1
 
   const true_url = addUrlPara(getVar('tab-url') || MY_URL, 'pageNum', pageNum)
 
