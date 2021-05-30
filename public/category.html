@@ -45,11 +45,20 @@
       this.initData()
     },
     methods: {
+      getQueryVariable(variable) {
+        let query = window.location.search.substring(1)
+        let vars = query.split("&");
+        for (let i=0;i<vars.length;i++) {
+          let pair = vars[i].split("=");
+          if(pair[0] === variable) return pair[1]
+        }
+        return false
+      },
       getData() {
         this.category = JSON.parse(fy_bridge_app.getVar('tab-panel'))
         this.baseUrl = fy_bridge_app.getVar('tab-base_url')
-        let choose = fy_bridge_app.getVar('tab-filters')
-        if (choose) this.choose = choose.split(',')
+        let choose = this.getQueryVariable('filters')
+        if (choose) this.choose = choose.split(',').map(_ => parseInt(_))
       },
       initData() {
         this.category.forEach((cate, index) => {

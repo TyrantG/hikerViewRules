@@ -26,12 +26,10 @@ const baseParse = _ => {
   })
 
   putVar('tab-panel', JSON.stringify(category_list))
-  putVar('tab-filters', filters)
-  putVar('tab-base_url', MY_URL)
 
   d.push({
     desc: '132 && float',
-    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html',
+    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html?filters='+filters+'?url='+MY_URL,
     col_type:"x5_webview_single"
   })
 
