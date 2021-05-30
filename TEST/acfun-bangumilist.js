@@ -6,11 +6,8 @@ const baseParse = _ => {
 
   const true_url = getVar('tab-url') || MY_URL
 
-  if (getVar('tab-url'))
-    setError(getVar('tab-url'))
-
-  const params = parseQuery(true_url)
-  const filters = params.filters || ''
+  const filters = getUrlParams(filters) || ''
+  setError(filters)
   categories.forEach(category => {
     let sub_list = []
     let category_sub = parseDomForArray(category, '.ac-menu-filter-content&&.ac-menu-filter-item')
@@ -34,7 +31,7 @@ const baseParse = _ => {
     col_type:"x5_webview_single"
   })
 
-  const list = parseDomForArray(category_html, '.ac-mod-ul&&.ac-mod-li')
+  const list = parseDomForArray(fetch(true_url), '.ac-mod-ul&&.ac-mod-li')
 
   list.forEach(item => {
     d.push({
@@ -47,17 +44,9 @@ const baseParse = _ => {
   setResult(d);
 }
 
-const parseQuery = url => {
-  let queryObj = {};
-  let reg = /[?&]([^=&#]+)=([^&#]*)/g;
-  let querys = url.match(reg);
-  if (querys) {
-    for(let i in querys){
-      let query=querys[i].split('=');
-      let key=query[0].substr(1),
-          value=query[1];
-      queryObj[key] ? queryObj[key] = [].concat(queryObj[key], value) : queryObj[key] = value;
-    }
-  }
-  return queryObj;
+const getUrlParams = name => {
+  let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); //定义正则表达式
+  let r = window.location.search.substr(1).match(reg);
+  if (r != null) return unescape(r[2]);
+  return null;
 }
