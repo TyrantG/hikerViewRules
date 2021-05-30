@@ -6,6 +6,8 @@ const baseParse = _ => {
 
   const true_url = getVar('tab-url') || MY_URL
 
+  setError(true_url)
+
   const params = parseQuery(true_url)
   const filters = params.filters || ''
   categories.forEach(category => {
@@ -18,12 +20,14 @@ const baseParse = _ => {
       })
     })
     category_list.push({
-      name: parseDomForHtml(category, '.ac-menu-filter-title&&Text').trim(':'),
+      name: parseDomForHtml(category, '.ac-menu-filter-title&&Text').slice(0,-1),
       list: sub_list
     })
   })
+
   putVar('tab-panel', JSON.stringify(category_list))
   putVar('tab-filters', filters)
+  putVar('tab-base_url', MY_URL)
 
   d.push({
     desc: '132 && float',

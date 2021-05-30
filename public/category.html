@@ -26,7 +26,7 @@
 <div id="app">
   <el-tabs type="border-card">
     <el-tab-pane v-for="(item, index) in category" :key="index" :label="item.name">
-      <el-tag class="tab" v-for="(tab, key) in item.list" :key="key" size="mini" :type="tab.choose ? `danger` : ''" @click="chooseTab(index, key)">{{tab.name}}</el-tag>
+      <el-tag class="tab" v-for="(tab, key) in item.list" :key="key" size="mini" :type="tab.choose ? `danger` : ''" @click="chooseTab(index, key, tab.choose)">{{tab.name}}</el-tag>
     </el-tab-pane>
   </el-tabs>
 </div>
@@ -37,38 +37,47 @@
       return {
         category: [],
         choose: [],
+        baseUrl: '',
       }
     },
     mounted() {
       this.getData()
-      this.category.forEach((cate, index) => {
-        cate.list.forEach((item, key) => {
-          if (this.choose.length > 0)
-            item.choose = this.choose.indexOf(parseInt(item.id)) > -1
-          else
-            item.choose = key === 0
-        })
-      })
-      this.$forceUpdate()
+      this.initData()
     },
     methods: {
       getData() {
         this.category = JSON.parse(fy_bridge_app.getVar('tab-panel'))
+        this.baseUrl = fy_bridge_app.getVar('tab-base_url')
         let choose = fy_bridge_app.getVar('tab-filters')
         if (choose) this.choose = choose.split(',')
       },
-      chooseTab(index, key) {
-        this.choose = []
-        this.category[index].list.forEach((item, current_index) => {
-          item.choose = current_index === key
-        })
+      initData() {
         this.category.forEach((cate, index) => {
           cate.list.forEach((item, key) => {
-            if (item.choose) this.choose.push(parseInt(item.id))
+            if (this.choose.length > 0)
+              item.choose = this.choose.indexOf(parseInt(item.id)) > -1
+            else
+              item.choose = key === 0
           })
         })
         this.$forceUpdate()
-        console.log(this.choose)
+      },
+      chooseTab(index, key, status) {
+        if (! status) {
+          this.choose = []
+          this.category[index].list.forEach((item, current_index) => {
+            item.choose = current_index === key
+          })
+          this.category.forEach((cate, index) => {
+            cate.list.forEach((item, key) => {
+              if (item.choose) this.choose.push(parseInt(item.id))
+            })
+          })
+          this.$forceUpdate()
+
+          fy_bridge_app.putVar('tab-url', this.baseUrl+'?filters='+this.choose.join(','))
+          fy_bridge_app.refreshPage()
+        }
       },
     }
   })
