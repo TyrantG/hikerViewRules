@@ -4,8 +4,7 @@ const baseParse = _ => {
   const categories = parseDomForArray(category_html, '.ac-menu&&.ac-menu-filter')
   let category_list = []
 
-  putVar('tab-url', '')
-  const true_url = getVar('tab-url') || MY_URL
+  const true_url = addUrlPara(getVar('tab-url') || MY_URL, 'pageNum', 'fypage')
 
   const filters = getUrlParams(true_url, MY_URL, 'filters') || ''
 
@@ -32,7 +31,7 @@ const baseParse = _ => {
     col_type:"x5_webview_single"
   })
 
-  const list = parseDomForArray(fetch(true_url), '.ac-mod-ul&&.ac-mod-li')
+  const list = parseDomForArray(fetch(true_url, {headers:{"User-Agent":PC_UA}}), '.ac-mod-ul&&.ac-mod-li')
 
   list.forEach(item => {
     d.push({
@@ -50,4 +49,18 @@ const getUrlParams = (url, baseUrl, name) => {
   let r = url.replace(baseUrl, '').substr(1).match(reg);
   if (r != null) return unescape(r[2]);
   return null;
+}
+
+const addUrlPara = (url, name, value) => {
+  let currentUrl = url.split('#')[0];
+  if (/\?/g.test(currentUrl)) {
+    if (/name=[-\w]{4,25}/g.test(currentUrl)) {
+      currentUrl = currentUrl.replace(/name=[-\w]{4,25}/g, name + "=" + value);
+    } else {
+      currentUrl += "&" + name + "=" + value;
+    }
+  } else {
+    currentUrl += "?" + name + "=" + value;
+  }
+  return currentUrl
 }
