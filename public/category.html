@@ -73,7 +73,7 @@
         this.$forceUpdate()
       },
       chooseTab(index, key, status) {
-        if (! status) {
+        // if (! status) {
           this.choose = []
           this.category[index].list.forEach((item, current_index) => {
             item.choose = current_index === key
@@ -87,7 +87,7 @@
 
           fy_bridge_app.putVar('tab-url', this.baseUrl+'?filters='+this.choose.join(','))
           fy_bridge_app.refreshPage()
-        }
+        // }
       },
     }
   })
