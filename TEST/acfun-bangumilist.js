@@ -6,7 +6,7 @@ const baseParse = _ => {
 
   const true_url = getVar('tab-url') || MY_URL
 
-  const filters = getUrlParams(filters) || ''
+  const filters = getUrlParams(true_url, 'filters') || ''
   setError(filters)
   categories.forEach(category => {
     let sub_list = []
@@ -44,9 +44,9 @@ const baseParse = _ => {
   setResult(d);
 }
 
-const getUrlParams = name => {
+const getUrlParams = (url, name) => {
   let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); //定义正则表达式
-  let r = window.location.search.substr(1).match(reg);
+  let r = url.replace(MY_URL, '').substr(1).match(reg);
   if (r != null) return unescape(r[2]);
   return null;
 }
