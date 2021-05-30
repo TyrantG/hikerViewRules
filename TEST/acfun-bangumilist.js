@@ -6,7 +6,8 @@ const baseParse = _ => {
 
   const true_url = getVar('tab-url') || MY_URL
 
-  setError(true_url)
+  if (getVar('tab-url'))
+    setError(getVar('tab-url'))
 
   const params = parseQuery(true_url)
   const filters = params.filters || ''
@@ -29,7 +30,7 @@ const baseParse = _ => {
 
   d.push({
     desc: '132 && float',
-    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html?filters='+filters+'?url='+MY_URL,
+    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html?filters='+filters+'&url='+MY_URL,
     col_type:"x5_webview_single"
   })
 
