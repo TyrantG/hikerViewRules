@@ -6,7 +6,8 @@ const baseParse = _ => {
 
   const base_url = MY_URL.split('?')[0]
 
-  const pageNum = getUrlParams(MY_URL, 'pageNum') || 1
+  const pageNum = getUrlParams(MY_URL, base_url, 'pageNum')
+  setError(pageNum)
 
   const true_url = addUrlPara(getVar('tab-url') || MY_URL, 'pageNum', pageNum)
 
@@ -31,7 +32,7 @@ const baseParse = _ => {
 
   d.push({
     desc: '132 && float',
-    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html?filters='+filters+'&page='+pageNum,
+    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html?filters='+filters,
     col_type:"x5_webview_single"
   })
 
