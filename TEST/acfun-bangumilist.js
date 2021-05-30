@@ -4,9 +4,13 @@ const baseParse = _ => {
   const categories = parseDomForArray(category_html, '.ac-menu&&.ac-menu-filter')
   let category_list = []
 
-  const true_url = addUrlPara(getVar('tab-url') || MY_URL, 'pageNum', 'fypage')
+  const base_url = MY_URL.split('?')[0]
 
-  const filters = getUrlParams(true_url, MY_URL, 'filters') || ''
+  const pageNum = getUrlParams(MY_URL, 'pageNum')
+
+  const true_url = addUrlPara(getVar('tab-url') || MY_URL, 'pageNum', pageNum)
+
+  const filters = getUrlParams(true_url, base_url, 'filters') || ''
 
   categories.forEach(category => {
     let sub_list = []

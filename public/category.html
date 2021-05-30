@@ -24,7 +24,7 @@
 </head>
 <body>
 <div id="app">
-  <el-tabs type="border-card">
+  <el-tabs type="border-card" v-model="currentTab" @tab-click="tabClick">
     <el-tab-pane v-for="(item, index) in category" :key="index" :label="item.name">
       <el-tag class="tab" v-for="(tab, key) in item.list" :key="key" size="mini" :type="tab.choose ? `danger` : ''" @click="chooseTab(index, key, tab.choose)">{{tab.name}}</el-tag>
     </el-tab-pane>
@@ -39,6 +39,7 @@
         category: [],
         choose: [],
         baseUrl: '',
+        currentTab: 0,
       }
     },
     mounted() {
@@ -58,6 +59,7 @@
       getData() {
         this.category = JSON.parse(fy_bridge_app.getVar('tab-panel'))
         this.baseUrl = fy_bridge_app.getVar('tab-base_url')
+        this.currentTab = fy_bridge_app.getVar('tab-current')
         let choose = this.getQueryVariable('filters')
         if (choose) this.choose = choose.split(',').map(_ => parseInt(_))
       },
@@ -71,6 +73,9 @@
           })
         })
         this.$forceUpdate()
+      },
+      tabClick(e) {
+        fy_bridge_app.putVar('tab-current', e)
       },
       chooseTab(index, key, status) {
         // if (! status) {
