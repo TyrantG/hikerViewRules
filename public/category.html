@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="" xmlns="">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Title</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="js/vue.min.js"></script>
+  <script src="js/element-ui.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      height: 132px;
+      overflow: hidden;
+    }
+    .tab {
+      margin: 4px 6px;
+    }
+    .el-tab-pane {
+      height: 56px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <el-tabs type="border-card">
+    <el-tab-pane v-for="(item, index) in category" :key="index" :label="item.name">
+      <el-tag class="tab" v-for="(tab, key) in item.list" :key="key" size="mini" :type="tab.choose ? `danger` : ''" @click="chooseTab(index, key)">{{tab.name}}</el-tag>
+    </el-tab-pane>
+  </el-tabs>
+</div>
+<script>
+  new Vue({
+    el: '#app',
+    data() {
+      return {
+        category: [{"list":[{"id":"11","name":"最近更新"},{"id":"12","name":"推荐"}],"name":"排序"},{"list":[{"id":"20","name":"全部"},{"id":"21","name":"连载中"},{"id":"22","name":"已完结"},{"id":"23","name":"即将上映"}],"name":"状态"},{"list":[{"id":"30","name":"全部"},{"id":"31","name":"日本"},{"id":"32","name":"欧美"},{"id":"33","name":"国产"}],"name":"地区"},{"list":[{"id":"805306368","name":"全部"},{"id":"805306375","name":"恋爱"},{"id":"805306369","name":"校园"},{"id":"805306371","name":"战斗"},{"id":"805306373","name":"热血"},{"id":"805306372","name":"奇幻"},{"id":"805306374","name":"搞笑"},{"id":"805306370","name":"冒险"},{"id":"805306376","name":"萌系"},{"id":"805306394","name":"特摄"},{"id":"805306397","name":"青春"}],"name":"风格"},{"list":[{"id":"40","name":"全部"},{"id":"49","name":"2021"},{"id":"48","name":"2020"},{"id":"41","name":"2019"},{"id":"42","name":"2018"},{"id":"43","name":"2017"},{"id":"44","name":"2016"},{"id":"45","name":"2015"},{"id":"46","name":"2014-2010"},{"id":"47","name":"更早"}],"name":"年份"},{"list":[{"id":"50","name":"全部"},{"id":"51","name":"1月"},{"id":"52","name":"4月"},{"id":"53","name":"7月"},{"id":"54","name":"10月"}],"name":"季度"}],
+        choose: [
+          12,22,33,48,52,805306372
+        ],
+      }
+    },
+    mounted() {
+      this.category.forEach((cate, index) => {
+        cate.list.forEach((item, key) => {
+          if (this.choose.length > 0)
+            item.choose = this.choose.indexOf(parseInt(item.id)) > -1
+          else
+            item.choose = key === 0
+        })
+      })
+      this.$forceUpdate()
+    },
+    methods: {
+      chooseTab(index, key) {
+        this.choose = []
+        this.category[index].list.forEach((item, current_index) => {
+          item.choose = current_index === key
+        })
+        this.category.forEach((cate, index) => {
+          cate.list.forEach((item, key) => {
+            if (item.choose) this.choose.push(parseInt(item.id))
+          })
+        })
+        this.$forceUpdate()
+        console.log(this.choose)
+      },
+    }
+  })
+</script>
+</body>
+</html>
