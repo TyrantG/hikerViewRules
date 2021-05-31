@@ -48,6 +48,77 @@ const baseParse = _ => {
   setResult(d);
 }
 
+const secParse = _ => {
+  let res = {};
+  let d = [];
+  const url = MY_URL != getVar('url', MY_URL).split('_')[0] ? MY_URL : getVar('url', MY_URL);
+  const title = getVar('title');
+  const code = request(url,{ headers: { "User-Agent": PC_UA } });
+  try {
+    let rurl = code.replace(/\\/g,'').split('backupUrl":["')[1].split('"')[0];
+  }catch(e){let rurl = url}
+  d.push({
+    title: "““当前集数:"+title,
+    url: rurl,
+    col_type:"text_1"
+  });
+
+
+
+  d.push({
+    title: "选集",
+    col_type:"rich_text"
+  });
+  let json =code.split('window.bangumiList = ')[1].split('};')[0]+'}';
+  let jsons = JSON.parse(json);
+  let list = jsons.items;
+  for (let x of list){
+    let a = MY_URL+'_36188_'+x.itemId;
+    let b = x.title;
+    let c =a+'&&'+b;
+    d.push({
+      title: b==title? '““'+x.episodeName+'””':x.episodeName,
+      img:x.image,
+      url:$("#noLoading#").lazyRule((c)=>{
+        putVar("url",c.split('&&')[0]);
+        putVar("title",c.split('&&')[1]);
+        refreshPage(false);
+        let url = MY_URL!=getVar('url',MY_URL).split('_')[0]?MY_URL:getVar('url',MY_URL);
+        let title = getVar('title');
+        let code = request(url,{headers:{"User-Agent":PC_UA}});
+        try{
+          let rurl=code.replace(/\\/g,'').split('backupUrl":["')[1].split('"')[0];
+        }catch(e){let rurl = url}
+        return rurl;
+        return "hiker://empty"
+      }, c),
+      col_type:'text_3'
+    });
+
+  }
+  res.data = d;
+  setResult(res);
+}
+
+const searchParse = _ => {
+  let res = {};
+  let d = [];
+  const code = request(MY_URL,{});
+  let bgm = JSON.parse(code).bgmList;
+  for (let x of bgm){
+    d.push({
+      title:x.bgmTitle,
+      img:x.coverImageH,
+      desc:x.contentCount,
+      content:x.bgmIntro,
+      url:'https://www.acfun.cn/bangumi/aa'+x.bgmId,
+      col_type:'movie_1_left_pic'
+    });
+  }
+  res.data = d;
+  setResult(res);
+}
+
 const getUrlParams = (url, baseUrl, name) => {
   let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i"); //定义正则表达式
   let r = url.replace(baseUrl, '').substr(1).match(reg);
