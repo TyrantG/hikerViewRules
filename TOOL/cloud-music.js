@@ -23,14 +23,17 @@ const baseParse = _ => {
         col_type: 'icon_round_4'
     });
 
-    for (let i = 0; i < 24; i++) {
+    const list_json = request("hiker://files/TyrantG/data/cloud-music.json")
+    const list = JSON.parse(list_json)
+
+    list.forEach(item => {
         d.push({
-            title: 'The Off-Season',
-            desc: 'J.Cole',
-            pic_url: "https://wp.stanforddaily.com/wp-content/uploads/2021/05/The-Off-Season.png",
+            title: item.name,
+            desc: item.desc,
+            pic_url: item.cover_image,
             col_type: 'movie_1_vertical_pic'
         });
-    }
+    })
 
     res.data = d;
     setHomeResult(res);

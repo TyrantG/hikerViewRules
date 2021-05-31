@@ -45,6 +45,10 @@ const acfun = _ => {
   godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
 }
 
+const TMusic = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/data/cloud-music.json?t="+time, 'hiker://files/TyrantG/data/cloud-music.json')
+}
+
 const douyu_live = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/douyu.js?t="+time, 'hiker://files/TyrantG/LIVE/douyu.js')
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/douyu-tabs.html?t="+time, 'hiker://files/TyrantG/public/douyu-tabs.html')
