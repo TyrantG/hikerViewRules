@@ -49,17 +49,16 @@ const baseParse = _ => {
 }
 
 const secParse = _ => {
-  let res = {};
-  let d = [];
-  const url = MY_URL != getVar('url', MY_URL).split('_')[0] ? MY_URL : getVar('url', MY_URL);
-  const title = getVar('title');
-  const code = request(url,{ headers: { "User-Agent": PC_UA } });
-  try {
-    let rurl = code.replace(/\\/g,'').split('backupUrl":["')[1].split('"')[0];
-  }catch(e){let rurl = url}
+  var res = {};var d = [];
+  var url = MY_URL!=getVar('url',MY_URL).split('_')[0]?MY_URL:getVar('url',MY_URL);
+  var title = getVar('title');
+  var code = request(url,{headers:{"User-Agent":PC_UA}});
+  try{
+    var rurl = code.replace(/\\/g,'').split('backupUrl":["')[1].split('"')[0];
+  }catch(e){var rurl = url}
   d.push({
     title: "““当前集数:"+title,
-    url: rurl,
+    url:rurl,
     col_type:"text_1"
   });
 
@@ -69,13 +68,13 @@ const secParse = _ => {
     title: "选集",
     col_type:"rich_text"
   });
-  let json =code.split('window.bangumiList = ')[1].split('};')[0]+'}';
-  let jsons = JSON.parse(json);
-  let list = jsons.items;
+  var json =code.split('window.bangumiList = ')[1].split('};')[0]+'}';
+  var jsons = JSON.parse(json);
+  var list = jsons.items;
   for (let x of list){
-    let a = MY_URL+'_36188_'+x.itemId;
-    let b = x.title;
-    let c =a+'&&'+b;
+    var a = MY_URL+'_36188_'+x.itemId;
+    var b = x.title;
+    var c =a+'&&'+b;
     d.push({
       title: b==title? '““'+x.episodeName+'””':x.episodeName,
       img:x.image,
@@ -83,12 +82,12 @@ const secParse = _ => {
         putVar("url",c.split('&&')[0]);
         putVar("title",c.split('&&')[1]);
         refreshPage(false);
-        let url = MY_URL!=getVar('url',MY_URL).split('_')[0]?MY_URL:getVar('url',MY_URL);
-        let title = getVar('title');
-        let code = request(url,{headers:{"User-Agent":PC_UA}});
+        var url = MY_URL!=getVar('url',MY_URL).split('_')[0]?MY_URL:getVar('url',MY_URL);
+        var title = getVar('title');
+        var code = request(url,{headers:{"User-Agent":PC_UA}});
         try{
-          let rurl=code.replace(/\\/g,'').split('backupUrl":["')[1].split('"')[0];
-        }catch(e){let rurl = url}
+          var rurl=code.replace(/\\/g,'').split('backupUrl":["')[1].split('"')[0];
+        }catch(e){var rurl = url}
         return rurl;
         return "hiker://empty"
       }, c),
@@ -101,10 +100,9 @@ const secParse = _ => {
 }
 
 const searchParse = _ => {
-  let res = {};
-  let d = [];
-  const code = request(MY_URL,{});
-  let bgm = JSON.parse(code).bgmList;
+  var res = {};var d = [];
+  var code = request(MY_URL,{});
+  var bgm = JSON.parse(code).bgmList;
   for (let x of bgm){
     d.push({
       title:x.bgmTitle,
