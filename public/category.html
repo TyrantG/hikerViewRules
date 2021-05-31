@@ -15,8 +15,11 @@
   <style>
     html, body {
       margin: 0 5px;
-      height: 110px;
+      height: 114px;
       overflow: hidden;
+    }
+    .tab-box {
+      margin: 4px;
     }
     .tab {
       margin: 4px 6px;
@@ -38,8 +41,8 @@
       <el-tag class="tab" v-for="(tab, key) in item.list" :key="key" size="mini" :type="tab.choose ? `danger` : ''" @click="chooseTab(index, key, tab.choose)">{{tab.name}}</el-tag>
     </el-tab-pane>
   </el-tabs>-->
-  <van-tabs v-model="currentTab" @click="tabClick">
-    <van-tab v-for="(item, index) in category" :key="index" :title="item.name">
+  <van-tabs class="tab-box" v-model="currentTab" @click="tabClick">
+    <van-tab v-for="(item, index) in category" :key="index" :title="`${item.name}：${chooseLabel[index]}`">
       <van-tag class="tab" v-for="(tab, key) in item.list" :key="key" type="danger" size="large" :plain="! tab.choose" @click="chooseTab(index, key, tab.choose)" >{{tab.name}}</van-tag>
     </van-tab>
   </van-tabs>
@@ -52,6 +55,7 @@
       return {
         category: [],
         choose: [],
+        chooseLabel: [],
         baseUrl: '',
         currentTab: 0,
       }
@@ -81,8 +85,10 @@
       initData() {
         this.category.forEach((cate, index) => {
           cate.list.forEach((item, key) => {
-            if (this.choose.length > 0)
+            if (this.choose.length > 0){
+              this.chooseLabel[index] = item.name
               item.choose = this.choose.indexOf(parseInt(item.id)) > -1
+            }
             else
               item.choose = key === 0
           })
@@ -101,7 +107,10 @@
           })
           this.category.forEach((cate, index) => {
             cate.list.forEach((item, key) => {
-              if (item.choose) this.choose.push(parseInt(item.id))
+              if (item.choose) {
+                this.chooseLabel[index] = item.name
+                this.choose.push(parseInt(item.id))
+              }
             })
           })
           this.$forceUpdate()

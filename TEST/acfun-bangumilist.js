@@ -30,7 +30,7 @@ const baseParse = _ => {
   putVar('tab-panel', JSON.stringify(category_list))
 
   d.push({
-    desc: '110 && float',
+    desc: '114 && float',
     url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html?filters='+filters,
     col_type:"x5_webview_single"
   })
