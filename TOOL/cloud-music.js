@@ -5,6 +5,10 @@ const baseParse = _ => {
     d.push({
         title: '我的歌单',
         pic_url: "https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/list.png",
+        url: $("hiker://empty").lazyRule(_ => {
+            refreshPage()
+            return input
+        }),
         col_type: 'icon_round_4'
     });
     d.push({
@@ -13,7 +17,7 @@ const baseParse = _ => {
         col_type: 'icon_round_4'
     });
     d.push({
-        title: '导入/导出',
+        title: '导入',
         pic_url: "https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/turn.png",
         col_type: 'icon_round_4'
     });
@@ -31,9 +35,32 @@ const baseParse = _ => {
             title: item.name,
             desc: item.desc,
             pic_url: item.cover_image,
+            url: $("hiker://empty").rule(param => {
+                let d = [];
+                const list = param.list
+                list.forEach(music => {
+                    d.push({
+                        title: music.name,
+                        desc: music.author,
+                        url: music.url,
+                        pic_url: music.cover_image,
+                    })
+                })
+
+                setResult(d);
+            }, {list: item.list}),
             col_type: 'movie_1_vertical_pic'
         });
     })
+
+    res.data = d;
+    setHomeResult(res);
+}
+
+const secParse = _ => {
+    let res = {};
+    let d = [];
+
 
     res.data = d;
     setHomeResult(res);
