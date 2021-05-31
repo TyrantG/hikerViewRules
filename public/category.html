@@ -4,31 +4,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Title</title>
-  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
-  <script src="js/vue.min.js"></script>
-  <script src="js/element-ui.js"></script>
+<!--  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+<!--  <script src="js/element-ui.js"></script>-->
   <style>
     html, body {
       margin: 0 5px;
-      height: 132px;
+      height: 110px;
       overflow: hidden;
     }
     .tab {
       margin: 4px 6px;
     }
-    .el-tab-pane {
+    /*.el-tab-pane {
       height: 56px;
+      overflow-y: auto;
+    }*/
+    .van-tab__pane {
+      height: 64px;
       overflow-y: auto;
     }
   </style>
 </head>
 <body>
 <div id="app">
-  <el-tabs type="border-card" v-model="currentTab" @tab-click="tabClick">
+  <!--<el-tabs type="border-card" v-model="currentTab" @tab-click="tabClick">
     <el-tab-pane v-for="(item, index) in category" :key="index" :label="item.name" :name="index">
       <el-tag class="tab" v-for="(tab, key) in item.list" :key="key" size="mini" :type="tab.choose ? `danger` : ''" @click="chooseTab(index, key, tab.choose)">{{tab.name}}</el-tag>
     </el-tab-pane>
-  </el-tabs>
+  </el-tabs>-->
+  <van-tabs v-model="currentTab" @click="tabClick">
+    <van-tab v-for="(item, index) in category" :key="index" :title="item.name">
+      <van-tag class="tab" v-for="(tab, key) in item.list" :key="key" type="danger" size="large" :plain="! tab.choose" @click="chooseTab(index, key, tab.choose)" >{{tab.name}}</van-tag>
+    </van-tab>
+  </van-tabs>
 </div>
 <script>
   // eval(fy_bridge_app.getInternalJs())
@@ -76,7 +90,8 @@
         this.$forceUpdate()
       },
       tabClick(e) {
-        fy_bridge_app.putVar('tab-current', e.name)
+        // fy_bridge_app.putVar('tab-current', e.name)
+        fy_bridge_app.putVar('tab-current', e)
       },
       chooseTab(index, key, status) {
         // if (! status) {
