@@ -46,7 +46,7 @@ const acfun = _ => {
 }
 
 const TMusic = _ => {
-  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/data/cloud-music.json?t="+time, 'hiker://files/TyrantG/data/cloud-music.json')
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/data/music_list.json?t="+time, 'hiker://files/TyrantG/data/music_list.json')
 }
 
 const douyu_live = _ => {

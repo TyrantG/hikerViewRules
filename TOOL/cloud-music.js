@@ -23,7 +23,7 @@ const baseParse = _ => {
         col_type: 'icon_round_4'
     });
 
-    const list_json = request("hiker://files/TyrantG/data/cloud-music.json")
+    const list_json = request("hiker://files/TyrantG/data/music_list.json")
     const list = JSON.parse(list_json)
 
     list.forEach(item => {
