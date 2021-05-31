@@ -92,9 +92,10 @@
               } else {
                 item.choose = false
               }
-            }
-            else
+            } else {
+              this.chooseLabel[index] = cate.list[0].name
               item.choose = key === 0
+            }
           })
         })
         this.$forceUpdate()
