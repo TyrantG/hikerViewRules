@@ -85,9 +85,13 @@
       initData() {
         this.category.forEach((cate, index) => {
           cate.list.forEach((item, key) => {
-            if (this.choose.length > 0){
-              this.chooseLabel[index] = cate.list[this.choose[index]].name
-              item.choose = this.choose.indexOf(parseInt(item.id)) > -1
+            if (this.choose.length > 0) {
+              if (this.choose.indexOf(parseInt(item.id)) > -1) {
+                this.chooseLabel[index] = item.name
+                item.choose = true
+              } else {
+                item.choose = false
+              }
             }
             else
               item.choose = key === 0
