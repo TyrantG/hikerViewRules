@@ -41,10 +41,8 @@ const tyrantgenesis = _ => {
 const acfun = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TEST/acfun-bangumilist.js?t="+time, 'hiker://files/TyrantG/TEST/acfun-bangumilist.js')
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/category.html?t="+time, 'hiker://files/TyrantG/public/category.html')
-  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/css/vant.css", 'hiker://files/TyrantG/public/css/vant.css')
   godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/vue.min.js", 'hiker://files/TyrantG/public/js/vue.min.js')
-  // godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
-  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/vant.min.js", 'hiker://files/TyrantG/public/js/vant.min.js')
+  godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
 }
 
 const douyu_live = _ => {

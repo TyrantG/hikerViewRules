@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <title>Title</title>
-<!--  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">-->
-  <link rel="stylesheet" href="css/vant.css">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
   <script src="js/vue.min.js"></script>
-<!--  <script src="js/element-ui.js"></script>-->
-  <script src="js/vant.min.js"></script>
+  <script src="js/element-ui.js"></script>
   <style>
     html, body {
       margin: 0 5px;
@@ -18,24 +16,19 @@
     .tab {
       margin: 4px 6px;
     }
-    .van-tab__pane {
-      height: 70px;
+    .el-tab-pane {
+      height: 56px;
       overflow-y: auto;
     }
   </style>
 </head>
 <body>
 <div id="app">
-  <van-tabs>
-    <van-tab v-model="currentTab" :key="index" :title="item.name">
-      <van-tag class="tab" v-for="(tab, key) in item.list" :key="key" :type="tab.choose ? `danger` : 'primary'" size="large" @click="chooseTab(index, key, tab.choose)">{{tab.name}}</van-tag>
-    </van-tab>
-  </van-tabs>
-  <!--<el-tabs type="border-card" v-model="currentTab" @tab-click="tabClick">
+  <el-tabs type="border-card" v-model="currentTab" @tab-click="tabClick">
     <el-tab-pane v-for="(item, index) in category" :key="index" :label="item.name" :name="index">
       <el-tag class="tab" v-for="(tab, key) in item.list" :key="key" size="mini" :type="tab.choose ? `danger` : ''" @click="chooseTab(index, key, tab.choose)">{{tab.name}}</el-tag>
     </el-tab-pane>
-  </el-tabs>-->
+  </el-tabs>
 </div>
 <script>
   // eval(fy_bridge_app.getInternalJs())
