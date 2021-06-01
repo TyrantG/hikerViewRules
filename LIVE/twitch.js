@@ -41,7 +41,6 @@ const secParse = _ => {
     setHomeResult(res);
 }
 
-/*
 const videoParse = _ => {
     const header = {'User-Agent': PC_UA}
     const html = fetch(input, {headers: header})
@@ -80,4 +79,4 @@ const videoParse = _ => {
         '&token=' + encodeURIComponent(value) +
         '&cdm=wv' +
         '&player_version=1.4.0'
-}*/
+}
