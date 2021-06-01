@@ -1,5 +1,4 @@
 const baseParse = _ => {
-    let res = {};
     let d = [];
     const url = MY_URL
     const header = {'Accept': 'application/vnd.twitchtv.v5+json', 'Client-ID' : '7i8imjlwj0oqyiu3rutgfayf17op3w'}
@@ -14,12 +13,10 @@ const baseParse = _ => {
         })
     })
 
-
-    res.data = d;
-    setHomeResult(res);
+    setResult(d);
 }
 
-const secParse = _ => {
+/*const secParse = _ => {
     let res = {};
     let d = [];
     const header = {'Accept': 'application/vnd.twitchtv.v5+json', 'Client-ID' : '7i8imjlwj0oqyiu3rutgfayf17op3w', 'User-Agent': PC_UA}
@@ -42,8 +39,9 @@ const secParse = _ => {
 
     res.data = d;
     setHomeResult(res);
-}
+}*/
 
+/*
 const videoParse = _ => {
     const header = {'User-Agent': PC_UA}
     const html = fetch(input, {headers: header})
@@ -82,4 +80,4 @@ const videoParse = _ => {
         '&token=' + encodeURIComponent(value) +
         '&cdm=wv' +
         '&player_version=1.4.0'
-}
+}*/
