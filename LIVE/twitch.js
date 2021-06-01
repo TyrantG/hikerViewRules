@@ -29,12 +29,12 @@ const secParse = _ => {
             desc: channel.display_name,
             pic_url: item.preview.medium,
             url: $(channel.url).lazyRule(_ => {
-                /*const header = {'User-Agent': PC_UA}
+                const header = {'User-Agent': PC_UA}
                 const html = fetch(input, {headers: header})
                 const client_id = html.match(/"Client-ID":"(.*?)"/)[1]
                 const rid = input.split('/').pop()
 
-                const data = {
+                /*const data = {
                     "operationName": "PlaybackAccessToken_Template",
                     "query": "query PlaybackAccessToken_Template($login: String!, $isLive: Boolean!, $vodID: ID!, $isVod: Boolean!, $playerType: String!) {  streamPlaybackAccessToken(channelName: $login, params: {platform: \"web\", playerBackend: \"mediaplayer\", playerType: $playerType}) @include(if: $isLive) {    value    signature    __typename  }  videoPlaybackAccessToken(id: $vodID, params: {platform: \"web\", playerBackend: \"mediaplayer\", playerType: $playerType}) @include(if: $isVod) {    value    signature    __typename  }}",
                     "variables": {
