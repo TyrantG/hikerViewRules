@@ -28,24 +28,12 @@ const secParse = _ => {
             title: channel.status,
             desc: channel.display_name,
             pic_url: item.preview.medium,
-            url: $(channel.url).lazyRule(_ => {
+            url: $(channel.url).rule(_ => {
+                let d = [];
                 const header = {'User-Agent': PC_UA}
-                const html = fetch(input, {headers: header})
+                const html = fetch(MY_URL, {headers: header})
                 const client_id = html.match(/"Client-ID":"(.*?)"/)[1]
-                const rid = input.split('/').pop()
-
-                const parsePlaylist = playlist => {
-                    const parsedPlaylist = [];
-                    const lines = playlist.split('\n');
-                    for (let i = 4; i < lines.length; i += 3) {
-                        parsedPlaylist.push({
-                            quality: lines[i - 2].split('NAME="')[1].split('"')[0],
-                            resolution: (lines[i - 1].indexOf('RESOLUTION') != -1 ? lines[i - 1].split('RESOLUTION=')[1].split(',')[0] : null),
-                            url: lines[i]
-                        });
-                    }
-                    return parsedPlaylist;
-                }
+                const rid = MY_URL.split('/').pop()
 
                 /*const data = {
                     "operationName": "PlaybackAccessToken_Template",
@@ -93,7 +81,18 @@ const secParse = _ => {
                     '&allow_source=true' +
                     '&allow_audio_only=true'
 
-                setError(parsePlaylist(fetch(stream_url)))
+                const playlist = fetch(stream_url)
+
+                const lines = playlist.split('\n');
+                for (let i = 4; i < lines.length; i += 3) {
+                    d.push({
+                        title: lines[i - 2].split('NAME="')[1].split('"')[0],
+                        // resolution: (lines[i - 1].indexOf('RESOLUTION') != -1 ? lines[i - 1].split('RESOLUTION=')[1].split(',')[0] : null),
+                        url: lines[i],
+                        col_type: 'text_2'
+                    });
+                }
+                setResult(d);
             }),
             col_type: 'movie_2'
         })
