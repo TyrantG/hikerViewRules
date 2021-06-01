@@ -85,7 +85,7 @@ const secParse = _ => {
 
                 const lines = playlist.split('\n');
                 d.push({
-                    title: "<span style='color: red'>如果显示“commercial break in progress”请等15秒</span>",
+                    title: "如果显示“commercial break in progress”请等15秒",
                     col_type: 'text_center_1'
                 });
                 for (let i = 4; i < lines.length; i += 3) {
