@@ -78,8 +78,8 @@ const secParse = _ => {
                     '?client_id=' + client_id +
                     '&token=' + encodeURIComponent(value) +
                     '&sig=' + signature +
-                    '&allow_source=true' +
-                    '&allow_audio_only=true'
+                    '&allow_source=true'/* +
+                    '&allow_audio_only=true'*/
 
                 const playlist = fetch(stream_url)
 
