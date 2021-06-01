@@ -57,13 +57,15 @@ const secParse = _ => {
                 const value = JSON.parse(data_json).data.streamPlaybackAccessToken.value
                 const signature = JSON.parse(data_json).data.streamPlaybackAccessToken.signature
 
-                return 'https://usher.ttvnw.net/api/channel/hls/'+rid+'.m3u8?allow_source=true' +
-                    '&dt=2&fast_bread=true' +
+                return 'https://usher.ttvnw.net/api/channel/hls/'+rid+'.m3u8' +
+                    '?allow_source=true' +
+                    '&dt=2' +
+                    '&fast_bread=true' +
                     '&player_backend=mediaplayer' +
                     '&playlist_include_framerate=true' +
                     '&reassignments_supported=true' +
                     '&sig=' + signature +
-                    '&supported_codecs=vp09,avc1' +
+                    '&supported_codecs=avc1' +
                     '&token=' + encodeURIComponent(value) +
                     '&cdm=wv' +
                     '&player_version=1.4.0'
