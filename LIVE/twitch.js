@@ -3,7 +3,7 @@ const baseParse = _ => {
     let d = [];
     const url = MY_URL
     const header = {'Accept': 'application/vnd.twitchtv.v5+json', 'Client-ID' : '7i8imjlwj0oqyiu3rutgfayf17op3w'}
-    const data_json = fetch(url, {header: header})
+    const data_json = fetch(url, {headers: header})
     const list = JSON.parse(data_json).top
     list.forEach(item => {
         d.push({
