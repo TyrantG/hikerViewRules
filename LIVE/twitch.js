@@ -17,7 +17,6 @@ const baseParse = _ => {
 }
 
 const secParse = _ => {
-    let res = {};
     let d = [];
     const header = {'Accept': 'application/vnd.twitchtv.v5+json', 'Client-ID' : '7i8imjlwj0oqyiu3rutgfayf17op3w', 'User-Agent': PC_UA}
     const data_json = fetch(MY_URL, {headers: header})
@@ -30,7 +29,7 @@ const secParse = _ => {
             desc: channel.display_name,
             pic_url: item.preview.medium,
             url: $(channel.url).lazyRule(_ => {
-                const header = {'User-Agent': PC_UA}
+                /*const header = {'User-Agent': PC_UA}
                 const html = fetch(input, {headers: header})
                 const client_id = html.match(/"Client-ID":"(.*?)"/)[1]
                 const rid = input.split('/').pop()
@@ -66,14 +65,13 @@ const secParse = _ => {
                     '&supported_codecs=vp09,avc1' +
                     '&token=' + encodeURIComponent(value) +
                     '&cdm=wv' +
-                    '&player_version=1.4.0'
+                    '&player_version=1.4.0'*/
             }),
             col_type: 'movie_2'
         })
     })
 
-    res.data = d;
-    setHomeResult(res);
+    setResult(d);
 }
 
 /*
