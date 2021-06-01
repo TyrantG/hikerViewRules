@@ -54,7 +54,8 @@ const secParse = _ => {
                 }
 
                 const data_json = fetch('https://gql.twitch.tv/gql', {headers: headers, method:'POST', body: JSON.stringify(data)})
-                const {value, signature, _} = JSON.parse(data_json).data.streamPlaybackAccessToken
+                const value = JSON.parse(data_json).data.streamPlaybackAccessToken.value
+                const signature = JSON.parse(data_json).data.streamPlaybackAccessToken.signature
 
                 /*return 'https://usher.ttvnw.net/api/channel/hls/'+rid+'.m3u8?allow_source=true' +
                     '&dt=2&fast_bread=true' +
