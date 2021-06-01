@@ -53,10 +53,10 @@ const secParse = _ => {
                     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.214 Safari/537.36'
                 }
 
-                /*const data_json = fetch('https://gql.twitch.tv/gql', {headers: headers, method:'POST', body: JSON.stringify(data)})
+                const data_json = fetch('https://gql.twitch.tv/gql', {headers: headers, method:'POST', body: JSON.stringify(data)})
                 const {value, signature, _} = JSON.parse(data_json).data.streamPlaybackAccessToken
 
-                return 'https://usher.ttvnw.net/api/channel/hls/'+rid+'.m3u8?allow_source=true' +
+                /*return 'https://usher.ttvnw.net/api/channel/hls/'+rid+'.m3u8?allow_source=true' +
                     '&dt=2&fast_bread=true' +
                     '&player_backend=mediaplayer' +
                     '&playlist_include_framerate=true' +
