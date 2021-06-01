@@ -16,7 +16,7 @@ const baseParse = _ => {
     setResult(d);
 }
 
-/*const secParse = _ => {
+const secParse = _ => {
     let res = {};
     let d = [];
     const header = {'Accept': 'application/vnd.twitchtv.v5+json', 'Client-ID' : '7i8imjlwj0oqyiu3rutgfayf17op3w', 'User-Agent': PC_UA}
@@ -39,7 +39,7 @@ const baseParse = _ => {
 
     res.data = d;
     setHomeResult(res);
-}*/
+}
 
 /*
 const videoParse = _ => {
