@@ -34,9 +34,25 @@ const secParse = _ => {
                 const client_id = html.match(/"Client-ID":"(.*?)"/)[1]
                 const rid = input.split('/').pop()
 
-                const data = {
+                /*const data = {
                     "operationName": "PlaybackAccessToken_Template",
                     "query": "query PlaybackAccessToken_Template($login: String!, $isLive: Boolean!, $vodID: ID!, $isVod: Boolean!, $playerType: String!) {  streamPlaybackAccessToken(channelName: $login, params: {platform: \"web\", playerBackend: \"mediaplayer\", playerType: $playerType}) @include(if: $isLive) {    value    signature    __typename  }  videoPlaybackAccessToken(id: $vodID, params: {platform: \"web\", playerBackend: \"mediaplayer\", playerType: $playerType}) @include(if: $isVod) {    value    signature    __typename  }}",
+                    "variables": {
+                        "isLive": true,
+                        "login": rid,
+                        "isVod": true,
+                        "vodID": "",
+                        "playerType": "site"
+                    }
+                }*/
+                const data = {
+                    "operationName": "PlaybackAccessToken",
+                    "extensions": {
+                        "persistedQuery": {
+                            "version": 1,
+                            "sha256Hash": "0828119ded1c13477966434e15800ff57ddacf13ba1911c129dc2200705b0712"
+                        }
+                    },
                     "variables": {
                         "isLive": true,
                         "login": rid,
@@ -58,17 +74,11 @@ const secParse = _ => {
                 const signature = JSON.parse(data_json).data.streamPlaybackAccessToken.signature
 
                 return 'https://usher.ttvnw.net/api/channel/hls/'+rid+'.m3u8' +
-                    '?allow_source=true' +
-                    '&dt=2' +
-                    '&fast_bread=true' +
-                    '&player_backend=mediaplayer' +
-                    '&playlist_include_framerate=true' +
-                    '&reassignments_supported=true' +
-                    '&sig=' + signature +
-                    '&supported_codecs=avc1' +
+                    '?client_id=' + client_id +
                     '&token=' + encodeURIComponent(value) +
-                    '&cdm=wv' +
-                    '&player_version=1.4.0'
+                    '&sig=' + signature +
+                    '&allow_source=true' +
+                    '&allow_audio_only=true'
             }),
             col_type: 'movie_2'
         })
