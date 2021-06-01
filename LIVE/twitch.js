@@ -73,12 +73,14 @@ const secParse = _ => {
                 const value = JSON.parse(data_json).data.streamPlaybackAccessToken.value
                 const signature = JSON.parse(data_json).data.streamPlaybackAccessToken.signature
 
-                return 'https://usher.ttvnw.net/api/channel/hls/'+rid+'.m3u8' +
+                const stream_url = 'https://usher.ttvnw.net/api/channel/hls/'+rid+'.m3u8' +
                     '?client_id=' + client_id +
                     '&token=' + encodeURIComponent(value) +
                     '&sig=' + signature +
                     '&allow_source=true' +
                     '&allow_audio_only=true'
+
+                setError(parsePlaylist(fetch(stream_url)))
             }),
             col_type: 'movie_2'
         })
@@ -127,3 +129,16 @@ const videoParse = _ => {
         '&cdm=wv' +
         '&player_version=1.4.0'
 }*/
+
+const parsePlaylist = playlist => {
+    const parsedPlaylist = [];
+    const lines = playlist.split('\n');
+    for (let i = 4; i < lines.length; i += 3) {
+        parsedPlaylist.push({
+            quality: lines[i - 2].split('NAME="')[1].split('"')[0],
+            resolution: (lines[i - 1].indexOf('RESOLUTION') != -1 ? lines[i - 1].split('RESOLUTION=')[1].split(',')[0] : null),
+            url: lines[i]
+        });
+    }
+    return parsedPlaylist;
+}
