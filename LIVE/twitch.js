@@ -34,6 +34,19 @@ const secParse = _ => {
                 const client_id = html.match(/"Client-ID":"(.*?)"/)[1]
                 const rid = input.split('/').pop()
 
+                const parsePlaylist = playlist => {
+                    const parsedPlaylist = [];
+                    const lines = playlist.split('\n');
+                    for (let i = 4; i < lines.length; i += 3) {
+                        parsedPlaylist.push({
+                            quality: lines[i - 2].split('NAME="')[1].split('"')[0],
+                            resolution: (lines[i - 1].indexOf('RESOLUTION') != -1 ? lines[i - 1].split('RESOLUTION=')[1].split(',')[0] : null),
+                            url: lines[i]
+                        });
+                    }
+                    return parsedPlaylist;
+                }
+
                 /*const data = {
                     "operationName": "PlaybackAccessToken_Template",
                     "query": "query PlaybackAccessToken_Template($login: String!, $isLive: Boolean!, $vodID: ID!, $isVod: Boolean!, $playerType: String!) {  streamPlaybackAccessToken(channelName: $login, params: {platform: \"web\", playerBackend: \"mediaplayer\", playerType: $playerType}) @include(if: $isLive) {    value    signature    __typename  }  videoPlaybackAccessToken(id: $vodID, params: {platform: \"web\", playerBackend: \"mediaplayer\", playerType: $playerType}) @include(if: $isVod) {    value    signature    __typename  }}",
@@ -129,16 +142,3 @@ const videoParse = _ => {
         '&cdm=wv' +
         '&player_version=1.4.0'
 }*/
-
-const parsePlaylist = playlist => {
-    const parsedPlaylist = [];
-    const lines = playlist.split('\n');
-    for (let i = 4; i < lines.length; i += 3) {
-        parsedPlaylist.push({
-            quality: lines[i - 2].split('NAME="')[1].split('"')[0],
-            resolution: (lines[i - 1].indexOf('RESOLUTION') != -1 ? lines[i - 1].split('RESOLUTION=')[1].split(',')[0] : null),
-            url: lines[i]
-        });
-    }
-    return parsedPlaylist;
-}
