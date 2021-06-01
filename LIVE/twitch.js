@@ -84,6 +84,10 @@ const secParse = _ => {
                 const playlist = fetch(stream_url)
 
                 const lines = playlist.split('\n');
+                d.push({
+                    title: "<span style='color: red'>如果显示“commercial break in progress”请等15秒</span>",
+                    col_type: 'text_center_1'
+                });
                 for (let i = 4; i < lines.length; i += 3) {
                     d.push({
                         title: lines[i - 2].split('NAME="')[1].split('"')[0],
