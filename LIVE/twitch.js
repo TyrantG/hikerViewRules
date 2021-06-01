@@ -14,6 +14,7 @@ const baseParse = _ => {
         })
     })
 
+
     res.data = d;
     setHomeResult(res);
 }
