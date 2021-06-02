@@ -26,7 +26,7 @@ const baseParse = _ => {
     list.forEach((cate, index) => {
         let group = cate.sName, current_cate, cate_id
 
-        /*if (index === 0) {
+        if (index === 0) {
             current_cate = "l"
 
             let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+cate_id
@@ -51,7 +51,7 @@ const baseParse = _ => {
                     col_type: 'movie_2'
                 })
             })
-        }*/
+        }
         try {
             cate_id = cate_list.find(item => item.gameFullName === group).gid
             current_cate = "g/"+cate_id
@@ -89,8 +89,9 @@ const baseParse = _ => {
 const secParse = _ => {
     let rid = MY_URL.split('/').pop()
     let html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}})
-    let script = html.match(/var liveLineUrl.*\"/)[0]
-    eval(script)
+    let script = html.match(/var var liveLineUrl = \".*\";/)
+    setError(script)
+    /*eval(script)
     let live_url = base64Decode(liveLineUrl)
     let source
     try {
@@ -121,7 +122,7 @@ const secParse = _ => {
         col_type:"x5_webview_single",
     })
     // setError('huya-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(source)+'&info='+encodeURIComponent(JSON.stringify(info)))
-    setResult(d);
+    setResult(d);*/
 
 }
 
