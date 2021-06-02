@@ -161,7 +161,7 @@ const searchParse = () => {
 const cateGroupParse = url => {
     let d = [], cate = []
     const list_json = fetch(url).match(/id=\"ssrData\"\>(.*?)\<\/textarea\>/)
-    setError(list_json)
+    setError(url)
 
     /* const json = JSON.parse(list_json)
 
