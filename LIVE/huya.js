@@ -158,12 +158,10 @@ const searchParse = () => {
     setHomeResult(res);
 }
 
-const cateGroupParse = url => {
-    let d = [], cate = []
-    const list_json = fetch(url).match(/id=\"ssrData\"\>(.*?)\<\/textarea\>/)
-    setError(fetch(url))
-
-    /* const json = JSON.parse(list_json)
+const cateGroupParse = _ => {
+    let d = [], cate
+    const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
+    const json = JSON.parse(list_json)
 
     const tabCurrent = parseInt(getVar('tab-current') || 0)
     switch (tabCurrent) {
@@ -190,7 +188,7 @@ const cateGroupParse = url => {
             }),
             col_type:"icon_round_4"
         });
-    });*/
+    });
     setResult(d);
 }
 
