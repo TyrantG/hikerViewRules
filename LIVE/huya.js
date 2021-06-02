@@ -21,7 +21,7 @@ const baseParse = _ => {
     const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
     const json = JSON.parse(list_json)
     const list = json.recommendList
-    const cate_list = json.gameList
+    // const cate_list = json.gameList
 
     list.forEach((cate, index) => {
         let group = cate.sName, current_cate, cate_id
@@ -53,11 +53,11 @@ const baseParse = _ => {
             })
         }
         try {
-            cate_id = cate_list.find(item => item.gameFullName === group).gid
-            current_cate = "g/"+cate_id
 
-            let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+cate_id
+            cate_id = videoDom[0].iGameId
             let videoDom = cate.vItems.value
+            let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+cate_id
+            current_cate = "g/"+cate_id
 
             d.push({
                 title: group,
