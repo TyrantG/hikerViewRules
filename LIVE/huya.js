@@ -97,7 +97,7 @@ const secParse = _ => {
             let d = [];
             d.push({
                 desc: '100% && float',
-                url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(params.source)+'&info='+encodeURIComponent(JSON.stringify(params.info)),
+                url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-player.html?time='+(new Date()).getTime()+'&rid='+params.rid+'&source='+encodeURIComponent(params.source)+'&info='+encodeURIComponent(JSON.stringify(params.info)),
                 col_type:"x5_webview_single",
             })
             setResult(d);
