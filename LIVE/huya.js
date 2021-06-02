@@ -130,14 +130,17 @@ const searchParse = () => {
     let res = {};
     let d = [];
     const html = getResCode();
-    const list = JSON.parse(html).data
+    const list = JSON.parse(html).response[3].docs
 
     list.list.forEach(item => {
         d.push({
-            title: item.nickname,
-            desc: item.roomName,
-            pic_url: item.roomSrc,
-            url: "https://m.douyu.com/"+item.roomId,
+            title: item.game_roomName,
+            desc: item.game_nick,
+            pic_url: item.game_screenshot,
+            url: $("https://m.huya.com/"+item.room_id).rule(_ => {
+                eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
+                secParse()
+            }),
             col_type: 'movie_2'
         })
     })
