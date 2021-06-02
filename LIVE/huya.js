@@ -54,10 +54,10 @@ const baseParse = _ => {
         }
         try {
 
-            cate_id = videoDom[0].iGameId
             let videoDom = cate.vItems.value
-            let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+cate_id
+            cate_id = videoDom[0].iGameId
             current_cate = "g/"+cate_id
+            let group_url = "https://m.huya.com/"+current_cate+'?p=fypage&id='+cate_id
 
             d.push({
                 title: group,
@@ -79,9 +79,7 @@ const baseParse = _ => {
                     col_type: 'movie_2'
                 })
             })
-        } catch (e) {
-            setError(e)
-        }
+        } catch (e) {}
     })
 
     res.data = d;
