@@ -160,7 +160,8 @@ const searchParse = () => {
 
 const cateGroupParse = _ => {
     let d = [], cate = []
-    const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
+    setError(getResCode())
+    /*const list_json = parseDomForHtml(fetch(MY_URL), "#ssrData&&Text")
 
     const json = JSON.parse(list_json)
 
@@ -189,7 +190,7 @@ const cateGroupParse = _ => {
             }),
             col_type:"icon_round_4"
         });
-    });
+    });*/
     setResult(d);
 }
 
