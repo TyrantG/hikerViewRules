@@ -159,9 +159,10 @@ const searchParse = () => {
 }
 
 const cateGroupParse = _ => {
-    let d = [], cate
+    let d = [], cate = []
     const list_json = parseDomForHtml(fetch(MY_URL), "#ssrData&&Text")
-    const json = JSON.parse(list_json)
+    setError(list_json)
+    /*const json = JSON.parse(list_json)
 
     const tabCurrent = parseInt(getVar('tab-current') || 0)
     switch (tabCurrent) {
@@ -178,7 +179,7 @@ const cateGroupParse = _ => {
         col_type:"x5_webview_single"
     })
 
-    /*cate.forEach(cate2 => {
+    cate.forEach(cate2 => {
         d.push({
             title:cate2.gameFullName,
             pic_url:"https://huyaimg.msstatic.com/cdnimage/game/"+cate2.gid+"-MS.jpg",
