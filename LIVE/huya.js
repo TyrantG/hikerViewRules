@@ -179,7 +179,7 @@ const cateGroupParse = _ => {
         d.push({
             title:cate2.gameFullName,
             pic_url:"https://huyaimg.msstatic.com/cdnimage/game/"+cate2.gid+"-MS.jpg",
-            url: $("https://m.huya.com/g/"+cate2.gid).rule(_ => {
+            url: $("https://m.huya.com/g/"+cate2.gid+'?p=fypage&id='+cate2.gid).rule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
                 categoryParse()
             }),
