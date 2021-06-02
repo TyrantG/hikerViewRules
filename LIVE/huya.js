@@ -89,9 +89,8 @@ const baseParse = _ => {
 const secParse = _ => {
     let rid = MY_URL.split('/').pop()
     let html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}})
-    let script = html.match(/var liveLineUrl = \"(.*?)\";/)
-    setError(script)
-    /*eval(script)
+    let liveLineUrl = html.match(/var liveLineUrl = \"(.*?)\";/)[1]
+
     let live_url = base64Decode(liveLineUrl)
     let source
     try {
@@ -122,7 +121,7 @@ const secParse = _ => {
         col_type:"x5_webview_single",
     })
     // setError('huya-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(source)+'&info='+encodeURIComponent(JSON.stringify(info)))
-    setResult(d);*/
+    setResult(d);
 
 }
 
