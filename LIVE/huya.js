@@ -178,7 +178,7 @@ const cateGroupParse = _ => {
         col_type:"x5_webview_single"
     })
 
-    cate.forEach(cate2 => {
+    /*cate.forEach(cate2 => {
         d.push({
             title:cate2.gameFullName,
             pic_url:"https://huyaimg.msstatic.com/cdnimage/game/"+cate2.gid+"-MS.jpg",
@@ -188,7 +188,7 @@ const cateGroupParse = _ => {
             }),
             col_type:"icon_round_4"
         });
-    });
+    });*/
     setResult(d);
 }
 
