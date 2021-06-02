@@ -79,19 +79,19 @@ const secParse = _ => {
         title: $ROOM.roomName,
         pic_url: $ROOM.roomSrc,
         desc: $ROOM.desc,
-        url: url,
+        url: stream.url,
         col_type: 'pic_1'
     })
+
     d.push({
-        pic_url: $ROOM.avatar,
-        title: $ROOM.nickname,
-        url: url,
-        col_type: 'icon_2_round'
+        title: "直接观看",
+        url: stream.url,
+        col_type: 'text_2'
     })
     d.push({
-        title: "观看直播",
+        title: "弹幕播放器（测试）",
         url: url,
-        col_type: 'icon_2'
+        col_type: 'text_2'
     })
 
     res.data = d;
