@@ -12,16 +12,20 @@ const getQueryVariable = (host, variable) => {
 const baseParse = _ => {
     let res = {};
     let d = [];
-
-    /*d.push({
-        desc: '48 && float',
-        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-tabs.html?time='+(new Date()).getTime(),
-        col_type:"x5_webview_single"
-    })*/
     const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
     const json = JSON.parse(list_json)
     const list = json.recommendList
-    // const cate_list = json.gameList
+    /*const cate_1 = json.gameList
+    const cate_2 = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=1")).data
+    const cate_3 = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=2")).data
+    const cate_4 = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=8")).data
+    const cate_5 = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=3")).data*/
+
+    d.push({
+        desc: '48 && float',
+        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-tabs.html?time='+(new Date()).getTime(),
+        col_type:"x5_webview_single"
+    })
 
     list.forEach((cate, index) => {
         let group = cate.sName, current_cate, cate_id
@@ -157,15 +161,24 @@ const searchParse = () => {
 }
 
 const cateGroupParse = _ => {
-    let d = []
-    let list_json = fetch(MY_URL)
-    let list = JSON.parse(list_json).data
-    list.cate2Info.forEach(cate2 => {
-        let category_url = "https://m.douyu.com/api/room/list?page=fypage&type="+cate2.shortName
+    let d = [], cate
+    const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
+    const json = JSON.parse(list_json)
+
+    const tabCurrent = getVar('tab-current') || 0
+    switch (tabCurrent) {
+        case 1: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=1")).data;break;
+        case 2: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=2")).data;break;
+        case 3: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=8")).data;break;
+        case 4: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=3")).data;break;
+        default: cate = json.gameList
+    }
+
+    cate.forEach(cate2 => {
         d.push({
-            title:cate2.cate2Name,
-            pic_url:cate2.icon,
-            url: $(category_url).rule(_ => {
+            title:cate2.gameFullName,
+            pic_url:"https://huyaimg.msstatic.com/cdnimage/game/"+cate2.gid+"-MS.jpg",
+            url: $("https://m.huya.com/g/"+cate2.gid).rule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
                 categoryParse()
             }),
