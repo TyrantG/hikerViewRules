@@ -160,10 +160,11 @@ const searchParse = () => {
 
 const cateGroupParse = _ => {
     let d = [], cate
+    setError(getResCode())
     const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
     const json = JSON.parse(list_json)
 
-    const tabCurrent = parseInt(getVar('tab-current')) || 0
+    const tabCurrent = parseInt(getVar('tab-current') || 0)
     switch (tabCurrent) {
         case 1: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=1")).data;break;
         case 2: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=2")).data;break;
