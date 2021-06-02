@@ -79,7 +79,9 @@ const baseParse = _ => {
                     col_type: 'movie_2'
                 })
             })
-        } catch (e) {}
+        } catch (e) {
+            setError(e)
+        }
     })
 
     res.data = d;
