@@ -132,7 +132,7 @@ const searchParse = () => {
     const html = getResCode();
     const list = JSON.parse(html).response[3].docs
 
-    list.list.forEach(item => {
+    list.forEach(item => {
         d.push({
             title: item.game_roomName,
             desc: item.game_nick,
