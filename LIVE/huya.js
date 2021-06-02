@@ -160,7 +160,7 @@ const searchParse = () => {
 
 const cateGroupParse = _ => {
     let d = [], cate = []
-    setError(getResCode())
+    setError(parseDomForHtml(getResCode(), "#ssrData&&Text"))
     /*const list_json = parseDomForHtml(fetch(MY_URL), "#ssrData&&Text")
 
     const json = JSON.parse(list_json)
