@@ -160,8 +160,8 @@ const searchParse = () => {
 
 const cateGroupParse = _ => {
     let d = [], cate
-    const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
-    const json = JSON.parse(list_json)
+    /*const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
+    const json = JSON.parse(list_json)*/
 
     const tabCurrent = parseInt(getVar('tab-current') || 0)
     switch (tabCurrent) {
@@ -169,7 +169,7 @@ const cateGroupParse = _ => {
         case 2: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=2")).data;break;
         case 3: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=8")).data;break;
         case 4: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=3")).data;break;
-        default: cate = json.gameList
+        default: cate = /*json.gameList*/[]
     }
 
     d.push({
