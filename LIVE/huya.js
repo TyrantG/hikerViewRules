@@ -15,11 +15,6 @@ const baseParse = _ => {
     const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
     const json = JSON.parse(list_json)
     const list = json.recommendList
-    /*const cate_1 = json.gameList
-    const cate_2 = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=1")).data
-    const cate_3 = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=2")).data
-    const cate_4 = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=8")).data
-    const cate_5 = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=3")).data*/
 
     d.push({
         desc: '48 && float',
@@ -174,12 +169,18 @@ const cateGroupParse = _ => {
         default: cate = json.gameList
     }
 
+    d.push({
+        desc: '118 && float',
+        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-category.html',
+        col_type:"x5_webview_single"
+    })
+
     cate.forEach(cate2 => {
         d.push({
             title:cate2.gameFullName,
             pic_url:"https://huyaimg.msstatic.com/cdnimage/game/"+cate2.gid+"-MS.jpg",
             url: $("https://m.huya.com/g/"+cate2.gid).rule(_ => {
-                eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+                eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
                 categoryParse()
             }),
             col_type:"icon_round_4"
