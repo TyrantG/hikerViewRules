@@ -158,9 +158,9 @@ const searchParse = () => {
     setHomeResult(res);
 }
 
-const cateGroupParse = _ => {
+const cateGroupParse = url => {
     let d = [], cate = []
-    const list_json = fetch(MY_URL).match(/id=\"ssrData\"\>(.*?)\<\/textarea\>/)
+    const list_json = fetch(url).match(/id=\"ssrData\"\>(.*?)\<\/textarea\>/)
     setError(list_json)
 
     /* const json = JSON.parse(list_json)
