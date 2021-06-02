@@ -127,7 +127,7 @@ const categoryParse = index =>{
             pic_url: item.screenshot,
             url: $("https://m.huya.com/"+item.profileRoom).rule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                secParse(params.index)
+                secParse()
             }),
             col_type: 'movie_2'
         })
