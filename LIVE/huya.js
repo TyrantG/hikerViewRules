@@ -103,51 +103,11 @@ const secParse = _ => {
             setResult(d);
         }, {
             source: source,
-            info: info
+            info: info,
+            rid: rid
         }),
         col_type: 'text_2',
     })
-    /**/
-    // setError('huya-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(source)+'&info='+encodeURIComponent(JSON.stringify(info)))
-    setResult(d);
-
-}
-
-const trdParse = _ => {
-    let rid = MY_URL.split('/').pop()
-    let html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}})
-    let liveLineUrl = html.match(/var liveLineUrl = \"(.*?)\";/)[1]
-
-    let live_url = base64Decode(liveLineUrl)
-    let source
-    try {
-        if (live_url.match(/replay/)) {
-            source = base64Decode(liveLineUrl)
-        } else {
-            source = getRealUrl(live_url)
-        }
-    } catch (e) {
-
-    }
-
-    let info = {};
-    let subsid_array = html.match(/var SUBSID = '(.*)';/);
-    let topsid_array = html.match(/var TOPSID = '(.*)';/);
-    let yyuid_array = html.match(/ayyuid: '(.*)',/);
-    let anthor_nick = html.match(/var ANTHOR_NICK = '(.*)';/)
-    info.subsid = subsid_array[1] === '' ? 0 : parseInt(subsid_array[1]);
-    info.topsid = topsid_array[1] === '' ? 0 : parseInt(topsid_array[1]);
-    info.yyuid = parseInt(yyuid_array[1]);
-    info.sGuid = "";
-    info.anthor_nick = anthor_nick[1] === '' ? '' : anthor_nick[1];
-
-    let d = [];
-    d.push({
-        desc: '100% && float',
-        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(source)+'&info='+encodeURIComponent(JSON.stringify(info)),
-        col_type:"x5_webview_single",
-    })
-    // setError('huya-player.html?time='+(new Date()).getTime()+'&rid='+rid+'&source='+encodeURIComponent(source)+'&info='+encodeURIComponent(JSON.stringify(info)))
     setResult(d);
 
 }
