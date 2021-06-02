@@ -160,7 +160,7 @@ const searchParse = () => {
 
 const cateGroupParse = _ => {
     let d = [], cate = []
-    const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
+    const list_json = getResCode().match(/id="ssrData">(.*?)<\/textarea>/)
     setError(list_json)
 
     /* const json = JSON.parse(list_json)
