@@ -160,9 +160,9 @@ const searchParse = () => {
 
 const cateGroupParse = _ => {
     let d = [], cate = []
-    const list_json = parseDomForHtml(fetch(MY_URL), "#ssrData&&Text")
-    setError(list_json)
-    /*const json = JSON.parse(list_json)
+    setError(MY_URL)
+    /*const list_json = parseDomForHtml(fetch(), "#ssrData&&Text")
+    const json = JSON.parse(list_json)
 
     const tabCurrent = parseInt(getVar('tab-current') || 0)
     switch (tabCurrent) {
