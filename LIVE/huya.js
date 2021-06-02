@@ -165,10 +165,10 @@ const cateGroupParse = _ => {
 
     const tabCurrent = parseInt(getVar('tab-current') || 0)
     switch (tabCurrent) {
-        case 1: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=1")).data;break;
-        case 2: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=2")).data;break;
-        case 3: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=8")).data;break;
-        case 4: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=3")).data;break;
+        case 0: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=1")).data;break;
+        case 1: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=2")).data;break;
+        case 2: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=8")).data;break;
+        case 3: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=3")).data;break;
         default: cate = /*json.gameList*/[]
     }
 
