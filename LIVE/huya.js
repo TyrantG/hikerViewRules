@@ -163,7 +163,7 @@ const cateGroupParse = _ => {
     const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
 
     const json = JSON.parse(list_json)
-    setError(json)
+    setError(json.gameList)
 
     /*const tabCurrent = parseInt(getVar('tab-current') || 0)
     switch (tabCurrent) {
