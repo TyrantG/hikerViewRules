@@ -161,6 +161,7 @@ const cateGroupParse = _ => {
     const json = JSON.parse(list_json)
 
     const tabCurrent = getVar('tab-current') || 0
+    setError(tabCurrent)
     switch (tabCurrent) {
         case 1: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=1")).data;break;
         case 2: cate = JSON.parse(fetch("https://live.cdn.huya.com/liveconfig/game/bussLive?bussType=2")).data;break;

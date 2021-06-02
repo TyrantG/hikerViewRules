@@ -49,8 +49,6 @@
                 this.currentTab = parseInt(fy_bridge_app.getVar('tab-current')) || 0
             },
             tabClick(e) {
-                alert(e)
-                // fy_bridge_app.putVar('tab-current', e.name)
                 fy_bridge_app.putVar('tab-current', e)
                 fy_bridge_app.refreshPage(true)
             },
