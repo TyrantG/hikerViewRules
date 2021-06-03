@@ -42,7 +42,7 @@ const secParse = _ => {
 
 const cateGroupParse = _ => {
   let d = []
-  setError(MY_URL)
+  setError("https://egame.qq.com/gamelist/")
   /*const list = parseDomForArray(getResCode(), '.livelist-mod&&.gui-list-game');
   setError(list)
   setResult(d);*/
