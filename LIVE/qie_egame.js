@@ -88,7 +88,7 @@ const searchParse = _ => {
   list.forEach(item => {
     d.push({
       title: parseDomForHtml(item, 'a&&title'),
-      pic_url: parseDomForHtml(item, 'img&&src'),
+      pic_url: parseDom(item, 'img&&src'),
       col_type: 'movie_2',
       url: "https://m.egame.qq.com/live?anchorid="+parseDomForHtml(item, 'a&&href').split('/').pop()+"&_=_"
     })
