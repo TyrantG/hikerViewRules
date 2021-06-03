@@ -50,8 +50,10 @@ const cateGroupParse = _ => {
       title: parseDomForHtml(item, 'a&&title'),
       pic_url: parseDomForHtml(item, 'img&&src'),
       url: $(parseDom(item, 'a&&href')+'&_=_').rule(_ => {
-        const layout_id = MY_URL.match(/layoutid=(.*?)&/)[0]
-        setError(layout_id)
+        const layout_id = MY_URL.match(/layoutid=(.*?)&/)[1]
+
+        const data_json = fetch("https://share.egame.qq.com/cgi-bin/pgg_async_fcgi?param=%7B%22key%22:%7B%22module%22:%22pgg_live_read_ifc_mt_svr%22,%22method%22:%22get_pc_live_list%22,%22param%22:%7B%22appid%22:%"+layout_id+"%22,%22page_num%22:2,%22page_size%22:40,%22tag_id%22:0,%22tag_id_str%22:%22%22%7D%7D%7D", {headers:{"User-Agent":PC_UA}})
+        setError(data_json)
       }),
       col_type: 'movie_3',
     })
