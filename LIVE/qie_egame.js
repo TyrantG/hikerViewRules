@@ -54,7 +54,8 @@ const cateGroupParse = _ => {
         const layout_id = MY_URL.match(/layoutid=(.*?)&/)[1]
 
         const data_json = fetch("https://share.egame.qq.com/cgi-bin/pgg_async_fcgi?param={\"key\":{\"module\":\"pgg_live_read_ifc_mt_svr\",\"method\":\"get_pc_live_list\",\"param\":{\"appid\":\""+layout_id+"\",\"page_num\":fypage,\"page_size\":16,\"tag_id\":0,\"tag_id_str\":\"\"}}}", {headers:{"User-Agent":PC_UA}})
-        const list = JSON.parse(data_json).data.key.retBody.data.live_data.live_list
+        setError(JSON.parse(data_json))
+        /*const list = JSON.parse(data_json).data.key.retBody.data.live_data.live_list
         list.forEach(item => {
           let data = JSON.parse(item.data_h5)
           d.push({
@@ -69,7 +70,7 @@ const cateGroupParse = _ => {
           })
         })
 
-        setResult(d);
+        setResult(d);*/
       }),
       col_type: 'movie_3',
     })
