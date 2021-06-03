@@ -49,7 +49,7 @@ const cateGroupParse = _ => {
     d.push({
       title: parseDomForHtml(item, 'a&&title'),
       pic_url: parseDomForHtml(item, 'img&&src'),
-      url: parseDom(item, 'a&&href'),
+      url: parseDomForHtml(item, 'a&&href'),
       col_type: 'movie_3',
     })
   })
