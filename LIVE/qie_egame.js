@@ -42,8 +42,8 @@ const secParse = _ => {
 
 const cateGroupParse = _ => {
   let d = []
-  setError("https://egame.qq.com/gamelist/")
-  /*const list = parseDomForArray(getResCode(), '.livelist-mod&&.gui-list-game');
+  const html = fetch("https://egame.qq.com/gamelist/", {headers:{"User-Agent":PC_UA}})
+  const list = parseDomForArray(html, '.livelist-mod&&.gui-list-game');
   setError(list)
-  setResult(d);*/
+  setResult(d);
 }
