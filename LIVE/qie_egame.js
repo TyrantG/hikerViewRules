@@ -79,3 +79,20 @@ const cateGroupParse = _ => {
 
   setResult(d);
 }
+
+const searchParse = _ => {
+  let d = []
+  const html = fetch(MY_URL, {headers:{"User-Agent":PC_UA}})
+  const list = parseDomForArray(html, '.livelist-mod&&.gui-list-normal');
+
+  list.forEach(item => {
+    d.push({
+      title: parseDomForHtml(item, 'a&&title'),
+      pic_url: parseDomForHtml(item, 'img&&src'),
+      col_type: 'movie_2',
+      url: "https://m.egame.qq.com/live?anchorid="+parseDomForHtml(item, 'a&&href').split('/').pop()+"&_=_"
+    })
+  })
+
+  setResult(d);
+}
