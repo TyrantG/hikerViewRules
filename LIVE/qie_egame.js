@@ -57,20 +57,19 @@ const cateGroupParse = _ => {
         const data_json = fetch("https://share.egame.qq.com/cgi-bin/pgg_kit_async_fcgi", {headers: {"Content-Type": "application/x-www-form-urlencoded"}, method: 'POST', body: "param={\"0\":{\"param\":{\"layout_id\":\""+layout_id+"\",\"page_num\":"+page+",\"page_size\":16,\"scene\":0,\"tag_id\":0},\"module\":\"pgg_live_read_svr\",\"method\":\"get_live_list\"}}"})
 
         const list = JSON.parse(data_json).data[0].retBody.data.live_data.live_list
-        setError(list)
-        /*list.forEach(item => {
-          let data = JSON.parse(item.data_h5)
+
+        list.forEach(item => {
           d.push({
-            title: data.title,
-            desc: data.anchor_name,
-            pic_url: data.program_res.cover_url,
+            title: item.title,
+            desc: item.anchor_name,
+            pic_url: item.program_res.cover_url,
             col_type: 'movie_2',
-            url: $(data.jump_url).rule(_ => {
+            url: $(item.jump_url).rule(_ => {
               eval(fetch('hiker://files/TyrantG/LIVE/qie_egame.js'))
               secParse()
             })
           })
-        })*/
+        })
 
         setResult(d);
       }),
