@@ -49,7 +49,10 @@ const cateGroupParse = _ => {
     d.push({
       title: parseDomForHtml(item, 'a&&title'),
       pic_url: parseDomForHtml(item, 'img&&src'),
-      url: parseDomForHtml(item, 'a&&href'),
+      url: $(parseDomForHtml(item, 'a&&href')).rule(_ => {
+        const layout_id = MY_URL.match(/layoutid=(.*?)/)
+        setError(layout_id)
+      }),
       col_type: 'movie_3',
     })
   })
