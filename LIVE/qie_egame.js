@@ -42,7 +42,8 @@ const secParse = _ => {
 
 const cateGroupParse = _ => {
   let d = []
-  const list = parseDomForArray(getResCode(), '.livelist-mod&&.gui-list-game');
+  setError(MY_URL)
+  /*const list = parseDomForArray(getResCode(), '.livelist-mod&&.gui-list-game');
   setError(list)
-  setResult(d);
+  setResult(d);*/
 }
