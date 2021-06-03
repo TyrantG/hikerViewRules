@@ -44,6 +44,15 @@ const cateGroupParse = _ => {
   let d = []
   const html = fetch("https://egame.qq.com/gamelist/", {headers:{"User-Agent":PC_UA}})
   const list = parseDomForArray(html, '.livelist-mod&&.gui-list-game');
-  setError(list)
+
+  list.forEach(item => {
+    d.push({
+      title: parseDomForHtml(item, 'a&&title'),
+      pic_url: parseDomForHtml(item, 'img&&src'),
+      url: parseDomForHtml(item, 'a&&href'),
+      col_type: 'movie_3',
+    })
+  })
+
   setResult(d);
 }
