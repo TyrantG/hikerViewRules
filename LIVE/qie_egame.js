@@ -57,7 +57,8 @@ const cateGroupParse = _ => {
         const data_json = fetch("https://share.egame.qq.com/cgi-bin/pgg_kit_async_fcgi", {headers: {"Content-Type": "application/x-www-form-urlencoded"}, method: 'POST', body: "param={\"0\":{\"param\":{\"layout_id\":\""+layout_id+"\",\"page_num\":"+page+",\"page_size\":16,\"scene\":0,\"tag_id\":0},\"module\":\"pgg_live_read_svr\",\"method\":\"get_live_list\"}}"})
 
         const list = JSON.parse(data_json).data[0].retBody.data.live_data.live_list
-        list.forEach(item => {
+        setError(list)
+        /*list.forEach(item => {
           let data = JSON.parse(item.data_h5)
           d.push({
             title: data.title,
@@ -69,7 +70,7 @@ const cateGroupParse = _ => {
               secParse()
             })
           })
-        })
+        })*/
 
         setResult(d);
       }),
