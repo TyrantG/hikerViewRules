@@ -72,7 +72,7 @@ const homePage = _ => {
     let d = [];
 
     d.push({
-        desc: '100% && list',
+        desc: '100% && float',
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/Home.html?time='+(new Date()).getTime(),
         col_type:"x5_webview_single"
     })
