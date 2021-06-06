@@ -32,7 +32,7 @@ const baseParse = _ => {
     d.push({
       title: current_child === '' ? "““全部””":"全部",
       url: $("#noLoading#").lazyRule(_ => {
-        putVar("tyrantgenesis.qie_sport.current_tab",'');
+        putVar("tyrantgenesis.qie_sport.current_child_tab",'');
         refreshPage(false);
         return "hiker://empty"
       })
