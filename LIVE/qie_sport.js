@@ -10,11 +10,11 @@ const baseParse = _ => {
   const child_category_json = fetch(child_cate_url)
   const child_list = JSON.parse(child_category_json).data
 
+  setError(child_list)
   const data_url = "https://live.qq.com/api/live/vlist?page_size=16&page="+page+"&shortName="+category[current].short_name+"&child_id="+current_child === '' ? '' : child_list[current_child].child_id
   const data_json = fetch(data_url)
   const list = JSON.parse(data_json).data.result
 
-  setError(list)
   if (parseInt(page) === 1) {
     category.forEach((item, index) => {
       d.push({
