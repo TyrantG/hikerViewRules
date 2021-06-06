@@ -86,6 +86,10 @@ const qie_egame_live = _ => {
   godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
 }
 
+const qie_sport_live = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/qie_sport.js?t="+time, 'hiker://files/TyrantG/LIVE/qie_sport.js')
+}
+
 const yande_re = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/yande.re.js?t="+time, 'hiker://files/TyrantG/GHS/yande.re.js')
 }
