@@ -90,6 +90,10 @@ const qie_sport_live = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/qie_sport.js?t="+time, 'hiker://files/TyrantG/LIVE/qie_sport.js')
 }
 
+const _95_xiu_live = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/95_xiu.js?t="+time, 'hiker://files/TyrantG/LIVE/95_xiu.js')
+}
+
 const yande_re = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/yande.re.js?t="+time, 'hiker://files/TyrantG/GHS/yande.re.js')
 }
