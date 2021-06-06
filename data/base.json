@@ -20,6 +20,10 @@
           {
             "title": "企鹅体育",
             "rule": {"title":"企鹅体育","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"hiker://empty?page=fypage&_=_","col_type":"scroll_button","class_name":"","class_url":"","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/LIVE/qie_sport.js'))\nbaseParse()","search_url":"https://live.qq.com/api/info/search?keyword=**&from=room;post","searchFind":"js:\neval(fetch('hiker://files/TyrantG/LIVE/qie_sport.js'))\nsearchParse()","detail_col_type":"","detail_find_rule":"","sdetail_col_type":"","sdetail_find_rule":"","ua":"","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nqie_sport_live()"}
+          },
+          {
+            "title": "95秀",
+            "rule": {"title":"95秀","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"https://www.95.cn/index/AnchorCategory2?page=fypage&type=fyclass&screen_high=0&counts=20","col_type":"movie_2","class_name":"热门&连麦&女神&才艺&新星&手机&交友&畅聊","class_url":"9&20&1&18&11&15&16&22","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/LIVE/95_xiu.js'))\nbaseParse()","search_url":"https://www.95.cn/index/SearchAnchor2?page=fypage&screen_high=1&value=**","searchFind":"js:\neval(fetch('hiker://files/TyrantG/LIVE/95_xiu.js'))\nsearchParse()","detail_col_type":"","detail_find_rule":"","sdetail_col_type":"","sdetail_find_rule":"","ua":"","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\n_95_xiu_live()"}
           }
         ]
       },
