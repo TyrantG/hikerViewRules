@@ -4,8 +4,8 @@ const baseParse = _ => {
   const page = MY_URL.match(/\?page\=(.*?)\&/)[1]
   const category = JSON.parse(category_json).data.leftNav
   const current = getVar("tyrantgenesis.qie_sport.current_tab") || 0;
+  putVar("tyrantgenesis.qie_sport.current_tab",'');
   const current_child = getVar("tyrantgenesis.qie_sport.current_child_tab") || '';
-  setError(current_child)
 
   const child_cate_url = "https://live.qq.com/app_api/v10/getChildList?short_name="+category[current].short_name
   const child_category_json = fetch(child_cate_url)
