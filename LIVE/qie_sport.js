@@ -14,6 +14,7 @@ const baseParse = _ => {
   const data_json = fetch(data_url)
   const list = JSON.parse(data_json).data.result
 
+  setError(list)
   if (parseInt(page) === 1) {
     category.forEach((item, index) => {
       d.push({
