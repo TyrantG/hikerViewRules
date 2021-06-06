@@ -10,7 +10,7 @@ const baseParse = _ => {
   const child_category_json = fetch(child_cate_url)
   const child_list = JSON.parse(child_category_json).data
 
-  const data_url = "https://live.qq.com/api/live/vlist?page_size=16&page="+page+"&shortName="+category[current].short_name+"&child_id="+(current_child == '' ? '' : child_list[current_child].child_id)
+  const data_url = "https://live.qq.com/api/live/vlist?page_size=16&page="+page+"&shortName="+category[current].short_name+"&child_id="+current_child
   const data_json = fetch(data_url)
   const list = JSON.parse(data_json).data.result
 
@@ -39,12 +39,12 @@ const baseParse = _ => {
     });
     child_list.forEach((child, key) => {
       d.push({
-        title: key==current_child? "““"+child.child_name+"””":child.child_name,
+        title: child.child_id==current_child? "““"+child.child_name+"””":child.child_name,
         url: $("#noLoading#").lazyRule((key)=>{
           putVar("tyrantgenesis.qie_sport.current_child_tab",key);
           refreshPage(false);
           return "hiker://empty"
-        }, key)
+        }, child.child_id)
       });
     })
   }
