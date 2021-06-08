@@ -30,6 +30,10 @@ const home_page = _ => {
   godSaveFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
 }
 
+const new_homepage = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TEST/new-homepage.js?t="+time, 'hiker://files/TyrantG/TEST/new-homepage.js')
+}
+
 const tyrantgenesis = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/data/base.json?t="+time, 'hiker://files/TyrantG/data/base.json')
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/tyrantgenesis.js?t="+time, 'hiker://files/TyrantG/tyrantgenesis.js')
