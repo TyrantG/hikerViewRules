@@ -33,6 +33,10 @@
           {
             "title": "Twitch",
             "rule": {"title":"Twitch","author":"TyrantGenesis","version":2,"url":"https://api.twitch.tv/kraken/games/top?offset=fypage@-1@*24@&limit=24","col_type":"","class_name":"","class_url":"","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch(\"hiker://files/TyrantG/LIVE/twitch.js\"))\nbaseParse()","searchFind":"js:\neval(fetch(\"hiker://files/TyrantG/LIVE/twitch.js\"))\nsecParse()","search_url":"https://api.twitch.tv/kraken/search/streams?query=**&offset=fypage@-1@*24@&limit=24","titleColor":"#bdb2ff","group":"⑳TyrantG","detail_col_type":"movie_2","detail_find_rule":"js:\neval(fetch(\"hiker://files/TyrantG/LIVE/twitch.js\"))\nsecParse()","sdetail_col_type":"","sdetail_find_rule":"","ua":"pc","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\ntwitch()"}
+          },
+          {
+            "title": "17LIVE",
+            "rule": {"title":"17LIVE","author":"TyrantGenesis","version":1,"url":"https://api-dsa.17app.co/api/v1/cells?count=fypage@*20@&cursor&paging=1&region=fyarea&tab=fyclass","col_type":"","class_name":"熱門直播&最新直播&音樂直播&電玩遊戲","class_url":"hot_opt&latest&music&gaming","area_name":"全球&台灣&香港&日本&馬來西亞&美國&新加坡","area_url":"GLOBAL&TW&HK&JP&MY&US&SG","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/LIVE/17live.js'))\nbaseParse()","searchFind":"js:\neval(fetch('hiker://files/TyrantG/LIVE/17live.js'))\nsearchParse()","search_url":"https://api-dsa.17app.co/api/v1/user/search?query=**","titleColor":"#bdb2ff","group":"⑳TyrantG","detail_col_type":"","detail_find_rule":"","sdetail_col_type":"","sdetail_find_rule":"","ua":"pc","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\n_17live()"}
           }
         ]
       }

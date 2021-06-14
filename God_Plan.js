@@ -69,6 +69,10 @@ const twitch = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/twitch.js?t="+time, 'hiker://files/TyrantG/LIVE/twitch.js')
 }
 
+const _17live = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/17live.js?t="+time, 'hiker://files/TyrantG/LIVE/17live.js')
+}
+
 const huya_live = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/LIVE/huya.js?t="+time, 'hiker://files/TyrantG/LIVE/huya.js')
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/huya-tabs.html?t="+time, 'hiker://files/TyrantG/public/huya-tabs.html')
