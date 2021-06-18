@@ -110,6 +110,10 @@ const pornhub = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/pornhub.js?t="+time, 'hiker://files/TyrantG/GHS/pornhub.js')
 }
 
+const jable = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/jable.js?t="+time, 'hiker://files/TyrantG/GHS/jable.js')
+}
+
 const spankbang = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/GHS/spankbang.js?t="+time, 'hiker://files/TyrantG/GHS/spankbang.js')
 }
