@@ -31,6 +31,7 @@ const home_page = _ => {
 }
 
 const new_homepage = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/HOME/index.html?t="+time, 'hiker://files/TyrantG/HOME/index.html')
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TEST/new-homepage.js?t="+time, 'hiker://files/TyrantG/TEST/new-homepage.js')
 }
 
