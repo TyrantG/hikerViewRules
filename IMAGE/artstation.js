@@ -14,7 +14,7 @@ const baseParse = _ => {
   if (parseInt(page) === 1) {
     channels.forEach(item => {
       d.push({
-        title: item.id.toString()===channel_sel? "““"+item.name+"””":item.name,
+        title: item.id==channel_sel? "““"+item.name+"””":item.name,
         url: $("#noLoading#").lazyRule((item)=>{
           putVar("tyrantgenesis.artstation.channel",item.id);
           refreshPage(false);
@@ -46,7 +46,7 @@ const baseParse = _ => {
 const secParse = _ => {
   let d = [];
   const html = fetch(MY_URL, {headers:{"User-Agent": PC_UA, "Cookie": getVar("tyrantgenesis.artstation.cookie")}})
-  const images_json = html.match(/assets(.*?),\\"collections/)[1].replace('\\":', '').replace(/\\\\\\/g,'你妈死了').replace(/\\/g,'').replace(/你妈死了/g,'\\')
+  const images_json = html.match(/assets(.*?),\\"collections/)[1].replace('\\":', '').replace(/\\\\\\/g,'标志NMSL标志').replace(/\\/g,'').replace(/标志NMSL标志/g,'\\')
   const images = JSON.parse(images_json)
 
   images.forEach(item => {
