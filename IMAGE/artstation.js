@@ -8,39 +8,39 @@ const baseParse = _ => {
   const channels_json = getResCode().match(/window.preloadedChannels = (.*?);<\/script>/)[1]
   const channels = JSON.parse(channels_json).data
 
-  setError(channels)
   // 选择
-/*  const channel_sel = getVar("tyrantgenesis.artstation.channel", channels[0].id);
+const channel_sel = getVar("tyrantgenesis.artstation.channel", channels[0].id);
+  setError(channel_sel)
 
-  if (parseInt(page) === 1) {
-    channels.forEach(item => {
+  /*    if (parseInt(page) === 1) {
+      channels.forEach(item => {
+        d.push({
+          title: item.id==channel_sel? "““"+item.name+"””":item.name,
+          url: $("#noLoading#").lazyRule((item)=>{
+            putVar("tyrantgenesis.artstation.channel", item.id);
+            refreshPage(false);
+            return "hiker://empty"
+          }, item),
+          col_type: 'scroll_button'
+        });
+      })
+    }
+
+    const url = "https://www.artstation.com/api/v2/community/channels/projects.json?page="+page+"&per_page=30&sorting=trending&dimension=3d&channel_id="+channel_sel
+    const list_json = fetch(url)
+    const list = JSON.parse(list_json).data
+
+    list.forEach(item => {
       d.push({
-        title: item.id==channel_sel? "““"+item.name+"””":item.name,
-        url: $("#noLoading#").lazyRule((item)=>{
-          putVar("tyrantgenesis.artstation.channel", item.id);
-          refreshPage(false);
-          return "hiker://empty"
-        }, item),
-        col_type: 'scroll_button'
+        // title: item.title,
+        url: item.url,
+        pic_url: item.smaller_square_cover_url,
+        // desc: item.user.username,
+        col_type: 'pic_3'
       });
     })
-  }
 
-  const url = "https://www.artstation.com/api/v2/community/channels/projects.json?page="+page+"&per_page=30&sorting=trending&dimension=3d&channel_id="+channel_sel
-  const list_json = fetch(url)
-  const list = JSON.parse(list_json).data
-
-  list.forEach(item => {
-    d.push({
-      // title: item.title,
-      url: item.url,
-      pic_url: item.smaller_square_cover_url,
-      // desc: item.user.username,
-      col_type: 'pic_3'
-    });
-  })
-
-  setResult(d);*/
+    setResult(d);*/
 }
 
 
