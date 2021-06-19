@@ -92,6 +92,20 @@
     ]
   },
   {
+    "title": "图片",
+    "data": [
+      {
+        "title": "艺术",
+        "rules": [
+          {
+            "title": "ArtStation",
+            "rule": {"title":"ArtStation","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"https://www.artstation.com?page=fypage&t=1","col_type":"","class_name":"","class_url":"","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/IMAGE/artstation.js'))\nbaseParse()","search_url":"","searchFind":"","detail_col_type":"","detail_find_rule":"js:\neval(fetch('hiker://files/TyrantG/IMAGE/artstation.js'))\nsecParse()","sdetail_col_type":"","sdetail_find_rule":"","ua":"","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nartStation()"}
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "GHS",
     "data": [
       {

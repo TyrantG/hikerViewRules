@@ -155,4 +155,8 @@ const zczc = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TOOL/zczc.js?t="+time, 'hiker://files/TyrantG/TOOL/zczc.js')
 }
 
+const artStation = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/IMAGE/artstation.js?t="+time, 'hiker://files/TyrantG/IMAGE/artstation.js')
+}
+
 /* Customize Function */
