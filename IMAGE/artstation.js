@@ -8,15 +8,16 @@ const baseParse = _ => {
   const channels_json = getResCode().match(/window.preloadedChannels = (.*?);<\/script>/)[1]
   const channels = JSON.parse(channels_json).data
 
+  setError(channels)
   // 选择
-  const channel_sel = getVar("tyrantgenesis.artstation.channel", channels[0].id);
+/*  const channel_sel = getVar("tyrantgenesis.artstation.channel", channels[0].id);
 
   if (parseInt(page) === 1) {
     channels.forEach(item => {
       d.push({
         title: item.id==channel_sel? "““"+item.name+"””":item.name,
         url: $("#noLoading#").lazyRule((item)=>{
-          putVar("tyrantgenesis.artstation.channel",item.id);
+          putVar("tyrantgenesis.artstation.channel", item.id);
           refreshPage(false);
           return "hiker://empty"
         }, item),
@@ -39,7 +40,7 @@ const baseParse = _ => {
     });
   })
 
-  setResult(d);
+  setResult(d);*/
 }
 
 
