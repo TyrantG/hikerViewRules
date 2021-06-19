@@ -9,7 +9,7 @@ const baseParse = _ => {
   const channels = JSON.parse(channels_json).data
 
   // 选择
-const channel_sel = getVar("tyrantgenesis.artstation.channel", channels[0].id);
+const channel_sel = getVar("tyrantgenesis.artstation.channel", channels[0].id.toString());
   setError(channel_sel)
 
   /*    if (parseInt(page) === 1) {
