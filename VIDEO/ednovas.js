@@ -130,11 +130,12 @@ const secParse = _ => {
       video_num.forEach(item => {
         d.push({
           title: parseDomForHtml(item, 'a&&Text'),
-          url: $().lazyRule(_ => {
+          url: $(parseDom(item, 'a&&href')).lazyRule(_ => {
+            eval(getCryptoJS())
             const html = fetch(input)
             const player = parseDomForArray(html, '[data-play]')[0]
-            const base64 = base64Decode(parseDomForHtml(player, "div&&data-play").substring(3))
-            setError(base64)
+            const base64 = parseDomForHtml(player, "div&&data-play")
+            return base64Decode(base64.substring(3))
           }),
           col_type: 'text_4'
         })
