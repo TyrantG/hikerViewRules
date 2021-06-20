@@ -159,4 +159,8 @@ const artStation = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/IMAGE/artstation.js?t="+time, 'hiker://files/TyrantG/IMAGE/artstation.js')
 }
 
+const ednovas = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/VIDEO/ednovas.js?t="+time, 'hiker://files/TyrantG/VIDEO/ednovas.js')
+}
+
 /* Customize Function */

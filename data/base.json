@@ -92,6 +92,20 @@
     ]
   },
   {
+    "title": "影视",
+    "data": [
+      {
+        "title": "免嗅",
+        "rules": [
+          {
+            "title": "EdNovas影视",
+            "rule": {"title":"EdNovas影视","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"https://movies.ednovas.xyz/index.php/vod/show/id/1/page/fypage.html","col_type":"","class_name":"","class_url":"","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch(\"hiker://files/TyrantG/VIDEO/ednovas.js\"))\nbaseParse()","search_url":"","searchFind":"","detail_col_type":"","detail_find_rule":"js:\neval(fetch(\"hiker://files/TyrantG/VIDEO/ednovas.js\"))\nsecParse()","sdetail_col_type":"","sdetail_find_rule":"","ua":"","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nednovas()"}
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "图片",
     "data": [
       {
