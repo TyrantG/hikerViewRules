@@ -1,5 +1,4 @@
 const baseParse = _ => {
-  const GHS = 0
   let d = [];
   let true_url = getVar("tyrantgenesis.ednovas.url", MY_URL)
   const page = MY_URL.match(/page\/(.*?)\.html/)[1]
