@@ -179,66 +179,65 @@ const baseParse = _ => {
     if (channels.length > 0) {
         const url = "https://www.googleapis.com/youtube/v3/playlistItems?key=" + key + "&part=snippet&maxResults=" + max_results + "&playlistId=" + channels[channel_select].uploadsId + "&pageToken=" + page_token
         const video_item_json = fetch(url)
-        setError(video_item_json)
-    }
-        /*if (video_item_json.error) {
+        if (video_item_json.error) {
             d.push({
                 title: "接口配额已超量，请进入设置申请 Google YouTube API 并输入密钥",
                 col_type: "long_text"
             })
             setResult(d)
             return false
-        }
-        const video_item = JSON.parse(video_item_json)
-        const list = video_item.items
+        } else {
+            const video_item = JSON.parse(video_item_json)
+            const list = video_item.items
 
-        if (video_item.prevPageToken) {
-            d.push({
-                title: '上一页',
-                url: $("").lazyRule(video_item => {
-                    putVar("tyrantgenesis.youtube.page_token", video_item.prevPageToken)
-                    refreshPage(true)
-                    return "hiker://empty"
-                }, video_item),
-                col_type: 'text_center_1',
-            })
-            d.push({
-                col_type: 'blank_block',
-            })
-        }
+            if (video_item.prevPageToken) {
+                d.push({
+                    title: '上一页',
+                    url: $("").lazyRule(video_item => {
+                        putVar("tyrantgenesis.youtube.page_token", video_item.prevPageToken)
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }, video_item),
+                    col_type: 'text_center_1',
+                })
+                d.push({
+                    col_type: 'blank_block',
+                })
+            }
 
-        list.forEach(item => {
-            let thumbnails = item.snippet.thumbnails
-            let pic_url = thumbnails[Object.keys(thumbnails)[Object.keys(thumbnails).length - 1]].url
-            let video_id = item.snippet.resourceId.videoId
-            let video_url = "https://www.googleapis.com/youtube/v3/videos?key="+key+"&part=snippet&part=snippet&id="+video_id
-            d.push({
-                title: item.snippet.title,
-                pic_url: pic_url,
-                url: $(video_url).rule(params => {
-                    eval(fetch('hiker://files/TyrantG/TEST/youtube.js'))
-                    secParse(params)
-                }, {
-                    video_id: video_id,
-                    channel_id: item.snippet.channelId,
-                }),
-                col_type: 'movie_2',
+            list.forEach(item => {
+                let thumbnails = item.snippet.thumbnails
+                let pic_url = thumbnails[Object.keys(thumbnails)[Object.keys(thumbnails).length - 1]].url
+                let video_id = item.snippet.resourceId.videoId
+                let video_url = "https://www.googleapis.com/youtube/v3/videos?key="+key+"&part=snippet&part=snippet&id="+video_id
+                d.push({
+                    title: item.snippet.title,
+                    pic_url: pic_url,
+                    url: $(video_url).rule(params => {
+                        eval(fetch('hiker://files/TyrantG/TEST/youtube.js'))
+                        secParse(params)
+                    }, {
+                        video_id: video_id,
+                        channel_id: item.snippet.channelId,
+                    }),
+                    col_type: 'movie_2',
+                })
             })
-        })
 
-        if (video_item.nextPageToken) {
-            d.push({
-                col_type: 'blank_block',
-            })
-            d.push({
-                title: '下一页',
-                url: $("").lazyRule(video_item => {
-                    putVar("tyrantgenesis.youtube.page_token", video_item.nextPageToken)
-                    refreshPage(true)
-                    return "hiker://empty"
-                }, video_item),
-                col_type: 'text_center_1',
-            })
+            if (video_item.nextPageToken) {
+                d.push({
+                    col_type: 'blank_block',
+                })
+                d.push({
+                    title: '下一页',
+                    url: $("").lazyRule(video_item => {
+                        putVar("tyrantgenesis.youtube.page_token", video_item.nextPageToken)
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }, video_item),
+                    col_type: 'text_center_1',
+                })
+            }
         }
     } else {
         d.push({
@@ -247,7 +246,7 @@ const baseParse = _ => {
         })
     }
 
-    setResult(d);*/
+    setResult(d);
 }
 
 const secParse = params => {
