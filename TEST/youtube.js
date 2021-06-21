@@ -81,7 +81,7 @@ const baseParse = _ => {
         })
 
         d.push({
-            url: "input.trim() ? $('hiker://empty').rule(params => {eval(fetch('hiker://files/TyrantG/tyrantgenesis.js'));searchParse(params);}, {input: input.trim(), search_select: "+search_select+"}) : 'toast://请输入搜索内容'",
+            url: "input.trim() ? $('hiker://empty').rule(params => {eval(fetch('hiker://files/TyrantG/tyrantgenesis.js'));searchParse(params);}, {input: input.trim(), search_select: '"+search_select+"'}) : 'toast://请输入搜索内容'",
             col_type: "input"
         });
     }
@@ -239,10 +239,10 @@ const baseParse = _ => {
 }
 
 const searchParse = params => {
-    setError(params);
-    // const search = params.input
-    // const type = params.search_select
-    // const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
-    // const max_results = getVar("tyrantgenesis.youtube.max_results", "10")
-    // const url = "https://www.googleapis.com/youtube/v3/search?key="+key+"&part=snippet,id&maxResults="+max_results+"&type="+type+"&q="+search
+    const search = params.input
+    const type = params.search_select
+    const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
+    const max_results = getVar("tyrantgenesis.youtube.max_results", "10")
+    const url = "https://www.googleapis.com/youtube/v3/search?key="+key+"&part=snippet,id&maxResults="+max_results+"&type="+type+"&q="+search
+    setError(url);
 }
