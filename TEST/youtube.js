@@ -146,14 +146,9 @@ const baseParse = _ => {
                 col_type: "text_1"
             })
             d.push({
-                title: "申请 Google YouTube API 教程",
-                url: "https://www.tyrantg.com/2021/06/22/apply-google-youtube-api/",
-                col_type: "text_1"
-            })
-            d.push({
                 title: "确认",
                 desc: "请输入密钥",
-                url: "input.trim() ? $('hiker://empty').rule(params => {}) : 'toast://请输入搜索内容'",
+                url: "input.trim() ? $('hiker://empty').rule(params => {const key_path = 'hiker://files/rules/js/TyrantGenesis_YouTube-api-key.js';writeFile(key_path, params.input)}, {input: input.trim()}) : 'toast://请输入搜索内容'",
                 col_type: "input"
             });
             setResult(d);
