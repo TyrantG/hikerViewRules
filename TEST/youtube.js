@@ -182,7 +182,7 @@ const baseParse = _ => {
         const video_item = JSON.parse(video_item_json)
         if (video_item.error) {
             if (search_show === '1') {
-                putVar("tyrantgenesis.youtube.search_show", params.search_show === '0')
+                putVar("tyrantgenesis.youtube.search_show", '0')
                 refreshPage(false)
                 return "hiker://empty"
             }
