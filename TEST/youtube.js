@@ -275,7 +275,7 @@ const searchParse = params => {
         list.forEach(item => {
             let thumbnails = item.snippet.thumbnails
             let pic_url = thumbnails[Object.keys(thumbnails)[Object.keys(thumbnails).length - 1]].url
-            let video_id = item.snippet.resourceId.videoId
+            let video_id = item.id.videoId
             let video_url = "https://www.googleapis.com/youtube/v3/videos?key="+key+"&part=snippet&part=snippet&id="+video_id
             d.push({
                 title: item.snippet.title,
