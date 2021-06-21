@@ -178,35 +178,8 @@ const baseParse = _ => {
                 title: item.snippet.title,
                 pic_url: pic_url,
                 url: $(video_url).rule(params => {
-                    let d = [];
-                    const video_desc_json = getResCode()
-                    const video_desc = JSON.parse(video_desc_json)
-                    const snippet = video_desc.items[0].snippet
-
-                    let thumbnails = snippet.thumbnails
-                    let pic_url = thumbnails[Object.keys(thumbnails)[Object.keys(thumbnails).length - 1]].url
-                    let ori_url = "https://m.youtube.com/watch?v="+params.video_id
-
-                    d.push({
-                        title: snippet.title,
-                        pic_url: pic_url,
-                        url: ori_url,
-                        desc: snippet.description,
-                        col_type: 'pic_1'
-                    })
-
-                    const videoParse = fetch("https://www.youtubemy.com/search?url="+ori_url)
-                    const video_list = parseDomForArray(videoParse, '.video_files&&a')
-                    video_list.forEach(video => {
-                        let audio = parseDomForHtml(video, 'img&&src').indexOf("yy.png") !== -1
-                        d.push({
-                            title: parseDomForHtml(video, 'a&&Text').replace(/\(.*?\)/, '') + (audio ? '（有声）' : '（无声）'),
-                            url: parseDomForHtml(video, 'a&&href'),
-                            col_type: 'text_2'
-                        })
-                    })
-
-                    setResult(d);
+                    eval(fetch('hiker://files/TyrantG/TEST/youtube.js'))
+                    secParse(params)
                 }, {
                     video_id: video_id,
                 }),
@@ -234,6 +207,38 @@ const baseParse = _ => {
             col_type: 'long_text',
         })
     }
+
+    setResult(d);
+}
+
+const secParse = params => {
+    let d = [];
+    const video_desc_json = getResCode()
+    const video_desc = JSON.parse(video_desc_json)
+    const snippet = video_desc.items[0].snippet
+
+    let thumbnails = snippet.thumbnails
+    let pic_url = thumbnails[Object.keys(thumbnails)[Object.keys(thumbnails).length - 1]].url
+    let ori_url = "https://m.youtube.com/watch?v="+params.video_id
+
+    d.push({
+        title: snippet.title,
+        pic_url: pic_url,
+        url: ori_url,
+        desc: snippet.description,
+        col_type: 'pic_1'
+    })
+
+    const videoParse = fetch("https://www.youtubemy.com/search?url="+ori_url)
+    const video_list = parseDomForArray(videoParse, '.video_files&&a')
+    video_list.forEach(video => {
+        let audio = parseDomForHtml(video, 'img&&src').indexOf("yy.png") !== -1
+        d.push({
+            title: parseDomForHtml(video, 'a&&Text').replace(/\(.*?\)/, '') + (audio ? '（有声）' : '（无声）'),
+            url: parseDomForHtml(video, 'a&&href'),
+            col_type: 'text_2'
+        })
+    })
 
     setResult(d);
 }
