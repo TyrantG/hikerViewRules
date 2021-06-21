@@ -1,5 +1,14 @@
-const key = "AIzaSyDAVB60lCVpHO0nnsWyGtDWC9DTxH8vWlg"
+const key_path = "hiker://files/rules/js/TyrantGenesis_YouTube-api-key.js"
 const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
+
+let key
+
+if (fetch(key_path)) {
+    key = fetch(key_path)
+} else {
+    key = "AIzaSyDAVB60lCVpHO0nnsWyGtDWC9DTxH8vWlg"
+    writeFile(key_path, key)
+}
 
 const baseParse = _ => {
     let d = [];
@@ -129,6 +138,7 @@ const baseParse = _ => {
     d.push({
         title: '设置',
         url: $('hiker://empty').rule(_ => {
+            eval(fetch('hiker://files/TyrantG/TEST/youtube.js'))
             let d = [];
             d.push({
                 title: "申请 Google YouTube API 教程",
@@ -136,7 +146,12 @@ const baseParse = _ => {
                 col_type: "text_1"
             })
             d.push({
-                title: "密钥",
+                title: "申请 Google YouTube API 教程",
+                url: "https://www.tyrantg.com/2021/06/22/apply-google-youtube-api/",
+                col_type: "text_1"
+            })
+            d.push({
+                title: "确认",
                 desc: "请输入密钥",
                 url: "input.trim() ? $('hiker://empty').rule(params => {}) : 'toast://请输入搜索内容'",
                 col_type: "input"
