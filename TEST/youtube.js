@@ -225,7 +225,8 @@ const secParse = params => {
 
     // 频道
     const channel_url = "https://www.googleapis.com/youtube/v3/channels?key="+key+"&part=snippet&id="+params.channel_id
-    const channel_desc = JSON.parse(fetch(channel_url)).items[0]
+    // const channel_desc = JSON.parse(fetch(channel_url)).items[0]
+    const channel_desc = JSON.parse(fetch(channel_url))
     setError(channel_desc)
 
     let channel_thumbnails = channel_desc.snippet.thumbnails
