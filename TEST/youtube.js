@@ -101,7 +101,7 @@ const baseParse = _ => {
         }, {
             button_1_status: button_1_status
         }),
-        col_type: 'text_4',
+        col_type: 'scroll_button',
     })
     d.push({
         title: button_2_title,
@@ -112,7 +112,7 @@ const baseParse = _ => {
         }, {
             button_2_status: button_2_status
         }),
-        col_type: 'text_4',
+        col_type: 'scroll_button',
     })
     d.push({
         title: search_show === '1' ? '隐藏搜索' : '显示搜索',
@@ -123,7 +123,7 @@ const baseParse = _ => {
         }, {
             search_show: search_show
         }),
-        col_type: 'text_4',
+        col_type: 'scroll_button',
     })
     d.push({
         title: '设置',
@@ -131,7 +131,7 @@ const baseParse = _ => {
             refreshPage(false)
             return 'toast://懒得写'
         }),
-        col_type: 'text_4',
+        col_type: 'scroll_button',
     })
 
     if (channel_show !== '0') {
