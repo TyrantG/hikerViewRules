@@ -227,7 +227,7 @@ const secParse = params => {
     const channel_url = "https://www.googleapis.com/youtube/v3/channels?key="+key+"&part=snippet&id="+params.channel_id
     // const channel_desc = JSON.parse(fetch(channel_url)).items[0]
     const channel_desc = JSON.parse(fetch(channel_url))
-    setError(channel_desc)
+    setError(params.channel_id)
 
     /*let channel_thumbnails = channel_desc.snippet.thumbnails
     let channel_pic_url = channel_thumbnails[Object.keys(channel_thumbnails)[Object.keys(channel_thumbnails).length - 1]].url
