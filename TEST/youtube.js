@@ -225,11 +225,10 @@ const secParse = params => {
 
     // 频道
     const channel_url = "https://www.googleapis.com/youtube/v3/channels?key="+key+"&part=snippet&id="+params.channel_id
-    // const channel_desc = JSON.parse(fetch(channel_url)).items[0]
-    const channel_desc = JSON.parse(fetch(channel_url))
-    setError(params.channel_id)
+    const channel_desc = JSON.parse(fetch(channel_url)).items[0]
+    // const channel_desc = JSON.parse(fetch(channel_url))
 
-    /*let channel_thumbnails = channel_desc.snippet.thumbnails
+    let channel_thumbnails = channel_desc.snippet.thumbnails
     let channel_pic_url = channel_thumbnails[Object.keys(channel_thumbnails)[Object.keys(channel_thumbnails).length - 1]].url
     d.push({
         title: channel_desc.snippet.title,
@@ -262,7 +261,7 @@ const secParse = params => {
         })
     })
 
-    setResult(d);*/
+    setResult(d);
 }
 
 const searchParse = params => {
@@ -307,6 +306,7 @@ const searchParse = params => {
                     secParse(params)
                 }, {
                     video_id: video_id,
+                    channel_id: item.snippet.channelId,
                 }),
                 col_type: 'movie_2',
             })
