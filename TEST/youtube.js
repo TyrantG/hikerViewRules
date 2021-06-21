@@ -270,7 +270,6 @@ const secParse = params => {
                     uploadsId: params.channel_upload_id,
                     icon: params.channel_pic_url,
                 })
-                setError(params.channels)
                 script = `local_channels = `+JSON.stringify(params.channels)
                 writeFile(channels_path, script)
                 refreshPage(false)
