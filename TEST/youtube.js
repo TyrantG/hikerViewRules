@@ -128,9 +128,14 @@ const baseParse = _ => {
     })
     d.push({
         title: '设置',
-        url: $('').lazyRule(_ => {
-            refreshPage(false)
-            return 'toast://懒得写'
+        url: $('').rule(_ => {
+            let d = [];
+            d.push({
+                title: "申请 Google YouTube API 教程",
+                url: "https://www.tyrantg.com/2021/06/22/apply-google-youtube-api/",
+                col_type: "long_text"
+            })
+            setResult(d);
         }),
         col_type: 'scroll_button',
     })
@@ -187,7 +192,7 @@ const baseParse = _ => {
                 return "hiker://empty"
             }
             d.push({
-                title: "接口配额已超量，请进入设置申请 Google YouTube API 并输入密钥",
+                title: "接口配额已超量，请进入设置 按照教程申请 Google YouTube API 并在设置中输入密钥",
                 col_type: "long_text"
             })
         } else {
