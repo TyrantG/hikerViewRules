@@ -62,7 +62,7 @@ const baseParse = _ => {
 
     if (search_show === '1') {
         d.push({
-            title: search_select === 'video' ? '‘‘’’<strong><font color="red">视频</font></strong>' : '视频',
+            title: search_select === 'video' ? '搜索：‘‘’’<strong><font color="red">视频</font></strong>' : '搜索：视频',
             url: $('').lazyRule(_ => {
                 putVar("tyrantgenesis.youtube.search_select", "video")
                 refreshPage(false)
@@ -71,7 +71,7 @@ const baseParse = _ => {
             col_type: 'text_2'
         })
         d.push({
-            title: search_select === 'channel' ? '‘‘’’<strong><font color="red">频道</font></strong>' : '频道',
+            title: search_select === 'channel' ? '搜索：‘‘’’<strong><font color="red">频道</font></strong>' : '搜索：频道',
             url: $('').lazyRule(_ => {
                 putVar("tyrantgenesis.youtube.search_select", "channel")
                 refreshPage(false)
