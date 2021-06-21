@@ -73,9 +73,9 @@ const baseParse = _ => {
         d.push({
             title: search_select === 'channel' ? '‘‘’’<strong>搜索：<font color="red">频道</font></strong>' : '搜索：频道',
             url: $('').lazyRule(_ => {
-                putVar("tyrantgenesis.youtube.search_select", "channel")
+                putVar("tyrantgenesis.youtube.search_select", "video")
                 refreshPage(false)
-                return "hiker://empty"
+                return 'toast://频道搜索未完成'
             }),
             col_type: 'text_2'
         })
@@ -182,6 +182,7 @@ const baseParse = _ => {
                     secParse(params)
                 }, {
                     video_id: video_id,
+                    channel_id: item.snippet.channelId,
                 }),
                 col_type: 'movie_2',
             })
@@ -213,6 +214,7 @@ const baseParse = _ => {
 
 const secParse = params => {
     let d = [];
+    const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
     const video_desc_json = getResCode()
     const video_desc = JSON.parse(video_desc_json)
     const snippet = video_desc.items[0].snippet
@@ -227,6 +229,23 @@ const secParse = params => {
         url: ori_url,
         desc: snippet.description,
         col_type: 'pic_1'
+    })
+
+    const channel_url = "https://www.googleapis.com/youtube/v3/channels?key="+key+"&part=snippet&id="+params.channel_id
+    const channel_desc = JSON.parse(fetch(channel_url)).items[0]
+
+    let channel_thumbnails = channel_desc.snippet.thumbnails
+    let channel_pic_url = channel_desc[Object.keys(channel_thumbnails)[Object.keys(channel_thumbnails).length - 1]].url
+    d.push({
+        title: channel_desc.snippet.title,
+        pic_url: channel_pic_url,
+        url: "https://m.youtube.com/channel/"+params.channel_id,
+        col_type: "icon_2_round"
+    })
+    d.push({
+        title: "关注频道",
+        url: "https://m.youtube.com/channel/"+params.channel_id,
+        col_type: "icon_2"
     })
 
     const videoParse = fetch("https://www.youtubemy.com/search?url="+ori_url)
