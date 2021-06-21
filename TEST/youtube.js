@@ -144,13 +144,13 @@ const baseParse = _ => {
                     if (params.channel_show === '1') {
                         putVar("tyrantgenesis.youtube.channel_select", params.index.toString())
                         putVar("tyrantgenesis.youtube.page_token", "")
-                    } else if (channel_show === '2') {
+                    } else if (params.channel_show === '2') {
                         params.channels.splice(params.index, 1)
                         let script = `local_channels = `+JSON.stringify(params.channels)
                         writeFile(channels_path, script)
                         putVar("tyrantgenesis.youtube.channel_select", "0")
                         putVar("tyrantgenesis.youtube.page_token", "")
-                    } else if (channel_show === '3') {
+                    } else if (params.channel_show === '3') {
                         let current = params.channels[params.index]
                         params.channels.splice(params.index, 1)
                         params.channels.unshift(current)
