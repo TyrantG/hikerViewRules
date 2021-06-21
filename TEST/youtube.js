@@ -253,16 +253,17 @@ const secParse = params => {
         col_type: "icon_2_round"
     })
 
+    let has_collect = false
+
+    channels.forEach(item => {
+        if (item.channelId === params.channel_id) has_collect = true
+    })
+
     d.push({
-        title: "关注频道",
+        title: has_collect ? "已关注" : "关注频道",
         url: $("").lazyRule(params => {
             const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
-            let has_collect = false
-
-            params.channels.forEach(item => {
-                if (item.channelId === params.channel_id) has_collect = true
-            })
-            if (has_collect) {
+            if (params.has_collect) {
                 refreshPage(false)
                 return 'toast://已关注'
             } else {
@@ -275,9 +276,10 @@ const secParse = params => {
                 script = `local_channels = `+JSON.stringify(params.channels)
                 writeFile(channels_path, script)
                 refreshPage(false)
-                return 'hiker://empty'
+                return 'toast://关注成功'
             }
         }, {
+            has_collect: has_collect,
             channel_upload_id: channel_upload_id,
             channel_id: params.channel_id,
             channel_pic_url: channel_pic_url,
