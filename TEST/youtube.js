@@ -19,7 +19,7 @@ const baseParse = _ => {
         channels = defaultChannels
     }
 
-    const channel_select = getVar("tyrantgenesis.youtube.channel_select", "2")
+    const channel_select = getVar("tyrantgenesis.youtube.channel_select", "0")
     const max_results = getVar("tyrantgenesis.youtube.max_results", "10")
     const page_token = getVar("tyrantgenesis.youtube.page_token", "")
     const channel_show = getVar("tyrantgenesis.youtube.channel_show", "1") // 0:关闭,1:展示,2:取消,3:置顶
@@ -127,7 +127,10 @@ const baseParse = _ => {
     })
     d.push({
         title: '设置',
-        url: 'hiker://empty',
+        url: $('').lazyRule(_ => {
+            refreshPage(false)
+            return 'toast://懒得写'
+        }),
         col_type: 'text_4',
     })
 
@@ -137,14 +140,32 @@ const baseParse = _ => {
                 title: (parseInt(channel_select) === index || channel_prefix_status) ? channel_prefix+item.title : item.title,
                 pic_url: item.icon,
                 url: $("").lazyRule(params => {
-                    // TODO 删除、排序
-                    putVar("tyrantgenesis.youtube.channel_select", params.index.toString())
-                    putVar("tyrantgenesis.youtube.page_token", "")
+                    const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
+                    if (channel_show === '1') {
+                        putVar("tyrantgenesis.youtube.channel_select", params.index.toString())
+                        putVar("tyrantgenesis.youtube.page_token", "")
+                    } else if (channel_show === '2') {
+                        params.channels.splice(params.index, 1)
+                        let script = `local_channels = `+JSON.stringify(params.channels)
+                        writeFile(channels_path, script)
+                        putVar("tyrantgenesis.youtube.channel_select", "0")
+                        putVar("tyrantgenesis.youtube.page_token", "")
+                    } else if (channel_show === '3') {
+                        let current = params.channels[params.index]
+                        params.channels.splice(params.index, 1)
+                        params.channels.unshift(current)
+                        let script = `local_channels = `+JSON.stringify(params.channels)
+                        writeFile(channels_path, script)
+                        putVar("tyrantgenesis.youtube.channel_select", "0")
+                        putVar("tyrantgenesis.youtube.page_token", "")
+                    }
+
                     refreshPage(false)
                     return "hiker://empty"
                 }, {
                     index: index,
                     channel_show: channel_show,
+                    channels: channels,
                 }),
                 col_type: 'icon_round_4',
             })
