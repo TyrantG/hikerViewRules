@@ -244,10 +244,67 @@ const secParse = params => {
 }
 
 const searchParse = params => {
+    let d = []
     const search = params.input
     const type = params.search_select
     const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
     const max_results = getVar("tyrantgenesis.youtube.max_results", "10")
-    const url = "https://www.googleapis.com/youtube/v3/search?key="+key+"&part=snippet,id&maxResults="+max_results+"&type="+type+"&q="+search
-    setError(url);
+    const search_page_token = getVar("tyrantgenesis.youtube.search_page_token", "")
+    const url = "https://www.googleapis.com/youtube/v3/search?key="+key+"&part=snippet,id&maxResults="+max_results+"&type="+type+"&q="+search+"&pageToken="+search_page_token
+
+    const search_json = fetch(url)
+    const search_item = JSON.parse(search_json)
+    const list = search_item.items
+
+    if (search_item.prevPageToken) {
+        d.push({
+            title: '上一页',
+            url: $("").lazyRule(search_item => {
+                putVar("tyrantgenesis.youtube.search_page_token", search_item.prevPageToken)
+                refreshPage(true)
+                return "hiker://empty"
+            }, search_item),
+            col_type: 'text_center_1',
+        })
+        d.push({
+            col_type: 'blank_block',
+        })
+    }
+
+    if (type === 'video') {
+        list.forEach(item => {
+            let thumbnails = item.snippet.thumbnails
+            let pic_url = thumbnails[Object.keys(thumbnails)[Object.keys(thumbnails).length - 1]].url
+            let video_id = item.snippet.resourceId.videoId
+            let video_url = "https://www.googleapis.com/youtube/v3/videos?key="+key+"&part=snippet&part=snippet&id="+video_id
+            d.push({
+                title: item.snippet.title,
+                pic_url: pic_url,
+                url: $(video_url).rule(params => {
+                    eval(fetch('hiker://files/TyrantG/TEST/youtube.js'))
+                    secParse(params)
+                }, {
+                    video_id: video_id,
+                }),
+                col_type: 'movie_2',
+            })
+        })
+    }
+
+    if (search_item.nextPageToken) {
+        d.push({
+            col_type: 'blank_block',
+        })
+        d.push({
+            title: '下一页',
+            url: $("").lazyRule(search_item => {
+                putVar("tyrantgenesis.youtube.search_page_token", search_item.nextPageToken)
+                refreshPage(true)
+                return "hiker://empty"
+            }, search_item),
+            col_type: 'text_center_1',
+        })
+    }
+
+    setResult(d);
 }
