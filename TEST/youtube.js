@@ -141,7 +141,7 @@ const baseParse = _ => {
                 pic_url: item.icon,
                 url: $("").lazyRule(params => {
                     const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
-                    if (channel_show === '1') {
+                    if (params.channel_show === '1') {
                         putVar("tyrantgenesis.youtube.channel_select", params.index.toString())
                         putVar("tyrantgenesis.youtube.page_token", "")
                     } else if (channel_show === '2') {
