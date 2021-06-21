@@ -4,6 +4,7 @@ const baseParse = _ => {
     const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
     let channels = []
     let script = ""
+    setError(fetch(channels_path))
     if (fetch(channels_path)) {
         script = fetch(channels_path)
     } else {
