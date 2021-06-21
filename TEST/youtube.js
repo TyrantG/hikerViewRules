@@ -259,20 +259,20 @@ const secParse = params => {
             const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
             let has_collect = false
 
-            channels.forEach(item => {
+            params.channels.forEach(item => {
                 if (item.channelId === params.channel_id) has_collect = true
             })
             if (has_collect) {
                 refreshPage(false)
                 return 'toast://已关注'
             } else {
-                channels.push({
+                params.channels.push({
                     title: params.channel_desc.snippet.title,
                     channelId: params.channel_id,
                     uploadsId: params.channel_upload_id,
                     icon: params.channel_pic_url,
                 })
-                script = `local_channels = `+JSON.stringify(channels)
+                script = `local_channels = `+JSON.stringify(params.channels)
                 writeFile(channels_path, script)
                 refreshPage(false)
                 return 'hiker://empty'
