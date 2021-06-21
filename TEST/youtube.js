@@ -137,6 +137,7 @@ const baseParse = _ => {
             })
             d.push({
                 title: "密钥",
+                desc: "请输入密钥",
                 url: "input.trim() ? $('hiker://empty').rule(params => {}) : 'toast://请输入搜索内容'",
                 col_type: "input"
             });
