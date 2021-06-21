@@ -7,7 +7,12 @@ const baseParse = _ => {
     if (fileExist(channels_path) === 'true') {
         script = fetch(channels_path)
     } else {
-        script = `local_channels = [{title: 'J. Cole', channelId: 'UCnc6db-y3IU7CkT_yeVXdVg', uploadsId: 'UUnc6db-y3IU7CkT_yeVXdVg', icon: 'https://yt3.ggpht.com/ytc/AAUvwniDYxWC2x4VZF7ecutGEaLpssNmrptdeuVFJI999g=s88-c-k-c0x00ffffff-no-rj-mo'}, {title: 'Lofi Girl', channelId: 'UCSJ4gkVC6NrvII8umztf0Ow', uploadsId: 'UUSJ4gkVC6NrvII8umztf0Ow', icon: 'https://yt3.ggpht.com/ytc/AAUvwnhGIymQGp3jRMECbTCBSRAUqi8sKbATpWowQG44CA=s88-c-k-c0x00ffffff-no-rj'}, {title: 'HatsuneMiku', channelId: 'UCJwGWV914kBlV4dKRn7AEFA', uploadsId: 'UUJwGWV914kBlV4dKRn7AEFA', icon: 'https://yt3.ggpht.com/ytc/AAUvwnjlsiW6yKsmkrfqn2foSm-ONTTWLeK_G70PF6TXBg=s800-c-k-c0x00ffffff-no-rj-mo'}]`
+        const defaultChannels = [
+            {title: 'J. Cole', channelId: 'UCnc6db-y3IU7CkT_yeVXdVg', uploadsId: 'UUnc6db-y3IU7CkT_yeVXdVg', icon: 'https://yt3.ggpht.com/ytc/AAUvwniDYxWC2x4VZF7ecutGEaLpssNmrptdeuVFJI999g=s88-c-k-c0x00ffffff-no-rj-mo'},
+            {title: 'Lofi Girl', channelId: 'UCSJ4gkVC6NrvII8umztf0Ow', uploadsId: 'UUSJ4gkVC6NrvII8umztf0Ow', icon: 'https://yt3.ggpht.com/ytc/AAUvwnhGIymQGp3jRMECbTCBSRAUqi8sKbATpWowQG44CA=s88-c-k-c0x00ffffff-no-rj'},
+            {title: 'HatsuneMiku', channelId: 'UCJwGWV914kBlV4dKRn7AEFA', uploadsId: 'UUJwGWV914kBlV4dKRn7AEFA', icon: 'https://yt3.ggpht.com/ytc/AAUvwnjlsiW6yKsmkrfqn2foSm-ONTTWLeK_G70PF6TXBg=s800-c-k-c0x00ffffff-no-rj-mo'}
+        ]
+        script = `local_channels = `+ JSON.stringify(defaultChannels)
         writeFile(channels_path, script)
     }
     eval(script)
@@ -217,16 +222,8 @@ const secParse = params => {
     const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
     // local_channels
     const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
-    let channels = []
-    let script = ""
-    if (fileExist(channels_path) === 'true') {
-        script = fetch(channels_path)
-    } else {
-        script = `local_channels = [{title: 'J. Cole', channelId: 'UCnc6db-y3IU7CkT_yeVXdVg', uploadsId: 'UUnc6db-y3IU7CkT_yeVXdVg', icon: 'https://yt3.ggpht.com/ytc/AAUvwniDYxWC2x4VZF7ecutGEaLpssNmrptdeuVFJI999g=s88-c-k-c0x00ffffff-no-rj-mo'}, {title: 'Lofi Girl', channelId: 'UCSJ4gkVC6NrvII8umztf0Ow', uploadsId: 'UUSJ4gkVC6NrvII8umztf0Ow', icon: 'https://yt3.ggpht.com/ytc/AAUvwnhGIymQGp3jRMECbTCBSRAUqi8sKbATpWowQG44CA=s88-c-k-c0x00ffffff-no-rj'}, {title: 'HatsuneMiku', channelId: 'UCJwGWV914kBlV4dKRn7AEFA', uploadsId: 'UUJwGWV914kBlV4dKRn7AEFA', icon: 'https://yt3.ggpht.com/ytc/AAUvwnjlsiW6yKsmkrfqn2foSm-ONTTWLeK_G70PF6TXBg=s800-c-k-c0x00ffffff-no-rj-mo'}]`
-        writeFile(channels_path, script)
-    }
-    eval(script)
-    channels = local_channels || []
+    eval(fetch(channels_path))
+    const channels = local_channels || []
 
     // video
     const video_desc_json = getResCode()
@@ -273,6 +270,7 @@ const secParse = params => {
                     uploadsId: params.channel_upload_id,
                     icon: params.channel_pic_url,
                 })
+                setError(params.channels)
                 script = `local_channels = `+JSON.stringify(params.channels)
                 writeFile(channels_path, script)
                 refreshPage(false)
