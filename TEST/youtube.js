@@ -215,6 +215,19 @@ const baseParse = _ => {
 const secParse = params => {
     let d = [];
     const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
+    // local_channels
+    let channels = []
+    let script = ""
+    if (fileExist(channels_path) === 'true') {
+        script = fetch(channels_path)
+    } else {
+        script = `local_channels = [{title: 'J. Cole', channelId: 'UCnc6db-y3IU7CkT_yeVXdVg', uploadsId: 'UUnc6db-y3IU7CkT_yeVXdVg', icon: 'https://yt3.ggpht.com/ytc/AAUvwniDYxWC2x4VZF7ecutGEaLpssNmrptdeuVFJI999g=s88-c-k-c0x00ffffff-no-rj-mo'}, {title: 'Lofi Girl', channelId: 'UCSJ4gkVC6NrvII8umztf0Ow', uploadsId: 'UUSJ4gkVC6NrvII8umztf0Ow', icon: 'https://yt3.ggpht.com/ytc/AAUvwnhGIymQGp3jRMECbTCBSRAUqi8sKbATpWowQG44CA=s88-c-k-c0x00ffffff-no-rj'}, {title: 'HatsuneMiku', channelId: 'UCJwGWV914kBlV4dKRn7AEFA', uploadsId: 'UUJwGWV914kBlV4dKRn7AEFA', icon: 'https://yt3.ggpht.com/ytc/AAUvwnjlsiW6yKsmkrfqn2foSm-ONTTWLeK_G70PF6TXBg=s800-c-k-c0x00ffffff-no-rj-mo'}]`
+        writeFile(channels_path, script)
+    }
+    eval(script)
+    channels = local_channels || []
+
+    // video
     const video_desc_json = getResCode()
     const video_desc = JSON.parse(video_desc_json)
     const snippet = video_desc.items[0].snippet
@@ -224,21 +237,49 @@ const secParse = params => {
     let ori_url = "https://m.youtube.com/watch?v="+params.video_id
 
     // 频道
-    const channel_url = "https://www.googleapis.com/youtube/v3/channels?key="+key+"&part=snippet&id="+params.channel_id
+    const channel_url = "https://www.googleapis.com/youtube/v3/channels?key="+key+"&part=snippet,contentDetails&id="+params.channel_id
     const channel_desc = JSON.parse(fetch(channel_url)).items[0]
     // const channel_desc = JSON.parse(fetch(channel_url))
 
     let channel_thumbnails = channel_desc.snippet.thumbnails
+    let channel_upload_id = channel_desc.contentDetails.relatedPlaylists.uploads
     let channel_pic_url = channel_thumbnails[Object.keys(channel_thumbnails)[Object.keys(channel_thumbnails).length - 1]].url
+
     d.push({
         title: channel_desc.snippet.title,
         pic_url: channel_pic_url,
         url: "https://m.youtube.com/channel/"+params.channel_id,
         col_type: "icon_2_round"
     })
+
     d.push({
         title: "关注频道",
-        url: "https://m.youtube.com/channel/"+params.channel_id,
+        url: $("").lazyRule(params => {
+            let has_collect = false
+
+            channels.forEach(item => {
+                if (item.channelId === params.channel_id) has_collect = true
+            })
+            if (has_collect) {
+                refreshPage(false)
+                return 'toast://已关注'
+            } else {
+                channels.push({
+                    title: params.channel_desc.snippet.title,
+                    channelId: params.channel_id,
+                    uploadsId: params.channel_upload_id,
+                    icon: params.channel_pic_url,
+                })
+                refreshPage(false)
+                return 'hiker://empty'
+            }
+        }, {
+            channel_upload_id: channel_upload_id,
+            channel_id: params.channel_id,
+            channel_pic_url: channel_pic_url,
+            channels: channels,
+            channel_desc: channel_desc,
+        }),
         col_type: "icon_2"
     })
 
