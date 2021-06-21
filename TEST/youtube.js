@@ -180,7 +180,7 @@ const baseParse = _ => {
         const url = "https://www.googleapis.com/youtube/v3/playlistItems?key="+key+"&part=snippet&maxResults="+max_results+"&playlistId="+channels[channel_select].uploadsId+"&pageToken="+page_token
         const video_item_json = fetch(url)
         setError(video_item_json)
-        if (video_item_json.error) {
+        /*if (video_item_json.error) {
             d.push({
                 title: "接口配额已超量，请进入设置申请 Google YouTube API 并输入密钥",
                 col_type: "long_text"
@@ -246,7 +246,7 @@ const baseParse = _ => {
         })
     }
 
-    setResult(d);
+    setResult(d);*/
 }
 
 const secParse = params => {
