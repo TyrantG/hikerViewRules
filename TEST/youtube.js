@@ -235,7 +235,7 @@ const secParse = params => {
     const channel_desc = JSON.parse(fetch(channel_url)).items[0]
 
     let channel_thumbnails = channel_desc.snippet.thumbnails
-    let channel_pic_url = channel_desc[Object.keys(channel_thumbnails)[Object.keys(channel_thumbnails).length - 1]].url
+    let channel_pic_url = channel_thumbnails[Object.keys(channel_thumbnails)[Object.keys(channel_thumbnails).length - 1]].url
     d.push({
         title: channel_desc.snippet.title,
         pic_url: channel_pic_url,
