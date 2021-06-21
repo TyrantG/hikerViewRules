@@ -135,6 +135,11 @@ const baseParse = _ => {
                 url: "https://www.tyrantg.com/2021/06/22/apply-google-youtube-api/",
                 col_type: "text_1"
             })
+            d.push({
+                title: "密钥",
+                url: "input.trim() ? $('hiker://empty').rule(params => {eval(fetch('hiker://files/TyrantG/TEST/youtube.js'));searchParse(params);}, {input: input.trim(), search_select: '"+search_select+"'}) : 'toast://请输入搜索内容'",
+                col_type: "input"
+            });
             setResult(d);
         }),
         col_type: 'scroll_button',
