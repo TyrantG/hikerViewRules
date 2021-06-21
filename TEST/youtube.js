@@ -223,14 +223,7 @@ const secParse = params => {
     let pic_url = thumbnails[Object.keys(thumbnails)[Object.keys(thumbnails).length - 1]].url
     let ori_url = "https://m.youtube.com/watch?v="+params.video_id
 
-    d.push({
-        title: snippet.title,
-        pic_url: pic_url,
-        url: ori_url,
-        desc: snippet.description,
-        col_type: 'pic_1'
-    })
-
+    // 频道
     const channel_url = "https://www.googleapis.com/youtube/v3/channels?key="+key+"&part=snippet&id="+params.channel_id
     const channel_desc = JSON.parse(fetch(channel_url)).items[0]
 
@@ -246,6 +239,14 @@ const secParse = params => {
         title: "关注频道",
         url: "https://m.youtube.com/channel/"+params.channel_id,
         col_type: "icon_2"
+    })
+
+    d.push({
+        title: snippet.title,
+        pic_url: pic_url,
+        url: ori_url,
+        desc: snippet.description,
+        col_type: 'pic_1'
     })
 
     const videoParse = fetch("https://www.youtubemy.com/search?url="+ori_url)
