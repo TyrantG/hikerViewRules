@@ -181,12 +181,15 @@ const baseParse = _ => {
         const video_item_json = fetch(url)
         const video_item = JSON.parse(video_item_json)
         if (video_item.error) {
+            if (search_show === '1') {
+                putVar("tyrantgenesis.youtube.search_show", params.search_show === '0')
+                refreshPage(false)
+                return "hiker://empty"
+            }
             d.push({
                 title: "接口配额已超量，请进入设置申请 Google YouTube API 并输入密钥",
                 col_type: "long_text"
             })
-            setResult(d)
-            return false
         } else {
             const list = video_item.items
 
