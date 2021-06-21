@@ -163,4 +163,8 @@ const ednovas = _ => {
   godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/VIDEO/ednovas.js?t="+time, 'hiker://files/TyrantG/VIDEO/ednovas.js')
 }
 
+const youtube = _ => {
+  godWriteFile("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/TEST/youtube.js?t="+time, 'hiker://files/TyrantG/TEST/youtube.js')
+}
+
 /* Customize Function */
