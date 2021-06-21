@@ -4,9 +4,11 @@ const baseParse = _ => {
     const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
     let channels = []
     let script = ""
-    setError(fetch(channels_path))
     if (fetch(channels_path)) {
         script = fetch(channels_path)
+        eval(script)
+        channels = local_channels || []
+        setError(channels)
     } else {
         const defaultChannels = [
             {title: 'J. Cole', channelId: 'UCnc6db-y3IU7CkT_yeVXdVg', uploadsId: 'UUnc6db-y3IU7CkT_yeVXdVg', icon: 'https://yt3.ggpht.com/ytc/AAUvwniDYxWC2x4VZF7ecutGEaLpssNmrptdeuVFJI999g=s88-c-k-c0x00ffffff-no-rj-mo'},
@@ -15,9 +17,8 @@ const baseParse = _ => {
         ]
         script = `local_channels = `+ JSON.stringify(defaultChannels)
         writeFile(channels_path, script)
+        channels = defaultChannels
     }
-    eval(script)
-    channels = local_channels || []
 
     const channel_select = getVar("tyrantgenesis.youtube.channel_select", "2")
     const max_results = getVar("tyrantgenesis.youtube.max_results", "10")
