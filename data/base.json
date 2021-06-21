@@ -86,6 +86,10 @@
           {
             "title": "测试主页2",
             "rule": {"title":"测试主页2","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"hiker://empty","col_type":"","class_name":"","class_url":"","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch(\"hiker://files/TyrantG/TEST/new-homepage.js\"))\nhomePage()","search_url":"","searchFind":"","detail_col_type":"","detail_find_rule":"","sdetail_col_type":"","sdetail_find_rule":"","ua":"","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nnew_homepage()"}
+          },
+          {
+            "title": "YouTube",
+            "rule": {"title":"YouTube","author":"TyrantGenesis","version":1,"url":"hiker://empty","col_type":"movie_3","class_name":"","class_url":"","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/TEST/youtube.js'))\nbaseParse()","searchFind":"","search_url":"","titleColor":"#bdb2ff","group":"⑳TyrantG","detail_col_type":"movie_1","detail_find_rule":"","sdetail_col_type":"movie_1","sdetail_find_rule":"","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nyoutube()"}
           }
         ]
       }
