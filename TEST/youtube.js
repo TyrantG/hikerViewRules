@@ -216,6 +216,7 @@ const secParse = params => {
     let d = [];
     const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
     // local_channels
+    const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
     let channels = []
     let script = ""
     if (fileExist(channels_path) === 'true') {
@@ -255,6 +256,7 @@ const secParse = params => {
     d.push({
         title: "关注频道",
         url: $("").lazyRule(params => {
+            const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
             let has_collect = false
 
             channels.forEach(item => {
@@ -270,6 +272,8 @@ const secParse = params => {
                     uploadsId: params.channel_upload_id,
                     icon: params.channel_pic_url,
                 })
+                script = `local_channels = `+JSON.stringify(channels)
+                writeFile(channels_path, script)
                 refreshPage(false)
                 return 'hiker://empty'
             }
