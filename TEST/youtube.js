@@ -284,7 +284,7 @@ const secParse = params => {
             channels: channels,
             channel_desc: channel_desc,
         }),
-        col_type: "icon_2"
+        col_type: "text_2"
     })
 
     d.push({
