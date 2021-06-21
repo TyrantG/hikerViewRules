@@ -1,7 +1,8 @@
+const key = "AIzaSyDAVB60lCVpHO0nnsWyGtDWC9DTxH8vWlg"
+const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
+
 const baseParse = _ => {
     let d = [];
-    const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
-    const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
     let channels = []
     let script = ""
     if (fetch(channels_path)) {
@@ -241,9 +242,7 @@ const baseParse = _ => {
 
 const secParse = params => {
     let d = [];
-    const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
     // local_channels
-    const channels_path = "hiker://files/rules/js/TyrantGenesis_YouTube频道.js"
     eval(fetch(channels_path))
     const channels = local_channels || []
 
@@ -334,7 +333,6 @@ const searchParse = params => {
     let d = []
     const search = params.input
     const type = params.search_select
-    const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
     const max_results = getVar("tyrantgenesis.youtube.max_results", "10")
     const search_page_token = getVar("tyrantgenesis.youtube.search_page_token", "")
     const url = "https://www.googleapis.com/youtube/v3/search?key="+key+"&part=snippet,id&maxResults="+max_results+"&type="+type+"&q="+search+"&pageToken="+search_page_token
