@@ -80,10 +80,8 @@ const baseParse = _ => {
             col_type: 'text_2'
         })
 
-        let searchRule = `$('hiker://empty').rule(params => {}, {input: input.trim(), search_select: search_select})`
-
         d.push({
-            url: "input.trim() ? "+searchRule+" : 'toast://请输入搜索内容'",
+            url: "input.trim() ? $('hiker://empty').rule(params => {eval(fetch('hiker://files/TyrantG/tyrantgenesis.js'));searchParse(params);}, {input: input.trim(), search_select: search_select}) : 'toast://请输入搜索内容'",
             col_type: "input"
         });
     }
