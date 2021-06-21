@@ -207,10 +207,18 @@ const baseParse = _ => {
                 refreshPage(false)
                 return "hiker://empty"
             }
-            d.push({
-                title: "接口配额已超量，请进入设置 按照教程申请 Google YouTube API 并在设置中输入密钥",
-                col_type: "long_text"
-            })
+            if (video_item.error.code === 403) {
+                d.push({
+                    title: "接口配额已超量，请进入设置 按照教程申请 Google YouTube API 并在设置中输入密钥",
+                    col_type: "long_text"
+                })
+            } else if (video_item.error.code === 400) {
+                d.push({
+                    title: "api key 无效，请进入设置 按照教程申请 Google YouTube API 并在设置中输入密钥",
+                    col_type: "long_text"
+                })
+            }
+
         } else {
             const list = video_item.items
 
