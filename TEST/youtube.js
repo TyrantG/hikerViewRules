@@ -148,7 +148,7 @@ const baseParse = _ => {
             d.push({
                 title: "确认",
                 desc: "请输入密钥",
-                url: "input.trim() ? $('hiker://empty').rule(params => {const key_path = 'hiker://files/rules/js/TyrantGenesis_YouTube-api-key.js';writeFile(key_path, params.input)}, {input: input.trim()}) : 'toast://请输入搜索内容'",
+                url: "input.trim() ? $('hiker://empty').lazyRule(params => {const key_path = 'hiker://files/rules/js/TyrantGenesis_YouTube-api-key.js';writeFile(key_path, params.input);back(true);}, {input: input.trim()}) : 'toast://请输入搜索内容'",
                 col_type: "input"
             });
             setResult(d);
