@@ -128,7 +128,7 @@ const baseParse = _ => {
     })
     d.push({
         title: '设置',
-        url: $('').rule(_ => {
+        url: $('hiker://empty').rule(_ => {
             let d = [];
             d.push({
                 title: "申请 Google YouTube API 教程",
