@@ -229,7 +229,7 @@ const secParse = params => {
     const channel_desc = JSON.parse(fetch(channel_url))
     setError(channel_desc)
 
-    let channel_thumbnails = channel_desc.snippet.thumbnails
+    /*let channel_thumbnails = channel_desc.snippet.thumbnails
     let channel_pic_url = channel_thumbnails[Object.keys(channel_thumbnails)[Object.keys(channel_thumbnails).length - 1]].url
     d.push({
         title: channel_desc.snippet.title,
@@ -262,7 +262,7 @@ const secParse = params => {
         })
     })
 
-    setResult(d);
+    setResult(d);*/
 }
 
 const searchParse = params => {
