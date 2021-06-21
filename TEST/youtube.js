@@ -133,7 +133,7 @@ const baseParse = _ => {
             d.push({
                 title: "申请 Google YouTube API 教程",
                 url: "https://www.tyrantg.com/2021/06/22/apply-google-youtube-api/",
-                col_type: "long_text"
+                col_type: "text_1"
             })
             setResult(d);
         }),
