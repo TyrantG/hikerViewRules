@@ -239,10 +239,10 @@ const baseParse = _ => {
 }
 
 const searchParse = params => {
-    const search = params.input
-    const type = params.search_select
-    const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
-    const max_results = getVar("tyrantgenesis.youtube.max_results", "10")
-    const url = "https://www.googleapis.com/youtube/v3/search?key="+key+"&part=snippet,id&maxResults="+max_results+"&type="+type+"&q="+search
-    setError(url);
+    setError(params);
+    // const search = params.input
+    // const type = params.search_select
+    // const key = "AIzaSyBy6kexDANJ48q-JvTSm6_Klew7qDrYGTM"
+    // const max_results = getVar("tyrantgenesis.youtube.max_results", "10")
+    // const url = "https://www.googleapis.com/youtube/v3/search?key="+key+"&part=snippet,id&maxResults="+max_results+"&type="+type+"&q="+search
 }
