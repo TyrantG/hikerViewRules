@@ -145,7 +145,7 @@ const baseParse = _ => {
                 col_type: "long_text"
             })
             d.push({
-                col_type:"blank_block"
+                col_type: "line"
             });
             d.push({
                 title: "申请 Google YouTube API 教程",
