@@ -12,7 +12,8 @@ const getQueryVariable = (host, variable) => {
 const baseParse = _ => {
     let res = {};
     let d = [];
-    const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
+    // const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
+    const list_json = getResCode().match(/window\.HNF_GLOBAL_INIT = (.*?) <\/script>/)[1]
     const json = JSON.parse(list_json)
     const list = json.recommendList
 
