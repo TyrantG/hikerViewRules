@@ -24,7 +24,7 @@ const baseParse = _ => {
             {title: 'Lofi Girl', channelId: 'UCSJ4gkVC6NrvII8umztf0Ow', uploadsId: 'UUSJ4gkVC6NrvII8umztf0Ow', icon: 'https://yt3.ggpht.com/ytc/AAUvwnhGIymQGp3jRMECbTCBSRAUqi8sKbATpWowQG44CA=s88-c-k-c0x00ffffff-no-rj'},
             {title: 'HatsuneMiku', channelId: 'UCJwGWV914kBlV4dKRn7AEFA', uploadsId: 'UUJwGWV914kBlV4dKRn7AEFA', icon: 'https://yt3.ggpht.com/ytc/AAUvwnjlsiW6yKsmkrfqn2foSm-ONTTWLeK_G70PF6TXBg=s800-c-k-c0x00ffffff-no-rj-mo'}
         ]
-        script = `local_channels = `+ JSON.stringify(defaultChannels)
+        script = `const local_channels = `+ JSON.stringify(defaultChannels)
         writeFile(channels_path, script)
         channels = defaultChannels
     }
@@ -175,7 +175,7 @@ const baseParse = _ => {
                         putVar("tyrantgenesis.youtube.page_token", "")
                     } else if (params.channel_show === '2') {
                         params.channels.splice(params.index, 1)
-                        let script = `local_channels = `+JSON.stringify(params.channels)
+                        let script = `const local_channels = `+JSON.stringify(params.channels)
                         writeFile(channels_path, script)
                         putVar("tyrantgenesis.youtube.channel_select", "0")
                         putVar("tyrantgenesis.youtube.page_token", "")
@@ -183,7 +183,7 @@ const baseParse = _ => {
                         let current = params.channels[params.index]
                         params.channels.splice(params.index, 1)
                         params.channels.unshift(current)
-                        let script = `local_channels = `+JSON.stringify(params.channels)
+                        let script = `const local_channels = `+JSON.stringify(params.channels)
                         writeFile(channels_path, script)
                         putVar("tyrantgenesis.youtube.channel_select", "0")
                         putVar("tyrantgenesis.youtube.page_token", "")
@@ -339,7 +339,7 @@ const secParse = params => {
                     uploadsId: params.channel_upload_id,
                     icon: params.channel_pic_url,
                 })
-                script = `local_channels = `+JSON.stringify(params.channels)
+                script = `const local_channels = `+JSON.stringify(params.channels)
                 writeFile(channels_path, script)
                 refreshPage(false)
                 return 'toast://关注成功'
