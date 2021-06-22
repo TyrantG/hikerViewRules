@@ -30,7 +30,7 @@ const baseParse = _ => {
     }
 
     const channel_select = getVar("tyrantgenesis.youtube.channel_select", "0")
-    const max_results = getVar("tyrantgenesis.youtube.max_results", "10")
+    const max_results = getVar("tyrantgenesis.youtube.max_results", "50")
     const page_token = getVar("tyrantgenesis.youtube.page_token", "")
     const channel_show = getVar("tyrantgenesis.youtube.channel_show", "1") // 0:关闭,1:展示,2:取消,3:置顶
     const search_select = getVar("tyrantgenesis.youtube.search_select", "video") // channel
