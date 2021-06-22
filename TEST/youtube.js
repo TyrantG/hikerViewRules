@@ -141,6 +141,10 @@ const baseParse = _ => {
             eval(fetch('hiker://files/TyrantG/TEST/youtube.js'))
             let d = [];
             d.push({
+                title: "使用须知：规则使用的接口来自 Google 开发者平台官方接口，配额限制为每日10000，除搜索外每次操作会消耗1次配额，而搜索会消耗100配额。首先请使用自己申请的密钥，其次尽量少用搜索，多用订阅。另外有美国信用卡或者其他国外支付途径的可以将自己的开发者账号绑定 Google Cloud 以获得更多配额。",
+                col_type: "long_text"
+            })
+            d.push({
                 title: "申请 Google YouTube API 教程",
                 url: "https://www.tyrantg.com/2021/06/22/apply-google-youtube-api/",
                 col_type: "text_1"
