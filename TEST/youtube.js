@@ -374,7 +374,7 @@ const searchParse = params => {
     let d = []
     const search = params.input
     const type = params.search_select
-    const max_results = getVar("tyrantgenesis.youtube.max_results", "10")
+    const max_results = getVar("tyrantgenesis.youtube.max_results", "50")
     const search_page_token = getVar("tyrantgenesis.youtube.search_page_token", "")
     const url = "https://www.googleapis.com/youtube/v3/search?key="+key+"&part=snippet,id&maxResults="+max_results+"&type="+type+"&q="+search+"&pageToken="+search_page_token
 
