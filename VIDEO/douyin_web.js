@@ -353,6 +353,7 @@ const searchParse = _ => {
     d.push({
         title: "搜索视频-关键词："+input,
         url: $("hiker://empty##fypage").rule(params => {
+            let d = [];
             let current_page = MY_URL.split('##')[1].toString()
             let page = 20
             let offset = (current_page - 1) * page
@@ -364,7 +365,27 @@ const searchParse = _ => {
                     "referer" : "https://www.douyin.com/"
                 }
             })
-            setError(data_json)
+            if (data_json === 'Need Verifying') {
+                d.push({
+                    title: 'signature 获取失败，待修复',
+                    col_type: "long_text",
+                })
+            } else {
+                let list = JSON.parse(data_json).data
+                if (list && list.length > 0) {
+                    list.forEach(item => {
+                        let aweme = item.aweme_info
+                        d.push({
+                            title: aweme.desc,
+                            pic_url: aweme.video.cover.url_list.shift(),
+                            desc: userinfo.signature,
+                            url: aweme.video.play_addr_lowbr.url_list.shift() + "#isVideo=true#",
+                            col_type: 'movie_3',
+                        })
+                    })
+                }
+            }
+            setResult(d);
         }, {
             input: input
         }),
@@ -372,6 +393,7 @@ const searchParse = _ => {
     d.push({
         title: "搜索用户-关键词："+input,
         url: $("hiker://empty##fypage").rule(params => {
+            let d = [];
             let current_page = MY_URL.split('##')[1].toString()
             let page = 20
             let offset = (current_page - 1) * page
@@ -383,7 +405,27 @@ const searchParse = _ => {
                     "referer" : "https://www.douyin.com/"
                 }
             })
-            setError(data_json)
+            if (data_json === 'Need Verifying') {
+                d.push({
+                    title: 'signature 获取失败，待修复',
+                    col_type: "long_text",
+                })
+            } else {
+                let list = JSON.parse(data_json).user_list
+                if (list && list.length > 0) {
+                    list.forEach(item => {
+                        let userinfo = item.user_info
+                        d.push({
+                            title: userinfo.nickname,
+                            pic_url: userinfo.avatar_thumb.url_list.shift(),
+                            desc: userinfo.signature,
+                            url: '',
+                            col_type: 'movie_3',
+                        })
+                    })
+                }
+            }
+            setResult(d);
         }, {
             input: input
         }),
