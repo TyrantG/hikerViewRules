@@ -174,7 +174,8 @@ const baseParse = _ => {
                     })
                 } else {
                     let list = JSON.parse(data_json).aweme_list
-                    list.forEach(item => {
+                    setError(list)
+                    /*list.forEach(item => {
                         d.push({
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
@@ -182,14 +183,9 @@ const baseParse = _ => {
                             url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
                             col_type: 'movie_2',
                         })
-                    })
+                    })*/
                 }
-            }/* else if (current_page === '2') {
-                d.push({
-                    title: '没有更多内容了~',
-                    col_type: 'text_center_1',
-                })
-            }*/
+            }
 
             break
         }
