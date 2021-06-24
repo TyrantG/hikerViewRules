@@ -378,9 +378,9 @@ const searchParse = _ => {
                         d.push({
                             title: aweme.desc,
                             pic_url: aweme.video.cover.url_list.shift(),
-                            desc: userinfo.signature,
+                            desc: '',
                             url: aweme.video.play_addr_lowbr.url_list.shift() + "#isVideo=true#",
-                            col_type: 'movie_3',
+                            col_type: 'movie_2',
                         })
                     })
                 }
