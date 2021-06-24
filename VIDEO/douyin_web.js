@@ -422,7 +422,7 @@ const searchParse = _ => {
                             desc: userinfo.signature,
                             url: $("https://www.douyin.com/user/"+userinfo.sec_uid+'##fypage').rule(userinfo => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
-                                userParse(userinfo.sec_uid)
+                                userParse(userinfo)
                             }, userinfo),
                             col_type: 'movie_3',
                         })
@@ -437,7 +437,8 @@ const searchParse = _ => {
     setResult(d);
 }
 
-const userParse = uid => {
+const userParse = userinfo => {
+    let uid = userinfo.sec_uid
     let d = [];
     let user_url = MY_URL.split('##')[0]
     let page = MY_URL.split('##')[1]
@@ -445,15 +446,11 @@ const userParse = uid => {
 
     if (parseInt(page) === 1) {
         let html = fetch(user_url, {headers:{"User-Agent": PC_UA}})
-        let regData = html.match(/id="RENDER_DATA".*>(.*?)<\/script><\/head>/)[1]
-        let data_json = decodeURIComponent(regData)
-        let data = JSON.parse(data_json)
-        let userinfo = data.C_10.user.user
+        max_cursor = html.match(/%22maxCursor%22%3A(.*?)%2C%22/)[1]
 
-        max_cursor = data.C_10.post.maxCursor || ''
         d.push({
             title: userinfo.nickname,
-            pic_url: userinfo.avatarUrl,
+            pic_url: userinfo.avatar_thumb.url_list.shift(),
             url: MY_URL,
             col_type: 'icon_2_round'
         })
@@ -489,7 +486,7 @@ const userParse = uid => {
                 d.push({
                     title: item.desc,
                     pic_url: item.video.cover.url_list.shift(),
-                    desc: '',
+                    // desc: '',
                     url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
                     col_type: 'movie_2',
                 })
