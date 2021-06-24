@@ -441,7 +441,7 @@ const userParse = uid => {
 
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
     let data = html.match(/id="RENDER_DATA".*>(.*?)<\/script><\/head>/)[1]
-    setError(data)
+    setError(decodeURIComponent(data))
 
     setResult(d);
 }
