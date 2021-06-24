@@ -174,7 +174,7 @@ const baseParse = _ => {
                     })
                 } else {
                     let list = JSON.parse(data_json).aweme_list
-                    if (list) {
+                    if (list && list.length > 0) {
                         list.forEach(item => {
                             d.push({
                                 title: item.desc,
@@ -237,7 +237,7 @@ const baseParse = _ => {
                 let data = JSON.parse(data_json)
                 let list = JSON.parse(data_json).aweme_list
 
-                if (list.length > 0) {
+                if (list && list.length > 0) {
                     putVar("tyrantgenesis.douyin_web.max_cursor", data.max_cursor.toString())
 
                     list.forEach(item => {
