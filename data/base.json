@@ -90,6 +90,10 @@
           {
             "title": "YouTube",
             "rule": {"title":"YouTube","author":"TyrantGenesis","version":1,"url":"hiker://empty","col_type":"movie_3","class_name":"","class_url":"","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/TEST/youtube.js'))\nbaseParse()","searchFind":"","search_url":"","titleColor":"#bdb2ff","group":"⑳TyrantG","detail_col_type":"movie_1","detail_find_rule":"","sdetail_col_type":"movie_1","sdetail_find_rule":"","ua":"mobile","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nyoutube()"}
+          },
+          {
+            "title": "抖音网页版",
+            "rule": {"title":"抖音网页版","author":"TyrantGenesis","version":1,"url":"hiker://empty##fypage","col_type":"movie_3","class_name":"","class_url":"","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))\nbaseParse()","searchFind":"js:\neval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))\nsearchParse()","search_url":"hiker://empty##**","titleColor":"#bdb2ff","group":"⑳TyrantG","detail_col_type":"movie_1","detail_find_rule":"","sdetail_col_type":"movie_1","sdetail_find_rule":"","ua":"pc","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\ndouyin_web()"}
           }
         ]
       }
