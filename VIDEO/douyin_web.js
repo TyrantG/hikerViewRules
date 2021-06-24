@@ -201,7 +201,7 @@ const baseParse = _ => {
         case "4": {
             let sec_uid = channels[channel_select].sec_uid
 
-            if (current_page === '1') {
+            if (current_page === '1' && button_show === '3') {
                 channels.forEach((channel, index) => {
                     d.push({
                         title: parseInt(channel_select) === index ? channel_prefix + channel.title : channel.title,
