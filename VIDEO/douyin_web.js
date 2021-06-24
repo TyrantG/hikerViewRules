@@ -439,16 +439,9 @@ const searchParse = _ => {
 const userParse = uid => {
     let d = [];
 
-    let not_sign_url = "https://www.douyin.com/aweme/v1/web/user/profile/other/?device_platform=webapp&aid=6383&channel=channel_pc_web&publish_video_strategy_type=2&source=channel_pc_web&sec_user_id="+uid+"&version_code=160100&version_name=16.1.0"
-    let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
-    let true_url = not_sign_url + "&_signature="+sign
-    let data_json = fetch(true_url, {
-        headers: {
-            "referer" : "https://www.douyin.com/"
-        }
-    })
-
-    setError(data_json)
+    let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
+    let data = html.match(/id="RENDER_DATA".*>(.*?)<\/script>/)[1]
+    setError(data)
 
     setResult(d);
 }
