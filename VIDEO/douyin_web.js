@@ -199,7 +199,7 @@ const baseParse = _ => {
         }
         case "3":
         case "4": {
-            const sec_uid = channels[channel_select].sec_uid
+            let sec_uid = channels[channel_select].sec_uid
 
             if (current_page === '1') {
                 channels.forEach((channel, index) => {
@@ -263,7 +263,7 @@ const baseParse = _ => {
         }
         case "5":
         case "6": {
-            const sec_uid = channels[channel_select].sec_uid
+            let sec_uid = channels[channel_select].sec_uid
 
             if (current_page === '1') {
                 channels.forEach((channel, index) => {
