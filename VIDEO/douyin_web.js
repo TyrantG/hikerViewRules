@@ -351,7 +351,7 @@ const searchParse = _ => {
     let input = MY_URL.split('##')[1].toString()
 
     d.push({
-        title: "搜索视频-关键词："+search_input,
+        title: "搜索视频-关键词："+input,
         url: $("hiker://empty##fypage").rule(params => {
             let current_page = MY_URL.split('##')[1].toString()
             let page = 20
@@ -370,7 +370,7 @@ const searchParse = _ => {
         }),
     })
     d.push({
-        title: "搜索用户-关键词："+search_input,
+        title: "搜索用户-关键词："+input,
         url: $("hiker://empty##fypage").rule(params => {
             let current_page = MY_URL.split('##')[1].toString()
             let page = 20
