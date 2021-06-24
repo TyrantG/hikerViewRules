@@ -7,12 +7,18 @@ const baseParse = _ => {
     let category = parseDomForArray(html, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
     let channels
 
-    let defaultChannels = [
-        {title: '法老_Pharaoh', sec_uid: 'MS4wLjABAAAAENcAhhKYCY80DmEdGk9gH2jlG42xW_5kRh33ynV8Ii4', avatar_url: 'https://p3.douyinpic.com/img/tos-cn-i-0813/833a09e8f9b14bcf87ee5a9c5435b825~c5_1080x1080.jpeg?from=116350172'},
-        {title: '马思唯马思唯', sec_uid: 'MS4wLjABAAAA508qPG3qA_ogo6wjQ9QTIEW_n_NBemKv8ujnHDxt-4OjNI0vC_rqs8x7I0EOoywP', avatar_url: 'https://p3.douyinpic.com/img/tos-cn-avt-0015/cd07db037361174d855251b2854d8b49~c5_1080x1080.jpeg?from=116350172'},
-        {title: '乃万NINEONE', sec_uid: 'MS4wLjABAAAAPqhPtBXeQ1E3eow8onFHRaZsfKXZnb9gLii-8QvhiJ4', avatar_url: 'https://p9.douyinpic.com/aweme/1080x1080/31afc0003a07472f77daf.jpeg?from=116350172'},
-    ]
-    channels = defaultChannels
+    if (fetch(channels_path)) {
+        let local_channels = fetch(channels_path)
+        channels = JSON.parse(local_channels)
+    } else {
+        let defaultChannels = [
+            {title: '法老_Pharaoh', sec_uid: 'MS4wLjABAAAAENcAhhKYCY80DmEdGk9gH2jlG42xW_5kRh33ynV8Ii4', avatar_url: 'https://p3.douyinpic.com/img/tos-cn-i-0813/833a09e8f9b14bcf87ee5a9c5435b825~c5_1080x1080.jpeg?from=116350172'},
+            {title: '马思唯马思唯', sec_uid: 'MS4wLjABAAAA508qPG3qA_ogo6wjQ9QTIEW_n_NBemKv8ujnHDxt-4OjNI0vC_rqs8x7I0EOoywP', avatar_url: 'https://p3.douyinpic.com/img/tos-cn-avt-0015/cd07db037361174d855251b2854d8b49~c5_1080x1080.jpeg?from=116350172'},
+            {title: '乃万NINEONE', sec_uid: 'MS4wLjABAAAAPqhPtBXeQ1E3eow8onFHRaZsfKXZnb9gLii-8QvhiJ4', avatar_url: 'https://p9.douyinpic.com/aweme/1080x1080/31afc0003a07472f77daf.jpeg?from=116350172'},
+        ]
+        writeFile(channels_path, JSON.stringify(defaultChannels))
+        channels = defaultChannels
+    }
 
     let cate_select = getVar("tyrantgenesis.douyin_web.cate_select", "")
     let channel_select = getVar("tyrantgenesis.douyin_web.channel_select", "0")
@@ -92,6 +98,7 @@ const baseParse = _ => {
             title: level_1_button_1_title,
             url: $("hiker://empty").lazyRule(_ => {
                 putVar("tyrantgenesis.douyin_web.button_show", "1")
+                putVar("tyrantgenesis.douyin_web.cate_select", "")
                 refreshPage(true)
                 return "hiker://empty"
             }),
