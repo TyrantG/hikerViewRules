@@ -440,7 +440,7 @@ const userParse = uid => {
     let d = [];
 
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
-    let data = html.match(/id="RENDER_DATA".*>(.*?)<\/script>/)[1]
+    let data = html.match(/id="RENDER_DATA".*>(.*?)<\/script><\/head>/)[1]
     setError(data)
 
     setResult(d);
