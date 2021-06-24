@@ -246,7 +246,7 @@ const baseParse = _ => {
                 })
             } else {
                 let data = JSON.parse(data_json)
-                let list = JSON.parse(data_json).aweme_list
+                let list = data.aweme_list
 
                 if (list && list.length > 0) {
                     putVar("tyrantgenesis.douyin_web.max_cursor", data.max_cursor.toString())
@@ -448,19 +448,20 @@ const userParse = uid => {
     let data_json = decodeURIComponent(regData)
     let data = JSON.parse(data_json)
     let userinfo = data.C_10.user.user
-    if (parseInt(page) === 1) max_cursor = html.match(/%22maxCursor%22%3A(.*?)%2C%22/)[1]
-
-    d.push({
-        title: userinfo.nickname,
-        pic_url: userinfo.avatarUrl,
-        url: MY_URL,
-        col_type: 'icon_2_round'
-    })
-    d.push({
-        title: "关注",
-        url: "",
-        col_type: 'text_2'
-    })
+    if (parseInt(page) === 1) {
+        max_cursor = data.C_10.post.maxCursor || ''
+        d.push({
+            title: userinfo.nickname,
+            pic_url: userinfo.avatarUrl,
+            url: MY_URL,
+            col_type: 'icon_2_round'
+        })
+        d.push({
+            title: "关注",
+            url: "",
+            col_type: 'text_2'
+        })
+    }
 
     let not_sign_url = "https://www.douyin.com/aweme/v1/web/aweme/post/?device_platform=webapp&aid=6383&channel=channel_pc_web&sec_user_id="+uid+"&max_cursor="+max_cursor+"&count=10&publish_video_strategy_type=2&version_code=160100&version_name=16.1.0"
     let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
@@ -478,7 +479,7 @@ const userParse = uid => {
         })
     } else {
         let data = JSON.parse(data_json)
-        let list = JSON.parse(data_json).aweme_list
+        let list = data.aweme_list
 
         if (list && list.length > 0) {
             putVar("tyrantgenesis.douyin_web.search_max_cursor", data.max_cursor.toString())
