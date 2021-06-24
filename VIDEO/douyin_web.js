@@ -271,6 +271,7 @@ const baseParse = _ => {
                         title: channel_prefix + channel.title,
                         pic_url: channel.avatar_url,
                         url: $("hiker://empty").lazyRule(params => {
+                            const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
                             if (params.button_show === '5') {
                                 params.channels.splice(params.index, 1)
                                 writeFile(channels_path, JSON.stringify(params.channels))
