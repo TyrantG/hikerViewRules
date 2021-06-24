@@ -202,6 +202,13 @@ const baseParse = _ => {
                     d.push({
                         title: parseInt(channel_select) === index ? channel_prefix + channel.title : channel.title,
                         pic_url: channel.avatar_url,
+                        url: $("hiker://empty").lazyRule(params => {
+                            putVar("tyrantgenesis.douyin_web.channel_select", params.index.toString())
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            index: index
+                        }),
                         col_type: 'icon_round_4'
                     })
                 })
