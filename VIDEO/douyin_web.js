@@ -345,3 +345,16 @@ const baseParse = _ => {
 
     setResult(d);
 }
+
+const searchParse = _ => {
+    let d = [];
+    let search_input = MY_URL.split('##')[1].toString()
+
+    d.push({
+        title: "搜索视频-关键词："+search_input
+    })
+    d.push({
+        title: "搜索用户-关键词："+search_input
+    })
+    setResult(d);
+}
