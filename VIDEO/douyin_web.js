@@ -123,7 +123,7 @@ const baseParse = _ => {
             title: level_1_button_4_title,
             url: $("hiker://empty").lazyRule(params => {
                 putVar("tyrantgenesis.douyin_web.button_show", params.level_1_button_4_show)
-                refreshPage(true)
+                refreshPage(false)
                 return "hiker://empty"
             }, {
                 level_1_button_4_show: level_1_button_4_show
@@ -143,7 +143,7 @@ const baseParse = _ => {
                     title: cate_select === '' ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
                     url: $("hiker://empty").lazyRule(_ => {
                         putVar("tyrantgenesis.douyin_web.cate_select", "")
-                        refreshPage(false)
+                        refreshPage(true)
                         return "hiker://empty"
                     }),
                     col_type: 'scroll_button',
@@ -156,7 +156,7 @@ const baseParse = _ => {
                             title: cate_select === cate_id.toString() ? '‘‘’’<strong><font color="red">'+parseDomForHtml(cate, 'a&&Text')+'</font></strong>' : parseDomForHtml(cate, 'a&&Text'),
                             url: $("hiker://empty").lazyRule(params => {
                                 putVar("tyrantgenesis.douyin_web.cate_select", params.cate_id.toString())
-                                refreshPage(false)
+                                refreshPage(true)
                                 return "hiker://empty"
                             }, {
                                 cate_id: cate_id
@@ -208,6 +208,7 @@ const baseParse = _ => {
                         pic_url: channel.avatar_url,
                         url: $("hiker://empty").lazyRule(params => {
                             putVar("tyrantgenesis.douyin_web.channel_select", params.index.toString())
+                            putVar("tyrantgenesis.douyin_web.max_cursor", "")
                             refreshPage(true)
                             return "hiker://empty"
                         }, {
@@ -259,7 +260,81 @@ const baseParse = _ => {
                 }
             }
             break
+        }
+        case "5":
+        case "6": {
+            const sec_uid = channels[channel_select].sec_uid
 
+            if (current_page === '1') {
+                channels.forEach((channel, index) => {
+                    d.push({
+                        title: channel_prefix + channel.title,
+                        pic_url: channel.avatar_url,
+                        url: $("hiker://empty").lazyRule(params => {
+                            if (params.button_show === '5') {
+                                params.channels.splice(params.index, 1)
+                                writeFile(channels_path, JSON.stringify(params.channels))
+                            } else {
+                                let current = params.channels[params.index]
+                                params.channels.splice(params.index, 1)
+                                params.channels.unshift(current)
+                                writeFile(channels_path, JSON.stringify(params.channels))
+                            }
+                            putVar("tyrantgenesis.douyin_web.channel_select", "0")
+                            putVar("tyrantgenesis.douyin_web.max_cursor", "")
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            channels: channels,
+                            index: index,
+                            button_show: button_show
+                        }),
+                        col_type: 'icon_round_4'
+                    })
+                })
+
+                d.push({
+                    col_type:"blank_block"
+                })
+
+                let web_url = "https://www.douyin.com/user/"+sec_uid
+                let html = fetch(web_url, {headers:{"User-Agent": PC_UA}})
+                max_cursor = html.match(/%22maxCursor%22%3A(.*?)%2C%22/)[1]
+            }
+
+            let not_sign_url = "https://www.douyin.com/aweme/v1/web/aweme/post/?device_platform=webapp&aid=6383&channel=channel_pc_web&sec_user_id="+sec_uid+"&max_cursor="+max_cursor+"&count=10&publish_video_strategy_type=2&version_code=160100&version_name=16.1.0"
+            let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
+            let true_url = not_sign_url + "&_signature="+sign
+            let data_json = fetch(true_url, {
+                headers: {
+                    "referer" : "https://www.douyin.com/"
+                }
+            })
+
+            if (data_json === 'Need Verifying') {
+                d.push({
+                    title: 'signature 获取失败，待修复',
+                    col_type: "long_text",
+                })
+            } else {
+                let data = JSON.parse(data_json)
+                let list = JSON.parse(data_json).aweme_list
+
+                if (list && list.length > 0) {
+                    putVar("tyrantgenesis.douyin_web.max_cursor", data.max_cursor.toString())
+
+                    list.forEach(item => {
+                        d.push({
+                            title: item.desc,
+                            pic_url: item.video.cover.url_list.shift(),
+                            desc: '',
+                            url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
+                            col_type: 'movie_2',
+                        })
+                    })
+                }
+            }
+            break
         }
     }
 
