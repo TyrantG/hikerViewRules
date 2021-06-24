@@ -99,6 +99,7 @@ const baseParse = _ => {
             url: $("hiker://empty").lazyRule(_ => {
                 putVar("tyrantgenesis.douyin_web.button_show", "1")
                 putVar("tyrantgenesis.douyin_web.cate_select", "")
+                putVar("tyrantgenesis.douyin_web.max_cursor", "")
                 refreshPage(true)
                 return "hiker://empty"
             }),
@@ -112,6 +113,7 @@ const baseParse = _ => {
             title: level_1_button_3_title,
             url: $("hiker://empty").lazyRule(params => {
                 putVar("tyrantgenesis.douyin_web.button_show", params.level_1_button_3_show)
+                putVar("tyrantgenesis.douyin_web.max_cursor", "")
                 refreshPage(true)
                 return "hiker://empty"
             }, {
@@ -123,6 +125,7 @@ const baseParse = _ => {
             title: level_1_button_4_title,
             url: $("hiker://empty").lazyRule(params => {
                 putVar("tyrantgenesis.douyin_web.button_show", params.level_1_button_4_show)
+                putVar("tyrantgenesis.douyin_web.max_cursor", "")
                 refreshPage(false)
                 return "hiker://empty"
             }, {
