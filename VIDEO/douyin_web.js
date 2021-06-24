@@ -173,7 +173,7 @@ const baseParse = _ => {
                         col_type: "long_text",
                     })
                 } else {
-                    let list = JSON.parse(data_json).aweme_list
+                    let list = JSON.parse(data_json)
                     setError(list)
                     /*list.forEach(item => {
                         d.push({
