@@ -173,17 +173,18 @@ const baseParse = _ => {
                         col_type: "long_text",
                     })
                 } else {
-                    let list = JSON.parse(data_json)
-                    setError(list)
-                    /*list.forEach(item => {
-                        d.push({
-                            title: item.desc,
-                            pic_url: item.video.cover.url_list.shift(),
-                            desc: '',
-                            url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
-                            col_type: 'movie_2',
+                    let list = JSON.parse(data_json).aweme_list
+                    if (list) {
+                        list.forEach(item => {
+                            d.push({
+                                title: item.desc,
+                                pic_url: item.video.cover.url_list.shift(),
+                                desc: '',
+                                url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
+                                col_type: 'movie_2',
+                            })
                         })
-                    })*/
+                    }
                 }
             }
 
