@@ -33,7 +33,6 @@ const baseParse = _ => {
     })
 
     const not_sign_url = "https://www.douyin.com/aweme/v1/web/channel/feed/?device_platform=webapp&aid=6383&channel=channel_pc_web&tag_id="+channel_select+"&count=10&version_code=160100&version_name=16.1.0"
-    eval()
 
     setResult(d);
 }

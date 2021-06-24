@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Title</title>
 </head>
 <body>
-$END$
+<script src="./js/_signature.js"></script>
+<script>
+  const channel_select = fy_bridge_app.getVar("tyrantgenesis.douyin_web.channel_select", "")
+  const not_sign_url = "https://www.douyin.com/aweme/v1/web/channel/feed/?device_platform=webapp&aid=6383&channel=channel_pc_web&tag_id="+channel_select+"&count=10&version_code=160100&version_name=16.1.0"
+  const signature = window.byted_acrawler.sign({url: not_sign_url})
+  alert(signature)
+</script>
 </body>
 </html>
