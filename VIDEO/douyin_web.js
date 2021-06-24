@@ -132,9 +132,9 @@ const baseParse = _ => {
         })
     }
 
-    /*d.push({
+    d.push({
         col_type:"blank_block"
-    })*/
+    })
 
     switch (button_show) {
         case "1": {
