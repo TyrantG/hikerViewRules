@@ -497,3 +497,9 @@ const userParse = userinfo => {
 
     setResult(d);
 }
+
+const videoParse = _ => {
+    let d = [];
+
+    setResult(d);
+}
