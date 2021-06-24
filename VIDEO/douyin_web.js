@@ -102,7 +102,7 @@ const baseParse = _ => {
                 refreshPage(true)
                 return "hiker://empty"
             }),
-            col_type: 'text_3',
+            col_type: 'scroll_button',
         })
         /*d.push({
             title: level_1_button_2_title,
@@ -117,7 +117,7 @@ const baseParse = _ => {
             }, {
                 level_1_button_3_show: level_1_button_3_show
             }),
-            col_type: 'text_3',
+            col_type: 'scroll_button',
         })
         d.push({
             title: level_1_button_4_title,
@@ -128,7 +128,7 @@ const baseParse = _ => {
             }, {
                 level_1_button_4_show: level_1_button_4_show
             }),
-            col_type: 'text_3',
+            col_type: 'scroll_button',
         })
     }
 
