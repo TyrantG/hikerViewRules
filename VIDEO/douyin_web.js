@@ -348,13 +348,45 @@ const baseParse = _ => {
 
 const searchParse = _ => {
     let d = [];
-    let search_input = MY_URL.split('##')[1].toString()
+    let input = MY_URL.split('##')[1].toString()
 
     d.push({
-        title: "搜索视频-关键词："+search_input
+        title: "搜索视频-关键词："+search_input,
+        url: $("hiker://empty##fypage").rule(params => {
+            let current_page = MY_URL.split('##')[1].toString()
+            let page = 20
+            let offset = (current_page - 1) * page
+            let not_sign_url = "https://www.douyin.com/aweme/v1/web/search/item/?device_platform=webapp&aid=6383&channel=channel_pc_web&search_channel=aweme_video_web&sort_type=0&publish_time=0&keyword="+params.input+"&search_source=normal_search&query_correct_type=1&is_filter_search=0&offset="+offset+"&count="+page+"&search_id=2021062422293301020208913049074871&version_code=160100&version_name=16.1.0"
+            let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
+            let true_url = not_sign_url + "&_signature="+sign
+            let data_json = fetch(true_url, {
+                headers: {
+                    "referer" : "https://www.douyin.com/"
+                }
+            })
+            setError(data_json)
+        }, {
+            input: input
+        }),
     })
     d.push({
-        title: "搜索用户-关键词："+search_input
+        title: "搜索用户-关键词："+search_input,
+        url: $("hiker://empty##fypage").rule(params => {
+            let current_page = MY_URL.split('##')[1].toString()
+            let page = 20
+            let offset = (current_page - 1) * page
+            let not_sign_url = "https://www.douyin.com/aweme/v1/web/discover/search/?device_platform=webapp&aid=6383&channel=channel_pc_web&search_channel=aweme_user_web&keyword="+params.input+"&search_source=normal_search&query_correct_type=1&is_filter_search=0&offset="+offset+"&count="+page+"&version_code=160100&version_name=16.1.0"
+            let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
+            let true_url = not_sign_url + "&_signature="+sign
+            let data_json = fetch(true_url, {
+                headers: {
+                    "referer" : "https://www.douyin.com/"
+                }
+            })
+            setError(data_json)
+        }, {
+            input: input
+        }),
     })
     setResult(d);
 }
