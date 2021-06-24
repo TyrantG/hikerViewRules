@@ -24,7 +24,8 @@ const baseParse = _ => {
         level_1_button_3_title = '',
         level_1_button_4_title = '',
         level_1_button_3_show = '',
-        level_1_button_4_show = ''
+        level_1_button_4_show = '',
+        channel_prefix = ''
 
     switch (button_show) {
         case "1": {
@@ -34,6 +35,7 @@ const baseParse = _ => {
             level_1_button_4_title = '取消关注'
             level_1_button_3_show = '3'
             level_1_button_4_show = '5'
+            channel_prefix = ''
             break
         }
         /*case "2": {
@@ -50,6 +52,7 @@ const baseParse = _ => {
             level_1_button_4_title = '取消关注'
             level_1_button_3_show = '4'
             level_1_button_4_show = '5'
+            channel_prefix = '✓'
             break
         }
         case "4": {
@@ -59,6 +62,7 @@ const baseParse = _ => {
             level_1_button_4_title = '取消关注'
             level_1_button_3_show = '3'
             level_1_button_4_show = '5'
+            channel_prefix = ''
             break
         }
         case "5": {
@@ -68,6 +72,7 @@ const baseParse = _ => {
             level_1_button_4_title = '‘‘’’<strong><font color="red">取消关注</font></strong>'
             level_1_button_3_show = '3'
             level_1_button_4_show = '6'
+            channel_prefix = '❌'
             break
         }
         case "6": {
@@ -77,6 +82,7 @@ const baseParse = _ => {
             level_1_button_4_title = '‘‘’’<strong><font color="red">置顶关注</font></strong>'
             level_1_button_3_show = '3'
             level_1_button_4_show = '5'
+            channel_prefix = '🔝'
             break
         }
     }
@@ -189,13 +195,12 @@ const baseParse = _ => {
         }
         case "3":
         case "4": {
-
             const sec_uid = channels[channel_select].sec_uid
 
             if (current_page === '1') {
-                channels.forEach(channel => {
+                channels.forEach((channel, index) => {
                     d.push({
-                        title: channel.title,
+                        title: parseInt(channel_select) === index ? channel_prefix + channel.title : channel.title,
                         pic_url: channel.avatar_url,
                         col_type: 'icon_round_4'
                     })
