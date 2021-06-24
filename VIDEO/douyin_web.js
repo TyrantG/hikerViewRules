@@ -443,12 +443,13 @@ const userParse = uid => {
     let page = MY_URL.split('##')[1]
     let max_cursor = getVar("tyrantgenesis.douyin_web.search_max_cursor", "")
 
-    let html = fetch(user_url, {headers:{"User-Agent": PC_UA}})
-    let regData = html.match(/id="RENDER_DATA".*>(.*?)<\/script><\/head>/)[1]
-    let data_json = decodeURIComponent(regData)
-    let data = JSON.parse(data_json)
-    let userinfo = data.C_10.user.user
     if (parseInt(page) === 1) {
+        let html = fetch(user_url, {headers:{"User-Agent": PC_UA}})
+        let regData = html.match(/id="RENDER_DATA".*>(.*?)<\/script><\/head>/)[1]
+        let data_json = decodeURIComponent(regData)
+        let data = JSON.parse(data_json)
+        let userinfo = data.C_10.user.user
+
         max_cursor = data.C_10.post.maxCursor || ''
         d.push({
             title: userinfo.nickname,
