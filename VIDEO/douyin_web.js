@@ -6,6 +6,12 @@ const baseParse = _ => {
     const channel_select = getVar("tyrantgenesis.douyin_web.channel_select", "")
 
     d.push({
+        desc: '1',
+        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/_signature.html?time='+(new Date()).getTime(),
+        col_type:"x5_webview_single"
+    })
+
+    d.push({
         title: channel_select === '' ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
         url: $("hiker://empty").lazyRule(_ => {
             putVar("tyrantgenesis.douyin_web.channel_select", "")
