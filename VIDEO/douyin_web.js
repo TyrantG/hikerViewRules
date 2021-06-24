@@ -8,6 +8,7 @@ const baseParse = _ => {
     let channels
 
     let defaultChannels = [
+        {title: '法老_Pharaoh', sec_uid: 'MS4wLjABAAAAENcAhhKYCY80DmEdGk9gH2jlG42xW_5kRh33ynV8Ii4', avatar_url: 'https://p3.douyinpic.com/img/tos-cn-i-0813/833a09e8f9b14bcf87ee5a9c5435b825~c5_1080x1080.jpeg?from=116350172'},
         {title: '乃万NINEONE', sec_uid: 'MS4wLjABAAAAPqhPtBXeQ1E3eow8onFHRaZsfKXZnb9gLii-8QvhiJ4', avatar_url: 'https://p9.douyinpic.com/aweme/1080x1080/31afc0003a07472f77daf.jpeg?from=116350172'},
     ]
     channels = defaultChannels
@@ -176,12 +177,12 @@ const baseParse = _ => {
                         })
                     })
                 }
-            } else if (current_page === '2') {
+            }/* else if (current_page === '2') {
                 d.push({
                     title: '没有更多内容了~',
                     col_type: 'text_center_1',
                 })
-            }
+            }*/
 
             break
         }
