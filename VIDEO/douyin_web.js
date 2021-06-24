@@ -398,9 +398,6 @@ const searchParse = _ => {
             let page = 18
             let offset = (current_page - 1) * page
             let not_sign_url = "https://www.douyin.com/aweme/v1/web/discover/search/?device_platform=webapp&aid=6383&channel=channel_pc_web&search_channel=aweme_user_web&keyword="+params.input+"&search_source=normal_search&query_correct_type=1&is_filter_search=0&offset="+offset+"&count="+page+"&version_code=160100&version_name=16.1.0"
-            if (page > 2) {
-                setError(not_sign_url)
-            }
             let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
             let true_url = not_sign_url + "&_signature="+sign
             let data_json = fetch(true_url, {
@@ -422,7 +419,10 @@ const searchParse = _ => {
                             title: userinfo.nickname,
                             pic_url: userinfo.avatar_thumb.url_list.shift(),
                             desc: userinfo.signature,
-                            url: '',
+                            url: $("https://www.douyin.com/user/"+userinfo.sec_uid).rule(userinfo => {
+                                eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
+                                userParse(userinfo.sec_uid)
+                            }, userinfo),
                             col_type: 'movie_3',
                         })
                     })
@@ -433,5 +433,22 @@ const searchParse = _ => {
             input: input
         }),
     })
+    setResult(d);
+}
+
+const userParse = uid => {
+    let d = [];
+
+    let not_sign_url = "https://www.douyin.com/aweme/v1/web/user/profile/other/?device_platform=webapp&aid=6383&channel=channel_pc_web&publish_video_strategy_type=2&source=channel_pc_web&sec_user_id="+uid+"&version_code=160100&version_name=16.1.0"
+    let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
+    let true_url = not_sign_url + "&_signature="+sign
+    let data_json = fetch(true_url, {
+        headers: {
+            "referer" : "https://www.douyin.com/"
+        }
+    })
+
+    setError(data_json)
+
     setResult(d);
 }
