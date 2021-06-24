@@ -419,7 +419,7 @@ const searchParse = _ => {
                             title: userinfo.nickname,
                             pic_url: userinfo.avatar_thumb.url_list.shift(),
                             desc: userinfo.signature,
-                            url: $("https://www.douyin.com/user/"+userinfo.sec_uid).rule(userinfo => {
+                            url: $("https://www.douyin.com/user/"+userinfo.sec_uid+'##fypage').rule(userinfo => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
                                 userParse(userinfo.sec_uid)
                             }, userinfo),
@@ -438,10 +438,62 @@ const searchParse = _ => {
 
 const userParse = uid => {
     let d = [];
+    let user_url = MY_URL.split('##')[0]
+    let page = MY_URL.split('##')[1]
+    let max_cursor = getVar("tyrantgenesis.douyin_web.search_max_cursor", "")
 
-    let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
-    let data = html.match(/id="RENDER_DATA".*>(.*?)<\/script><\/head>/)[1]
-    setError(decodeURIComponent(data))
+    let html = fetch(user_url, {headers:{"User-Agent": PC_UA}})
+    let regData = html.match(/id="RENDER_DATA".*>(.*?)<\/script><\/head>/)[1]
+    let data_json = decodeURIComponent(regData)
+    let data = JSON.parse(data_json)
+    let userinfo = data.C_10.user.user
+    if (parseInt(page) === 1) max_cursor = html.match(/%22maxCursor%22%3A(.*?)%2C%22/)[1]
+
+    d.push({
+        title: userinfo.nickname,
+        pic_url: userinfo.avatarUrl,
+        url: MY_URL,
+        col_type: 'icon_2_round'
+    })
+    d.push({
+        title: "关注",
+        url: "",
+        col_type: 'text_2'
+    })
+
+    let not_sign_url = "https://www.douyin.com/aweme/v1/web/aweme/post/?device_platform=webapp&aid=6383&channel=channel_pc_web&sec_user_id="+uid+"&max_cursor="+max_cursor+"&count=10&publish_video_strategy_type=2&version_code=160100&version_name=16.1.0"
+    let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
+    let true_url = not_sign_url + "&_signature="+sign
+    data_json = fetch(true_url, {
+        headers: {
+            "referer" : "https://www.douyin.com/"
+        }
+    })
+
+    if (data_json === 'Need Verifying') {
+        d.push({
+            title: 'signature 获取失败，待修复',
+            col_type: "long_text",
+        })
+    } else {
+        let data = JSON.parse(data_json)
+        let list = JSON.parse(data_json).aweme_list
+
+        if (list && list.length > 0) {
+            putVar("tyrantgenesis.douyin_web.search_max_cursor", data.max_cursor.toString())
+
+            list.forEach(item => {
+                d.push({
+                    title: item.desc,
+                    pic_url: item.video.cover.url_list.shift(),
+                    desc: '',
+                    url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
+                    col_type: 'movie_2',
+                })
+            })
+        }
+    }
+
 
     setResult(d);
 }
