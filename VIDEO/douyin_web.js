@@ -141,24 +141,23 @@ const baseParse = _ => {
                     }),
                     col_type: 'scroll_button',
                 })
-                setError(category)
-                // category.forEach(cate => {
-                //     let href = parseDomForHtml(cate, 'a&&href')
-                //     let cate_id = href.split('/').pop()
-                //     if (/^[\d]+$/.test(cate_id)) {
-                //         d.push({
-                //             title: cate_select === cate_id.toString() ? '‘‘’’<strong><font color="red">'+parseDomForHtml(cate, 'a&&Text')+'</font></strong>' : parseDomForHtml(cate, 'a&&Text'),
-                //             url: $("hiker://empty").lazyRule(params => {
-                //                 putVar("tyrantgenesis.douyin_web.cate_select", params.cate_id.toString())
-                //                 refreshPage(false)
-                //                 return "hiker://empty"
-                //             }, {
-                //                 cate_id: cate_id
-                //             }),
-                //             col_type: 'scroll_button',
-                //         })
-                //     }
-                // })
+                category.forEach(cate => {
+                    let href = parseDomForHtml(cate, 'a&&href')
+                    let cate_id = href.split('/').pop()
+                    if (/^[\d]+$/.test(cate_id)) {
+                        d.push({
+                            title: cate_select === cate_id.toString() ? '‘‘’’<strong><font color="red">'+parseDomForHtml(cate, 'a&&Text')+'</font></strong>' : parseDomForHtml(cate, 'a&&Text'),
+                            url: $("hiker://empty").lazyRule(params => {
+                                putVar("tyrantgenesis.douyin_web.cate_select", params.cate_id.toString())
+                                refreshPage(false)
+                                return "hiker://empty"
+                            }, {
+                                cate_id: cate_id
+                            }),
+                            col_type: 'scroll_button',
+                        })
+                    }
+                })
                 let not_sign_url = "https://www.douyin.com/aweme/v1/web/channel/feed/?device_platform=webapp&aid=6383&channel=channel_pc_web&tag_id="+cate_select+"&count=20&version_code=160100&version_name=16.1.0"
                 let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
                 let true_url = not_sign_url + "&_signature="+sign
