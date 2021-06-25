@@ -148,7 +148,7 @@ const baseParse = _ => {
             url: $("hiker://empty").rule(_ => {
                 let d = []
                 d.push({
-                    title: '根据抖音接口限制，登陆后才能享受更多搜索（即搜索的翻页）<br />需要解锁这个功能<del>点下方登录扫码登录</del>到网页版登陆后查找cookie - passport_csrf_token并将值填入下方输入框',
+                    title: '根据抖音接口限制，登陆后才能享受更多搜索（即搜索的翻页）<br />需要解锁这个功能<del>点下方登录扫码登录</del>到网页版登陆后查找cookie - sessionid并将值填入下方输入框',
                     col_type: 'rich_text',
                 })
                 d.push({
@@ -187,8 +187,8 @@ const baseParse = _ => {
                 })
                 d.push({
                     title: "确认",
-                    desc: "填写 passport_csrf_token",
-                    url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'));return saveCookie(params.input)}, {input: input.trim()}) : 'toast://请填写passport_csrf_token'",
+                    desc: "填写 sessionid",
+                    url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'));return saveCookie(params.input)}, {input: input.trim()}) : 'toast://请填写sessionid'",
                     col_type: "input"
                 })
                 setResult(d);
@@ -699,10 +699,10 @@ const videoParse = aweme => {
     setResult(d);
 }
 
-const saveCookie = token => {
+const saveCookie = sessionid => {
     let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
     let first_cookie = home_cookie.split(';').shift()
-    let new_cookie = 'passport_csrf_token='+token
+    let new_cookie = 'sessionid='+sessionid
 
     putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+new_cookie)
     setError(first_cookie+';'+new_cookie)
