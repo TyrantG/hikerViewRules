@@ -1,5 +1,5 @@
 const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
-putVar("tyrantgenesis.douyin_web.home_cookie", "")
+
 const baseParse = _ => {
     let d = [], category
     let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
