@@ -156,9 +156,9 @@ const baseParse = _ => {
                         const login_url = "https://sso.douyin.com/get_qrcode/?service=https%3A%2F%2Fwww.douyin.com&need_logo=false&aid=6383"
                         let data_json = fetch(login_url, {headers:{"User-Agent": PC_UA}, withHeaders: true})
                         let data = JSON.parse(data_json)
-                        home_cookie += '; '+data.headers["set-cookie"][0]
-                        putVar("tyrantgenesis.douyin_web.home_cookie", home_cookie)
-                        setError(data)
+                        let first_cookie = home_cookie.split(';').shift()
+                        putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+data.headers["set-cookie"].join(';'))
+                        setError(data.body)
                         /*d.push({
                             pic_url: base64_title+data.body.data.qrcode,
                             url: base64_title+data.body.data.qrcode,
