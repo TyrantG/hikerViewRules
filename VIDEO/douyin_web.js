@@ -710,12 +710,20 @@ const videoParse = aweme => {
         })
         d.push({
             title: video_other_button === '1' ? '‘‘’’<strong><font color="red">推荐视频</font></strong>' : '推荐视频',
-            url: '',
+            url: $('hiker://empty').lazyRule(_ => {
+                putVar("tyrantgenesis.douyin_web.video_other_button", "1")
+                refreshPage(false)
+                return "hiker://empty"
+            }),
             col_type: 'text_2'
         })
         d.push({
             title: video_other_button === '2' ? '‘‘’’’<strong><font color="red">评论</font></strong>' : '评论',
-            url: '',
+            url: $('hiker://empty').lazyRule(_ => {
+                putVar("tyrantgenesis.douyin_web.video_other_button", "2")
+                refreshPage(false)
+                return "hiker://empty"
+            }),
             col_type: 'text_2'
         })
     }
