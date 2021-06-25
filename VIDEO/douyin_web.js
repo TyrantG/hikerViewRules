@@ -412,7 +412,6 @@ const searchParse = _ => {
             let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
             let d = [];
             let current_page = parseInt(MY_URL.split('##')[1])
-            if (current_page > 1) setError(current_page)
             let page = 30
             let offset = (current_page - 1) * page
             let not_sign_url = "https://www.douyin.com/aweme/v1/web/discover/search/?device_platform=webapp&aid=6383&channel=channel_pc_web&search_channel=aweme_user_web&keyword="+encodeURIComponent(params.input)+"&search_source=normal_search&query_correct_type=1&is_filter_search=0&offset="+offset+"&count="+page+"&version_code=160100&version_name=16.1.0"
