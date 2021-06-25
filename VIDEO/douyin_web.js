@@ -256,6 +256,7 @@ const baseParse = _ => {
                             pic_url: item.video.cover.url_list.shift(),
                             desc: item.author.nickname,
                             url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(item => {
+                                putVar("tyrantgenesis.douyin_web.video_other_button", '0')
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
                                 videoParse(item)
                             }, item),
@@ -451,6 +452,7 @@ const searchParse = _ => {
                             pic_url: aweme.video.cover.url_list.shift(),
                             desc: aweme.author.nickname,
                             url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(aweme => {
+                                putVar("tyrantgenesis.douyin_web.video_other_button", '0')
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
                                 videoParse(aweme)
                             }, aweme),
@@ -608,6 +610,7 @@ const userParse = userinfo => {
                     pic_url: item.video.cover.url_list.shift(),
                     // desc: '',
                     url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(aweme => {
+                        putVar("tyrantgenesis.douyin_web.video_other_button", '0')
                         eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
                         videoParse(aweme)
                     }, item),
@@ -705,7 +708,6 @@ const videoParse = aweme => {
         d.push({
             col_type: 'line_blank'
         })
-    } else {
         d.push({
             title: video_other_button === '1' ? '‘‘’’<strong><font color="red">推荐视频</font></strong>' : '推荐视频',
             url: '',
@@ -716,49 +718,51 @@ const videoParse = aweme => {
             url: '',
             col_type: 'text_2'
         })
-
-        if (video_other_button === '1') {
-            let not_sign_url = "https://www.douyin.com/aweme/v1/web/aweme/related/?device_platform=webapp&aid=6383&channel=channel_pc_web&aweme_id="+aweme.aweme_id+"&count=20&version_code=160100&version_name=16.1.0"
-            let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
-            let true_url = not_sign_url + "&_signature="+sign
-
-            let data_json = fetch(true_url, {
-                headers: {
-                    "referer" : "https://www.douyin.com/",
-                    "cookie": home_cookie,
-                }
-            })
-
-            if (data_json === 'Need Verifying') {
-                d.push({
-                    title: 'signature 获取失败，待修复',
-                    col_type: "long_text",
-                })
-            } else {
-                let data = JSON.parse(data_json)
-                let list = data.aweme_list
-
-                if (list && list.length > 0) {
-                    // putVar("tyrantgenesis.douyin_web.search_max_cursor", data.max_cursor.toString())
-
-                    list.forEach(item => {
-                        d.push({
-                            title: item.desc,
-                            pic_url: item.video.cover.url_list.shift(),
-                            // desc: '',
-                            url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(aweme => {
-                                eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
-                                videoParse(aweme)
-                            }, item),
-                            col_type: 'movie_2',
-                        })
-                    })
-                }
-            }
-        } else if (video_other_button === '2') {
-
-        }
     }
+
+    if (video_other_button === '1') {
+        let not_sign_url = "https://www.douyin.com/aweme/v1/web/aweme/related/?device_platform=webapp&aid=6383&channel=channel_pc_web&aweme_id="+aweme.aweme_id+"&count=20&version_code=160100&version_name=16.1.0"
+        let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
+        let true_url = not_sign_url + "&_signature="+sign
+
+        let data_json = fetch(true_url, {
+            headers: {
+                "referer" : "https://www.douyin.com/",
+                "cookie": home_cookie,
+            }
+        })
+
+        if (data_json === 'Need Verifying') {
+            d.push({
+                title: 'signature 获取失败，待修复',
+                col_type: "long_text",
+            })
+        } else {
+            let data = JSON.parse(data_json)
+            let list = data.aweme_list
+
+            if (list && list.length > 0) {
+                // putVar("tyrantgenesis.douyin_web.search_max_cursor", data.max_cursor.toString())
+
+                list.forEach(item => {
+                    d.push({
+                        title: item.desc,
+                        pic_url: item.video.cover.url_list.shift(),
+                        // desc: '',
+                        url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(aweme => {
+                            putVar("tyrantgenesis.douyin_web.video_other_button", '0')
+                            eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
+                            videoParse(aweme)
+                        }, item),
+                        col_type: 'movie_2',
+                    })
+                })
+            }
+        }
+    } else if (video_other_button === '2') {
+
+    }
+
 
     setResult(d);
 }
