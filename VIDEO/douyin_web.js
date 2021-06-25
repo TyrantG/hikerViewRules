@@ -159,11 +159,11 @@ const baseParse = _ => {
                         home_cookie += '; '+data.headers["set-cookie"][0]
                         putVar("tyrantgenesis.douyin_web.home_cookie", home_cookie)
                         setError(data)
-                        d.push({
+                        /*d.push({
                             pic_url: base64_title+data.body.data.qrcode,
                             url: base64_title+data.body.data.qrcode,
                             col_type: 'pic_1_full',
-                        })
+                        })*/
                         setResult(d);
                     }),
                     col_type: "text_1",
