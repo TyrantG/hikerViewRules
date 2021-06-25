@@ -686,7 +686,7 @@ const videoParse = aweme => {
     if (aweme.video.play_addr) {
         aweme.video.play_addr.url_list.forEach((url, index) => {
             d.push({
-                title: "官方线路"+(parseInt(index)+1).toString(),
+                title: "线路"+(parseInt(index)+1).toString(),
                 url: url+"#isVideo=true#",
                 col_type: "text_4"
             })
@@ -694,7 +694,7 @@ const videoParse = aweme => {
     } else if (aweme.video.play_addr_lowbr) {
         aweme.video.play_addr_lowbr.url_list.forEach((url, index) => {
             d.push({
-                title: "官方线路"+(index+1),
+                title: "线路"+(index+1),
                 url: url+"#isVideo=true#",
                 col_type: "text_4"
             })
