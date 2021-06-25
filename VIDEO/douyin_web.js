@@ -340,7 +340,15 @@ const baseParse = _ => {
             }
             let count = 20
             let offset = (parseInt(current_page) - 1) * count
-            let not_sign_url = "https://live.douyin.com/webcast/web/partition/detail/room/?aid=6383&live_id=1&device_platform=web&language=zh-CN&count="+count+"&offset="+offset+"&partition=720&partition_type=1"
+            let partition = 720
+
+            if (live_2nd_cate !== '') {
+                partition = live_2nd_cate
+            } else if (live_1st_cate !== '') {
+                partition = live_1st_cate
+            }
+
+            let not_sign_url = "https://live.douyin.com/webcast/web/partition/detail/room/?aid=6383&live_id=1&device_platform=web&language=zh-CN&count="+count+"&offset="+offset+"&partition="+partition+"&partition_type=1"
             let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
             let true_url = not_sign_url + "&_signature="+sign
             let data_json = fetch(true_url, {
