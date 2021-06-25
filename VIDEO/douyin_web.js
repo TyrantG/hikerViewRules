@@ -3,7 +3,8 @@ const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
 const baseParse = _ => {
     let d = [];
     let html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}, withHeaders: true})
-    setError(JSON.parse(html))
+    html = JSON.parse(html)
+    setError(html.headers)
     let current_page = MY_URL.split('##')[1].toString()
     let category = parseDomForArray(html.body, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
     let channels
