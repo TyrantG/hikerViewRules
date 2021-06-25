@@ -628,6 +628,7 @@ const userParse = userinfo => {
 
 const videoParse = aweme => {
     let d = [];
+    let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
     let channels_json = request(channels_path)
     let channels = JSON.parse(channels_json)
     let video_other_button = getVar("tyrantgenesis.douyin_web.video_other_button", "1") // 1:推荐视频,2:评论
@@ -757,8 +758,6 @@ const videoParse = aweme => {
 
     }
 
-
-
     setResult(d);
 }
 
@@ -768,7 +767,7 @@ const saveCookie = sessionid => {
     let new_cookie = 'sessionid='+sessionid
 
     putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+new_cookie)
-    setError(first_cookie+';'+new_cookie)
-    // refreshPage(true)
+
+    refreshPage(true)
     return "toast://设置成功"
 }
