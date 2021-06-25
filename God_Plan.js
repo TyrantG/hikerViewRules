@@ -170,7 +170,6 @@ const youtube = _ => {
 
 const douyin_web = _ => {
   godWriteFile(BASE_URL+"VIDEO/douyin_web.js?t="+time, 'hiker://files/TyrantG/VIDEO/douyin_web.js')
-  // godWriteFile(BASE_URL+"public/_signature.html", 'hiker://files/TyrantG/public/_signature.html')
 }
 
 /* Customize Function */
