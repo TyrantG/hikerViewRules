@@ -610,15 +610,14 @@ const videoParse = aweme => {
         title: aweme.author.nickname,
         pic_url: aweme.author.avatar_thumb.url_list.shift(),
         desc: aweme.author.signature,
-        url: "",
-        col_type: 'icon_2_round',
-    })
-    d.push({
-        title: "关注",
         url: $("https://www.douyin.com/user/"+aweme.author.sec_uid+'##fypage').rule(userinfo => {
             eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
             userParse(userinfo)
         }, aweme.author),
+        col_type: 'icon_2_round',
+    })
+    d.push({
+        title: "关注",
         col_type: 'text_2'
     })
 
