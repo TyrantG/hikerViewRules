@@ -34,6 +34,7 @@ const baseParse = _ => {
     let channel_select = getVar("tyrantgenesis.douyin_web.channel_select", "0")
     let button_show = getVar("tyrantgenesis.douyin_web.button_show", "1") // 1:热门,2:直播,3:关注,4:收起,5:取消,6:置顶
     let max_cursor = getVar("tyrantgenesis.douyin_web.max_cursor", "")
+    putVar("tyrantgenesis.douyin_web.video_other_button", "0")
 
     let level_1_button_1_title = '',
         // level_1_button_2_title = '',
@@ -256,7 +257,6 @@ const baseParse = _ => {
                             pic_url: item.video.cover.url_list.shift(),
                             desc: item.author.nickname,
                             url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(item => {
-                                putVar("tyrantgenesis.douyin_web.video_other_button", '0')
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
                                 videoParse(item)
                             }, item),
@@ -452,7 +452,6 @@ const searchParse = _ => {
                             pic_url: aweme.video.cover.url_list.shift(),
                             desc: aweme.author.nickname,
                             url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(aweme => {
-                                putVar("tyrantgenesis.douyin_web.video_other_button", '0')
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
                                 videoParse(aweme)
                             }, aweme),
@@ -610,7 +609,6 @@ const userParse = userinfo => {
                     pic_url: item.video.cover.url_list.shift(),
                     // desc: '',
                     url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(aweme => {
-                        putVar("tyrantgenesis.douyin_web.video_other_button", '0')
                         eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
                         videoParse(aweme)
                     }, item),
@@ -760,7 +758,6 @@ const videoParse = aweme => {
                         pic_url: item.video.cover.url_list.shift(),
                         // desc: '',
                         url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(aweme => {
-                            putVar("tyrantgenesis.douyin_web.video_other_button", '0')
                             eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
                             videoParse(aweme)
                         }, item),
