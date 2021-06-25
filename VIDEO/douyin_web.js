@@ -631,7 +631,7 @@ const videoParse = aweme => {
     let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
     let channels_json = request(channels_path)
     let channels = JSON.parse(channels_json)
-    let video_other_button = getVar("tyrantgenesis.douyin_web.video_other_button", "1") // 1:推荐视频,2:评论
+    let video_other_button = getVar("tyrantgenesis.douyin_web.video_other_button") // 1:推荐视频,2:评论
 
     d.push({
         title: aweme.desc,
@@ -701,17 +701,17 @@ const videoParse = aweme => {
         })
     }
 
-    d.push({
+    /*d.push({
         col_type: 'line_blank'
     })
 
     d.push({
-        title: video_other_button === '1' ? '‘‘’’推荐视频' : '推荐视频',
+        title: video_other_button === '1' ? '‘‘’’<strong><font color="red">推荐视频</font></strong>' : '推荐视频',
         url: '',
         col_type: 'text_2'
     })
     d.push({
-        title: video_other_button === '2' ? '‘‘’’评论' : '评论',
+        title: video_other_button === '2' ? '‘‘’’’<strong><font color="red">评论</font></strong>' : '评论',
         url: '',
         col_type: 'text_2'
     })
@@ -756,7 +756,7 @@ const videoParse = aweme => {
         }
     } else if (video_other_button === '2') {
 
-    }
+    }*/
 
     setResult(d);
 }
