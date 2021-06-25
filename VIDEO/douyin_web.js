@@ -148,11 +148,11 @@ const baseParse = _ => {
             url: $("hiker://empty").rule(_ => {
                 let d = []
                 d.push({
-                    title: "根据抖音接口限制，登陆后才能享受更多搜索（即搜索的翻页）。需要解锁这个国内点下方登录扫码登录",
+                    title: '‘‘’’根据抖音接口限制，登陆后才能享受更多搜索（即搜索的翻页\r\n需要解锁这个功能<del>点下方登录扫码登录</del>到网页查找cookie - passport_csrf_token并将值填入下方输入框',
                     col_type: 'long_text',
                 })
                 d.push({
-                    title: "登录",
+                    title: "登录（已废弃）",
                     url: $("hiker://empty").rule(_ => {
                         let d = []
                         let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
@@ -184,6 +184,10 @@ const baseParse = _ => {
                         setResult(d);
                     }),
                     col_type: "text_1",
+                })
+                d.push({
+                    title: "填写 passport_csrf_token",
+                    col_type: ""
                 })
                 setResult(d);
             }),
