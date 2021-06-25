@@ -188,7 +188,7 @@ const baseParse = _ => {
                 d.push({
                     title: "确认",
                     desc: "填写 passport_csrf_token",
-                    url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'));saveCookie(params.input)}, {input: input.trim()}) : 'toast://请填写passport_csrf_token'",
+                    url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'));return saveCookie(params.input)}, {input: input.trim()}) : 'toast://请填写passport_csrf_token'",
                     col_type: "input"
                 })
                 setResult(d);
