@@ -621,8 +621,8 @@ const videoParse = aweme => {
 
     aweme.video.play_addr.url_list.forEach((url, index) => {
         d.push({
-            title: "官方线路"+(index+1),
-            url: url,
+            title: "官方线路"+(index+1).toString(),
+            url: url+"#isVideo=true#",
             col_type: "text_4"
         })
     })
