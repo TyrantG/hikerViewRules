@@ -61,6 +61,8 @@ const baseParse = _ => {
             level_1_button_2_title = '‘‘’’<strong><font color="red">热门直播</font></strong>'
             level_1_button_3_title = '我的关注'
             level_1_button_4_title = '取消关注'
+            level_1_button_3_show = '3'
+            level_1_button_4_show = '5'
             break
         }
         case "3": {
