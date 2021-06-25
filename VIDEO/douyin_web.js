@@ -148,8 +148,8 @@ const baseParse = _ => {
             url: $("hiker://empty").rule(_ => {
                 let d = []
                 d.push({
-                    title: '‘‘’’根据抖音接口限制，登陆后才能享受更多搜索（即搜索的翻页\r\n需要解锁这个功能<del>点下方登录扫码登录</del>到网页查找cookie - passport_csrf_token并将值填入下方输入框',
-                    col_type: 'long_text',
+                    title: '根据抖音接口限制，登陆后才能享受更多搜索（即搜索的翻页\r\n需要解锁这个功能<del>点下方登录扫码登录</del>到网页查找cookie - passport_csrf_token并将值填入下方输入框',
+                    col_type: 'rich_text',
                 })
                 d.push({
                     title: "登录（已废弃）",
