@@ -536,6 +536,8 @@ const searchParse = _ => {
 const userParse = userinfo => {
     let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
     let uid = userinfo.sec_uid
+    let channels_json = request(channels_path)
+    let channels = JSON.parse(channels_json)
     let d = [];
     let user_url = MY_URL.split('##')[0]
     let page = MY_URL.split('##')[1]
@@ -551,9 +553,35 @@ const userParse = userinfo => {
             url: MY_URL,
             col_type: 'icon_2_round'
         })
+
+        let has_collect = false
+
+        channels.forEach(item => {
+            if (item.sec_uid === userinfo.sec_uid) has_collect = true
+        })
+        
         d.push({
-            title: "关注",
-            url: "",
+            title: has_collect ? "已关注" : "关注用户",
+            url: $("").lazyRule(params => {
+                const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
+                if (params.has_collect) {
+                    refreshPage(false)
+                    return 'toast://已关注'
+                } else {
+                    params.channels.push({
+                        title: params.author.nickname,
+                        sec_uid: params.author.sec_uid,
+                        avatar_url: params.author.avatar_thumb.url_list.shift(),
+                    })
+                    writeFile(channels_path, JSON.stringify(params.channels))
+                    refreshPage(false)
+                    return 'toast://关注成功'
+                }
+            }, {
+                has_collect: has_collect,
+                author: userinfo,
+                channels: channels,
+            }),
             col_type: 'text_2'
         })
     }
@@ -597,6 +625,8 @@ const userParse = userinfo => {
 
 const videoParse = aweme => {
     let d = [];
+    let channels_json = request(channels_path)
+    let channels = JSON.parse(channels_json)
 
     d.push({
         title: aweme.desc,
@@ -616,8 +646,35 @@ const videoParse = aweme => {
         }, aweme.author),
         col_type: 'icon_2_round',
     })
+
+    let has_collect = false
+
+    channels.forEach(item => {
+        if (item.sec_uid === aweme.author.sec_uid) has_collect = true
+    })
+
     d.push({
-        title: "关注",
+        title: has_collect ? "已关注" : "关注用户",
+        url: $("").lazyRule(params => {
+            const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
+            if (params.has_collect) {
+                refreshPage(false)
+                return 'toast://已关注'
+            } else {
+                params.channels.push({
+                    title: params.author.nickname,
+                    sec_uid: params.author.sec_uid,
+                    avatar_url: params.author.avatar_thumb.url_list.shift(),
+                })
+                writeFile(channels_path, JSON.stringify(params.channels))
+                refreshPage(false)
+                return 'toast://关注成功'
+            }
+        }, {
+            has_collect: has_collect,
+            author: aweme.author,
+            channels: channels,
+        }),
         col_type: 'text_2'
     })
 
