@@ -1,17 +1,16 @@
 const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
 
 const baseParse = _ => {
-    let d = [], category
+    let d = [], category, html
     let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
     if (home_cookie) {
-        let html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}})
-        category = parseDomForArray(html, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
+        html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}})
     } else {
-        let html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}, withHeaders: true})
+        html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}, withHeaders: true})
         html = JSON.parse(html)
         home_cookie = html.headers["set-cookie"][0].split(';')[0]
         putVar("tyrantgenesis.douyin_web.home_cookie", home_cookie)
-        category = parseDomForArray(html.body, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
+        html = html.body
     }
 
     let current_page = MY_URL.split('##')[1].toString()
@@ -34,6 +33,8 @@ const baseParse = _ => {
     let channel_select = getVar("tyrantgenesis.douyin_web.channel_select", "0")
     let button_show = getVar("tyrantgenesis.douyin_web.button_show", "1") // 1:热门,2:直播,3:关注,4:收起,5:取消,6:置顶
     let max_cursor = getVar("tyrantgenesis.douyin_web.max_cursor", "")
+    let live_1st_cate = getVar("tyrantgenesis.douyin_web.live_1st_cate", "")
+    let live_2nd_cate = getVar("tyrantgenesis.douyin_web.live_2nd_cate", "")
     putVar("tyrantgenesis.douyin_web.video_other_button", "0")
 
     let level_1_button_1_title = '',
@@ -210,6 +211,7 @@ const baseParse = _ => {
     switch (button_show) {
         case "1": {
             if (current_page === '1') {
+                category = parseDomForArray(html, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
                 d.push({
                     title: cate_select === '' ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
                     url: $("hiker://empty").lazyRule(_ => {
@@ -274,6 +276,30 @@ const baseParse = _ => {
             break
         }
         case "2": {
+            if (current_page === '1') {
+                html = fetch("https://www.douyin.com/live", {headers:{"User-Agent": PC_UA}})
+                cate_1st_list = parseDomForArray(html, '._1ccdf9ef5e1baec8470ed46e874b49fd-scss&&.ece80b1afae1c9f97b41337a7ccdfaa3-scss')
+                d.push({
+                    title: live_1st_cate === '' ? '‘‘’’<strong><font color="red">热门直播</font></strong>' : '热门直播',
+                    url: $("hiker://empty").lazyRule(_ => {
+                        putVar("tyrantgenesis.douyin_web.live_1st_cate", "")
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }),
+                    col_type: 'scroll_button',
+                })
+                cate_1st_list.forEach(cate => {
+                    let cate_id = parseDomForHtml(cate, '.a18585314085fd46d4da4b236d3d2903-scss&&href').split('/').pop()
+                    let title = parseDomForHtml(cate, 'h2&&Text')
+                    d.push({
+                        title: live_1st_cate === cate_id.toString() ? '‘‘’’<strong><font color="red">'+title+'</font></strong>' : title,
+                        col_type: 'scroll_button',
+                    })
+                })
+                d.push({
+                    col_type:"blank_block"
+                })
+            }
             let count = 20
             let offset = (parseInt(current_page) - 1) * count
             let not_sign_url = "https://live.douyin.com/webcast/web/partition/detail/room/?aid=6383&live_id=1&device_platform=web&language=zh-CN&count="+count+"&offset="+offset+"&partition=720&partition_type=1"
@@ -291,7 +317,6 @@ const baseParse = _ => {
                     col_type: "long_text",
                 })
             } else {
-                let data = JSON.parse(data_json)
                 let list = JSON.parse(data_json).data.data
 
                 if (list && list.length > 0) {
@@ -454,7 +479,6 @@ const baseParse = _ => {
             break
         }
     }
-
 
     setResult(d);
 }
