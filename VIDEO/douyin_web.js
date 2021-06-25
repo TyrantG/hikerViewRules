@@ -255,10 +255,10 @@ const baseParse = _ => {
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
                             desc: item.author.nickname,
-                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(_ => {
+                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(item => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
-                                videoParse()
-                            }),
+                                videoParse(item)
+                            }, item),
                             col_type: 'movie_2',
                         })
                     })
@@ -324,10 +324,10 @@ const baseParse = _ => {
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
                             desc: item.author.nickname,
-                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(_ => {
+                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(item => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
-                                videoParse()
-                            }),
+                                videoParse(item)
+                            }, item),
                             col_type: 'movie_2',
                         })
                     })
@@ -404,10 +404,10 @@ const baseParse = _ => {
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
                             desc: item.author.nickname,
-                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(_ => {
+                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(item => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
-                                videoParse()
-                            }),
+                                videoParse(item)
+                            }, item),
                             col_type: 'movie_2',
                         })
                     })
@@ -456,10 +456,10 @@ const searchParse = _ => {
                             title: aweme.desc,
                             pic_url: aweme.video.cover.url_list.shift(),
                             desc: aweme.author.nickname,
-                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(_ => {
+                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(aweme => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
-                                videoParse()
-                            }),
+                                videoParse(aweme)
+                            }, aweme),
                             col_type: 'movie_2',
                         })
                     })
@@ -595,12 +595,16 @@ const userParse = userinfo => {
     setResult(d);
 }
 
-const videoParse = _ => {
+const videoParse = aweme => {
     let d = [];
-    let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
+    
+    d.push({
+        title: aweme.desc,
+        pic_url: aweme.video.cover.url_list.shift(),
+        desc: aweme.author.nickname,
+        url: MY_URL,
+        col_type: 'pic_1',
+    })
 
-    // let video_info_encode = html.match(/id="RENDER_DATA".*>(.*?)<\/script><\/head>/)[1]
-    // let video_info = decodeURIComponent(video_info_encode)
-    setError(html)
     setResult(d);
 }
