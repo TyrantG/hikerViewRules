@@ -324,10 +324,7 @@ const baseParse = _ => {
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
                             desc: item.author.nickname,
-                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(item => {
-                                eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
-                                videoParse(item)
-                            }, item),
+                            url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
                             col_type: 'movie_2',
                         })
                     })
@@ -404,10 +401,7 @@ const baseParse = _ => {
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
                             desc: item.author.nickname,
-                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(item => {
-                                eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
-                                videoParse(item)
-                            }, item),
+                            url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
                             col_type: 'movie_2',
                         })
                     })
