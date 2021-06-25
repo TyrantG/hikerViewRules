@@ -247,7 +247,8 @@ const baseParse = _ => {
             let true_url = not_sign_url + "&_signature="+sign
             let data_json = fetch(true_url, {
                 headers: {
-                    "referer" : "https://www.douyin.com/"
+                    "referer" : "https://www.douyin.com/",
+                    "cookie": home_cookie,
                 }
             })
 
@@ -323,7 +324,8 @@ const baseParse = _ => {
             let true_url = not_sign_url + "&_signature="+sign
             let data_json = fetch(true_url, {
                 headers: {
-                    "referer" : "https://www.douyin.com/"
+                    "referer" : "https://www.douyin.com/",
+                    "cookie": home_cookie,
                 }
             })
 
@@ -365,6 +367,7 @@ const searchParse = _ => {
     d.push({
         title: "搜索视频-关键词："+input,
         url: $("hiker://empty##fypage").rule(params => {
+            let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
             let d = [];
             let current_page = parseInt(MY_URL.split('##')[1])
             let page = 20
@@ -374,7 +377,8 @@ const searchParse = _ => {
             let true_url = not_sign_url + "&_signature="+sign
             let data_json = fetch(true_url, {
                 headers: {
-                    "referer" : "https://www.douyin.com/"
+                    "referer" : "https://www.douyin.com/",
+                    "cookie": home_cookie,
                 }
             })
             if (data_json === 'Need Verifying') {
@@ -405,9 +409,10 @@ const searchParse = _ => {
     d.push({
         title: "搜索用户-关键词："+input,
         url: $("hiker://empty##fypage").rule(params => {
+            let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
             let d = [];
             let current_page = parseInt(MY_URL.split('##')[1])
-            let page = 18
+            let page = 30
             let offset = (current_page - 1) * page
             let not_sign_url = "https://www.douyin.com/aweme/v1/web/discover/search/?device_platform=webapp&aid=6383&channel=channel_pc_web&search_channel=aweme_user_web&keyword="+encodeURIComponent(params.input)+"&search_source=normal_search&query_correct_type=1&is_filter_search=0&offset="+offset+"&count="+page+"&version_code=160100&version_name=16.1.0"
             let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
@@ -415,7 +420,8 @@ const searchParse = _ => {
 
             let data_json = fetch(true_url, {
                 headers: {
-                    "referer" : "https://www.douyin.com/"
+                    "referer" : "https://www.douyin.com/",
+                    "cookie": home_cookie,
                 }
             })
             if (data_json === 'Need Verifying') {
@@ -450,6 +456,7 @@ const searchParse = _ => {
 }
 
 const userParse = userinfo => {
+    let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
     let uid = userinfo.sec_uid
     let d = [];
     let user_url = MY_URL.split('##')[0]
@@ -478,7 +485,8 @@ const userParse = userinfo => {
     let true_url = not_sign_url + "&_signature="+sign
     data_json = fetch(true_url, {
         headers: {
-            "referer" : "https://www.douyin.com/"
+            "referer" : "https://www.douyin.com/",
+            "cookie": home_cookie,
         }
     })
 
@@ -505,7 +513,6 @@ const userParse = userinfo => {
             })
         }
     }
-
 
     setResult(d);
 }
