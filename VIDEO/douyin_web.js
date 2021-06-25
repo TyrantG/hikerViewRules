@@ -158,12 +158,20 @@ const baseParse = _ => {
                         let data = JSON.parse(data_json)
                         let first_cookie = home_cookie.split(';').shift()
                         putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+data.headers["set-cookie"].join(';'))
-                        setError(data.body)
-                        /*d.push({
-                            pic_url: base64_title+data.body.data.qrcode,
-                            url: base64_title+data.body.data.qrcode,
-                            col_type: 'pic_1_full',
-                        })*/
+
+                        if (data.body.data) {
+                            d.push({
+                               pic_url: base64_title+data.body.data.qrcode,
+                               url: base64_title+data.body.data.qrcode,
+                               col_type: 'pic_1_full',
+                           })
+                        } else {
+                            d.push({
+                                title: '获取二维码失败，请下拉刷新',
+                                col_type: 'long_text',
+                            })
+                        }
+
                         setResult(d);
                     }),
                     col_type: "text_1",
