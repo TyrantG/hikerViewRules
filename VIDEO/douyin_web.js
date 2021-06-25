@@ -255,7 +255,10 @@ const baseParse = _ => {
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
                             desc: item.author.nickname,
-                            url: "https://www.douyin.com/video/"+item.aweme_id,
+                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(_ => {
+                                eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
+                                videoParse()
+                            }),
                             col_type: 'movie_2',
                         })
                     })
@@ -321,7 +324,10 @@ const baseParse = _ => {
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
                             desc: item.author.nickname,
-                            url: "https://www.douyin.com/video/"+item.aweme_id,
+                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(_ => {
+                                eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
+                                videoParse()
+                            }),
                             col_type: 'movie_2',
                         })
                     })
@@ -398,7 +404,10 @@ const baseParse = _ => {
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
                             desc: item.author.nickname,
-                            url: "https://www.douyin.com/video/"+item.aweme_id,
+                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(_ => {
+                                eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
+                                videoParse()
+                            }),
                             col_type: 'movie_2',
                         })
                     })
@@ -447,7 +456,10 @@ const searchParse = _ => {
                             title: aweme.desc,
                             pic_url: aweme.video.cover.url_list.shift(),
                             desc: aweme.author.nickname,
-                            url: "https://www.douyin.com/video/"+item.aweme_id,
+                            url: $("https://www.douyin.com/video/"+item.aweme_id).rule(_ => {
+                                eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
+                                videoParse()
+                            }),
                             col_type: 'movie_2',
                         })
                     })
