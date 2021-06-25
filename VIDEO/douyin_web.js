@@ -308,7 +308,7 @@ const baseParse = _ => {
                 })
                 if (live_1st_cate !== '') {
                     html = fetch("https://live.douyin.com/category/"+live_1st_cate, {headers:{"User-Agent": PC_UA}})
-                    let cate_2nd_list = parseDomForArray(html, '._51b435273dea21a09f82e973bb87baf1-scss&&.a')
+                    let cate_2nd_list = parseDomForArray(html, '._51b435273dea21a09f82e973bb87baf1-scss&&a')
                     d.push({
                         title: live_2nd_cate === '' ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
                         url: $("hiker://empty").lazyRule(_ => {
