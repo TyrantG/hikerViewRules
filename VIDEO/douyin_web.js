@@ -600,7 +600,7 @@ const videoParse = _ => {
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
 
     let video_info_encode = html.match(/id="RENDER_DATA".*>(.*?)<\/script><\/head>/)[1]
-    let video_info = decodeURIComponent(video_info_encode)
-    setError(video_info)
+    // let video_info = decodeURIComponent(video_info_encode)
+    setError(video_info_encode)
     setResult(d);
 }
