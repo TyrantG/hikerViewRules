@@ -615,7 +615,10 @@ const videoParse = aweme => {
     })
     d.push({
         title: "关注",
-        url: "",
+        url: $("https://www.douyin.com/user/"+aweme.author.sec_uid+'##fypage').rule(userinfo => {
+            eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
+            userParse(userinfo)
+        }, aweme.author),
         col_type: 'text_2'
     })
 
