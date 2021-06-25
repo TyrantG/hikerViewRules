@@ -60,8 +60,8 @@ const baseParse = _ => {
 const secParse = _ => {
     let rid = MY_URL.split('/').pop()
     let html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}})
-    setError(html.match(/\"liveLineUrl\":\"(.*?)\",\"isFace/))
-    /*let liveLineUrl = html.match(/\"liveLineUrl\":\"(.*?)\",\"isFace/)[1]
+    let liveLineUrl = html.match(/\"liveLineUrl\":\"(.*?)\",\"isFace/)[1]
+    setError(liveLineUrl)
 
     let live_url = base64Decode(liveLineUrl)
     let source
@@ -109,7 +109,7 @@ const secParse = _ => {
         }),
         col_type: 'text_2',
     })
-    setResult(d);*/
+    setResult(d);
 
 }
 
