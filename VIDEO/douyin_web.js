@@ -319,19 +319,22 @@ const baseParse = _ => {
                         col_type: 'scroll_button',
                     })
                     cate_2nd_list.forEach(cate => {
-                        let cate_id = parseDomForHtml(cate, 'a&&href').split('/').pop()
+                        let cate_group = parseDomForHtml(cate, 'a&&href').split('/').pop().split('_')
                         let title = parseDomForHtml(cate, 'a&&title')
-                        d.push({
-                            title: live_2nd_cate === cate_id.toString() ? '‘‘’’<strong><font color="red">'+title+'</font></strong>' : title,
-                            url: $("hiker://empty").lazyRule(params => {
-                                putVar("tyrantgenesis.douyin_web.live_2nd_cate", params.cate_id.toString())
-                                refreshPage(false)
-                                return "hiker://empty"
-                            }, {
-                                cate_id: cate_id
-                            }),
-                            col_type: 'scroll_button',
-                        })
+                        if (cate_group.length > 1) {
+                            let cate_id = cate_group[1]
+                            d.push({
+                                title: live_2nd_cate === cate_id.toString() ? '‘‘’’<strong><font color="red">'+title+'</font></strong>' : title,
+                                url: $("hiker://empty").lazyRule(params => {
+                                    putVar("tyrantgenesis.douyin_web.live_2nd_cate", params.cate_id.toString())
+                                    refreshPage(false)
+                                    return "hiker://empty"
+                                }, {
+                                    cate_id: cate_id
+                                }),
+                                col_type: 'scroll_button',
+                            })
+                        }
                     })
                 }
             }
