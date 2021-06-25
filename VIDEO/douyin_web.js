@@ -178,34 +178,35 @@ const baseParse = _ => {
                         })
                     }
                 })
-                let not_sign_url = "https://www.douyin.com/aweme/v1/web/channel/feed/?device_platform=webapp&aid=6383&channel=channel_pc_web&tag_id="+cate_select+"&count=20&version_code=160100&version_name=16.1.0"
-                let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
-                let true_url = not_sign_url + "&_signature="+sign
-                let data_json = fetch(true_url, {
-                    headers: {
-                        "referer" : "https://www.douyin.com/",
-                        "cookie": home_cookie,
-                    }
-                })
+            }
+            
+            let not_sign_url = "https://www.douyin.com/aweme/v1/web/channel/feed/?device_platform=webapp&aid=6383&channel=channel_pc_web&tag_id="+cate_select+"&count=20&version_code=160100&version_name=16.1.0"
+            let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
+            let true_url = not_sign_url + "&_signature="+sign
+            let data_json = fetch(true_url, {
+                headers: {
+                    "referer" : "https://www.douyin.com/",
+                    "cookie": home_cookie,
+                }
+            })
 
-                if (data_json === 'Need Verifying') {
-                    d.push({
-                        title: 'signature 获取失败，待修复',
-                        col_type: "long_text",
-                    })
-                } else {
-                    let list = JSON.parse(data_json).aweme_list
-                    if (list && list.length > 0) {
-                        list.forEach(item => {
-                            d.push({
-                                title: item.desc,
-                                pic_url: item.video.cover.url_list.shift(),
-                                desc: '',
-                                url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
-                                col_type: 'movie_2',
-                            })
+            if (data_json === 'Need Verifying') {
+                d.push({
+                    title: 'signature 获取失败，待修复',
+                    col_type: "long_text",
+                })
+            } else {
+                let list = JSON.parse(data_json).aweme_list
+                if (list && list.length > 0) {
+                    list.forEach(item => {
+                        d.push({
+                            title: item.desc,
+                            pic_url: item.video.cover.url_list.shift(),
+                            desc: '',
+                            url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
+                            col_type: 'movie_2',
                         })
-                    }
+                    })
                 }
             }
 
