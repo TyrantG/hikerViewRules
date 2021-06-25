@@ -431,6 +431,9 @@ const searchParse = _ => {
                 })
             } else {
                 let list = JSON.parse(data_json).user_list
+                if (current_page > 0) {
+                    setError(list)
+                }
                 if (list && list.length > 0) {
                     list.forEach(item => {
                         let userinfo = item.user_info
