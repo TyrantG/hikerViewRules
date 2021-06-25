@@ -179,7 +179,7 @@ const baseParse = _ => {
                     }
                 })
             }
-            
+
             let not_sign_url = "https://www.douyin.com/aweme/v1/web/channel/feed/?device_platform=webapp&aid=6383&channel=channel_pc_web&tag_id="+cate_select+"&count=20&version_code=160100&version_name=16.1.0"
             let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
             let true_url = not_sign_url + "&_signature="+sign
@@ -436,7 +436,7 @@ const searchParse = _ => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
                                 userParse(userinfo)
                             }, userinfo),
-                            col_type: 'movie_3',
+                            col_type: 'icon_2_round',
                         })
                     })
                 }
