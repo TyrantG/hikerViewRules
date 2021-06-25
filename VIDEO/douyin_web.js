@@ -626,10 +626,10 @@ const videoParse = aweme => {
     let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
     let channels_json = request(channels_path)
     let channels = JSON.parse(channels_json)
-    let current_page = MY_URL.split('##')[1].toString()
+    let current_page = parseInt(MY_URL.split('##')[1])
     let video_other_button = getVar("tyrantgenesis.douyin_web.video_other_button") // 1:推荐视频,2:评论
 
-    if (current_page === '1') {
+    if (current_page === 1) {
         d.push({
             title: aweme.author.nickname,
             pic_url: aweme.author.avatar_thumb.url_list.shift(),
@@ -718,7 +718,7 @@ const videoParse = aweme => {
             col_type: 'text_2'
         })
         d.push({
-            title: video_other_button === '2' ? '‘‘’’’<strong><font color="red">评论</font></strong>' : '评论',
+            title: video_other_button === '2' ? '‘‘’’<strong><font color="red">评论</font></strong>' : '评论',
             url: $('hiker://empty').lazyRule(params => {
                 putVar("tyrantgenesis.douyin_web.video_other_button", params.video_other_button === "2" ? "0" : "2")
                 refreshPage(false)
@@ -730,14 +730,17 @@ const videoParse = aweme => {
         })
     }
 
+    let count = 20
+    let cursor = (current_page - 1) * count
+
     if (video_other_button === '1') {
-        let not_sign_url = "https://www.douyin.com/aweme/v1/web/aweme/related/?device_platform=webapp&aid=6383&channel=channel_pc_web&aweme_id="+aweme.aweme_id+"&count=20&version_code=160100&version_name=16.1.0"
+        let not_sign_url = "https://www.douyin.com/aweme/v1/web/aweme/related/?device_platform=webapp&aid=6383&channel=channel_pc_web&aweme_id="+aweme.aweme_id+"&count="+count+"&version_code=160100&version_name=16.1.0"
         let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
         let true_url = not_sign_url + "&_signature="+sign
 
         let data_json = fetch(true_url, {
             headers: {
-                "referer" : "https://www.douyin.com/",
+                "referer" : "https://www.douyin.com/video/"+aweme.aweme_id+"?previous_page=main_page",
                 "cookie": home_cookie,
             }
         })
@@ -752,8 +755,6 @@ const videoParse = aweme => {
             let list = data.aweme_list
 
             if (list && list.length > 0) {
-                // putVar("tyrantgenesis.douyin_web.search_max_cursor", data.max_cursor.toString())
-
                 list.forEach(item => {
                     d.push({
                         title: item.desc,
@@ -769,7 +770,35 @@ const videoParse = aweme => {
             }
         }
     } else if (video_other_button === '2') {
+        let not_sign_url = "https://www.douyin.com/aweme/v1/web/comment/list/?device_platform=webapp&aid=6383&channel=channel_pc_web&aweme_id="+aweme.aweme_id+"&cursor="+cursor+"&count="+count+"&version_code=160100&version_name=16.1.0"
+        let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
+        let true_url = not_sign_url + "&_signature="+sign
 
+        let data_json = fetch(true_url, {
+            headers: {
+                "referer" : "https://www.douyin.com/video/"+aweme.aweme_id+"?previous_page=main_page",
+                "cookie": home_cookie,
+            }
+        })
+
+        if (data_json === 'Need Verifying') {
+            d.push({
+                title: 'signature 获取失败，待修复',
+                col_type: "long_text",
+            })
+        } else {
+            let data = JSON.parse(data_json)
+            let list = data.comments
+
+            if (list && list.length > 0) {
+                list.forEach(item => {
+                    d.push({
+                        title: item.user.nickname + '：' + item.text,
+                        col_type: 'text_1',
+                    })
+                })
+            }
+        }
     }
 
     setResult(d);
