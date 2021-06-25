@@ -710,7 +710,7 @@ const videoParse = aweme => {
             title: video_other_button === '1' ? '‘‘’’<strong><font color="red">推荐视频</font></strong>' : '推荐视频',
             url: $('hiker://empty').lazyRule(params => {
                 putVar("tyrantgenesis.douyin_web.video_other_button", params.video_other_button === "1" ? "0" : "1")
-                refreshPage(false)
+                refreshPage(true)
                 return "hiker://empty"
             }, {
                 video_other_button: video_other_button
@@ -721,7 +721,7 @@ const videoParse = aweme => {
             title: video_other_button === '2' ? '‘‘’’<strong><font color="red">评论</font></strong>' : '评论',
             url: $('hiker://empty').lazyRule(params => {
                 putVar("tyrantgenesis.douyin_web.video_other_button", params.video_other_button === "2" ? "0" : "2")
-                refreshPage(false)
+                refreshPage(true)
                 return "hiker://empty"
             }, {
                 video_other_button: video_other_button
