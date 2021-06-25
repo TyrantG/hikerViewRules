@@ -148,6 +148,10 @@ const baseParse = _ => {
             url: $("hiker://empty").rule(_ => {
                 let d = []
                 d.push({
+                    title: "根据抖音接口限制，登陆后才能享受更多搜索（即搜索的翻页）。需要解锁这个国内点下方登录扫码登录",
+                    col_type: 'long_text',
+                })
+                d.push({
                     title: "登录",
                     url: $("hiker://empty").rule(_ => {
                         let d = []
@@ -162,8 +166,12 @@ const baseParse = _ => {
 
                         if (info.data) {
                             d.push({
+                                title: "1. 图片为base64格式不能直接保存\r\n2. 抖音限制不能通过扫相册的二维码登录，请使用app直接扫码",
+                                col_type: 'long_text',
+                            })
+                            d.push({
                                pic_url: base64_title+info.data.qrcode,
-                               url: base64_title+info.data.qrcode,
+                               url: "hiker://empty",
                                col_type: 'pic_1_full',
                            })
                         } else {
