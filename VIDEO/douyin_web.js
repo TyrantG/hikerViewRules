@@ -155,14 +155,14 @@ const baseParse = _ => {
                     title: "登录（已废弃）",
                     url: $("hiker://empty").rule(_ => {
                         let d = []
-                        let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
+                        // let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
                         const base64_title = "data:image/jpeg;base64,"
                         const login_url = "https://sso.douyin.com/get_qrcode/?service=https%3A%2F%2Fwww.douyin.com&need_logo=false&aid=6383"
                         let data_json = fetch(login_url, {headers:{"User-Agent": PC_UA}, withHeaders: true})
                         let data = JSON.parse(data_json)
                         let info = JSON.parse(data.body)
-                        let first_cookie = home_cookie.split(';').shift()
-                        putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+data.headers["set-cookie"].join(';'))
+                        // let first_cookie = home_cookie.split(';').shift()
+                        // putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+data.headers["set-cookie"].join(';'))
 
                         if (info.data) {
                             d.push({
@@ -188,6 +188,7 @@ const baseParse = _ => {
                 d.push({
                     title: "确认",
                     desc: "填写 passport_csrf_token",
+                    url: "input.trim() ? $('hiker://empty').rule(params => {setError(getVar(\"tyrantgenesis.douyin_web.home_cookie\"))}, {input: input.trim()}) : 'toast://请输入搜索内容'",
                     col_type: "input"
                 })
                 setResult(d);
