@@ -452,6 +452,13 @@ const searchParse = _ => {
                         })
                     })
                 }
+                
+                if (list && list.length === 0 && current_page === 2) {
+                    d.push({
+                        title: "抖音接口限制，在设置里填写token模拟后可搜索更多",
+                        col_type: "long_text",
+                    })
+                }
             }
             setResult(d);
         }, {
@@ -496,6 +503,13 @@ const searchParse = _ => {
                             }, userinfo),
                             col_type: 'icon_2_round',
                         })
+                    })
+                }
+
+                if (list && list.length === 0 && current_page === 2) {
+                    d.push({
+                        title: "抖音接口限制，在设置里填写token模拟后可搜索更多",
+                        col_type: "long_text",
                     })
                 }
             }
