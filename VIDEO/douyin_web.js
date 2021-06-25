@@ -9,8 +9,7 @@ const baseParse = _ => {
     } else {
         let html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}, withHeaders: true})
         html = JSON.parse(html)
-        home_cookie = html.headers["set-cookie"][0]
-        setError(home_cookie)
+        home_cookie = html.headers["set-cookie"][0].split(';')[0]
         putVar("tyrantgenesis.douyin_web.home_cookie", home_cookie)
         category = parseDomForArray(html.body, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
     }
