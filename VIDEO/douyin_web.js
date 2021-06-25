@@ -1,5 +1,5 @@
 const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
-putVar("tyrantgenesis.douyin_web.home_cookie", "")
+
 const baseParse = _ => {
     let d = [], category
     let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
@@ -10,6 +10,7 @@ const baseParse = _ => {
         let html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}, withHeaders: true})
         html = JSON.parse(html)
         home_cookie = html.headers["set-cookie"][0]
+        setEttot(home_cookie)
         putVar("tyrantgenesis.douyin_web.home_cookie", home_cookie)
         category = parseDomForArray(html.body, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
     }
