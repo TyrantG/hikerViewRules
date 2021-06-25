@@ -559,7 +559,7 @@ const userParse = userinfo => {
         channels.forEach(item => {
             if (item.sec_uid === userinfo.sec_uid) has_collect = true
         })
-        
+
         d.push({
             title: has_collect ? "已关注" : "关注用户",
             url: $("").lazyRule(params => {
@@ -678,13 +678,19 @@ const videoParse = aweme => {
         col_type: 'text_2'
     })
 
-    aweme.video.play_addr.url_list.forEach((url, index) => {
-        d.push({
-            title: "官方线路"+(index+1).toString(),
-            url: url+"#isVideo=true#",
-            col_type: "text_4"
+    if (aweme.video.play_addr) {
+        aweme.video.play_addr.url_list.forEach((url, index) => {
+            d.push({
+                title: "官方线路"+(parseInt(index)+1).toString(),
+                url: url+"#isVideo=true#",
+                col_type: "text_4"
+            })
         })
-    })
+    } else {
+        setError(aweme.video)
+    }
+
+
 
     setResult(d);
 }
