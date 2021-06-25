@@ -292,9 +292,9 @@ const baseParse = _ => {
                     col_type:"blank_block"
                 })
 
-                let web_url = "https://www.douyin.com/user/"+sec_uid
+                /*let web_url = "https://www.douyin.com/user/"+sec_uid
                 let html = fetch(web_url, {headers:{"User-Agent": PC_UA}})
-                max_cursor = html.match(/%22maxCursor%22%3A(.*?)%2C%22/)[1]
+                max_cursor = html.match(/%22maxCursor%22%3A(.*?)%2C%22/)[1]*/
             }
 
             let not_sign_url = "https://www.douyin.com/aweme/v1/web/aweme/post/?device_platform=webapp&aid=6383&channel=channel_pc_web&sec_user_id="+sec_uid+"&max_cursor="+max_cursor+"&count=10&publish_video_strategy_type=2&version_code=160100&version_name=16.1.0"
