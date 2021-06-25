@@ -254,8 +254,8 @@ const baseParse = _ => {
                         d.push({
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
-                            desc: '',
-                            url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
+                            desc: item.author.nickname,
+                            url: "https://www.douyin.com/video/"+item.aweme_id,
                             col_type: 'movie_2',
                         })
                     })
@@ -320,8 +320,8 @@ const baseParse = _ => {
                         d.push({
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
-                            desc: '',
-                            url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
+                            desc: item.author.nickname,
+                            url: "https://www.douyin.com/video/"+item.aweme_id,
                             col_type: 'movie_2',
                         })
                     })
@@ -397,8 +397,8 @@ const baseParse = _ => {
                         d.push({
                             title: item.desc,
                             pic_url: item.video.cover.url_list.shift(),
-                            desc: '',
-                            url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
+                            desc: item.author.nickname,
+                            url: "https://www.douyin.com/video/"+item.aweme_id,
                             col_type: 'movie_2',
                         })
                     })
@@ -446,13 +446,13 @@ const searchParse = _ => {
                         d.push({
                             title: aweme.desc,
                             pic_url: aweme.video.cover.url_list.shift(),
-                            desc: '',
-                            url: aweme.video.play_addr_lowbr.url_list.shift() + "#isVideo=true#",
+                            desc: aweme.author.nickname,
+                            url: "https://www.douyin.com/video/"+item.aweme_id,
                             col_type: 'movie_2',
                         })
                     })
                 }
-                
+
                 if (list && list.length === 0 && current_page === 2) {
                     d.push({
                         title: "抖音接口限制，在设置里填写token模拟后可搜索更多",
