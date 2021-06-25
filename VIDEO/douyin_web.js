@@ -421,7 +421,7 @@ const searchParse = _ => {
 
             let data_json = fetch(true_url, {
                 headers: {
-                    "referer" : "https://www.douyin.com/",
+                    "referer" : "https://www.douyin.com/search/pgone?source=normal_search&type=user",
                     "cookie": home_cookie,
                 }
             })
@@ -433,7 +433,7 @@ const searchParse = _ => {
             } else {
                 let list = JSON.parse(data_json).user_list
                 if (current_page > 1) {
-                    setError(true_url)
+                    setError(data_json)
                 }
                 if (list && list.length > 0) {
                     list.forEach(item => {
