@@ -148,7 +148,7 @@ const baseParse = _ => {
             url: $("hiker://empty").rule(_ => {
                 let d = []
                 d.push({
-                    title: '根据抖音接口限制，登陆后才能享受更多搜索（即搜索的翻页）<br />需要解锁这个功能<del>点下方登录扫码登录</del>到网页查找cookie - passport_csrf_token并将值填入下方输入框',
+                    title: '根据抖音接口限制，登陆后才能享受更多搜索（即搜索的翻页）<br />需要解锁这个功能<del>点下方登录扫码登录</del>到网页版登陆后查找cookie - passport_csrf_token并将值填入下方输入框',
                     col_type: 'rich_text',
                 })
                 d.push({
@@ -188,7 +188,7 @@ const baseParse = _ => {
                 d.push({
                     title: "确认",
                     desc: "填写 passport_csrf_token",
-                    url: "input.trim() ? $('hiker://empty').rule(params => {setError(getVar(\"tyrantgenesis.douyin_web.home_cookie\"))}, {input: input.trim()}) : 'toast://请输入搜索内容'",
+                    url: "input.trim() ? $('hiker://empty').lazyRule(params => {setError(params.input)}, {input: input.trim()}) : 'toast://请填写passport_csrf_token'",
                     col_type: "input"
                 })
                 setResult(d);
