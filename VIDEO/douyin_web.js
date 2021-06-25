@@ -158,7 +158,7 @@ const baseParse = _ => {
                         let data = JSON.parse(data_json)
                         let first_cookie = home_cookie.split(';').shift()
                         putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+data.headers["set-cookie"].join(';'))
-                        setError(data.body.data.qrcode)
+                        setError(data.body.data)
                         /*d.push({
                             pic_url: base64_title+data.body.data.qrcode,
                             url: base64_title+data.body.data.qrcode,
