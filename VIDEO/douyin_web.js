@@ -38,7 +38,7 @@ const baseParse = _ => {
     putVar("tyrantgenesis.douyin_web.video_other_button", "0")
 
     let level_1_button_1_title = '',
-        // level_1_button_2_title = '',
+        level_1_button_2_title = '',
         level_1_button_3_title = '',
         level_1_button_4_title = '',
         level_1_button_3_show = '',
