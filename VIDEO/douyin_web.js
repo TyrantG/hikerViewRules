@@ -597,13 +597,34 @@ const userParse = userinfo => {
 
 const videoParse = aweme => {
     let d = [];
-    
+
     d.push({
         title: aweme.desc,
         pic_url: aweme.video.cover.url_list.shift(),
         desc: aweme.author.nickname,
         url: MY_URL,
         col_type: 'pic_1',
+    })
+
+    d.push({
+        title: aweme.author.nickname,
+        pic_url: aweme.author.avatar_thumb.url_list.shift(),
+        desc: aweme.author.signature,
+        url: "",
+        col_type: 'icon_2_round',
+    })
+    d.push({
+        title: "关注",
+        url: "",
+        col_type: 'text_2'
+    })
+
+    aweme.video.play_addr.url_list.forEach((url, index) => {
+        d.push({
+            title: "官方线路"+(index+1),
+            url: url,
+            col_type: "text_4"
+        })
     })
 
     setResult(d);
