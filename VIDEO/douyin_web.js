@@ -414,9 +414,10 @@ const searchParse = _ => {
             let current_page = parseInt(MY_URL.split('##')[1])
             let page = 30
             let offset = (current_page - 1) * page
+            let not_encode_sign_url = "https://www.douyin.com/aweme/v1/web/discover/search/?device_platform=webapp&aid=6383&channel=channel_pc_web&search_channel=aweme_user_web&keyword="+params.input+"&search_source=normal_search&query_correct_type=1&is_filter_search=0&offset="+offset+"&count="+page+"&version_code=160100&version_name=16.1.0"
             let not_sign_url = "https://www.douyin.com/aweme/v1/web/discover/search/?device_platform=webapp&aid=6383&channel=channel_pc_web&search_channel=aweme_user_web&keyword="+encodeURIComponent(params.input)+"&search_source=normal_search&query_correct_type=1&is_filter_search=0&offset="+offset+"&count="+page+"&version_code=160100&version_name=16.1.0"
             let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
-            let true_url = not_sign_url + "&_signature="+sign
+            let true_url = not_encode_sign_url + "&_signature="+sign
 
             let data_json = fetch(true_url, {
                 headers: {
@@ -431,9 +432,9 @@ const searchParse = _ => {
                 })
             } else {
                 let list = JSON.parse(data_json).user_list
-                if (current_page > 1) {
+                /*if (current_page > 1) {
                     setError(true_url)
-                }
+                }*/
                 if (list && list.length > 0) {
                     list.forEach(item => {
                         let userinfo = item.user_info
