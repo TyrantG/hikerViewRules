@@ -47,7 +47,7 @@ const baseParse = _ => {
     switch (button_show) {
         case "1": {
             level_1_button_1_title = '‘‘’’<strong><font color="red">热门视频</font></strong>'
-            // level_1_button_2_title = '热门直播'
+            level_1_button_2_title = '热门直播'
             level_1_button_3_title = '我的关注'
             level_1_button_4_title = '取消关注'
             level_1_button_3_show = '3'
@@ -55,16 +55,16 @@ const baseParse = _ => {
             channel_prefix = ''
             break
         }
-        /*case "2": {
+        case "2": {
             level_1_button_1_title = '热门视频'
             level_1_button_2_title = '‘‘’’<strong><font color="red">热门直播</font></strong>'
             level_1_button_3_title = '我的关注'
             level_1_button_4_title = '取消关注'
             break
-        }*/
+        }
         case "3": {
             level_1_button_1_title = '热门视频'
-            // level_1_button_2_title = '热门直播'
+            level_1_button_2_title = '热门直播'
             level_1_button_3_title = '‘‘’’<strong><font color="red">我的关注</font></strong>'
             level_1_button_4_title = '取消关注'
             level_1_button_3_show = '4'
@@ -74,7 +74,7 @@ const baseParse = _ => {
         }
         case "4": {
             level_1_button_1_title = '热门视频'
-            // level_1_button_2_title = '热门直播'
+            level_1_button_2_title = '热门直播'
             level_1_button_3_title = '‘‘’’<strong><font color="red">我的关注</font></strong>'
             level_1_button_4_title = '取消关注'
             level_1_button_3_show = '3'
@@ -84,7 +84,7 @@ const baseParse = _ => {
         }
         case "5": {
             level_1_button_1_title = '热门视频'
-            // level_1_button_2_title = '热门直播'
+            level_1_button_2_title = '热门直播'
             level_1_button_3_title = '我的关注'
             level_1_button_4_title = '‘‘’’<strong><font color="red">取消关注</font></strong>'
             level_1_button_3_show = '3'
@@ -94,7 +94,7 @@ const baseParse = _ => {
         }
         case "6": {
             level_1_button_1_title = '热门视频'
-            // level_1_button_2_title = '热门直播'
+            level_1_button_2_title = '热门直播'
             level_1_button_3_title = '我的关注'
             level_1_button_4_title = '‘‘’’<strong><font color="red">置顶关注</font></strong>'
             level_1_button_3_show = '3'
@@ -116,10 +116,15 @@ const baseParse = _ => {
             }),
             col_type: 'scroll_button',
         })
-        /*d.push({
+        d.push({
             title: level_1_button_2_title,
-            col_type: 'text_4',
-        })*/
+            url: $("hiker://empty").lazyRule(_ => {
+                putVar("tyrantgenesis.douyin_web.button_show", "2")
+                refreshPage(true)
+                return "hiker://empty"
+            }),
+            col_type: 'scroll_button',
+        })
         d.push({
             title: level_1_button_3_title,
             url: $("hiker://empty").lazyRule(params => {
@@ -266,6 +271,44 @@ const baseParse = _ => {
                 }
             }
 
+            break
+        }
+        case "2": {
+            let count = 20
+            let offset = (parseInt(current_page) - 1) * count
+            let not_sign_url = "https://live.douyin.com/webcast/web/partition/detail/room/?aid=6383&live_id=1&device_platform=web&language=zh-CN&count="+count+"&offset="+offset+"&partition=720&partition_type=1"
+            let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
+            let true_url = not_sign_url + "&_signature="+sign
+            let data_json = fetch(true_url, {
+                headers: {
+                    "referer" : "https://live.douyin.com/hot_live",
+                    "cookie": home_cookie,
+                }
+            })
+            if (data_json === 'Need Verifying') {
+                d.push({
+                    title: 'signature 获取失败，待修复',
+                    col_type: "long_text",
+                })
+            } else {
+                let data = JSON.parse(data_json)
+                let list = JSON.parse(data_json).data.data
+
+                if (list && list.length > 0) {
+
+                    list.forEach(item => {
+                        let room = item.room
+                        let m3u8 = room.stream_url.hls_pull_url_map || room.stream_url.flv_pull_url
+                        d.push({
+                            title: room.title,
+                            pic_url: room.cover.url_list.shift(),
+                            desc: room.owner.nickname,
+                            url: m3u8[Object.keys(m3u8)[0]],
+                            col_type: 'movie_2',
+                        })
+                    })
+                }
+            }
             break
         }
         case "3":
