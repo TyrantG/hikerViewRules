@@ -4,7 +4,7 @@ const baseParse = _ => {
     let d = [];
     let html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}, withHeaders: true})
     html = JSON.parse(html)
-    setError(html.headers)
+    setError(html.headers["set-cookie"])
     let current_page = MY_URL.split('##')[1].toString()
     let category = parseDomForArray(html.body, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
     let channels
