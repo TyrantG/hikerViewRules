@@ -705,7 +705,7 @@ const saveCookie = token => {
     let new_cookie = 'passport_csrf_token='+token
 
     putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+new_cookie)
-
-    refreshPage(true)
+    setError(first_cookie+';'+new_cookie)
+    // refreshPage(true)
     return "toast://设置成功"
 }
