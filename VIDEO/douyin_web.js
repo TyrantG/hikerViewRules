@@ -186,7 +186,8 @@ const baseParse = _ => {
                     col_type: "text_1",
                 })
                 d.push({
-                    title: "填写 passport_csrf_token",
+                    title: "确认",
+                    desc: "填写 passport_csrf_token",
                     col_type: "input"
                 })
                 setResult(d);
