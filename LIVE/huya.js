@@ -61,7 +61,6 @@ const secParse = _ => {
     let rid = MY_URL.split('/').pop()
     let html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}})
     let liveLineUrl = html.match(/\"liveLineUrl\":\"(.*?)\",\"isFace/)[1]
-    setError(liveLineUrl)
 
     let live_url = base64Decode(liveLineUrl)
     let source
@@ -75,7 +74,7 @@ const secParse = _ => {
 
     }
 
-    let info = {};
+    /*let info = {};
     let subsid_array = html.match(/var SUBSID = '(.*)';/);
     let topsid_array = html.match(/var TOPSID = '(.*)';/);
     let yyuid_array = html.match(/ayyuid: '(.*)',/);
@@ -84,7 +83,7 @@ const secParse = _ => {
     info.topsid = topsid_array[1] === '' ? 0 : parseInt(topsid_array[1]);
     info.yyuid = parseInt(yyuid_array[1]);
     info.sGuid = "";
-    info.anthor_nick = anthor_nick[1] === '' ? '' : anthor_nick[1];
+    info.anthor_nick = anthor_nick[1] === '' ? '' : anthor_nick[1];*/
 
     let d = [];
     d.push({
@@ -92,7 +91,7 @@ const secParse = _ => {
         url: source,
         col_type: 'text_2',
     })
-    d.push({
+    /*d.push({
         title: "弹幕播放器（测试）",
         url: $(source).rule(params => {
             let d = [];
@@ -108,7 +107,7 @@ const secParse = _ => {
             rid: rid
         }),
         col_type: 'text_2',
-    })
+    })*/
     setResult(d);
 
 }
