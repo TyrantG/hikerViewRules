@@ -187,7 +187,7 @@ const baseParse = _ => {
                 })
                 d.push({
                     title: "填写 passport_csrf_token",
-                    col_type: ""
+                    col_type: "input"
                 })
                 setResult(d);
             }),
