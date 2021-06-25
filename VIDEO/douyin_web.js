@@ -278,7 +278,7 @@ const baseParse = _ => {
         case "2": {
             if (current_page === '1') {
                 html = fetch("https://www.douyin.com/live", {headers:{"User-Agent": PC_UA}})
-                cate_1st_list = parseDomForArray(html, '._1ccdf9ef5e1baec8470ed46e874b49fd-scss&&.ece80b1afae1c9f97b41337a7ccdfaa3-scss')
+                let cate_1st_list = parseDomForArray(html, '._1ccdf9ef5e1baec8470ed46e874b49fd-scss&&.ece80b1afae1c9f97b41337a7ccdfaa3-scss')
                 d.push({
                     title: live_1st_cate === '' ? '‘‘’’<strong><font color="red">热门直播</font></strong>' : '热门直播',
                     url: $("hiker://empty").lazyRule(_ => {
@@ -293,12 +293,47 @@ const baseParse = _ => {
                     let title = parseDomForHtml(cate, 'h2&&Text')
                     d.push({
                         title: live_1st_cate === cate_id.toString() ? '‘‘’’<strong><font color="red">'+title+'</font></strong>' : title,
+                        url: $("hiker://empty").lazyRule(params => {
+                            putVar("tyrantgenesis.douyin_web.live_1st_cate", params.cate_id.toString())
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            cate_id: cate_id
+                        }),
                         col_type: 'scroll_button',
                     })
                 })
                 d.push({
                     col_type:"blank_block"
                 })
+                if (live_1st_cate !== '') {
+                    html = fetch("https://live.douyin.com/category/"+live_1st_cate, {headers:{"User-Agent": PC_UA}})
+                    let cate_2nd_list = parseDomForArray(html, '._51b435273dea21a09f82e973bb87baf1-scss&&.a')
+                    d.push({
+                        title: live_2nd_cate === '' ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
+                        url: $("hiker://empty").lazyRule(_ => {
+                            putVar("tyrantgenesis.douyin_web.live_2nd_cate", "")
+                            refreshPage(false)
+                            return "hiker://empty"
+                        }),
+                        col_type: 'scroll_button',
+                    })
+                    cate_2nd_list.forEach(cate => {
+                        let cate_id = parseDomForHtml(cate, 'a&&href').split('/').pop()
+                        let title = parseDomForHtml(cate, 'a&&title')
+                        d.push({
+                            title: live_2nd_cate === cate_id.toString() ? '‘‘’’<strong><font color="red">'+title+'</font></strong>' : title,
+                            url: $("hiker://empty").lazyRule(params => {
+                                putVar("tyrantgenesis.douyin_web.live_2nd_cate", params.cate_id.toString())
+                                refreshPage(false)
+                                return "hiker://empty"
+                            }, {
+                                cate_id: cate_id
+                            }),
+                            col_type: 'scroll_button',
+                        })
+                    })
+                }
             }
             let count = 20
             let offset = (parseInt(current_page) - 1) * count
