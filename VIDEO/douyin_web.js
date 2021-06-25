@@ -188,7 +188,7 @@ const baseParse = _ => {
                 d.push({
                     title: "确认",
                     desc: "填写 passport_csrf_token",
-                    url: "input.trim() ? $('hiker://empty').lazyRule(params => {setError(params.input)}, {input: input.trim()}) : 'toast://请填写passport_csrf_token'",
+                    url: "input.trim() ? $('hiker://empty').lazyRule(params => {return 'toast://'+params.input}, {input: input.trim()}) : 'toast://请填写passport_csrf_token'",
                     col_type: "input"
                 })
                 setResult(d);
