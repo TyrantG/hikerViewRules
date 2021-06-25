@@ -156,13 +156,14 @@ const baseParse = _ => {
                         const login_url = "https://sso.douyin.com/get_qrcode/?service=https%3A%2F%2Fwww.douyin.com&need_logo=false&aid=6383"
                         let data_json = fetch(login_url, {headers:{"User-Agent": PC_UA}, withHeaders: true})
                         let data = JSON.parse(data_json)
+                        let info = JSON.parse(data.body)
                         let first_cookie = home_cookie.split(';').shift()
                         putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+data.headers["set-cookie"].join(';'))
 
-                        if (data.body.data) {
+                        if (info.data) {
                             d.push({
-                               pic_url: base64_title+data.body.data.qrcode,
-                               url: base64_title+data.body.data.qrcode,
+                               pic_url: base64_title+info.data.qrcode,
+                               url: base64_title+info.data.qrcode,
                                col_type: 'pic_1_full',
                            })
                         } else {
