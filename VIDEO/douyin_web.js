@@ -726,6 +726,8 @@ const videoParse = aweme => {
             }),
             col_type: 'text_2'
         })
+    } else {
+        setError(video_other_button)
     }
 
     if (video_other_button === '1') {
@@ -748,7 +750,6 @@ const videoParse = aweme => {
         } else {
             let data = JSON.parse(data_json)
             let list = data.aweme_list
-            setError(list)
 
             if (list && list.length > 0) {
                 // putVar("tyrantgenesis.douyin_web.search_max_cursor", data.max_cursor.toString())
@@ -771,7 +772,6 @@ const videoParse = aweme => {
     } else if (video_other_button === '2') {
 
     }
-
 
     setResult(d);
 }
