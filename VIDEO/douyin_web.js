@@ -2,9 +2,10 @@ const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
 
 const baseParse = _ => {
     let d = [];
-    let html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}})
+    let html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}, withHeaders: true})
+    setError(html)
     let current_page = MY_URL.split('##')[1].toString()
-    let category = parseDomForArray(html, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
+    let category = parseDomForArray(html.body, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
     let channels
 
     if (fetch(channels_path)) {
@@ -24,6 +25,7 @@ const baseParse = _ => {
     let channel_select = getVar("tyrantgenesis.douyin_web.channel_select", "0")
     let button_show = getVar("tyrantgenesis.douyin_web.button_show", "1") // 1:热门,2:直播,3:关注,4:收起,5:取消,6:置顶
     let max_cursor = getVar("tyrantgenesis.douyin_web.max_cursor", "")
+    let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie", "")
 
     let level_1_button_1_title = '',
         // level_1_button_2_title = '',
