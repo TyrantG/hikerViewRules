@@ -630,14 +630,6 @@ const videoParse = aweme => {
 
     if (current_page === '1') {
         d.push({
-            title: aweme.desc,
-            pic_url: aweme.video.cover.url_list.shift(),
-            desc: aweme.author.nickname,
-            url: MY_URL,
-            col_type: 'pic_1',
-        })
-
-        d.push({
             title: aweme.author.nickname,
             pic_url: aweme.author.avatar_thumb.url_list.shift(),
             desc: aweme.author.signature,
@@ -677,6 +669,14 @@ const videoParse = aweme => {
                 channels: channels,
             }),
             col_type: 'text_2'
+        })
+
+        d.push({
+            title: aweme.desc,
+            pic_url: aweme.video.cover.url_list.shift(),
+            desc: aweme.author.nickname,
+            url: MY_URL,
+            col_type: 'pic_1',
         })
 
         d.push({
