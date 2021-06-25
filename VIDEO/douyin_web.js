@@ -283,6 +283,7 @@ const baseParse = _ => {
                     title: live_1st_cate === '' ? '‘‘’’<strong><font color="red">热门直播</font></strong>' : '热门直播',
                     url: $("hiker://empty").lazyRule(_ => {
                         putVar("tyrantgenesis.douyin_web.live_1st_cate", "")
+                        putVar("tyrantgenesis.douyin_web.live_2nd_cate", "")
                         refreshPage(true)
                         return "hiker://empty"
                     }),
@@ -295,6 +296,7 @@ const baseParse = _ => {
                         title: live_1st_cate === cate_id.toString() ? '‘‘’’<strong><font color="red">'+title+'</font></strong>' : title,
                         url: $("hiker://empty").lazyRule(params => {
                             putVar("tyrantgenesis.douyin_web.live_1st_cate", params.cate_id.toString())
+                            putVar("tyrantgenesis.douyin_web.live_2nd_cate", "")
                             refreshPage(true)
                             return "hiker://empty"
                         }, {
