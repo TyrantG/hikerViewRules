@@ -124,6 +124,15 @@
             "rule": {"title":"ArtStation","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"https://www.artstation.com?page=fypage&t=1","col_type":"","class_name":"","class_url":"","area_name":"","area_url":"","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/IMAGE/artstation.js'))\nbaseParse()","search_url":"","searchFind":"","detail_col_type":"","detail_find_rule":"js:\neval(fetch('hiker://files/TyrantG/IMAGE/artstation.js'))\nsecParse()","sdetail_col_type":"","sdetail_find_rule":"","ua":"","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nartStation()"}
           }
         ]
+      },
+      {
+        "title": "设计",
+        "rules": [
+          {
+            "title": "Dribbble",
+            "rule": {"title":"Dribbble","author":"TyrantGenesis","version":"1","group":"⑳TyrantG","titleColor":"#bdb2ff","url":"https://dribbble.com/shots/fyarea/fyclass?page=fypage&per_page=24","col_type":"movie_2","class_name":"All&Animation&Branding&Illustration&Mobile&Print&Product Design&Typography&Web Design","class_url":"&animation&branding&illustration&mobile&print&product-design&typography&web-design","area_name":"Popular&New and Noteworthy","area_url":"popular&recent","year_name":"","year_url":"","sort_name":"","sort_url":"","find_rule":"ol&&.shot-thumbnail-container;\n.accessibility-text&&Text;\nimg&&src;\n.display-name&&Text;\n.shot-thumbnail-link&&href","search_url":"","searchFind":"ol&&.shot-thumbnail-container;\n.shot-title&&Text;\n.dribbble-link&&href;\n.display-name&&Text;\n;\nimg&&src","detail_col_type":"pic_1_full","detail_find_rule":".shot-image-color-palette-container&&.full-screen-page;\n;\nimg&&src.js:input.split('?')[0];\n;\nimg&&src.js:input.split('?')[0]","sdetail_col_type":"","sdetail_find_rule":"*","ua":"","preRule":""}
+          }
+        ]
       }
     ]
   },
