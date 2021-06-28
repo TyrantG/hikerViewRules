@@ -20,7 +20,8 @@ const baseParse = _ => {
         col_type: 'text_1'
     })
     d.push({
-        pic_url: 'https://test-homepage.dev.tyrantg.com/img/llll.gif',
+        pic_url: 'http://test-homepage.dev.tyrantg.com/img/llll.gif',
+        url: 'http://test-homepage.dev.tyrantg.com/img/llll.gif',
         col_type: 'pic_1_full'
     })
 
