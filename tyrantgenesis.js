@@ -15,6 +15,15 @@ const baseParse = _ => {
 
     eval(script);
 
+    d.push({
+        title: '跑路了，崩撤卖溜',
+        col_type: 'text_1'
+    })
+    d.push({
+        pic_url: 'https://test-homepage.dev.tyrantg.com/img/llll.gif',
+        col_type: 'pic_1_full'
+    })
+
     data.forEach(rule => {
         fst_rule_list = []
         rule.data.forEach(item => {
