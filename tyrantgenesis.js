@@ -17,6 +17,7 @@ const baseParse = _ => {
 
     d.push({
         title: '跑路了，崩撤卖溜',
+        url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules',
         col_type: 'text_1'
     })
     d.push({
