@@ -25,7 +25,7 @@ const secParse = _ => {
 
   const json = JSON.parse(fetch(url, {headers: {"User-Agent": PC_UA, "referer": MY_URL}}))
   const sources = json.sources.mp4
-  const prefix = json.sources.dash.auto.src
+  const prefix = json.sources.dash.auto.src.replace('/manifest.mpd', '')
   let i = 1
 
   for (let p in sources) {
@@ -34,6 +34,7 @@ const secParse = _ => {
       url: prefix+'/init-f'+i+'-v1-x3.mp4',
       col_type: 'text_2',
     })
+    i++
   }
 
   setResult(d);
