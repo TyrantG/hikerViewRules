@@ -6,7 +6,7 @@ const baseParse = _ => {
       d.push({
         title: parseDomForHtml(list[j], '.mbtit&&Text'),
         desc: parseDomForHtml(list[j], '.mvhdico&&Text'),
-        pic_url: parseDom(list[j], 'img&&src'),
+        pic_url: parseDom(list[j], 'img&&src')+"@Referer=",
         url: parseDom(list[j],'a&&href'),
       });
     }}catch(e){}
