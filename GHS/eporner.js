@@ -7,33 +7,36 @@ const baseParse = _ => {
         title: parseDomForHtml(list[j], '.mbtit&&Text'),
         desc: parseDomForHtml(list[j], '.mvhdico&&Text'),
         pic_url: parseDom(list[j], 'img&&src'),
-        url: $(parseDom(list[j],'a&&href')).lazyRule(_ => {
-          const hash_func = function (a) {
-            return parseInt(a.substring(0, 8), 16).toString(36) + parseInt(a.substring(8, 16), 16).toString(36) + parseInt(a.substring(16, 24), 16).toString(36) + parseInt(a.substring(24, 32), 16).toString(36)
-          }
-          const html = fetch(input)
-          const id = input.match(/\/video-.*\//)[0].replace(/\/video-/, '').replace(/\/.*/, '')
-
-          const hash = html.match(/EP\.video\.player\.hash = \'.*\';/)[0].replace(/EP\.video\.player\.hash = \'/, '').replace(/\';/, '')
-
-          const url = "https://www.eporner.com/xhr/video/"+id+"?hash="+hash_func(hash)+"&domain=www.eporner.com&fallback=false&embed=false&supportedFormats=dash,mp4&_="+(new Date()).getTime()
-
-          const json = JSON.parse(fetch(url))
-          const sources = json.sources.mp4
-
-          // const server = json.backupServers[0].replace('https://dash-', '')
-
-          let video_list = []
-
-          for (let p in sources) {
-            video_list.push(sources[p].src)
-          }
-
-          return "https://s5-n1-c2-fr-cdn.eporner.com" + video_list.shift().replace(/https.*com/, "")
-          //return parseDomForHtml(list[list.length-1], 'a&&href');
-        })
+        url: parseDom(list[j],'a&&href'),
       });
     }}catch(e){}
 
   setResult(d);
+}
+
+const secParse = _ => {
+  let d = [];
+  const html = fetch(MY_URL)
+  const id = input.match(/\/video-.*\//)[0].replace(/\/video-/, '').replace(/\/.*/, '')
+
+  const hash = html.match(/EP\.video\.player\.hash = \'(.*?)\';/)[1]
+
+  const url = "https://www.eporner.com/xhr/video/"+id+"?hash="+hash_func(hash)+"&domain=www.eporner.com&fallback=false&embed=false&supportedFormats=dash,mp4&_="+(new Date()).getTime()
+
+  const json = JSON.parse(fetch(url))
+  const sources = json.sources.mp4
+
+  for (let p in sources) {
+    d.push({
+      title: sources[p].labelShort,
+      url: sources[p].src,
+      col_type: 'text_2',
+    })
+  }
+
+  setResult(d);
+}
+
+const hash_func = a => {
+  return parseInt(a.substring(0, 8), 16).toString(36) + parseInt(a.substring(8, 16), 16).toString(36) + parseInt(a.substring(16, 24), 16).toString(36) + parseInt(a.substring(24, 32), 16).toString(36)
 }
