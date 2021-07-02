@@ -17,7 +17,7 @@ const baseParse = _ => {
 const secParse = _ => {
   let d = [];
   const html = fetch(MY_URL)
-  const id = input.match(/\/video-.*\//)[0].replace(/\/video-/, '').replace(/\/.*/, '')
+  const id = MY_URL.match(/\/video-.*\//)[0].replace(/\/video-/, '').replace(/\/.*/, '')
 
   const hash = html.match(/EP\.video\.player\.hash = \'(.*?)\';/)[1]
 
