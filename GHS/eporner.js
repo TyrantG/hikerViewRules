@@ -23,7 +23,7 @@ const secParse = _ => {
 
   const url = "https://www.eporner.com/xhr/video/"+id+"?hash="+hash_func(hash)+"&domain=www.eporner.com&fallback=false&embed=false&supportedFormats=dash,mp4&_="+(new Date()).getTime()
 
-  const json = JSON.parse(fetch(url))
+  const json = JSON.parse(fetch(url, {headers: {"User-Agent": PC_UA, "referer": MY_URL}}))
   const sources = json.sources.mp4
 
   for (let p in sources) {
