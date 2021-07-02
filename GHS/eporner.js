@@ -25,11 +25,13 @@ const secParse = _ => {
 
   const json = JSON.parse(fetch(url, {headers: {"User-Agent": PC_UA, "referer": MY_URL}}))
   const sources = json.sources.mp4
+  const prefix = json.sources.dash.auto.src
+  let i = 1
 
   for (let p in sources) {
     d.push({
       title: sources[p].labelShort,
-      url: sources[p].src,
+      url: prefix+'/init-f'+i+'-v1-x3.mp4',
       col_type: 'text_2',
     })
   }
