@@ -20,7 +20,7 @@ const secParse = _ => {
 
   list.forEach(item => {
     d.push({
-      title: parseDomForHtml(item, 'a&&Text'),
+      title: parseDomForHtml(item, 'a&&Text').match(/\((.*?),/)[1],
       url: parseDom(item,'a&&href'),
     });
   })
