@@ -22,6 +22,7 @@ const secParse = _ => {
     d.push({
       title: parseDomForHtml(item, 'a&&Text').match(/\((.*?),/)[1],
       url: parseDom(item,'a&&href'),
+      col_type: 'text_2',
     });
   })
 
