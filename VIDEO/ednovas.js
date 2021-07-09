@@ -88,7 +88,7 @@ const baseParse = _ => {
       }
     })
 
-    const by_cate = parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], 'h2')[0]
+    const by_cate = parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], 'h2&&a')[0]
     by_cate.forEach((item, index) => {
       let title = parseDomForHtml(item, 'a&&Text')
       d.push({
