@@ -109,11 +109,10 @@ const baseParse = _ => {
         col_type: 'scroll_button',
       })
     })
+    d.push({
+      col_type:"blank_block"
+    });*/
   }
-
-  d.push({
-    col_type:"blank_block"
-  });*/
 
   const video_list = parseDomForArray(parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], '.mo-cols-lays&&.mo-cols-rows')[1], 'ul&&li')
   video_list.forEach(video => {
