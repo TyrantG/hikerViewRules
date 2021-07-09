@@ -88,7 +88,7 @@ const baseParse = _ => {
       }
     })
 
-    const by_cate = parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], 'h2&&a')
+    /*const by_cate = parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], 'h2&&a')
     by_cate.forEach((item, index) => {
       let title = parseDomForHtml(item, 'a&&Text')
       d.push({
@@ -113,7 +113,7 @@ const baseParse = _ => {
 
   d.push({
     col_type:"blank_block"
-  });
+  });*/
 
   const video_list = parseDomForArray(parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], '.mo-cols-lays&&.mo-cols-rows')[1], 'ul&&li')
   video_list.forEach(video => {
