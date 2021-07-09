@@ -9,7 +9,7 @@ const secParse = _ => {
 
   const fetch_video = fetch(parseDomForHtml(html, 'iframe&&src'))
 
-  const src = fetch_video.match(/src.*',/)[0].replace('src: \'', '').replace('\',', '')
+  const src = fetch_video.match(/src: '(.*?)',/)[1]
 
   d.push({
     title: des_title,
