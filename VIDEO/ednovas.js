@@ -22,13 +22,13 @@ const baseParse = _ => {
 
   if (parseInt(page) === 1) {
     d.push({
-      title: fold === '1' ? '隐藏分类' : '展开分类',
+      title: fold === '1' ?  '““””<b><span style="color: #FF0000">∨</span></b>': '““””<b><span style="color: #1aad19">∧</span></b>',
       url: $(empty).lazyRule((fold) => {
         putVar("tyrantgenesis.ednovas.fold", fold === '1' ? '0' : '1');
         refreshPage(false);
         return "hiker://empty"
       }, fold),
-      col_type: 'text_center_1',
+      col_type: 'scroll_button',
     })
 
 
