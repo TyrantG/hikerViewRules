@@ -88,9 +88,10 @@ const baseParse = _ => {
       }
     })
 
-    /*const by_cate = parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], 'h2&&a')
-    by_cate.forEach((item, index) => {
+    const by_cate = parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], 'h2&&a')
+    by_cate.forEach((item, key) => {
       let title = parseDomForHtml(item, 'a&&Text')
+      let index = 15
       d.push({
         title: key.toString()===cate_temp[index]? "““"+title+"””":title,
         url: $(parseDom(item, 'a&&href')).lazyRule((params) => {
@@ -111,7 +112,7 @@ const baseParse = _ => {
     })
     d.push({
       col_type:"blank_block"
-    });*/
+    });
   }
 
   const video_list = parseDomForArray(parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], '.mo-cols-lays&&.mo-cols-rows')[1], 'ul&&li')
