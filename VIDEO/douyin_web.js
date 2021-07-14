@@ -560,7 +560,7 @@ const searchParse = _ => {
             let true_url = not_sign_url + "&_signature="+sign
             let data_json = fetch(true_url, {
                 headers: {
-                    "referer" : "https://www.douyin.com/",
+                    "referer" : "https://www.douyin.com/search/"+encodeURIComponent(params.input)+"?source=normal_search&aid=3e8899ee-879c-4f85-b666-1009462412c4&enter_from=main_page",
                     "cookie": home_cookie,
                 }
             })
