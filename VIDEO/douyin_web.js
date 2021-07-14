@@ -266,7 +266,7 @@ const baseParse = _ => {
                     list.forEach(item => {
                         d.push({
                             title: item.desc,
-                            pic_url: item.video.cover.url_list.shift(),
+                            pic_url: item.video.cover.url_list[0],
                             desc: item.author.nickname,
                             url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(item => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
