@@ -266,7 +266,7 @@ const baseParse = _ => {
                     list.forEach(item => {
                         d.push({
                             title: item.desc,
-                            pic_url: item.video.cover.url_list.shift(),
+                            pic_url: item.video.cover.url_list[0],
                             desc: item.author.nickname,
                             url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(item => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
@@ -379,7 +379,7 @@ const baseParse = _ => {
                         let m3u8 = room.stream_url.hls_pull_url_map || room.stream_url.flv_pull_url
                         d.push({
                             title: room.title,
-                            pic_url: room.cover.url_list.shift(),
+                            pic_url: room.cover.url_list[0],
                             desc: room.owner.nickname,
                             url: m3u8[Object.keys(m3u8)[0]],
                             col_type: 'movie_2',
@@ -445,9 +445,9 @@ const baseParse = _ => {
                     list.forEach(item => {
                         d.push({
                             title: item.desc,
-                            pic_url: item.video.cover.url_list.shift(),
+                            pic_url: item.video.cover.url_list[0],
                             desc: item.author.nickname,
-                            url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
+                            url: item.video.play_addr.url_list[0] + "#isVideo=true#",
                             col_type: 'movie_2',
                         })
                     })
@@ -523,9 +523,9 @@ const baseParse = _ => {
                     list.forEach(item => {
                         d.push({
                             title: item.desc,
-                            pic_url: item.video.cover.url_list.shift(),
+                            pic_url: item.video.cover.url_list[0],
                             desc: item.author.nickname,
-                            url: item.video.play_addr.url_list.shift() + "#isVideo=true#",
+                            url: item.video.play_addr.url_list[0] + "#isVideo=true#",
                             col_type: 'movie_2',
                         })
                     })
@@ -573,7 +573,7 @@ const searchParse = _ => {
                         let aweme = item.aweme_info
                         d.push({
                             title: aweme.desc,
-                            pic_url: aweme.video.cover.url_list.shift(),
+                            pic_url: aweme.video.cover.url_list[0],
                             desc: aweme.author.nickname,
                             url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(aweme => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
@@ -628,7 +628,7 @@ const searchParse = _ => {
                         let userinfo = item.user_info
                         d.push({
                             title: userinfo.nickname,
-                            pic_url: userinfo.avatar_thumb.url_list.shift(),
+                            pic_url: userinfo.avatar_thumb.url_list[0],
                             desc: userinfo.signature,
                             url: $("https://www.douyin.com/user/"+userinfo.sec_uid+'##fypage').rule(userinfo => {
                                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
@@ -675,7 +675,7 @@ const userParse = userinfo => {
         max_cursor = ''
         d.push({
             title: userinfo.nickname,
-            pic_url: userinfo.avatar_thumb.url_list.shift(),
+            pic_url: userinfo.avatar_thumb.url_list[0],
             url: MY_URL,
             col_type: 'icon_2_round'
         })
@@ -737,7 +737,7 @@ const userParse = userinfo => {
             list.forEach(item => {
                 d.push({
                     title: item.desc,
-                    pic_url: item.video.cover.url_list.shift(),
+                    pic_url: item.video.cover.url_list[0],
                     // desc: '',
                     url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(aweme => {
                         eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
@@ -765,7 +765,7 @@ const videoParse = aweme => {
     if (current_page === 1) {
         d.push({
             title: aweme.author.nickname,
-            pic_url: aweme.author.avatar_thumb.url_list.shift(),
+            pic_url: aweme.author.avatar_thumb.url_list[0],
             desc: aweme.author.signature,
             url: $("https://www.douyin.com/user/"+aweme.author.sec_uid+'##fypage').rule(userinfo => {
                 eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
@@ -791,7 +791,7 @@ const videoParse = aweme => {
                     params.channels.push({
                         title: params.author.nickname,
                         sec_uid: params.author.sec_uid,
-                        avatar_url: params.author.avatar_thumb.url_list.shift(),
+                        avatar_url: params.author.avatar_thumb.url_list[0],
                     })
                     writeFile(channels_path, JSON.stringify(params.channels))
                     refreshPage(false)
@@ -891,7 +891,7 @@ const videoParse = aweme => {
                 list.forEach(item => {
                     d.push({
                         title: item.desc,
-                        pic_url: item.video.cover.url_list.shift(),
+                        pic_url: item.video.cover.url_list[0],
                         // desc: '',
                         url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(aweme => {
                             eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
@@ -941,7 +941,7 @@ const saveCookie = sessionid => {
     const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
     let home_cookie = request(douyin_cookie)
     // let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
-    let first_cookie = home_cookie.split(';').shift()
+    let first_cookie = home_cookie.split(';')[0]
     let new_cookie = 'sessionid='+sessionid
 
 
