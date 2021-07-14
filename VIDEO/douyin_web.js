@@ -665,10 +665,10 @@ const userParse = userinfo => {
     let max_cursor = getVar("tyrantgenesis.douyin_web.search_max_cursor", "")
 
     if (parseInt(page) === 1) {
-        let html = fetch(user_url, {headers:{"User-Agent": PC_UA, 'cookie': home_cookie}})
+        let html = fetch(user_url, {headers:{"User-Agent": PC_UA}})
         max_cursor = html.match(/%22maxCursor%22%3A(.*?)%2C%22/)
 
-        setError(html)
+        setError(MY_URL.split('##'))
         return false
         d.push({
             title: userinfo.nickname,
