@@ -666,11 +666,8 @@ const userParse = userinfo => {
 
     if (parseInt(page) === 1) {
         let html = fetch(user_url, {headers:{"User-Agent": PC_UA}})
-        // max_cursor = html.match(/%22maxCursor%22%3A(.*?)%2C%22/)[1]
-
-
-        setError(html)
-        return false
+        max_cursor = html.match(/%22maxCursor%22%3A(.*?)%2C%22/)[1]
+        
         d.push({
             title: userinfo.nickname,
             pic_url: userinfo.avatar_thumb.url_list.shift(),
