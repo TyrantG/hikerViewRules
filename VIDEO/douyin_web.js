@@ -1,15 +1,17 @@
 const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
+const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
 
 const baseParse = _ => {
     let d = [], category, html
-    let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
+    let home_cookie = request(douyin_cookie)
     if (home_cookie) {
         html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}})
     } else {
         html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}, withHeaders: true})
         html = JSON.parse(html)
         home_cookie = html.headers["set-cookie"][0].split(';')[0]
-        putVar("tyrantgenesis.douyin_web.home_cookie", home_cookie)
+        writeFile(douyin_cookie, home_cookie)
+        // putVar("tyrantgenesis.douyin_web.home_cookie", home_cookie)
         html = html.body
     }
 
@@ -541,7 +543,9 @@ const searchParse = _ => {
     d.push({
         title: "搜索视频-关键词："+input,
         url: $("hiker://empty##fypage").rule(params => {
-            let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
+            const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
+            let home_cookie = request(douyin_cookie)
+            // let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
             let d = [];
             let current_page = parseInt(MY_URL.split('##')[1])
             let page = 20
@@ -593,7 +597,9 @@ const searchParse = _ => {
     d.push({
         title: "搜索用户-关键词："+input,
         url: $("hiker://empty##fypage").rule(params => {
-            let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
+            const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
+            let home_cookie = request(douyin_cookie)
+            // let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
             let d = [];
             let current_page = parseInt(MY_URL.split('##')[1])
             let page = 30
@@ -647,7 +653,9 @@ const searchParse = _ => {
 }
 
 const userParse = userinfo => {
-    let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
+    const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
+    let home_cookie = request(douyin_cookie)
+    // let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
     let uid = userinfo.sec_uid
     let channels_json = request(channels_path)
     let channels = JSON.parse(channels_json)
@@ -741,7 +749,9 @@ const userParse = userinfo => {
 
 const videoParse = aweme => {
     let d = [];
-    let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
+    const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
+    let home_cookie = request(douyin_cookie)
+    // let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
     let channels_json = request(channels_path)
     let channels = JSON.parse(channels_json)
     let current_page = parseInt(MY_URL.split('##')[1])
@@ -923,11 +933,15 @@ const videoParse = aweme => {
 }
 
 const saveCookie = sessionid => {
-    let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
+    const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
+    let home_cookie = request(douyin_cookie)
+    // let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
     let first_cookie = home_cookie.split(';').shift()
     let new_cookie = 'sessionid='+sessionid
 
-    putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+new_cookie)
+
+    writeFile(douyin_cookie, first_cookie+';'+new_cookie)
+    // putVar("tyrantgenesis.douyin_web.home_cookie", first_cookie+';'+new_cookie)
 
     refreshPage(true)
     return "toast://设置成功"
