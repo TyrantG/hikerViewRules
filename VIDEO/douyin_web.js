@@ -694,7 +694,7 @@ const userParse = userinfo => {
                     params.channels.push({
                         title: params.author.nickname,
                         sec_uid: params.author.sec_uid,
-                        avatar_url: params.author.avatar_thumb.url_list.shift(),
+                        avatar_url: params.author.avatar_thumb.url_list[0],
                     })
                     writeFile(channels_path, JSON.stringify(params.channels))
                     refreshPage(false)
@@ -804,7 +804,7 @@ const videoParse = aweme => {
 
         d.push({
             title: aweme.desc,
-            pic_url: aweme.video.cover.url_list.shift(),
+            pic_url: aweme.video.cover.url_list[0],
             desc: aweme.author.nickname,
             url: MY_URL,
             col_type: 'pic_1',
