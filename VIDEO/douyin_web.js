@@ -669,7 +669,7 @@ const userParse = userinfo => {
         max_cursor = html.match(/%22maxCursor%22%3A(.*?)%2C%22/)
 
 
-        setError(max_cursor)
+        setError(html)
         return false
         d.push({
             title: userinfo.nickname,
