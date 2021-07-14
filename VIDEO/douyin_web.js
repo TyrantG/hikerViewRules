@@ -540,7 +540,7 @@ const baseParse = _ => {
     setResult(d);
 }
 
-const searchParse = _ => {
+/*const searchParse = _ => {
     let d = [];
     let input = MY_URL.split('##')[1].toString()
 
@@ -654,6 +654,57 @@ const searchParse = _ => {
             input: input
         }),
     })
+    setResult(d);
+}*/
+
+const searchParse = _ => {
+    const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
+    let home_cookie = request(douyin_cookie)
+    // let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
+    let d = [];
+    let current_page = parseInt(MY_URL.split('##')[1])
+    let page = 30
+    let offset = (current_page - 1) * page
+    let not_sign_url = "https://www.douyin.com/aweme/v1/web/discover/search/?device_platform=webapp&aid=6383&channel=channel_pc_web&search_channel=aweme_user_web&keyword="+encodeURIComponent(params.input)+"&search_source=normal_search&query_correct_type=1&is_filter_search=0&offset="+offset+"&count="+page+"&version_code=160100&version_name=16.1.0"
+    let sign = fetch("http://douyin_signature.dev.tyrantg.com?url="+encodeURIComponent(not_sign_url))
+    let true_url = not_sign_url + "&_signature="+sign
+
+    let data_json = fetch(true_url, {
+        headers: {
+            "referer" : "https://www.douyin.com/",
+            "cookie": home_cookie,
+        }
+    })
+    if (data_json === 'Need Verifying') {
+        d.push({
+            title: 'signature 获取失败，待修复',
+            col_type: "long_text",
+        })
+    } else {
+        let list = JSON.parse(data_json).user_list
+        if (list && list.length > 0) {
+            list.forEach(item => {
+                let userinfo = item.user_info
+                d.push({
+                    title: userinfo.nickname,
+                    pic_url: userinfo.avatar_thumb.url_list[0],
+                    desc: userinfo.signature,
+                    url: $("https://www.douyin.com/user/"+userinfo.sec_uid+'##fypage').rule(userinfo => {
+                        eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
+                        userParse(userinfo)
+                    }, userinfo),
+                    col_type: 'icon_2_round',
+                })
+            })
+        }
+
+        if (list && list.length === 0 && current_page === 2) {
+            d.push({
+                title: "抖音接口限制，在设置里填写token模拟后可搜索更多",
+                col_type: "long_text",
+            })
+        }
+    }
     setResult(d);
 }
 
