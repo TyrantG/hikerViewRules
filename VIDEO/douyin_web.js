@@ -297,18 +297,20 @@ const baseParse = _ => {
                 cate_1st_list.forEach(cate => {
                     let cate_id = parseDomForHtml(cate, '.a18585314085fd46d4da4b236d3d2903-scss&&href').split('/').pop()
                     let title = parseDomForHtml(cate, 'h2&&Text')
-                    d.push({
-                        title: live_1st_cate === cate_id.toString() ? '‘‘’’<strong><font color="red">'+title+'</font></strong>' : title,
-                        url: $("hiker://empty").lazyRule(params => {
-                            putVar("tyrantgenesis.douyin_web.live_1st_cate", params.cate_id.toString())
-                            putVar("tyrantgenesis.douyin_web.live_2nd_cate", "")
-                            refreshPage(true)
-                            return "hiker://empty"
-                        }, {
-                            cate_id: cate_id
-                        }),
-                        col_type: 'scroll_button',
-                    })
+                    if (title !== '热门直播') {
+                        d.push({
+                            title: live_1st_cate === cate_id.toString() ? '‘‘’’<strong><font color="red">'+title+'</font></strong>' : title,
+                            url: $("hiker://empty").lazyRule(params => {
+                                putVar("tyrantgenesis.douyin_web.live_1st_cate", params.cate_id.toString())
+                                putVar("tyrantgenesis.douyin_web.live_2nd_cate", "")
+                                refreshPage(true)
+                                return "hiker://empty"
+                            }, {
+                                cate_id: cate_id
+                            }),
+                            col_type: 'scroll_button',
+                        })
+                    }
                 })
                 d.push({
                     col_type:"blank_block"
