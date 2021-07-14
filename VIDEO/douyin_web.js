@@ -668,7 +668,7 @@ const userParse = userinfo => {
         // let html = fetch(user_url, {headers:{"User-Agent": PC_UA}})
         max_cursor = getResCode().match(/%22maxCursor%22%3A(.*?)%2C%22/)
 
-        setError(max_cursor)
+        setError(getResCode())
         return false
         d.push({
             title: userinfo.nickname,
