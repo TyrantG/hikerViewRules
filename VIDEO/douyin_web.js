@@ -14,7 +14,7 @@ const baseParse = _ => {
         // putVar("tyrantgenesis.douyin_web.home_cookie", home_cookie)
         html = html.body
     }
-
+setError(html.match(/验证码中间页/))
     if (html.match(/验证码中间页/)[0]) {
         d.push({
             desc: '90% && float',
