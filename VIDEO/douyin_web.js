@@ -17,9 +17,17 @@ const baseParse = _ => {
 
     if (html.match(/验证码中间页/)[0]) {
         d.push({
-            desc: '100% && float',
+            desc: '90% && float',
             url: 'https://www.douyin.com',
             col_type:"x5_webview_single"
+        })
+        d.push({
+            title: '重新加载',
+            url: $().lazyRule(_ => {
+                refreshPage(true)
+                return "hiker://empty"
+            }),
+            col_type:"text_center_1"
         })
     } else {
         let current_page = MY_URL.split('##')[1].toString()
