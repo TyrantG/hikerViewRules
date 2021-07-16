@@ -16,7 +16,11 @@ const baseParse = _ => {
     }
 
     if (html.match(/验证码中间页/)[0]) {
-
+        d.push({
+            desc: '100% && float',
+            url: 'https://www.douyin.com',
+            col_type:"x5_webview_single"
+        })
     } else {
         let current_page = MY_URL.split('##')[1].toString()
         let channels
