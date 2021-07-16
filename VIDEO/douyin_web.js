@@ -17,7 +17,7 @@ const baseParse = _ => {
 
     if (html.match(/验证码中间页/)[0]) {
         d.push({
-            desc: '90% && list',
+            desc: '600 && list',
             url: 'https://www.douyin.com',
             col_type:"x5_webview_single"
         })
