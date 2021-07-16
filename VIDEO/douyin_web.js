@@ -216,8 +216,8 @@ const baseParse = _ => {
     switch (button_show) {
         case "1": {
             if (current_page === '1') {
+                setError(html)
                 category = parseDomForArray(html, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
-                setError(category)
                 d.push({
                     title: cate_select === '' ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
                     url: $("hiker://empty").lazyRule(_ => {
