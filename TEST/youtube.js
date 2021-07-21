@@ -374,6 +374,13 @@ const secParse = params => {
         })
     })*/
 
+    const cookie = fetchCookie("https://www.y2mate.com/", {
+        headers: {
+            "User-Agent": PC_UA
+        },
+        withHeaders: true
+    })
+    setError(cookie)
 
     const videoParse = fetch("https://www.y2mate.com/mates/analyze/ajax", {
         headers: {
