@@ -384,15 +384,33 @@ const secParse = params => {
 
     const html = JSON.parse(videoParse).result
 
+    const id_res = html.match(/var k__id = \\"(.*?)\\"/)
+    const _id = id_res ? id_res[1] : ''
+    setError(_id)
+
     const video_list = parseDomForArray(html, 'tbody&&tr')
     video_list.forEach(video => {
-        let quality = parseDomForHtml(video, 'a[rel=nofollow]&&Text').replace(/p.*/, '')
+        let quality = parseDomForHtml(video, 'a&&Text').replace(/p.*/, '')
         d.push({
             title: quality + 'P',
-            url: parseDomForHtml(video, 'a&&href'),
+            url: $("").lazyRule(params => {
+                /*const videoParse = fetch("https://www.y2mate.com/mates/analyze/ajax", {
+                    headers: {
+                        "User-Agent": PC_UA,
+                    },
+                    body: 'type=youtube&ftype=mp4&ajax=1',
+                    method: 'POST'
+                })*/
+            }, {
+                v_id: params.video_id,
+                fquality: quality,
+                _id: _id,
+            }),
             col_type: 'text_2'
         })
     })
+
+    d.pop()
 
     setResult(d);
 }
