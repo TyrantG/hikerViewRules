@@ -60,7 +60,9 @@ const baseParse = _ => {
 const secParse = _ => {
     let rid = MY_URL.split('/').pop()
     let html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}})
-    let liveLineUrl = html.match(/\"liveLineUrl\":\"(.*?)\",\"isFace/)[1]
+    // let liveLineUrl = html.match(/\"liveLineUrl\":\"(.*?)\",\"isFace/)[1]
+    let live_json= html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
+    setError(live_json)
 
     let live_url = base64Decode(liveLineUrl)
     let source
@@ -73,17 +75,6 @@ const secParse = _ => {
     } catch (e) {
 
     }
-
-    /*let info = {};
-    let subsid_array = html.match(/var SUBSID = '(.*)';/);
-    let topsid_array = html.match(/var TOPSID = '(.*)';/);
-    let yyuid_array = html.match(/ayyuid: '(.*)',/);
-    let anthor_nick = html.match(/var ANTHOR_NICK = '(.*)';/)
-    info.subsid = subsid_array[1] === '' ? 0 : parseInt(subsid_array[1]);
-    info.topsid = topsid_array[1] === '' ? 0 : parseInt(topsid_array[1]);
-    info.yyuid = parseInt(yyuid_array[1]);
-    info.sGuid = "";
-    info.anthor_nick = anthor_nick[1] === '' ? '' : anthor_nick[1];*/
 
     let d = [];
     d.push({
