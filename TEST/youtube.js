@@ -385,9 +385,15 @@ const secParse = params => {
     const html = JSON.parse(videoParse).result
 
     const video_list = parseDomForArray(html, 'tbody&&tr')
-    setError(video_list)
-
-
+    video_list.forEach(video => {
+        let quality = parseDomForHtml(video, 'a&&Text').replace(/p.*/, '')
+        d.push({
+            title: quality + 'P',
+            url: parseDomForHtml(video, 'a&&href'),
+            col_type: 'text_2'
+        })
+    })
+    
     setResult(d);
 }
 
