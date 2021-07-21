@@ -393,7 +393,7 @@ const secParse = params => {
         d.push({
             title: quality + 'P',
             url: $("").lazyRule(params => {
-                const videoParse = fetch("https://www.y2mate.com/mates/analyze/ajax", {
+                const videoParse = fetch("https://www.y2mate.com/mates/convert", {
                     headers: {
                         "User-Agent": PC_UA,
                     },
