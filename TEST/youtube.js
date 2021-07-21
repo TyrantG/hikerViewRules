@@ -386,14 +386,14 @@ const secParse = params => {
 
     const video_list = parseDomForArray(html, 'tbody&&tr')
     video_list.forEach(video => {
-        let quality = parseDomForHtml(video, 'a&&Text').replace(/p.*/, '')
+        let quality = parseDomForHtml(video, '[rel=nofollow]&&Text').replace(/p.*/, '')
         d.push({
             title: quality + 'P',
             url: parseDomForHtml(video, 'a&&href'),
             col_type: 'text_2'
         })
     })
-    
+
     setResult(d);
 }
 
