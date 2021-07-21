@@ -382,7 +382,11 @@ const secParse = params => {
         method: 'POST'
     })
 
-    setError(JSON.parse(videoParse).result)
+    const html = JSON.parse(videoParse).result
+
+    const video_list = parseDomForArray(html, 'tbody&&tr')
+    setError(video_list)
+
 
     setResult(d);
 }
