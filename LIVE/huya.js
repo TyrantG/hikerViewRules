@@ -59,17 +59,16 @@ const baseParse = _ => {
 
 const secParse = _ => {
     let rid = MY_URL.split('/').pop()
-    let html = fetch(MY_URL, {headers:{"User-Agent":MOBILE_UA}})
+    let html = fetch(MY_URL, {headers:{"User-Agent": MOBILE_UA}})
     // let liveLineUrl = html.match(/\"liveLineUrl\":\"(.*?)\",\"isFace/)[1]
-    let live_json= html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
-    setError(live_json)
-
-    let source
+    let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
+    let live  = JSON.parse(live_json)
+    let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
 
     let d = [];
     d.push({
         title: "直接观看",
-        url: source,
+        url: streamInfo,
         col_type: 'text_2',
     })
     /*d.push({
