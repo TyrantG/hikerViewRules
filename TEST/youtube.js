@@ -386,7 +386,6 @@ const secParse = params => {
 
     const id_res = html.match(/var k__id = "(.*?)"/)
     const _id = id_res ? id_res[1] : ''
-    setError(_id)
 
     const video_list = parseDomForArray(html, 'tbody&&tr')
     video_list.forEach(video => {
@@ -394,13 +393,15 @@ const secParse = params => {
         d.push({
             title: quality + 'P',
             url: $("").lazyRule(params => {
-                /*const videoParse = fetch("https://www.y2mate.com/mates/analyze/ajax", {
+                const videoParse = fetch("https://www.y2mate.com/mates/analyze/ajax", {
                     headers: {
                         "User-Agent": PC_UA,
                     },
-                    body: 'type=youtube&ftype=mp4&ajax=1',
+                    body: 'type=youtube&ftype=mp4&ajax=1&v_id='+params.v_id+'&fquality='+params.fquality+'&_id='+params._id,
                     method: 'POST'
-                })*/
+                })
+
+                return JSON.parse(videoParse).result
             }, {
                 v_id: params.video_id,
                 fquality: quality,
