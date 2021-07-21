@@ -384,7 +384,7 @@ const secParse = params => {
 
     const html = JSON.parse(videoParse).result
 
-    const id_res = html.match(/var k__id = \\"(.*?)\\"/)
+    const id_res = html.match(/var k__id = "(.*?)"/)
     const _id = id_res ? id_res[1] : ''
     setError(_id)
 
