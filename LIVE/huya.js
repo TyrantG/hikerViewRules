@@ -66,11 +66,15 @@ const secParse = _ => {
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
 
     let d = [];
-    d.push({
-        title: "直接观看",
-        url: streamInfo,
-        col_type: 'text_2',
+
+    streamInfo.forEach(info => {
+        d.push({
+            title: info.sCdnType,
+            url: info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode,
+            col_type: 'text_2',
+        })
     })
+
     /*d.push({
         title: "弹幕播放器（测试）",
         url: $(source).rule(params => {
