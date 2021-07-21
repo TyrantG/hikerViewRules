@@ -382,7 +382,7 @@ const secParse = params => {
         method: 'POST'
     })
 
-    setError(videoParse.result)
+    setError(JSON.parse(videoParse).result)
 
     setResult(d);
 }
