@@ -401,7 +401,7 @@ const secParse = params => {
                     method: 'POST'
                 })
 
-                return JSON.parse(videoParse).result
+                return videoParse
             }, {
                 v_id: params.video_id,
                 fquality: quality,
