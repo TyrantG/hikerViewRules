@@ -383,9 +383,10 @@ const secParse = params => {
 
     const videoParse = fetch("https://www.y2mate.com/mates/analyze/ajax", {
         headers: {
-            origin: 'https://www.y2mate.com',
-            referer: 'https://www.y2mate.com/youtube/'+params.video_id,
-            cookie: cookie[0],
+            "User-Agent": PC_UA,
+            "origin": 'https://www.y2mate.com',
+            "referer": 'https://www.y2mate.com/youtube/'+params.video_id,
+            "cookie": cookie[0],
         },
         body: 'ajax=1&q_auto=1&url='+ori_url,
         method: 'POST'
