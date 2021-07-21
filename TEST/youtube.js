@@ -403,7 +403,7 @@ const secParse = params => {
 
                 const html = JSON.parse(videoParse).result
 
-                return html.match(/<a href="(.*?)"/)[1]
+                return html.match(/<a href="(.*?)"/)[1]+"#isVideo=true#"
             }, {
                 v_id: params.video_id,
                 fquality: quality,
