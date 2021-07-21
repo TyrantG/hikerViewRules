@@ -401,7 +401,7 @@ const secParse = params => {
                     method: 'POST'
                 })
 
-                return videoParse
+                setError(videoParse)
             }, {
                 v_id: params.video_id,
                 fquality: quality,
