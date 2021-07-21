@@ -46,7 +46,10 @@ const baseParse = _ => {
                     title: item.sTitle,
                     desc: item.sNickName,
                     pic_url: item.sCoverUrl,
-                    url: item.sAction,
+                    url: $(item.sAction).lazyRule( _ => {
+                        eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
+                        return secParse()
+                    }),
                     col_type: 'movie_2'
                 })
             })
@@ -58,42 +61,22 @@ const baseParse = _ => {
 }
 
 const secParse = _ => {
-    let rid = MY_URL.split('/').pop()
-    let html = fetch(MY_URL, {headers:{"User-Agent": MOBILE_UA}})
-    // let liveLineUrl = html.match(/\"liveLineUrl\":\"(.*?)\",\"isFace/)[1]
+    let rid = input.split('/').pop()
+    let html = fetch(input, {headers:{"User-Agent": MOBILE_UA}})
+
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
 
-    let d = [];
+    let liva_url
 
     streamInfo.forEach(info => {
-        d.push({
-            title: info.sCdnType,
-            url: info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode,
-            col_type: 'text_2',
-        })
+        if (info.sCdnType === 'TX') {
+            liva_url = info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
+        }
     })
 
-    /*d.push({
-        title: "弹幕播放器（测试）",
-        url: $(source).rule(params => {
-            let d = [];
-            d.push({
-                desc: '100% && float',
-                url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-player.html?time='+(new Date()).getTime()+'&rid='+params.rid+'&source='+encodeURIComponent(params.source)+'&info='+encodeURIComponent(JSON.stringify(params.info)),
-                col_type:"x5_webview_single",
-            })
-            setResult(d);
-        }, {
-            source: source,
-            info: info,
-            rid: rid
-        }),
-        col_type: 'text_2',
-    })*/
-    setResult(d);
-
+    return liva_url
 }
 
 const categoryParse = index =>{
@@ -110,9 +93,9 @@ const categoryParse = index =>{
             title: item.introduction,
             desc: item.nick,
             pic_url: item.screenshot,
-            url: $("https://m.huya.com/"+item.profileRoom).rule(_ => {
+            url: $("https://m.huya.com/"+item.profileRoom).lazyRule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
-                secParse()
+                return secParse()
             }),
             col_type: 'movie_2'
         })
@@ -134,7 +117,10 @@ const searchParse = () => {
             title: item.game_roomName,
             desc: item.game_nick,
             pic_url: item.game_screenshot,
-            url: "https://m.huya.com/"+item.room_id,
+            url: $("https://m.huya.com/"+item.room_id).lazyRule(_ => {
+                eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
+                return secParse()
+            }),
             col_type: 'movie_2'
         })
     })
