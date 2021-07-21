@@ -64,17 +64,7 @@ const secParse = _ => {
     let live_json= html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     setError(live_json)
 
-    let live_url = base64Decode(liveLineUrl)
     let source
-    try {
-        if (live_url.match(/replay/)) {
-            source = base64Decode(liveLineUrl)
-        } else {
-            source = getRealUrl(live_url)
-        }
-    } catch (e) {
-
-    }
 
     let d = [];
     d.push({
