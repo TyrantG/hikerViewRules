@@ -405,7 +405,7 @@ const secParse = params => {
 
                 const url_res = html.match(/<a href="(.*?)"/)
 
-                return url_res ? html.match(/<a href="(.*?)"/)[1]+"#isVideo=true#" : "toast://该清晰度解析失败，请使用更低清晰度"
+                return url_res ? url_res[1]+"#isVideo=true#" : "toast://该清晰度解析失败，请使用更低清晰度"
             }, {
                 v_id: params.video_id,
                 fquality: quality,
