@@ -401,7 +401,9 @@ const secParse = params => {
                     method: 'POST'
                 })
 
-                setError(videoParse)
+                const html = JSON.parse(videoParse).result
+
+                return html.match(/<a href="(.*?)"/)[1]
             }, {
                 v_id: params.video_id,
                 fquality: quality,
