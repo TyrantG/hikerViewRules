@@ -363,7 +363,7 @@ const secParse = params => {
         col_type: 'pic_1'
     })
 
-    const videoParse = fetch("https://www.youtubemy.com/search?url="+ori_url)
+    /*const videoParse = fetch("https://www.youtubemy.com/search?url="+ori_url)
     const video_list = parseDomForArray(videoParse, '.video_files&&a')
     video_list.forEach(video => {
         let audio = parseDomForHtml(video, 'img&&src').indexOf("yy.png") !== -1
@@ -372,7 +372,15 @@ const secParse = params => {
             url: parseDomForHtml(video, 'a&&href'),
             col_type: 'text_2'
         })
+    })*/
+
+
+    const videoParse = fetch("https://www.y2mate.com/mates/analyze/ajax", {
+        body: 'ajax=1&q_auto=1&url='+ori_url,
+        method: 'POST'
     })
+
+    setError(videoParse)
 
     setResult(d);
 }
