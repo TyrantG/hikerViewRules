@@ -71,7 +71,7 @@ const secParse = _ => {
     let liva_url
 
     streamInfo.forEach(info => {
-        if (info.sCdnType === 'TX') {
+        if (info.sCdnType === 'BD') {
             liva_url = info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
         }
     })
