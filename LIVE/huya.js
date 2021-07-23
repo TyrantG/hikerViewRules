@@ -69,12 +69,14 @@ const secParse = params => {
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
     let gid = live.roomInfo.tLiveInfo.iGid
 
+    setError(gid)
+
     let liva_url
 
     if (gid === 2135) {
         streamInfo.forEach(info => {
             if (info.sCdnType === 'AL') {
-                liva_url = (info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode).replace('http', 'https')
+                liva_url = info.sHlsUrl.replace('http://', 'https://') + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
             }
         })
     } else {
