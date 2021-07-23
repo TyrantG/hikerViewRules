@@ -67,23 +67,20 @@ const secParse = params => {
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
-    // let gameName = live.roomInfo.tLiveInfo.sGameFullName
+    let gameName = live.roomInfo.tLiveInfo.sGameFullName
+    let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     let liva_url
 
-    /*if (gameName === '一起看') {
-        streamInfo.forEach(info => {
-            if (info.sCdnType === 'AL') {
-                liva_url = info.sHlsUrl.replace('http://', 'https://') + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
-            }
-        })
-    } else {*/
+    if (gameName === '一起看') {
+        liva_url = defaultLiveStreamUrl
+    } else {
         streamInfo.forEach(info => {
             if (info.sCdnType === 'TX') {
                 liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
             }
         })
-    // }
+    }
 
     return liva_url
 }
