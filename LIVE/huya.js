@@ -80,7 +80,7 @@ const secParse = params => {
     } else {*/
         streamInfo.forEach(info => {
             if (info.sCdnType === 'TX') {
-                liva_url = info.sFlvUrl.replace('http://', 'https://') + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
+                liva_url = info.sHlsUrl.replace('http://', 'https://') + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
             }
         })
     // }
