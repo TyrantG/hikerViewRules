@@ -67,7 +67,7 @@ const secParse = params => {
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
-    let gid = live.roomInfo.tLiveInfo.iGid
+    let gid = live.roomInfo.tLiveInfo
 
     setError(gid)
 
