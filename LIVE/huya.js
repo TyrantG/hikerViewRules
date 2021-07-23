@@ -60,23 +60,30 @@ const baseParse = _ => {
     setHomeResult(res);
 }
 
-const secParse = _ => {
+const secParse = params => {
     let rid = input.split('/').pop()
     let html = fetch(input, {headers:{"User-Agent": MOBILE_UA}})
 
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
+    let gid = live.roomInfo.tLiveInfo.iGid
 
     let liva_url
 
-    streamInfo.forEach(info => {
-        if (info.sCdnType === 'WS') {
-            liva_url = info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
-        } else if (info.sCdnType === 'TX') {
-            liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
-        }
-    })
+    if (gid === 2135) {
+        streamInfo.forEach(info => {
+            if (info.sCdnType === 'AL') {
+                liva_url = info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
+            }
+        })
+    } else {
+        streamInfo.forEach(info => {
+            if (info.sCdnType === 'TX') {
+                liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
+            }
+        })
+    }
 
     return liva_url
 }
