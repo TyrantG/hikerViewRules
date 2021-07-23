@@ -75,7 +75,7 @@ const secParse = params => {
     if (gameName === '一起看') {
         streamInfo.forEach(info => {
             if (info.sCdnType === 'AL') {
-                liva_url = info.sHlsUrl.replace('http://', 'https://') + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
+                liva_url = info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
             }
         })
     } else {
