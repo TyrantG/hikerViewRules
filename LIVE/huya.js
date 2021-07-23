@@ -68,12 +68,16 @@ const secParse = params => {
     let live  = JSON.parse(live_json)
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
     let gameName = live.roomInfo.tLiveInfo.sGameFullName
-    let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
+    // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     let liva_url
 
     if (gameName === '一起看') {
-        liva_url = defaultLiveStreamUrl
+        streamInfo.forEach(info => {
+            if (info.sCdnType === 'AL') {
+                liva_url = info.sHlsUrl.replace('http://', 'https://') + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
+            }
+        })
     } else {
         streamInfo.forEach(info => {
             if (info.sCdnType === 'TX') {
