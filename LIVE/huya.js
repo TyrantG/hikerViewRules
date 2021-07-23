@@ -74,7 +74,7 @@ const secParse = params => {
     if (gid === 2135) {
         streamInfo.forEach(info => {
             if (info.sCdnType === 'AL') {
-                liva_url = info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
+                liva_url = (info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode).replace('http', 'https')
             }
         })
     } else {
