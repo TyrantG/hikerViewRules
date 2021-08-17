@@ -19,6 +19,11 @@ const baseParse = _ => {
             const channel_select = getVar("tyrantgenesis.youtube.channel_select", "0")
             roleId = fetch(role_path)
             let careerData = "https://gamedb.gamersky.com/yjwujian/career/getCareerData?gamerskyId=5861820&identity=0&roleId="+roleId
+
+            d.push({
+                title: "最近战绩",
+                col_type: "text_1",
+            })
         }
 
         let listData = "https://gamedb.gamersky.com/yjwujian/record/getRecentRecords?roleId="+roleId+"&pageIndex="+current_page+"&pageSize=20"
