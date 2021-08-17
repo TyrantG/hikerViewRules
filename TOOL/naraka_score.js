@@ -363,11 +363,11 @@ const userParse = (d, data, type = 1) => {
         pic_url: "https:"+data.backImage+"@Referer=https://www.gamersky.com/",
         col_type: 'movie_1'
     })
-    d.push({
-        title: "胜场：" + (type === 1 ? data.winRate : data.winTimes),
-        url: "hiker://empty",
-        col_type: 'text_2',
-    })
+    // d.push({
+    //     title: "胜场：" + (type === 1 ? data.winRate : data.winTimes),
+    //     url: "hiker://empty",
+    //     col_type: 'text_2',
+    // })
     d.push({
         title: "场均伤害：" + data.avgDamage,
         url: "hiker://empty",
