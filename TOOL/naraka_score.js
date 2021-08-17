@@ -286,11 +286,9 @@ const baseParse = _ => {
                 let heroBest = res.data.heroBest
                 let heroList = res.data.heroList
 
-                let best = userParse(heroBest)
-                d.push(...best)
+                userParse(d, heroBest)
                 heroList.forEach(hero => {
-                    let heroData = userParse(heroBest)
-                    d.push(...heroData)
+                    userParse(d, hero)
                 })
 
                 // movie_1_vertical_pic
@@ -348,13 +346,10 @@ const resultFormat = result => {
     return time;
 }
 
-const userParse = data => {
-    let d = []
+const userParse = (d, data) => {
     d.push({
         title: data.hero,
         pic_url: "https:"+data.backImage+"@Referer=https://www.gamersky.com/",
         col_type: 'movie_1_vertical_pic_blur'
     })
-
-    return d
 }
