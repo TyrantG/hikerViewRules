@@ -34,6 +34,24 @@ const baseParse = _ => {
             }),
             col_type: 'scroll_button',
         })
+        d.push({
+            title: cate_select === '3' ? '‘‘’’<strong><font color="red">角色数据</font></strong>' : '角色数据',
+            url: $(empty).lazyRule(_ => {
+                putVar("tyrantgenesis.naraka_score.cate_select", "3")
+                refreshPage(true)
+                return "hiker://empty"
+            }),
+            col_type: 'scroll_button',
+        })
+        d.push({
+            title: cate_select === '4' ? '‘‘’’<strong><font color="red">武器数据</font></strong>' : '武器数据',
+            url: $(empty).lazyRule(_ => {
+                putVar("tyrantgenesis.naraka_score.cate_select", "4")
+                refreshPage(true)
+                return "hiker://empty"
+            }),
+            col_type: 'scroll_button',
+        })
     }
 
     if (fetch(role_path)) {
