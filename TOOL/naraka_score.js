@@ -401,7 +401,7 @@ const userParse = (d, data) => {
         title: data.hero,
         desc: "使用率："+data.useRate+"%",
         pic_url: "https:"+data.backImage+"@Referer=https://www.gamersky.com/",
-        col_type: 'movie_1'
+        col_type: 'image_1'
     })
     d.push({
         title: "胜场：" + data.winRate,
