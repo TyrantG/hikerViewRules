@@ -39,7 +39,7 @@ const baseParse = _ => {
                 d.push({
                     title: item.hero,
                     url: "hiker://empty",
-                    col_type: 'text_4',
+                    col_type: 'text_2',
                 })
                 d.push({
                     title: item.battleMode,
@@ -77,7 +77,7 @@ const baseParse = _ => {
                     col_type: 'text_5',
                 })
                 d.push({
-                    col_type: 'line'
+                    col_type: 'blank_block'
                 })
             })
         } else {
