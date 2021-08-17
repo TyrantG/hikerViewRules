@@ -313,6 +313,14 @@ const baseParse = _ => {
                     col_type: 'text_2',
                 })
                 d.push({
+                    title: "游戏时长：" + resultFormat(heroBest.playTime),
+                    url: "hiker://empty",
+                    col_type: 'text_2',
+                })
+                d.push({
+                    col_type: 'line_blank'
+                })
+                d.push({
                     title: "英雄数据",
                     url: "hiker://empty",
                     col_type: 'text_1',
@@ -339,9 +347,15 @@ const baseParse = _ => {
                         url: "hiker://empty",
                         col_type: 'text_2',
                     })
+                    d.push({
+                        title: "游戏时长：" + resultFormat(hero.playTime),
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        col_type: 'line_blank'
+                    })
                 })
-
-                // movie_1_vertical_pic
             }
         } else if (cate_select === '4') {
             let url = "https://gamedb.gamersky.com/yjwujian/weapon/getWeaponData?roleId="+roleId
@@ -394,36 +408,4 @@ const resultFormat = result => {
         time = "" + parseInt(hourTime) + "小时" + time;
     }
     return time;
-}
-
-const userParse = (d, data) => {
-    d.push({
-        title: data.hero,
-        desc: "使用率："+data.useRate+"%",
-        pic_url: "https:"+data.backImage+"@Referer=https://www.gamersky.com/",
-        col_type: 'image_1'
-    })
-    d.push({
-        title: "胜场：" + data.winRate,
-        url: "hiker://empty",
-        col_type: 'text_2',
-    })
-    d.push({
-        title: "场均伤害：" + data.avgDamage,
-        url: "hiker://empty",
-        col_type: 'text_2',
-    })
-    d.push({
-        title: "K/D：" + data.kd,
-        url: "hiker://empty",
-        col_type: 'text_2',
-    })
-    // d.push({
-    //     title: "游戏时长：" + resultFormat(data.playTime),
-    //     url: "hiker://empty",
-    //     col_type: 'text_2',
-    // })
-    d.push({
-        col_type: 'line_blank'
-    })
 }
