@@ -291,14 +291,54 @@ const baseParse = _ => {
                     url: "hiker://empty",
                     col_type: 'text_1',
                 })
-                userParse(d, heroBest, 1)
+                d.push({
+                    title: heroBest.hero,
+                    desc: "使用率："+heroBest.useRate+"%",
+                    pic_url: "https:"+heroBest.backImage+"@Referer=https://www.gamersky.com/",
+                    col_type: 'movie_1'
+                })
+                d.push({
+                    title: "胜场：" +  heroBest.winRate,
+                    url: "hiker://empty",
+                    col_type: 'text_2',
+                })
+                d.push({
+                    title: "场均伤害：" + heroBest.avgDamage,
+                    url: "hiker://empty",
+                    col_type: 'text_2',
+                })
+                d.push({
+                    title: "K/D：" + heroBest.kd,
+                    url: "hiker://empty",
+                    col_type: 'text_2',
+                })
                 d.push({
                     title: "英雄数据",
                     url: "hiker://empty",
                     col_type: 'text_1',
                 })
                 heroList.forEach(hero => {
-                    userParse(d, hero, 2)
+                    d.push({
+                        title: hero.hero,
+                        desc: "使用率："+hero.useRate+"%",
+                        pic_url: "https:"+hero.backImage+"@Referer=https://www.gamersky.com/",
+                        col_type: 'movie_1'
+                    })
+                    d.push({
+                        title: "胜场：" + hero.winTimes,
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "场均伤害：" + hero.avgDamage,
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "K/D：" + hero.kd,
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
                 })
 
                 // movie_1_vertical_pic
@@ -356,18 +396,18 @@ const resultFormat = result => {
     return time;
 }
 
-const userParse = (d, data, type = 1) => {
+const userParse = (d, data) => {
     d.push({
         title: data.hero,
         desc: "使用率："+data.useRate+"%",
         pic_url: "https:"+data.backImage+"@Referer=https://www.gamersky.com/",
         col_type: 'movie_1'
     })
-    // d.push({
-    //     title: "胜场：" + (type === 1 ? data.winRate : data.winTimes),
-    //     url: "hiker://empty",
-    //     col_type: 'text_2',
-    // })
+    d.push({
+        title: "胜场：" + data.winRate,
+        url: "hiker://empty",
+        col_type: 'text_2',
+    })
     d.push({
         title: "场均伤害：" + data.avgDamage,
         url: "hiker://empty",
