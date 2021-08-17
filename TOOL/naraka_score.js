@@ -163,19 +163,19 @@ const baseParse = _ => {
                 }
                 d.push({
                     title: "场次："+data.gameCount,
-                    col_type: 'text_4',
+                    col_type: 'text_2',
                 })
                 d.push({
                     title: "场均击杀："+data.avgKillTimes,
-                    col_type: 'text_4',
+                    col_type: 'text_2',
                 })
                 d.push({
                     title: "场均伤害："+data.sumDamage,
-                    col_type: 'text_4',
+                    col_type: 'text_2',
                 })
                 d.push({
                     title: "场均KDA："+data.kd,
-                    col_type: 'text_4',
+                    col_type: 'text_2',
                 })
             } else {
                 d.push({
