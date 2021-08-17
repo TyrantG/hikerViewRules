@@ -278,9 +278,22 @@ const baseParse = _ => {
                     })
                 }
             }
-
         } else if (cate_select === '3') {
-            let url = "https://gamedb.gamersky.com/yjwujian/hero/getHeroData?roleId="+roleId
+            if (current_page === '1') {
+                let url = "https://gamedb.gamersky.com/yjwujian/hero/getHeroData?roleId="+roleId
+                let res_json = fetch(url)
+                let res = JSON.parse(res_json)
+                let heroBest = res.data.heroBest
+                let heroList = res.data.heroList
+
+                d.push({
+                    title: heroBest.hero,
+                    pic_url: "https:"+heroBest.heroImage+"@Referer=https://www.gamersky.com/",
+                    col_type: 'movie_1_vertical_pic_blur'
+                })
+
+                // movie_1_vertical_pic
+            }
         } else if (cate_select === '4') {
             let url = "https://gamedb.gamersky.com/yjwujian/weapon/getWeaponData?roleId="+roleId
         }
