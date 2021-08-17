@@ -32,9 +32,10 @@ const baseParse = _ => {
         if (res.code === 0) {
             res.data.list.forEach(item => {
                 d.push({
-                    title: "‘‘’’<strong>#&nbsp;<font color=\"red\">"+item.groupRank+"</font></strong>",
+                    title: item.battleMode,
+                    pic_url: "https:"+item.battleModeImage+"@Referer=https://www.gamersky.com/",
                     url: "hiker://empty",
-                    col_type: 'text_4',
+                    col_type: 'icon_4',
                 })
                 d.push({
                     title: item.hero,
@@ -43,10 +44,9 @@ const baseParse = _ => {
                     col_type: 'icon_4',
                 })
                 d.push({
-                    title: item.battleMode,
-                    pic_url: "https:"+item.battleModeImage+"@Referer=https://www.gamersky.com/",
+                    title: "‘‘’’<strong>#&nbsp;<font color=\"red\">"+item.groupRank+"</font></strong>",
                     url: "hiker://empty",
-                    col_type: 'icon_4',
+                    col_type: 'text_4',
                 })
                 d.push({
                     title: item.map,
