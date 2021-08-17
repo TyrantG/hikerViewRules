@@ -171,11 +171,38 @@ const baseParse = _ => {
                         col_type: 'text_2',
                     })
                     d.push({
-                        title: "场均伤害：" + data.sumDamage,
+                        title: "场均伤害：" + data.avgDamage,
                         col_type: 'text_2',
                     })
                     d.push({
-                        title: "场均KDA：" + data.kd,
+                        title: "KD：" + data.kd,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        col_type: 'line_blank'
+                    })
+                    d.push({
+                        title: "总伤害：" + data.sumDamage,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "总击杀：" + data.sumKillTimes,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "总死亡：" + data.sumDeadTimes,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "总救援：" + data.sumRescueTimes,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "总振刀：" + data.sumShockCount,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "总治疗：" + data.sumCure,
                         col_type: 'text_2',
                     })
                 } else {
