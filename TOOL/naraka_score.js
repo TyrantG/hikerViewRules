@@ -27,9 +27,15 @@ const baseParse = _ => {
         if (res.code === 0) {
             res.data.list.forEach(item => {
                 d.push({
-                    title: "‘‘’’<strong>#&nbsp;&nbsp;&nbsp;<font color=\"red\">"+item.groupRank+"</font></strong>",
+                    title: "‘‘’’<strong>#&nbsp;<font color=\"red\">"+item.groupRank+"</font></strong>",
                     url: "hiker://empty",
                     col_type: 'text_4',
+                })
+                d.push({
+                    title: item.hero,
+                    pic_url: "https:"+item.heroImage,
+                    url: "hiker://empty",
+                    col_type: 'icon_4',
                 })
                 d.push({
                     col_type: 'line'
