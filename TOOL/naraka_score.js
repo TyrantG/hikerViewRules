@@ -3,16 +3,18 @@ const baseParse = _ => {
     let d = [];
     let roleId = ''
 
-    d.push({
-        title: '绑定',
-        desc: '请输入游戏ID',
-        url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/TOOL/naraka_score.js'));return setRoleId(params);}, {input: input.trim()}) : 'toast://请输入游戏ID'",
-        col_type: "input"
-    })
+    let current_page = MY_URL.split('##')[1].toString()
+
+    if (current_page === '1') {
+        d.push({
+            title: '绑定',
+            desc: '请输入游戏ID',
+            url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/TOOL/naraka_score.js'));return setRoleId(params);}, {input: input.trim()}) : 'toast://请输入游戏ID'",
+            col_type: "input"
+        })
+    }
 
     if (fetch(role_path)) {
-        let current_page = MY_URL.split('##')[1].toString()
-
         if (current_page === '1') {
             const channel_select = getVar("tyrantgenesis.youtube.channel_select", "0")
             roleId = fetch(role_path)
