@@ -286,9 +286,11 @@ const baseParse = _ => {
                 let heroBest = res.data.heroBest
                 let heroList = res.data.heroList
 
-                d.push(...userParse(heroBest))
+                let best = userParse(heroBest)
+                d.push(...best)
                 heroList.forEach(hero => {
-                    d.push(...userParse(hero))
+                    let heroData = userParse(heroBest)
+                    d.push(...heroData)
                 })
 
                 // movie_1_vertical_pic
