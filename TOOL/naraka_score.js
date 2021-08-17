@@ -378,11 +378,11 @@ const userParse = (d, data, type = 1) => {
         url: "hiker://empty",
         col_type: 'text_2',
     })
-    d.push({
-        title: "游戏时长：" + resultFormat(data.playTime),
-        url: "hiker://empty",
-        col_type: 'text_2',
-    })
+    // d.push({
+    //     title: "游戏时长：" + resultFormat(data.playTime),
+    //     url: "hiker://empty",
+    //     col_type: 'text_2',
+    // })
     d.push({
         col_type: 'line_blank'
     })
