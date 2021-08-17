@@ -38,6 +38,7 @@ const baseParse = _ => {
                 })
                 d.push({
                     title: item.hero,
+                    pic_url: encodeURI("https:"+item.heroImage),
                     url: "hiker://empty",
                     col_type: 'text_2',
                 })
