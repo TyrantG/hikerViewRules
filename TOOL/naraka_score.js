@@ -53,15 +53,15 @@ const baseParse = _ => {
             }),
             col_type: 'scroll_button',
         })*/
-        d.push({
-            title: cate_select === '5' ? '‘‘’’<strong><font color="red">地图模拟器</font></strong>' : '地图模拟器',
-            url: $(empty).lazyRule(_ => {
-                putVar("tyrantgenesis.naraka_score.cate_select", "5")
-                refreshPage(true)
-                return "hiker://empty"
-            }),
-            col_type: 'scroll_button',
-        })
+        // d.push({
+        //     title: cate_select === '5' ? '‘‘’’<strong><font color="red">地图模拟器</font></strong>' : '地图模拟器',
+        //     url: $(empty).lazyRule(_ => {
+        //         putVar("tyrantgenesis.naraka_score.cate_select", "5")
+        //         refreshPage(true)
+        //         return "hiker://empty"
+        //     }),
+        //     col_type: 'scroll_button',
+        // })
     }
 
     if (fetch(role_path)) {
