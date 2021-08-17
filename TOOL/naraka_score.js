@@ -32,9 +32,9 @@ const baseParse = _ => {
                     col_type: 'text_4',
                 })
                 d.push({
-                    title: "‘‘’’<strong><font color=\"red\">"+item.hero+"</font></strong>",
+                    title: item.hero,
                     pic_url: "https:"+item.heroImage,
-                    url: "hiker://empty",
+                    url: "https:"+item.heroImage,
                     col_type: 'icon_4',
                 })
                 d.push({
@@ -66,3 +66,4 @@ const setRoleId = params => {
         return 'toast://查找不到玩家数据'
     }
 }
+
