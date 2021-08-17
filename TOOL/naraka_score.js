@@ -34,8 +34,13 @@ const baseParse = _ => {
                 d.push({
                     title: item.hero,
                     pic_url: "https:"+item.heroImage,
-                    url: "https:"+item.heroImage,
-                    col_type: 'icon_4',
+                    url: "hiker://empty",
+                    col_type: 'icon_2',
+                })
+                d.push({
+                    title: item.battleMode,
+                    url: "hiker://empty",
+                    col_type: 'text_4',
                 })
                 d.push({
                     col_type: 'line'
