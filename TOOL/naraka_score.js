@@ -73,22 +73,22 @@ const makeListHtml = object => {
         "</div>\n" +
         "<div style=\"margin: 0px 21px 0px 0px; padding: 0px; height: 65px; text-align: left; display: flex; align-items: center; width: 36px;\"><img style=\"margin: 0px 5px 0px 0px; padding: 0px; width: 36px; height: 36px; border-radius: 50%; display: block;\" src=\"https:"+object.battleModeImage+"\" alt=\"\" /></div>\n" +
         "<div style=\"margin: 0px 21px 0px 0px; padding: 0px; height: 65px; display: flex; align-items: center; width: 66px;\">\n" +
-        "<p style=\"margin: 0px; padding: 0px; width: 66px; line-height: 20px; height: 20px;\">聚窟州</p>\n" +
+        "<p style=\"margin: 0px; padding: 0px; width: 66px; line-height: 20px; height: 20px;\">"+object.map+"</p>\n" +
         "</div>\n" +
         "<div style=\"margin: 0px 21px 0px 0px; padding: 0px; height: 65px; display: flex; align-items: center; width: 72px;\">\n" +
-        "<p style=\"margin: 0px; padding: 0px; width: 72px; line-height: 20px; height: 20px;\">青铜Ⅴ</p>\n" +
+        "<p style=\"margin: 0px; padding: 0px; width: 72px; line-height: 20px; height: 20px;\">"+object.grade+"</p>\n" +
         "</div>\n" +
         "<div style=\"margin: 0px 21px 0px 0px; padding: 0px; height: 65px; display: flex; align-items: center; width: 91px;\">\n" +
-        "<p style=\"margin: 0px; padding: 0px; width: 58px; text-align: right; text-indent: 10px; font-size: 14px;\">1098</p>\n" +
-        "<span style=\"margin: 0px 0px 0px 8px; padding: 0px; width: 25px; text-align: left; color: #e9494c;\">0</span></div>\n" +
+        "<p style=\"margin: 0px; padding: 0px; width: 58px; text-align: right; text-indent: 10px; font-size: 14px;\">"+object.gradeScore+"</p>\n" +
+        "<span style=\"margin: 0px 0px 0px 8px; padding: 0px; width: 25px; text-align: left; color: #e9494c;\">"+object.deltaValue+"</span></div>\n" +
         "<div style=\"margin: 0px 21px 0px 0px; padding: 0px; height: 65px; display: flex; align-items: center; width: 34px;\">\n" +
-        "<p style=\"margin: 0px; padding: 0px; width: 34px; line-height: 20px; height: 20px;\">0</p>\n" +
+        "<p style=\"margin: 0px; padding: 0px; width: 34px; line-height: 20px; height: 20px;\">"+object.killTimes+"</p>\n" +
         "</div>\n" +
         "<div style=\"margin: 0px 21px 0px 0px; padding: 0px; height: 65px; display: flex; align-items: center; width: 35px;\">\n" +
-        "<p style=\"margin: 0px; padding: 0px; width: 35px; line-height: 20px; height: 20px;\">1290</p>\n" +
+        "<p style=\"margin: 0px; padding: 0px; width: 35px; line-height: 20px; height: 20px;\">"+object.damage+"</p>\n" +
         "</div>\n" +
         "<div style=\"margin: 0px; padding: 0px; height: 65px; align-items: center; width: 28px;\">\n" +
-        "<p style=\"margin: 0px; padding: 0px; width: 28px; line-height: 65px; height: 65px;\">D</p>\n" +
+        "<p style=\"margin: 0px; padding: 0px; width: 28px; line-height: 65px; height: 65px;\">"+object.performScore+"</p>\n" +
         "</div>\n" +
         "</div>"
 }
