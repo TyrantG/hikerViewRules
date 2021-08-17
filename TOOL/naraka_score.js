@@ -15,9 +15,10 @@ const baseParse = _ => {
     }
 
     if (fetch(role_path)) {
+        roleId = fetch(role_path)
         if (current_page === '1') {
             const channel_select = getVar("tyrantgenesis.youtube.channel_select", "0")
-            roleId = fetch(role_path)
+
             let careerData = "https://gamedb.gamersky.com/yjwujian/career/getCareerData?gamerskyId=5861820&identity=0&roleId="+roleId
 
             d.push({
