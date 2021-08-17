@@ -268,7 +268,7 @@ const setRoleId = params => {
 }
 
 const resultFormat = result => {
-    let secondTime = parseInt(value);// 秒
+    let secondTime = parseInt(result);// 秒
     let minuteTime = 0;// 分
     let hourTime = 0;// 小时
     if(secondTime > 60) {//如果秒数大于60，将秒数转换成整数
