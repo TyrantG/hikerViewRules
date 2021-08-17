@@ -364,7 +364,7 @@ const userParse = (d, data, type = 1) => {
         col_type: 'movie_1'
     })
     d.push({
-        title: "胜场：" + type === 1 ? data.winRate : data.winTimes,
+        title: "胜场：" + (type === 1 ? data.winRate : data.winTimes),
         url: "hiker://empty",
         col_type: 'text_2',
     })
