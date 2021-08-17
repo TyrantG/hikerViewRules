@@ -286,6 +286,11 @@ const baseParse = _ => {
                 let heroBest = res.data.heroBest
                 let heroList = res.data.heroList
 
+                d.push({
+                    title: "最佳英雄",
+                    url: "hiker://empty",
+                    col_type: 'text_1',
+                })
                 userParse(d, heroBest)
                 heroList.forEach(hero => {
                     userParse(d, hero)
@@ -349,7 +354,11 @@ const resultFormat = result => {
 const userParse = (d, data) => {
     d.push({
         title: data.hero,
+        desc: "使用率："+data.useRate+"%",
         pic_url: "https:"+data.backImage+"@Referer=https://www.gamersky.com/",
         col_type: 'movie_1_left_pic'
+    })
+    d.push({
+        col_type: 'line_blank'
     })
 }
