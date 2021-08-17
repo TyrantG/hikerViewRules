@@ -27,7 +27,7 @@ const baseParse = _ => {
         if (res.code === 0) {
             res.data.list.forEach(item => {
                 d.push({
-                    title: "#"+"‘‘’’<strong><font color=\"red\">item.groupRank</font></strong>",
+                    title: "#"+"‘‘’’<strong><font color=\"red\">"+item.groupRank+"</font></strong>",
                     col_type: 'text_4',
                 })
                 d.push({
