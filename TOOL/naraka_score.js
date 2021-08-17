@@ -32,6 +32,16 @@ const baseParse = _ => {
         if (res.code === 0) {
             res.data.list.forEach(item => {
                 d.push({
+                    title: "‘‘’’<strong>#&nbsp;<font color=\"red\">"+item.groupRank+"</font></strong>",
+                    url: "hiker://empty",
+                    col_type: 'text_4',
+                })
+                d.push({
+                    title: item.map,
+                    url: "hiker://empty",
+                    col_type: 'text_4',
+                })
+                d.push({
                     title: item.battleMode,
                     pic_url: "https:"+item.battleModeImage+"@Referer=https://www.gamersky.com/",
                     url: "hiker://empty",
@@ -42,16 +52,6 @@ const baseParse = _ => {
                     pic_url: "https:"+item.heroImage+"@Referer=https://www.gamersky.com/",
                     url: "hiker://empty",
                     col_type: 'icon_4',
-                })
-                d.push({
-                    title: "‘‘’’<strong>#&nbsp;<font color=\"red\">"+item.groupRank+"</font></strong>",
-                    url: "hiker://empty",
-                    col_type: 'text_4',
-                })
-                d.push({
-                    title: item.map,
-                    url: "hiker://empty",
-                    col_type: 'text_4',
                 })
                 d.push({
                     title: item.grade,
