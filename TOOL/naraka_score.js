@@ -60,24 +60,24 @@ const baseParse = _ => {
                     col_type: 'icon_4',
                 })
                 d.push({
-                    title: item.gradeScore,
+                    title: "‘‘’’<strong>分数：&nbsp;<font color=\"red\">"+item.gradeScore+"</font></strong>",
                     url: "hiker://empty",
-                    col_type: 'text_5',
+                    col_type: 'text_4',
                 })
                 d.push({
                     title: item.killTimes,
                     url: "hiker://empty",
-                    col_type: 'text_5',
+                    col_type: 'text_4',
                 })
                 d.push({
                     title: item.damage,
                     url: "hiker://empty",
-                    col_type: 'text_5',
+                    col_type: 'text_4',
                 })
                 d.push({
                     title: item.performScore,
                     url: "hiker://empty",
-                    col_type: 'text_5',
+                    col_type: 'text_4',
                 })
                 d.push({
                     col_type: 'line_blank'
