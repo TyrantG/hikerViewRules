@@ -38,8 +38,8 @@ const baseParse = _ => {
                 })
                 d.push({
                     title: item.hero,
-                    pic_url: encodeURI("https:"+item.heroImage)+"@Referer=https://www.gamersky.com/",
-                    url: encodeURI("https:"+item.heroImage)+"@Referer",
+                    pic_url: "https:"+item.heroImage+"@Referer=https://www.gamersky.com/",
+                    url: "hiker://empty",
                     col_type: 'icon_4',
                 })
                 d.push({
