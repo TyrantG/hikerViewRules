@@ -156,6 +156,10 @@ const zczc = _ => {
   godWriteFile(BASE_URL+"TOOL/zczc.js?t="+time, 'hiker://files/TyrantG/TOOL/zczc.js')
 }
 
+const naraka_score = _ => {
+  godWriteFile(BASE_URL+"TOOL/naraka_score.js?t="+time, 'hiker://files/TyrantG/TOOL/naraka_score.js')
+}
+
 const artStation = _ => {
   godWriteFile(BASE_URL+"IMAGE/artstation.js?t="+time, 'hiker://files/TyrantG/IMAGE/artstation.js')
 }
