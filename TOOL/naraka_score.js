@@ -77,7 +77,7 @@ const baseParse = _ => {
                     col_type: 'text_5',
                 })
                 d.push({
-                    col_type: 'blank_block'
+                    col_type: 'line_blank'
                 })
             })
         } else {
