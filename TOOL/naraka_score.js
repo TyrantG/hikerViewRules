@@ -68,7 +68,7 @@ const makeListHtml = object => {
         "<div style=\"margin: 0px 21px 0px 0px; padding: 0px; height: 65px; display: flex; align-items: center; width: 72px; justify-content: center; flex-direction: column;\">\n" +
         "<p style=\"margin: 0px; padding: 0px; width: 72px; height: 20px; font-size: 14px;\">"+object.startTs+"</p>\n" +
         // "<span style=\"margin: 0px; padding: 0px; line-height: 12px; color: #aaaaaa;\">23:18</span></div>\n" +
-        "<div style=\"margin: 0px 21px 0px 0px; padding: 0px; height: 65px; display: flex; align-items: center; width: 112px;\"><img style=\"margin: 0px 5px 0px 0px; padding: 0px; width: 34px; height: 34px; border-radius: 50%; display: block;\" src=\""+object.heroImage+"\" alt=\"\" />\n" +
+        "<div style=\"margin: 0px 21px 0px 0px; padding: 0px; height: 65px; display: flex; align-items: center; width: 112px;\"><img style=\"margin: 0px 5px 0px 0px; padding: 0px; width: 34px; height: 34px; border-radius: 50%; display: block;\" src=\"https:"+object.heroImage+"\" alt=\"\" />\n" +
         "<p style=\"margin: 0px; padding: 0px; width: 73px; text-align: left; line-height: 20px; height: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;\">"+object.hero+"</p>\n" +
         "</div>\n" +
         "<div style=\"margin: 0px 21px 0px 0px; padding: 0px; height: 65px; text-align: left; display: flex; align-items: center; width: 36px;\"><img style=\"margin: 0px 5px 0px 0px; padding: 0px; width: 36px; height: 36px; border-radius: 50%; display: block;\" src=\"https://image.gamersky.com/webimg13/s_zq/yjwj/icondan.png\" alt=\"\" /></div>\n" +
