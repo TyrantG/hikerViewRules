@@ -33,14 +33,43 @@ const baseParse = _ => {
                 })
                 d.push({
                     title: item.hero,
-                    pic_url: "https:"+item.heroImage,
                     url: "hiker://empty",
-                    col_type: 'icon_2',
+                    col_type: 'text_4',
                 })
                 d.push({
                     title: item.battleMode,
                     url: "hiker://empty",
                     col_type: 'text_4',
+                })
+                d.push({
+                    title: item.map,
+                    url: "hiker://empty",
+                    col_type: 'text_4',
+                })
+                d.push({
+                    title: item.grade,
+                    url: "hiker://empty",
+                    col_type: 'text_5',
+                })
+                d.push({
+                    title: item.gradeScore,
+                    url: "hiker://empty",
+                    col_type: 'text_5',
+                })
+                d.push({
+                    title: item.killTimes,
+                    url: "hiker://empty",
+                    col_type: 'text_5',
+                })
+                d.push({
+                    title: item.damage,
+                    url: "hiker://empty",
+                    col_type: 'text_5',
+                })
+                d.push({
+                    title: item.performScore,
+                    url: "hiker://empty",
+                    col_type: 'text_5',
                 })
                 d.push({
                     col_type: 'line'
