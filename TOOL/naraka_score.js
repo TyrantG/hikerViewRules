@@ -368,13 +368,13 @@ const baseParse = _ => {
                     })
                 })
             }
-        }  else if (cate_select === '5') {
+        }/*  else if (cate_select === '5') {
             d.push({
                 desc: '600 && float',
                 url: "https://api.xiaoheihe.cn/wiki/map_v2/?wiki_id=1203220&mapId=39",
                 col_type: 'x5_webview_single'
             });
-        }
+        }*/
 
     }
 
@@ -421,36 +421,4 @@ const resultFormat = result => {
         time = "" + parseInt(hourTime) + "小时" + time;
     }
     return time;
-}
-
-const userParse = (d, data) => {
-    d.push({
-        title: data.hero,
-        desc: "使用率："+data.useRate+"%",
-        pic_url: "https:"+data.backImage+"@Referer=https://www.gamersky.com/",
-        col_type: 'pic_1'
-    })
-    d.push({
-        title: "胜场：" + data.winRate,
-        url: "hiker://empty",
-        col_type: 'text_2',
-    })
-    d.push({
-        title: "场均伤害：" + data.avgDamage,
-        url: "hiker://empty",
-        col_type: 'text_2',
-    })
-    d.push({
-        title: "K/D：" + data.kd,
-        url: "hiker://empty",
-        col_type: 'text_2',
-    })
-    d.push({
-        title: "游戏时长：" + resultFormat(data.playTime),
-        url: "hiker://empty",
-        col_type: 'text_2',
-    })
-    d.push({
-        col_type: 'line_blank'
-    })
 }
