@@ -25,7 +25,12 @@ const baseParse = _ => {
         let res_json = fetch(listData)
         let res = JSON.parse(res_json)
         if (res.code === 0) {
-
+            res.data.list.forEach(item => {
+                d.push({
+                    title: item.battleMode,
+                    col_type: 'rich_text',
+                })
+            })
         } else {
             d.push({
                 title: res.message,
