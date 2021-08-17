@@ -66,17 +66,17 @@ const baseParse = _ => {
                     col_type: 'text_2',
                 })
                 d.push({
-                    title: item.killTimes,
+                    title: "‘‘’’<strong>击杀：&nbsp;<font color=\"red\">"+item.killTimes+"</font></strong>",
                     url: "hiker://empty",
                     col_type: 'text_2',
                 })
                 d.push({
-                    title: item.damage,
+                    title: "‘‘’’<strong>伤害：&nbsp;<font color=\"red\">"+item.damage+"</font></strong>",
                     url: "hiker://empty",
                     col_type: 'text_2',
                 })
                 d.push({
-                    title: item.performScore,
+                    title: "‘‘’’<strong>评分：&nbsp;<font color=\"red\">"+item.performScore+"</font></strong>",
                     url: "hiker://empty",
                     col_type: 'text_2',
                 })
