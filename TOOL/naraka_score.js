@@ -370,7 +370,7 @@ const baseParse = _ => {
             }
         }  else if (cate_select === '5') {
             d.push({
-                desc: '100% && list',
+                desc: '800 && list',
                 url: "https://api.xiaoheihe.cn/wiki/map_v2/?wiki_id=1203220&mapId=39",
                 col_type: 'x5_webview_single'
             });
