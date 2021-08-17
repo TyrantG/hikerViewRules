@@ -11,12 +11,18 @@ const baseParse = _ => {
     })
 
     if (fetch(role_path)) {
-        roleId = fetch(role_path)
-        d.push({
-            title: roleId,
-            col_type: 'long_text'
-        })
-    } else {
+        let current_page = MY_URL.split('##')[1].toString()
+
+        if (current_page === '1') {
+            const channel_select = getVar("tyrantgenesis.youtube.channel_select", "0")
+            roleId = fetch(role_path)
+            let careerData = "https://gamedb.gamersky.com/yjwujian/career/getCareerData?gamerskyId=5861820&identity=0&roleId="+roleId
+        }
+
+        let listData = "https://gamedb.gamersky.com/yjwujian/record/getRecentRecords?roleId="+roleId+"&pageIndex="+current_page+"&pageSize=20"
+        let res_json = fetch(listData)
+        let res = JSON.parse(res_json)
+        setError(res)
 
     }
 
