@@ -1,5 +1,3 @@
-// https://gamedb.gamersky.com/yjwujian/search/getSearchResult?roleName=TyrantGenesis
-
 const baseParse = _ => {
     const role_path = "hiker://files/rules/js/TyrantGenesis_永劫无间绑定.js"
     let d = [];
@@ -10,7 +8,7 @@ const baseParse = _ => {
         d.push({
             title: '绑定',
             desc: '请输入游戏ID',
-            url: "input.trim() ? $('hiker://empty').rule(params => {eval(fetch('hiker://files/TyrantG/TOOL/naraka_score.js'));setRoleId(params);}, {input: input.trim()}) : 'toast://请输入游戏ID'",
+            url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/TOOL/naraka_score.js'));setRoleId(params);}, {input: input.trim()}) : 'toast://请输入游戏ID'",
             col_type: "input"
         });
         // let defaultChannels = [
@@ -26,5 +24,6 @@ const baseParse = _ => {
 }
 
 const setRoleId = params => {
-    setError(params)
+    let res = fetch("https://gamedb.gamersky.com/yjwujian/search/getSearchResult?roleName="+params.input)
+    setError(res)
 }
