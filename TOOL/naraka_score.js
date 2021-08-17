@@ -8,6 +8,7 @@ const baseParse = _ => {
 
 
     let cate_select = getVar("tyrantgenesis.naraka_score.cate_select", "1")
+    let game_mode = getVar("tyrantgenesis.naraka_score.game_mode", "1")
 
     if (current_page === '1') {
         d.push({
@@ -117,7 +118,39 @@ const baseParse = _ => {
                 })
             }
         } else if (cate_select === '2') {
-            let careerData = "https://gamedb.gamersky.com/yjwujian/career/getCareerData?gamerskyId=5861820&identity=0&roleId="+roleId
+            d.push({
+                title: game_mode === '1' ? '‘‘’’<strong><font color="red">单人</font></strong>' : '单人',
+                url: $(empty).lazyRule(_ => {
+                    putVar("tyrantgenesis.naraka_score.game_mode", "1")
+                    refreshPage(true)
+                    return "hiker://empty"
+                }),
+                col_type: 'scroll_button',
+            })
+            d.push({
+                title: game_mode === '2' ? '‘‘’’<strong><font color="red">三人</font></strong>' : '三人',
+                url: $(empty).lazyRule(_ => {
+                    putVar("tyrantgenesis.naraka_score.game_mode", "2")
+                    refreshPage(true)
+                    return "hiker://empty"
+                }),
+                col_type: 'scroll_button',
+            })
+            d.push({
+                title: game_mode === '3' ? '‘‘’’<strong><font color="red">死斗</font></strong>' : '死斗',
+                url: $(empty).lazyRule(_ => {
+                    putVar("tyrantgenesis.naraka_score.game_mode", "3")
+                    refreshPage(true)
+                    return "hiker://empty"
+                }),
+                col_type: 'scroll_button',
+            })
+            let url = "https://gamedb.gamersky.com/yjwujian/career/getCareerData?gamerskyId=5861820&identity=0&roleId="+roleId
+
+        } else if (cate_select === '3') {
+            let url = "https://gamedb.gamersky.com/yjwujian/hero/getHeroData?roleId="+roleId
+        } else if (cate_select === '4') {
+            let url = "https://gamedb.gamersky.com/yjwujian/weapon/getWeaponData?roleId="+roleId
         }
 
 
