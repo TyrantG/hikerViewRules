@@ -295,7 +295,7 @@ const baseParse = _ => {
                     title: heroBest.hero,
                     desc: "使用率："+heroBest.useRate+"%",
                     pic_url: "https:"+heroBest.backImage+"@Referer=https://www.gamersky.com/",
-                    col_type: 'movie_1'
+                    col_type: 'pic_1'
                 })
                 d.push({
                     title: "胜场：" +  heroBest.winRate,
@@ -330,7 +330,7 @@ const baseParse = _ => {
                         title: hero.hero,
                         desc: "使用率："+hero.useRate+"%",
                         pic_url: "https:"+hero.backImage+"@Referer=https://www.gamersky.com/",
-                        col_type: 'movie_1'
+                        col_type: 'pic_1'
                     })
                     d.push({
                         title: "胜场：" + hero.winTimes,
