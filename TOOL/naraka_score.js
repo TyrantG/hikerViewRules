@@ -225,7 +225,7 @@ const baseParse = _ => {
                         col_type: 'text_2',
                     })
                     d.push({
-                        title: "最高振刀：" + data.maxShockCount,
+                        title: "最高生存时间：" + resultFormat(data.maxTotalLiveTime),
                         col_type: 'text_2',
                     })
                     d.push({
@@ -267,3 +267,12 @@ const setRoleId = params => {
     }
 }
 
+const resultFormat = result => {
+    let h = Math.floor(result / 3600 % 24)
+    let m = Math.floor(result / 60 % 60)
+    if (h < 1) {
+        return result = m + "分钟";
+    } else {
+        return result = h + "小时" + m + "分钟";
+    }
+}
