@@ -149,6 +149,28 @@ const baseParse = _ => {
                 col_type: 'scroll_button',
             })
             let url = "https://gamedb.gamersky.com/yjwujian/career/getCareerData?gamerskyId=5861820&identity=0&roleId="+roleId
+            let res_json = fetch(url)
+            let res = JSON.parse(res_json)
+            let data = {}
+
+            if (res.code === 0) {
+                if (game_mode === '1') {
+                    data = res.data.single
+                } else if (game_mode === '2') {
+                    data = res.data.three
+                } else if (game_mode === '3') {
+                    data = res.data.chaos
+                }
+                d.push({
+                    title: "场次："+data.gameCount,
+                    col_type: 'text_4',
+                })
+            } else {
+                d.push({
+                    title: res.message,
+                    col_type: 'long_text',
+                })
+            }
 
         } else if (cate_select === '3') {
             let url = "https://gamedb.gamersky.com/yjwujian/hero/getHeroData?roleId="+roleId
