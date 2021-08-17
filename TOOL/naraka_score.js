@@ -44,8 +44,9 @@ const baseParse = _ => {
                 })
                 d.push({
                     title: item.battleMode,
+                    pic_url: "https:"+item.battleModeImage+"@Referer=https://www.gamersky.com/",
                     url: "hiker://empty",
-                    col_type: 'text_4',
+                    col_type: 'icon_4',
                 })
                 d.push({
                     title: item.map,
