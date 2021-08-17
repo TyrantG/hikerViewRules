@@ -30,6 +30,9 @@ const baseParse = _ => {
                     title: item.battleMode,
                     col_type: 'rich_text',
                 })
+                d.push({
+                    col_type: 'line'
+                })
             })
         } else {
             d.push({
