@@ -8,7 +8,8 @@ const baseParse = _ => {
         roleId = fetch(role_path)
     } else {
         d.push({
-            title: '请输入游戏ID',
+            title: '绑定',
+            desc: '请输入游戏ID',
             url: "input.trim() ? $('hiker://empty').rule(params => {eval(fetch('hiker://files/TyrantG/TOOL/naraka_score.js'));setRoleId(params);}, {input: input.trim()}) : 'toast://请输入游戏ID'",
             col_type: "input"
         });
