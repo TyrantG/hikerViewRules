@@ -38,8 +38,8 @@ const baseParse = _ => {
                 })
                 d.push({
                     title: item.hero,
-                    pic_url: "https:"+item.heroImage+"@Referer",
-                    url: encodeURI("https:"+item.heroImage),
+                    pic_url: encodeURI("https:"+item.heroImage)+"@Referer",
+                    url: encodeURI("https:"+item.heroImage)+"@Referer",
                     col_type: 'icon_4',
                 })
                 d.push({
