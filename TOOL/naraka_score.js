@@ -44,7 +44,7 @@ const baseParse = _ => {
             }),
             col_type: 'scroll_button',
         })
-        d.push({
+        /*d.push({
             title: cate_select === '4' ? '‘‘’’<strong><font color="red">武器数据</font></strong>' : '武器数据',
             url: $(empty).lazyRule(_ => {
                 putVar("tyrantgenesis.naraka_score.cate_select", "4")
@@ -52,7 +52,7 @@ const baseParse = _ => {
                 return "hiker://empty"
             }),
             col_type: 'scroll_button',
-        })
+        })*/
     }
 
     if (fetch(role_path)) {
@@ -295,6 +295,7 @@ const baseParse = _ => {
                     title: heroBest.hero,
                     desc: "使用率："+heroBest.useRate+"%",
                     pic_url: "https:"+heroBest.backImage+"@Referer=https://www.gamersky.com/",
+                    url: "hiker://empty",
                     col_type: 'movie_1_left_pic'
                 })
                 d.push({
@@ -330,6 +331,7 @@ const baseParse = _ => {
                         title: hero.hero,
                         desc: "使用率："+hero.useRate+"%",
                         pic_url: "https:"+hero.backImage+"@Referer=https://www.gamersky.com/",
+                        url: "hiker://empty",
                         col_type: 'movie_1_left_pic'
                     })
                     d.push({
@@ -357,11 +359,7 @@ const baseParse = _ => {
                     })
                 })
             }
-        } else if (cate_select === '4') {
-            let url = "https://gamedb.gamersky.com/yjwujian/weapon/getWeaponData?roleId="+roleId
         }
-
-
 
     }
 
