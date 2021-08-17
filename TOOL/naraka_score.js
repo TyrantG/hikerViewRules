@@ -119,6 +119,9 @@ const baseParse = _ => {
             }
         } else if (cate_select === '2') {
             d.push({
+                col_type: 'blank_block',
+            })
+            d.push({
                 title: game_mode === '1' ? '‘‘’’<strong><font color="red">单人</font></strong>' : '单人',
                 url: $(empty).lazyRule(_ => {
                     putVar("tyrantgenesis.naraka_score.game_mode", "1")
