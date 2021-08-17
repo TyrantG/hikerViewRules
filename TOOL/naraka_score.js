@@ -24,6 +24,7 @@ const baseParse = _ => {
 }
 
 const setRoleId = params => {
-    let res = fetch("https://gamedb.gamersky.com/yjwujian/search/getSearchResult?roleName="+params.input)
+    let res_json = fetch("https://gamedb.gamersky.com/yjwujian/search/getSearchResult?roleName="+params.input)
+    let res = JSON.parse(res_json)
     setError(res)
 }
