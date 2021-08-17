@@ -164,18 +164,22 @@ const baseParse = _ => {
                     }
                     d.push({
                         title: "场次：" + data.gameCount,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
                         title: "场均击杀：" + data.avgKillTimes,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
                         title: "场均伤害：" + data.avgDamage,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
                         title: "KD：" + data.kd,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
@@ -183,26 +187,32 @@ const baseParse = _ => {
                     })
                     d.push({
                         title: "总伤害：" + data.sumDamage,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
                         title: "总击杀：" + data.sumKillTimes,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
                         title: "总死亡：" + data.sumDeadTimes,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
                         title: "总救援：" + data.sumRescueTimes,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
                         title: "总振刀：" + data.sumShockCount,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
                         title: "总治疗：" + data.sumCure,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
@@ -210,26 +220,55 @@ const baseParse = _ => {
                     })
                     d.push({
                         title: "最高伤害：" + data.maxDamage,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
                         title: "最高击杀：" + data.maxKillTimes,
-                        col_type: 'text_2',
-                    })
-                    d.push({
-                        title: "最高死亡：" + data.maxDeadTimes,
-                        col_type: 'text_2',
-                    })
-                    d.push({
-                        title: "最高救援：" + data.maxRescueTimes,
-                        col_type: 'text_2',
-                    })
-                    d.push({
-                        title: "最高生存时间：" + resultFormat(data.maxTotalLiveTime),
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                     d.push({
                         title: "最高治疗：" + data.maxCure,
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "最高死亡：" + data.maxDeadTimes,
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "最高救援：" + data.maxRescueTimes,
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "最高生存时间：" + resultFormat(data.maxTotalLiveTime),
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        col_type: 'line_blank'
+                    })
+                    d.push({
+                        title: "夺冠次数：" + data.rank1Count,
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "夺冠率：" + data.rank1Rate,
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "前五次数：" + data.rankLe5Count,
+                        url: "hiker://empty",
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "前五率：" + data.rankLe5Rate,
+                        url: "hiker://empty",
                         col_type: 'text_2',
                     })
                 } else {
