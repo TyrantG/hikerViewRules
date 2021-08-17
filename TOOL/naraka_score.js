@@ -350,6 +350,6 @@ const userParse = (d, data) => {
     d.push({
         title: data.hero,
         pic_url: "https:"+data.backImage+"@Referer=https://www.gamersky.com/",
-        col_type: 'movie_1_vertical_pic_blur'
+        col_type: 'movie_1_vertical_pic'
     })
 }
