@@ -286,10 +286,9 @@ const baseParse = _ => {
                 let heroBest = res.data.heroBest
                 let heroList = res.data.heroList
 
-                d.push({
-                    title: heroBest.hero,
-                    pic_url: "https:"+heroBest.heroImage+"@Referer=https://www.gamersky.com/",
-                    col_type: 'movie_1_vertical_pic_blur'
+                d.push(...userParse(heroBest))
+                heroList.forEach(hero => {
+                    d.push(...userParse(hero))
                 })
 
                 // movie_1_vertical_pic
@@ -345,4 +344,15 @@ const resultFormat = result => {
         time = "" + parseInt(hourTime) + "小时" + time;
     }
     return time;
+}
+
+const userParse = data => {
+    let d = []
+    d.push({
+        title: data.hero,
+        pic_url: "https:"+data.backImage+"@Referer=https://www.gamersky.com/",
+        col_type: 'movie_1_vertical_pic_blur'
+    })
+
+    return d
 }
