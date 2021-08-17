@@ -22,7 +22,14 @@ const baseParse = _ => {
         let listData = "https://gamedb.gamersky.com/yjwujian/record/getRecentRecords?roleId="+roleId+"&pageIndex="+current_page+"&pageSize=20"
         let res_json = fetch(listData)
         let res = JSON.parse(res_json)
-        setError(res)
+        if (res.code === 0) {
+
+        } else {
+            d.push({
+                title: res.message,
+                col_type: 'long_text',
+            })
+        }
 
     }
 
