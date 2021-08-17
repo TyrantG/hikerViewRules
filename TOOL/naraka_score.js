@@ -6,7 +6,7 @@ const baseParse = _ => {
     d.push({
         title: '绑定',
         desc: '请输入游戏ID',
-        url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/TOOL/naraka_score.js'));setRoleId(params);refreshPage(true);return 'hiker://empty';}, {input: input.trim()}) : 'toast://请输入游戏ID'",
+        url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/TOOL/naraka_score.js'));setRoleId(params);}, {input: input.trim()}) : 'toast://请输入游戏ID'",
         col_type: "input"
     })
 
