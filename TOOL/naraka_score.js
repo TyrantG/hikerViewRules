@@ -118,70 +118,72 @@ const baseParse = _ => {
                 })
             }
         } else if (cate_select === '2') {
-            d.push({
-                col_type: 'blank_block',
-            })
-            d.push({
-                title: game_mode === '1' ? '‘‘’’<strong><font color="red">单人</font></strong>' : '单人',
-                url: $(empty).lazyRule(_ => {
-                    putVar("tyrantgenesis.naraka_score.game_mode", "1")
-                    refreshPage(true)
-                    return "hiker://empty"
-                }),
-                col_type: 'scroll_button',
-            })
-            d.push({
-                title: game_mode === '2' ? '‘‘’’<strong><font color="red">三人</font></strong>' : '三人',
-                url: $(empty).lazyRule(_ => {
-                    putVar("tyrantgenesis.naraka_score.game_mode", "2")
-                    refreshPage(true)
-                    return "hiker://empty"
-                }),
-                col_type: 'scroll_button',
-            })
-            d.push({
-                title: game_mode === '3' ? '‘‘’’<strong><font color="red">死斗</font></strong>' : '死斗',
-                url: $(empty).lazyRule(_ => {
-                    putVar("tyrantgenesis.naraka_score.game_mode", "3")
-                    refreshPage(true)
-                    return "hiker://empty"
-                }),
-                col_type: 'scroll_button',
-            })
-            let url = "https://gamedb.gamersky.com/yjwujian/career/getCareerData?gamerskyId=5861820&identity=0&roleId="+roleId
-            let res_json = fetch(url)
-            let res = JSON.parse(res_json)
-            let data = {}
+            if (current_page === '1') {
+                d.push({
+                    col_type: 'blank_block',
+                })
+                d.push({
+                    title: game_mode === '1' ? '‘‘’’<strong><font color="red">单人</font></strong>' : '单人',
+                    url: $(empty).lazyRule(_ => {
+                        putVar("tyrantgenesis.naraka_score.game_mode", "1")
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }),
+                    col_type: 'scroll_button',
+                })
+                d.push({
+                    title: game_mode === '2' ? '‘‘’’<strong><font color="red">三人</font></strong>' : '三人',
+                    url: $(empty).lazyRule(_ => {
+                        putVar("tyrantgenesis.naraka_score.game_mode", "2")
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }),
+                    col_type: 'scroll_button',
+                })
+                d.push({
+                    title: game_mode === '3' ? '‘‘’’<strong><font color="red">死斗</font></strong>' : '死斗',
+                    url: $(empty).lazyRule(_ => {
+                        putVar("tyrantgenesis.naraka_score.game_mode", "3")
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }),
+                    col_type: 'scroll_button',
+                })
+                let url = "https://gamedb.gamersky.com/yjwujian/career/getCareerData?gamerskyId=5861820&identity=0&roleId=" + roleId
+                let res_json = fetch(url)
+                let res = JSON.parse(res_json)
+                let data = {}
 
-            if (res.code === 0) {
-                if (game_mode === '1') {
-                    data = res.data.single
-                } else if (game_mode === '2') {
-                    data = res.data.three
-                } else if (game_mode === '3') {
-                    data = res.data.chaos
+                if (res.code === 0) {
+                    if (game_mode === '1') {
+                        data = res.data.single
+                    } else if (game_mode === '2') {
+                        data = res.data.three
+                    } else if (game_mode === '3') {
+                        data = res.data.chaos
+                    }
+                    d.push({
+                        title: "场次：" + data.gameCount,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "场均击杀：" + data.avgKillTimes,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "场均伤害：" + data.sumDamage,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "场均KDA：" + data.kd,
+                        col_type: 'text_2',
+                    })
+                } else {
+                    d.push({
+                        title: res.message,
+                        col_type: 'long_text',
+                    })
                 }
-                d.push({
-                    title: "场次："+data.gameCount,
-                    col_type: 'text_2',
-                })
-                d.push({
-                    title: "场均击杀："+data.avgKillTimes,
-                    col_type: 'text_2',
-                })
-                d.push({
-                    title: "场均伤害："+data.sumDamage,
-                    col_type: 'text_2',
-                })
-                d.push({
-                    title: "场均KDA："+data.kd,
-                    col_type: 'text_2',
-                })
-            } else {
-                d.push({
-                    title: res.message,
-                    col_type: 'long_text',
-                })
             }
 
         } else if (cate_select === '3') {
