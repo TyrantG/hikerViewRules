@@ -205,6 +205,33 @@ const baseParse = _ => {
                         title: "总治疗：" + data.sumCure,
                         col_type: 'text_2',
                     })
+                    d.push({
+                        col_type: 'line_blank'
+                    })
+                    d.push({
+                        title: "最高伤害：" + data.maxDamage,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "最高击杀：" + data.maxKillTimes,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "最高死亡：" + data.maxDeadTimes,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "最高救援：" + data.maxRescueTimes,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "最高振刀：" + data.maxShockCount,
+                        col_type: 'text_2',
+                    })
+                    d.push({
+                        title: "最高治疗：" + data.maxCure,
+                        col_type: 'text_2',
+                    })
                 } else {
                     d.push({
                         title: res.message,
