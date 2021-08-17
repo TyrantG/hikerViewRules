@@ -292,6 +292,11 @@ const baseParse = _ => {
                     col_type: 'text_1',
                 })
                 userParse(d, heroBest)
+                d.push({
+                    title: "英雄数据",
+                    url: "hiker://empty",
+                    col_type: 'text_1',
+                })
                 heroList.forEach(hero => {
                     userParse(d, hero)
                 })
@@ -357,6 +362,21 @@ const userParse = (d, data) => {
         desc: "使用率："+data.useRate+"%",
         pic_url: "https:"+data.backImage+"@Referer=https://www.gamersky.com/",
         col_type: 'movie_1_left_pic'
+    })
+    d.push({
+        title: "胜场：" + data.winRate,
+        url: "hiker://empty",
+        col_type: 'text_3',
+    })
+    d.push({
+        title: "场均伤害：" + data.avgDamage,
+        url: "hiker://empty",
+        col_type: 'text_3',
+    })
+    d.push({
+        title: "K/D：" + data.kd,
+        url: "hiker://empty",
+        col_type: 'text_3',
     })
     d.push({
         col_type: 'line_blank'
