@@ -164,6 +164,10 @@ const artStation = _ => {
   godWriteFile(BASE_URL+"IMAGE/artstation.js?t="+time, 'hiker://files/TyrantG/IMAGE/artstation.js')
 }
 
+const zcool = _ => {
+  godWriteFile(BASE_URL+"IMAGE/zcool.js?t="+time, 'hiker://files/TyrantG/IMAGE/zcool.js')
+}
+
 const ednovas = _ => {
   godWriteFile(BASE_URL+"VIDEO/ednovas.js?t="+time, 'hiker://files/TyrantG/VIDEO/ednovas.js')
 }
