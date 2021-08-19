@@ -91,13 +91,15 @@ const baseParse = _ => {
     list.forEach(item => {
         if (item.objectType === 78) {
             let obj = item.object
-            d.push({
-                title: obj.title,
-                desc: obj.creatorObj.username,
-                pic_url: obj.cover,
-                url: obj.pageUrl,
-                col_type: 'movie_2'
-            })
+            if (obj.objectType === 3) {
+                d.push({
+                    title: obj.title,
+                    desc: obj.creatorObj.username,
+                    pic_url: obj.cover,
+                    url: obj.pageUrl,
+                    col_type: 'movie_2'
+                })
+            }
         }
     })
 
@@ -123,13 +125,15 @@ const searchParse = _ => {
     list.forEach(item => {
         if (item.objectType === 78) {
             let obj = item.object
-            d.push({
-                title: obj.title,
-                desc: obj.creatorObj.username,
-                pic_url: obj.cover,
-                url: obj.pageUrl,
-                col_type: 'movie_2'
-            })
+            if (obj.objectType === 3) {
+                d.push({
+                    title: obj.title.replace(/<[^>]+>/g, ""),
+                    desc: obj.creatorObj.username,
+                    pic_url: obj.cover,
+                    url: obj.pageUrl,
+                    col_type: 'movie_2'
+                })
+            }
         }
     })
 
