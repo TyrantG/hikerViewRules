@@ -108,7 +108,7 @@ const secParse = _ => {
     const html = parseDomForHtml(getResCode(), '.work-content-wrap&&Html');
 
     d.push({
-        title: html,
+        title: html.replace("<span class=\"icon-image-collection js-single-collection\" title=\"收藏单图\">收藏</span>", ''),
         col_type: 'rich_text'
     })
 
