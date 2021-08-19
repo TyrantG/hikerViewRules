@@ -116,8 +116,8 @@ const secParse = _ => {
 
 const searchParse = _ => {
     let d = [];
-    const list = JSON.parse(getResCode()).data
+    // const list = JSON.parse().data
 
-    setError(list)
+    setError(getResCode())
     setResult(d);
 }
