@@ -86,7 +86,7 @@ const baseParse = _ => {
     }
 
     const list_json = fetch(api_url)
-    const list = JSON.parse(list).data.data
+    const list = JSON.parse(list_json).data.data
 
     list.forEach(item => {
         let obj = item.object
