@@ -3,7 +3,6 @@ const baseParse = _ => {
     let d = [];
     const cate_url = "https://www.zcool.com.cn/common/category"
     const empty = "hiker://empty"
-    let api_url = MY_URL.split('##')[0]
     const page = MY_URL.split('##')[1]
     const sort = [{title: '编辑精选', url: 'recommendLevel=2&sort=9'},{title: '首页推荐', url: 'recommendLevel=3&sort=9'},{title: '全部推荐', url: 'recommendLevel=1&sort=9'},{title: '最新发布', url: 'recommendLevel=0&sort=0'}]
 
@@ -12,75 +11,93 @@ const baseParse = _ => {
     let cate_2nd = getVar("tyrantgenesis.zcool.cate_2nd_select", "0")
     let cate_sort = getVar("tyrantgenesis.zcool.cate_sort", "0")
 
+    const api_url = MY_URL.split('##')[0] + "?cate="+cate_1st+"&subCate="+cate_2nd+"&hasVideo=0&city=0&college=0&"+sort[cate_sort]+"&limit=20&page="+page
+
     // 一级分类
     const category_json = fetch(cate_url)
     const category = JSON.parse(category_json).data
 
-    // 一级分类
-    category.forEach(cate => {
+    if (parseInt(page) === 1) {
+
+        // 一级分类
+        category.forEach(cate => {
+            d.push({
+                title: cate_1st === cate.id.toString() ? '‘‘’’<strong><font color="red">'+cate.name+'</font></strong>' : cate.name,
+                url: $(empty).lazyRule(params => {
+                    putVar("tyrantgenesis.zcool.cate_1st_select", params.cate_id.toString())
+                    putVar("tyrantgenesis.zcool.cate_2nd_select", "0")
+                    refreshPage(true)
+                    return "hiker://empty"
+                }, {
+                    cate_id: cate.id,
+                }),
+                col_type: 'scroll_button'
+            })
+        })
         d.push({
-            title: cate_1st === cate.id.toString() ? '‘‘’’<strong><font color="red">'+cate.name+'</font></strong>' : cate.name,
+            col_type: 'blank_block',
+        })
+
+        // 二级分类
+        let sub_category = category.find(item => item.id.toString() === cate_1st).subCateList
+        d.push({
+            title: cate_2nd === "0" ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
             url: $(empty).lazyRule(params => {
-                putVar("tyrantgenesis.zcool.cate_1st_select", params.cate_id.toString())
                 putVar("tyrantgenesis.zcool.cate_2nd_select", "0")
                 refreshPage(true)
                 return "hiker://empty"
-            }, {
-                cate_id: cate.id,
             }),
             col_type: 'scroll_button'
         })
-    })
-    d.push({
-        col_type: 'blank_block',
-    })
-
-    // 二级分类
-    let sub_category = category.find(item => item.id.toString() === cate_1st).subCateList
-    d.push({
-        title: cate_2nd === "0" ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
-        url: $(empty).lazyRule(params => {
-            putVar("tyrantgenesis.zcool.cate_2nd_select", "0")
-            refreshPage(true)
-            return "hiker://empty"
-        }),
-        col_type: 'scroll_button'
-    })
-    sub_category.forEach(cate => {
+        sub_category.forEach(cate => {
+            d.push({
+                title: cate_2nd === cate.id.toString() ? '‘‘’’<strong><font color="red">'+cate.name+'</font></strong>' : cate.name,
+                url: $(empty).lazyRule(params => {
+                    putVar("tyrantgenesis.zcool.cate_2nd_select", params.cate_id.toString())
+                    refreshPage(true)
+                    return "hiker://empty"
+                }, {
+                    cate_id: cate.id
+                }),
+                col_type: 'scroll_button'
+            })
+        })
         d.push({
-            title: cate_2nd === cate.id.toString() ? '‘‘’’<strong><font color="red">'+cate.name+'</font></strong>' : cate.name,
-            url: $(empty).lazyRule(params => {
-                putVar("tyrantgenesis.zcool.cate_2nd_select", params.cate_id.toString())
-                refreshPage(true)
-                return "hiker://empty"
-            }, {
-                cate_id: cate.id
-            }),
-            col_type: 'scroll_button'
+            col_type: 'blank_block',
         })
-    })
-    d.push({
-        col_type: 'blank_block',
-    })
 
-    // 三级分类
-    sort.forEach((item, index) => {
+        // 三级分类
+        sort.forEach((item, index) => {
+            d.push({
+                title: cate_sort === index.toString() ? '‘‘’’<strong><font color="red">'+item.title+'</font></strong>' : item.title,
+                url: $(empty).lazyRule(params => {
+                    putVar("tyrantgenesis.zcool.cate_sort", params.cate_id.toString())
+                    refreshPage(true)
+                    return "hiker://empty"
+                }, {
+                    cate_id: index
+                }),
+                col_type: 'scroll_button'
+            })
+        })
         d.push({
-            title: cate_sort === index.toString() ? '‘‘’’<strong><font color="red">'+item.title+'</font></strong>' : item.title,
-            url: $(empty).lazyRule(params => {
-                putVar("tyrantgenesis.zcool.cate_sort", params.cate_id.toString())
-                refreshPage(true)
-                return "hiker://empty"
-            }, {
-                cate_id: index
-            }),
-            col_type: 'scroll_button'
+            col_type: 'blank_block',
+        })
+    }
+
+    const list_json = fetch(api_url)
+    const list = JSON.parse(list).data.data
+
+    list.forEach(item => {
+        let obj = item.object
+        d.push({
+            title: obj.title,
+            desc: obj.creatorObj.username,
+            pic_url: obj.cover,
+            url: obj.pageUrl,
+            col_type: 'movie_2'
         })
     })
-    d.push({
-        col_type: 'blank_block',
-    })
-
 
     setResult(d);
 }
