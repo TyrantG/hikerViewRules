@@ -15,10 +15,10 @@ const baseParse = _ => {
     const html = fetch(base_url, {headers:{"User-Agent": PC_UA}})
     const cate_array = parseDomForArray(html, '.swiper-wrapper&&.cate-slide');
 
-    cate_array.forEach((cate, index) => {
+    cate_array.forEach(cate => {
         let ori_title = parseDomForHtml(cate, 'span&&Text')
         let cate_id = parseDomForHtml(cate, '.cate-slide&&data-cateid')
-        let title = index === parseInt(cate_1st) ? '‘‘’’<strong><font color="red">'+ori_title+'</font></strong>' : ori_title
+        let title = cate_id.toString() === cate_1st ? '‘‘’’<strong><font color="red">'+ori_title+'</font></strong>' : ori_title
         d.push({
             title: title,
             url: $(empty).lazyRule(params => {
