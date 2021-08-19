@@ -11,7 +11,7 @@ const baseParse = _ => {
     let cate_2nd = getVar("tyrantgenesis.zcool.cate_2nd_select", "0")
     let cate_sort = getVar("tyrantgenesis.zcool.cate_sort", "0")
 
-    const api_url = MY_URL.split('##')[0] + "?cate="+cate_1st+"&subCate="+cate_2nd+"&hasVideo=0&city=0&college=0&"+sort[cate_sort]+"&limit=20&page="+page
+    const api_url = MY_URL.split('##')[0] + "?cate="+cate_1st+"&subCate="+cate_2nd+"&hasVideo=0&city=0&college=0&"+sort[cate_sort].url+"&limit=20&page="+page
 
     // 一级分类
     const category_json = fetch(cate_url, {headers:{"User-Agent": PC_UA}})
@@ -85,13 +85,7 @@ const baseParse = _ => {
         })
     }
 
-    d.push({
-        title: api_url,
-        col_type: 'long_text'
-    })
-
     const list_json = fetch(api_url, {headers:{"User-Agent": PC_UA}})
-    // setError(list_json)
     const list = JSON.parse(list_json).data.data
 
     list.forEach(item => {
