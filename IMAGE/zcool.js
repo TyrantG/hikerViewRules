@@ -102,13 +102,12 @@ const baseParse = _ => {
     setResult(d);
 }
 
-
 const secParse = _ => {
     let d = [];
     const html = parseDomForHtml(getResCode(), '.work-content-wrap&&Html');
 
     d.push({
-        title: html.replace("收藏", ''),
+        title: html.replace(/收藏/, ''),
         col_type: 'rich_text'
     })
 
