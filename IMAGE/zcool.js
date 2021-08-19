@@ -89,14 +89,16 @@ const baseParse = _ => {
     const list = JSON.parse(list_json).data.data
 
     list.forEach(item => {
-        let obj = item.object
-        d.push({
-            title: obj.title,
-            desc: obj.creatorObj.username,
-            pic_url: obj.cover,
-            url: obj.pageUrl,
-            col_type: 'movie_2'
-        })
+        if (item.objectType === 78) {
+            let obj = item.object
+            d.push({
+                title: obj.title,
+                desc: obj.creatorObj.username,
+                pic_url: obj.cover,
+                url: obj.pageUrl,
+                col_type: 'movie_2'
+            })
+        }
     })
 
     setResult(d);
@@ -116,8 +118,20 @@ const secParse = _ => {
 
 const searchParse = _ => {
     let d = [];
-    // const list = JSON.parse().data
+    const list = JSON.parse(getResCode()).data.data
 
-    setError(MY_URL)
+    list.forEach(item => {
+        if (item.objectType === 78) {
+            let obj = item.object
+            d.push({
+                title: obj.title,
+                desc: obj.creatorObj.username,
+                pic_url: obj.cover,
+                url: obj.pageUrl,
+                col_type: 'movie_2'
+            })
+        }
+    })
+
     setResult(d);
 }
