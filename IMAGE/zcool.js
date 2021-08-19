@@ -105,7 +105,7 @@ const baseParse = _ => {
 
 const secParse = _ => {
     let d = [];
-    const html = parseDomForHtml(getResCode(), '.js-work-content&&Html');
+    const html = parseDomForHtml(getResCode(), '.work-details-content&&Html');
 
     d.push({
         title: html,
