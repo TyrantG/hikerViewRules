@@ -118,6 +118,6 @@ const searchParse = _ => {
     let d = [];
     const list = JSON.parse(getResCode()).data
 
-    setErrror(list)
+    setError(list)
     setResult(d);
 }
