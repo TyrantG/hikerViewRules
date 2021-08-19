@@ -1,21 +1,40 @@
-const Url = "https://picaapi.picacomic.com/"
-const ApiKey = "C69BAF41DA5ABD1FFEDC6D2FEA56B"
-const AppChannel = "3"
-const Version = "2.2.1.3.3.4"
-const BuildVersion = "45"
-const Accept = "application/vnd.picacomic.com.v1+json"
+const config =
+    "Url=https://picaapi.picacomic.com/\r\n"+
+    "ApiKey=C69BAF41DA5ABD1FFEDC6D2FEA56B\r\n"+
+    "AppChannel=3\r\n"+
+    "Version=2.2.1.3.3.4\r\n"+
+    "BuildVersion=45\r\n"+
+    "Accept=application/vnd.picacomic.com.v1+json\r\n"+
+    "username=\r\n"+
+    "password="
+
+const picacg_path = "hiker://files/rules/js/TyrantGenesis_哔咔设置.js"
 
 const baseParse = _ => {
+    // 初始化
     let d = [];
-    const list = parseDomForArray(getResCode(), '.fed-list-info&&li');
-    for (let j in list) {
+    let picacg_config = fetch(picacg_path)
+    if (picacg_config) {
+        let username = getConf("username", picacg_config)
+        let password = getConf("password", picacg_config)
+
         d.push({
-            title: parseDomForHtml(list[j], 'a,1&&Text'),
-            desc: parseDomForHtml(list[j], 'span,1&&Text'),
-            pic_url: parseDomForHtml(list[j], 'a&&data-original')+"@Referer=https://www.cocomanhua.com/@User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.134 Safari/537.36@Cookie=UM_distinctid=17b5d3391a63ab-00490b6eb30ed4-1343363-1fa400-17b5d3391a77d4; __cf_bm=04737274175fbd6efa700c2b7e0d687687e603b0-1629358334-1800-AWTg2ZOUlBgdhNN9azwmfqX1SI92nkk+QAOz0k+lBvZ250OBMvAsmQz+QsvOnnq3V8bxRP52G5qdWQcu70z1ul7s9D0JpkBZZYkx7N4/XnCIF2YCQHcluo20aEC4KUu/ng==",
-            url: parseDomForHtml(list[j],'a&&href'),
+            title: username,
+            col_type: 'long_text',
         })
+    } else {
+        writeFile(channels_path, config)
+        refreshPage(true)
     }
 
     setResult(d);
+}
+
+const getConf = (key, config) => {
+    let reg = new RegExp(key+"=(.*?)")
+    const match = config.match(reg, config)
+    if (match)
+        return match[1]
+    else
+        return false
 }
