@@ -14,7 +14,7 @@ const baseParse = _ => {
     const api_url = MY_URL.split('##')[0] + "?cate="+cate_1st+"&subCate="+cate_2nd+"&hasVideo=0&city=0&college=0&"+sort[cate_sort]+"&limit=20&page="+page
 
     // 一级分类
-    const category_json = fetch(cate_url)
+    const category_json = fetch(cate_url, {headers:{"User-Agent": PC_UA}})
     const category = JSON.parse(category_json).data
 
     if (parseInt(page) === 1) {
@@ -85,20 +85,20 @@ const baseParse = _ => {
         })
     }
 
-    const list_json = fetch(api_url)
-    setError(list_json)
-    // const list = JSON.parse(list_json).data.data
-    //
-    // list.forEach(item => {
-    //     let obj = item.object
-    //     d.push({
-    //         title: obj.title,
-    //         desc: obj.creatorObj.username,
-    //         pic_url: obj.cover,
-    //         url: obj.pageUrl,
-    //         col_type: 'movie_2'
-    //     })
-    // })
+    const list_json = fetch(api_url, {headers:{"User-Agent": PC_UA}})
+    // setError(list_json)
+    const list = JSON.parse(list_json).data.data
+
+    list.forEach(item => {
+        let obj = item.object
+        d.push({
+            title: obj.title,
+            desc: obj.creatorObj.username,
+            pic_url: obj.cover,
+            url: obj.pageUrl,
+            col_type: 'movie_2'
+        })
+    })
 
     setResult(d);
 }
