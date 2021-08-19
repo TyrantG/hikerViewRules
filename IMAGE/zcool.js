@@ -86,18 +86,19 @@ const baseParse = _ => {
     }
 
     const list_json = fetch(api_url)
-    const list = JSON.parse(list_json).data.data
-
-    list.forEach(item => {
-        let obj = item.object
-        d.push({
-            title: obj.title,
-            desc: obj.creatorObj.username,
-            pic_url: obj.cover,
-            url: obj.pageUrl,
-            col_type: 'movie_2'
-        })
-    })
+    setError(list_json)
+    // const list = JSON.parse(list_json).data.data
+    //
+    // list.forEach(item => {
+    //     let obj = item.object
+    //     d.push({
+    //         title: obj.title,
+    //         desc: obj.creatorObj.username,
+    //         pic_url: obj.cover,
+    //         url: obj.pageUrl,
+    //         col_type: 'movie_2'
+    //     })
+    // })
 
     setResult(d);
 }
