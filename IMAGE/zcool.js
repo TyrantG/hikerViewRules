@@ -111,7 +111,7 @@ const secParse = _ => {
     const html = parseDomForHtml(getResCode(), '.work-content-wrap&&Html');
 
     d.push({
-        title: html.replace(/收藏/g, ''),
+        title: html.replace(/收藏/g, '').replace(/<script.*script>/, ''),
         col_type: 'rich_text'
     })
 
