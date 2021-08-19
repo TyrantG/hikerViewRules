@@ -85,6 +85,11 @@ const baseParse = _ => {
         })
     }
 
+    d.push({
+        title: api_url,
+        col_type: 'long_text'
+    })
+
     const list_json = fetch(api_url, {headers:{"User-Agent": PC_UA}})
     // setError(list_json)
     const list = JSON.parse(list_json).data.data
