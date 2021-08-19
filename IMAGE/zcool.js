@@ -113,3 +113,11 @@ const secParse = _ => {
 
     setResult(d);
 }
+
+const searchParse = _ => {
+    let d = [];
+    const list = JSON.parse(getResCode()).ddata()
+
+    setErrror(list)
+    setResult(d);
+}
