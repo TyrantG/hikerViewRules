@@ -4,7 +4,8 @@ const baseParse = _ => {
     const cate_url = "https://www.zcool.com.cn/common/category"
     const empty = "hiker://empty"
     let api_url = MY_URL.split('##')[0]
-    let page = MY_URL.split('##')[1]
+    const page = MY_URL.split('##')[1]
+    const sort = [{title: '编辑精选', url: 'recommendLevel=2&sort=9'},{title: '首页推荐', url: 'recommendLevel=3&sort=9'},{title: '全部推荐', url: 'recommendLevel=1&sort=9'},{title: '最新发布', url: 'recommendLevel=0&sort=0'}]
 
     // 缓存
     let cate_1st = getVar("tyrantgenesis.zcool.cate_1st_select", "0")
@@ -54,6 +55,24 @@ const baseParse = _ => {
                 return "hiker://empty"
             }, {
                 cate_id: cate.id
+            }),
+            col_type: 'scroll_button'
+        })
+    })
+    d.push({
+        col_type: 'blank_block',
+    })
+
+    // 三级分类
+    sort.forEach((item, index) => {
+        d.push({
+            title: cate_sort === index.toString() ? '‘‘’’<strong><font color="red">'+item.title+'</font></strong>' : item.title,
+            url: $(empty).lazyRule(params => {
+                putVar("tyrantgenesis.zcool.cate_sort", params.cate_id.toString())
+                refreshPage(true)
+                return "hiker://empty"
+            }, {
+                cate_id: index
             }),
             col_type: 'scroll_button'
         })
