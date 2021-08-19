@@ -23,7 +23,7 @@ const baseParse = _ => {
             col_type: 'long_text',
         })
     } else {
-        writeFile(channels_path, config)
+        writeFile(picacg_path, config)
         refreshPage(true)
     }
 
