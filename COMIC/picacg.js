@@ -19,7 +19,7 @@ const baseParse = _ => {
         let password = getConf("password", picacg_config)
 
         d.push({
-            title: username,
+            title: '用户名:'+username,
             col_type: 'long_text',
         })
     } else {
