@@ -105,13 +105,12 @@ const baseParse = _ => {
 
 const secParse = _ => {
     let d = [];
-    // const html = parseDomForArray(getResCode(), '.work-center-con&&.js-work-content')[0];
-    setError(getResCode())
+    const html = parseDomForHtml(getResCode(), '.js-work-content&&Html');
 
-    // d.push({
-    //     title: html,
-    //     col_type: 'rich_text'
-    // })
+    d.push({
+        title: html,
+        col_type: 'rich_text'
+    })
 
     setResult(d);
 }
