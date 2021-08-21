@@ -256,7 +256,7 @@ const baseParse = _ => {
                 }
             })
 
-            if (data_json === 'Need Verifying') {
+            if (! data_json || data_json === 'Need Verifying') {
                 d.push({
                     title: 'signature 获取失败，待修复',
                     col_type: "long_text",
