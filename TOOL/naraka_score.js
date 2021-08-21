@@ -214,11 +214,11 @@ const baseParse = _ => {
                         url: "hiker://empty",
                         col_type: 'text_2',
                     })
-                    d.push({
+                    /*d.push({
                         title: "总振刀：" + data.sumShockCount,
                         url: "hiker://empty",
                         col_type: 'text_2',
-                    })
+                    })*/
                     d.push({
                         title: "总治疗：" + data.sumCure,
                         url: "hiker://empty",
@@ -242,11 +242,11 @@ const baseParse = _ => {
                         url: "hiker://empty",
                         col_type: 'text_2',
                     })
-                    d.push({
+                    /*d.push({
                         title: "最高死亡：" + data.maxDeadTimes,
                         url: "hiker://empty",
                         col_type: 'text_2',
-                    })
+                    })*/
                     d.push({
                         title: "最高救援：" + data.maxRescueTimes,
                         url: "hiker://empty",
