@@ -358,11 +358,11 @@ const baseParse = _ => {
                         url: "hiker://empty",
                         col_type: 'text_2',
                     })
-                    d.push({
-                        title: "游戏时长：" + resultFormat(hero.playTime),
-                        url: "hiker://empty",
-                        col_type: 'text_2',
-                    })
+                    // d.push({
+                    //     title: "游戏时长：" + resultFormat(hero.playTime),
+                    //     url: "hiker://empty",
+                    //     col_type: 'text_2',
+                    // })
                     d.push({
                         col_type: 'line_blank'
                     })
