@@ -304,7 +304,7 @@ const baseParse = _ => {
                     title: heroBest.hero,
                     desc: "使用率："+heroBest.useRate+"%",
                     pic_url: "https:"+heroBest.backImage+"@Referer=https://www.gamersky.com/",
-                    url: "hiker://empty",
+                    url: "https:"+heroBest.backImage+"@Referer=https://www.gamersky.com/",
                     col_type: 'movie_1_left_pic'
                 })
                 d.push({
@@ -340,7 +340,7 @@ const baseParse = _ => {
                         title: hero.hero,
                         desc: "使用率："+hero.useRate+"%",
                         pic_url: "https:"+hero.backImage+"@Referer=https://www.gamersky.com/",
-                        url: "hiker://empty",
+                        url: "https:"+hero.backImage+"@Referer=https://www.gamersky.com/",
                         col_type: 'movie_1_left_pic'
                     })
                     d.push({
