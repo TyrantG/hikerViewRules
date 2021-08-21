@@ -383,7 +383,7 @@ const baseParse = _ => {
 
 const setRoleId = params => {
     const role_path = "hiker://files/rules/js/TyrantGenesis_永劫无间绑定.js"
-    let res_json = fetch("https://gamedb.gamersky.com/yjwujian/search/getSearchResult?roleName="+params.input)
+    let res_json = fetch("https://gamedb.gamersky.com/yjwujian/search/getSearchResult?serverId=163&roleName="+params.input)
     let res = JSON.parse(res_json)
     if (res.data.length > 0) {
         writeFile(role_path, res.data[0].roleId)
