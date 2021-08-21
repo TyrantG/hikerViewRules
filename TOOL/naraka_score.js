@@ -74,7 +74,7 @@ const baseParse = _ => {
             if (res.code === 0) {
                 res.data.list.forEach(item => {
                     d.push({
-                        title: "‘‘’’<strong>#&nbsp;<font color=\"red\">"+item.groupRank+"</font></strong>",
+                        title: "‘‘’’<strong>#&nbsp;<font color=\"red\">"+item.rank+"</font></strong>",
                         url: "hiker://empty",
                         col_type: 'text_4',
                     })
@@ -385,13 +385,13 @@ const setRoleId = params => {
     const role_path = "hiker://files/rules/js/TyrantGenesis_永劫无间绑定.js"
     let res_json = fetch("https://gamedb.gamersky.com/yjwujian/search/getSearchResult?serverId=163&roleName="+params.input)
     let res = JSON.parse(res_json)
-    if (res.data.length > 0) {
-        writeFile(role_path, res.data[0].roleId)
+    if (res.code === 0) {
+        writeFile(role_path, res.data.roleId)
         refreshPage(false)
         return 'hiker://empty'
     } else {
         refreshPage(false)
-        return 'toast://查找不到玩家数据'
+        return 'toast://'+res.message
     }
 }
 
