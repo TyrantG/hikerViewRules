@@ -351,7 +351,7 @@ const secParse = _ => {
 const userParse = userObj => {
     let d = [];
 
-    const page = MY_URL.match(/\?p=(.*?)&/)[1]
+    const page = MY_URL.match(/\?p=(.*?)/)[1]
 
     if (page === '1') {
         let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
