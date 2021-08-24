@@ -84,29 +84,31 @@ const baseParse = _ => {
             break
         }
         case '3': {
-            let html = fetch(cateArray[parseInt(cate)].url, {headers:{"User-Agent": PC_UA}})
+            if (parseInt(page) === 1) {
+                let html = fetch(cateArray[parseInt(cate)].url, {headers:{"User-Agent": PC_UA}})
 
-            let list = parseDomForArray(html, '.c-tag-alphabet-list&&li')
+                let list = parseDomForArray(html, '.c-tag-alphabet-list&&li')
 
-            list.forEach((item, index) => {
-                let title = parseDomForHtml(item, '.row-label&&Text')
-                let tagList = parseDomForArray(item, '.label-list&&a')
-                d.push({
-                    title: '首字母：'+title,
-                    col_type: 'text_1'
-                })
-                if (index === 0)
-                    tagList.forEach(tag => {
-                        d.push({
-                            title: parseDomForHtml(tag, 'a&&Text'),
-                            url: parseDomForHtml(tag, 'a&&href'),
-                            col_type: 'flex_button',
-                        })
+                list.forEach((item, index) => {
+                    let title = parseDomForHtml(item, '.row-label&&Text')
+                    let tagList = parseDomForArray(item, '.label-list&&a')
+                    d.push({
+                        title: '首字母：'+title,
+                        col_type: 'text_1'
                     })
-                d.push({
-                    col_type: 'line_blank'
+                    if (index === 1)
+                        tagList.forEach(tag => {
+                            d.push({
+                                title: parseDomForHtml(tag, 'a&&Text'),
+                                url: parseDomForHtml(tag, 'a&&href'),
+                                col_type: 'flex_button',
+                            })
+                        })
+                    d.push({
+                        col_type: 'line_blank'
+                    })
                 })
-            })
+            }
 
             break
         }
