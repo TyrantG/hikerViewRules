@@ -315,6 +315,9 @@ const secParse = _ => {
         col_type: 'text_2'
     })
 
+    d.push({
+        col_type: 'line_blank'
+    })
 
 
     let list = parseDomForArray(html, '.pic&&.work-img-box')
