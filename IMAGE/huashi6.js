@@ -261,7 +261,7 @@ const secParse = _ => {
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
     let userinfo = parseDomForArray(html, '.pic&&.work-img-box')
 
-    let url = parseDomForHtml(userinfo, 'a&&href')
+    let url = parseDomForHtml(userinfo, 'a&&href')[0]
     let url_arr = url.split('/')
     let uid = url_arr[url_arr.length-1]
 
@@ -293,9 +293,9 @@ const secParse = _ => {
                 return 'toast://取消关注'
             } else {
                 params.channels.push({
-                    title: params.author.nickname,
-                    sec_uid: params.author.sec_uid,
-                    avatar_url: params.author.avatar_thumb.url_list[0],
+                    name: params.author.nickname,
+                    uid: params.author.sec_uid,
+                    avatar: params.author.avatar_thumb.url_list[0],
                 })
                 writeFile(channels_path, JSON.stringify(params.channels))
                 refreshPage(false)
@@ -312,7 +312,7 @@ const secParse = _ => {
 
 
 
-    /* let list = parseDomForArray(html, '.detail-painter-info&&a')[0]
+    let list = parseDomForArray(html, '.detail-painter-info&&a')
 
 
      list.forEach(item => {
@@ -321,7 +321,7 @@ const secParse = _ => {
              url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
              col_type: 'pic_1_full'
          })
-     })*/
+     })
 
     setResult(d);
 }
