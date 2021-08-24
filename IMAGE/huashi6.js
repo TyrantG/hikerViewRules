@@ -110,46 +110,53 @@ const baseParse = _ => {
                     col_type: 'scroll_button',
                 })
 
-                if (button_show !== '2') {
-                    let prefix = ''
-                    switch (button_show) {
-                        case '1': prefix = '';break
-                        case '3': prefix = '🔝';break
-                        case '4': prefix = '❌';break
-                    }
-                    channels.forEach((channel, index) => {
-                        d.push({
-                            title: parseInt(channel_select) === index && button_show === '1' ? '✓'+channel.name : prefix+channel.name,
-                            pic_url: channel.avatar+'@Referer='+base_url,
-                            url: $(empty).lazyRule(params => {
-                                const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
-                                if (params.button_show === '1') {
-                                    putVar("tyrantgenesis.huashi6.channel_select", params.index.toString())
-                                } else if (params.button_show === '3') {
-                                    let current = params.channels[params.index]
-                                    params.channels.splice(params.index, 1)
-                                    params.channels.unshift(current)
-                                    writeFile(channels_path, JSON.stringify(params.channels))
-                                    putVar("tyrantgenesis.huashi6.channel_select", '0')
-                                } else {
-                                    params.channels.splice(params.index, 1)
-                                    writeFile(channels_path, JSON.stringify(params.channels))
-                                    putVar("tyrantgenesis.huashi6.channel_select", '0')
-                                }
-
-                                refreshPage(true)
-                                return "hiker://empty"
-                            }, {
-                                index: index,
-                                button_show: button_show,
-                                channels: channels
-                            }),
-                            col_type: 'icon_round_4',
-                        })
-                    })
+                if (channels.length === 0) {
                     d.push({
-                        col_type: 'blank_block',
+                        title: '先关注几位画师吧~',
+                        col_type: 'long_text',
                     })
+                } else {
+                    if (button_show !== '2') {
+                        let prefix = ''
+                        switch (button_show) {
+                            case '1': prefix = '';break
+                            case '3': prefix = '🔝';break
+                            case '4': prefix = '❌';break
+                        }
+                        channels.forEach((channel, index) => {
+                            d.push({
+                                title: parseInt(channel_select) === index && button_show === '1' ? '✓'+channel.name : prefix+channel.name,
+                                pic_url: channel.avatar+'@Referer='+base_url,
+                                url: $(empty).lazyRule(params => {
+                                    const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
+                                    if (params.button_show === '1') {
+                                        putVar("tyrantgenesis.huashi6.channel_select", params.index.toString())
+                                    } else if (params.button_show === '3') {
+                                        let current = params.channels[params.index]
+                                        params.channels.splice(params.index, 1)
+                                        params.channels.unshift(current)
+                                        writeFile(channels_path, JSON.stringify(params.channels))
+                                        putVar("tyrantgenesis.huashi6.channel_select", '0')
+                                    } else {
+                                        params.channels.splice(params.index, 1)
+                                        writeFile(channels_path, JSON.stringify(params.channels))
+                                        putVar("tyrantgenesis.huashi6.channel_select", '0')
+                                    }
+
+                                    refreshPage(true)
+                                    return "hiker://empty"
+                                }, {
+                                    index: index,
+                                    button_show: button_show,
+                                    channels: channels
+                                }),
+                                col_type: 'icon_round_4',
+                            })
+                        })
+                        d.push({
+                            col_type: 'blank_block',
+                        })
+                    }
                 }
             }
 
