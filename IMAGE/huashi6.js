@@ -25,7 +25,7 @@ const baseParse = _ => {
         },*/
         {
             title: '今日榜单',
-            url: "https://rt.huashi6.com/front/works/rank_page",
+            url: "https://rt.huashi6.com/front/works/rank_page?index=0&size=50",
         },
         {
             title: '推荐画师',
@@ -219,8 +219,8 @@ const baseParse = _ => {
             if (parseInt(page) === 1) {
                 let list_json = fetch(cateArray[parseInt(cate)].url, {headers:{
                     "User-Agent": PC_UA,
-                    "body": "index=0&size=50",
-                    "method": "POST"
+                    // "body": "index=0&size=50",
+                    // "method": "POST"
                 }})
 
                 let list = JSON.parse(list_json).data.works.datas
