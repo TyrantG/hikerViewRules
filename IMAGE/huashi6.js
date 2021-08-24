@@ -418,17 +418,23 @@ const userParse = userObj => {
 
 const searchParse = _ => {
     let d = [];
-    let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
-
-    let list = parseDomForArray(html, '.px-container&&.px-waterfall-item')
+    let list = JSON.parse(getResCode()).data.datas
 
     list.forEach(item => {
+        let userObj = {
+            name: item.name,
+            uid: item.id,
+            avatar: item.coverImageUrl ? "https://img2.huashi6.com/"+item.coverImageUrl+'@Referer='+base_url : "https://res2.huashi6.com/static/hst/pc/imgs/default_avatar.d59d546.png"
+        }
         d.push({
-            title: parseDomForHtml(item, '.px-info-title&&Text'),
-            pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
-            url: parseDomForHtml(item, 'a&&href'),
-            desc: parseDomForHtml(item, '.painter-name&&Text'),
-            col_type: 'movie_2'
+            title: userObj.name,
+            pic_url: userObj.avatar+'@Referer='+base_url,
+            url: $("https://www.huashi6.com/painter/"+item.id+"?p=fypage##fypage").rule(userObj => {
+                eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
+                userParse(userObj)
+            }, userObj),
+            desc: item.profile,
+            col_type: 'movie_3_marquee'
         })
     })
 
