@@ -168,6 +168,10 @@ const zcool = _ => {
   godWriteFile(BASE_URL+"IMAGE/zcool.js?t="+time, 'hiker://files/TyrantG/IMAGE/zcool.js')
 }
 
+const huashi6 = _ => {
+  godWriteFile(BASE_URL+"IMAGE/huashi6.js?t="+time, 'hiker://files/TyrantG/IMAGE/huashi6.js')
+}
+
 const picacg = _ => {
   godWriteFile(BASE_URL+"COMIC/picacg.js?t="+time, 'hiker://files/TyrantG/COMIC/picacg.js')
 }
