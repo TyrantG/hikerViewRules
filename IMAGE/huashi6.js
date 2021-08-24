@@ -1,3 +1,5 @@
+const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
+
 const baseParse = _ => {
     // 初始化
     let d = [];
@@ -38,11 +40,23 @@ const baseParse = _ => {
             url: empty,
         }
     ]
-
+    let channels
 
     // 缓存
     let cate = getVar("tyrantgenesis.huashi6.cate_select", "0")
-    let tag = getVar("tyrantgenesis.huashi6.tag_select", "0")
+    let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
+    let button_show = getVar("tyrantgenesis.huashi6.button_show", "1") // 1:热门,2:收起,3:取消,4:置顶
+
+    if (fetch(channels_path)) {
+        let local_channels = fetch(channels_path)
+        channels = JSON.parse(local_channels)
+    } else {
+        let defaultChannels = [
+            {name: 'wlop', uid: '7168', avatar: 'https://img2.huashi6.com/images/resource/2015/06/24/51h068746p0.jpg?imageView2/1/q/100/interlace/1/w/160/h/160'},
+        ]
+        writeFile(channels_path, JSON.stringify(defaultChannels))
+        channels = defaultChannels
+    }
 
     if (parseInt(page) === 1) {
         cateArray.forEach((item, index) => {
@@ -63,6 +77,58 @@ const baseParse = _ => {
 
     switch (cate) {
         case '0': {
+            let uid = channels[channel_select].uid
+            if (parseInt(page) === 1) {
+                d.push({
+                    title: button_show === '1' ? '‘‘’’<strong><font color="red">关注画师</font></strong>' : '关注画师',
+                    url: $(empty).lazyRule(_ => {
+                        putVar("tyrantgenesis.huashi6.button_show", '1')
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }),
+                    col_type: 'scroll_button',
+                })
+                d.push({
+                    title: button_show === '2' ? '‘‘’’<strong><font color="red">收起</font></strong>' : '收起',
+                    url: $(empty).lazyRule(_ => {
+                        putVar("tyrantgenesis.huashi6.button_show", '2')
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }),
+                    col_type: 'scroll_button',
+                })
+                d.push({
+                    title: button_show === '3' ? '‘‘’’<strong><font color="red">置顶</font></strong>' : '置顶',
+                    url: $(empty).lazyRule(_ => {
+                        putVar("tyrantgenesis.huashi6.button_show", '3')
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }),
+                    col_type: 'scroll_button',
+                })
+                d.push({
+                    title: button_show === '4' ? '‘‘’’<strong><font color="red">取消</font></strong>' : '✓取消',
+                    url: $(empty).lazyRule(_ => {
+                        putVar("tyrantgenesis.huashi6.button_show", '4')
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }),
+                    col_type: 'scroll_button',
+                })
+                channels.forEach((channel, index) => {
+                    d.push({
+                        title: parseInt(channel_select) === index ? '✓'+channel.name : channel.name,
+                        url: $(empty).lazyRule(param => {
+                            putVar("tyrantgenesis.huashi6.channel_select", param.index.toString())
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            index: index
+                        }),
+                        col_type: 'icon_4',
+                    })
+                })
+            }
             break
         }
         case '1':
