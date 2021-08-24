@@ -350,45 +350,49 @@ const secParse = _ => {
 
 const userParse = userObj => {
     let d = [];
-    let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
-    let channels = JSON.parse(fetch(channels_path))
 
-    let has_collect = false
+    const page = MY_URL.match(/\?p=(.*?)&/)[1]
 
-    channels.forEach((item, index) => {
-        if (item.uid.toString() === userObj.uid.toString()) has_collect = index
-    })
+    if (page === '1') {
+        let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
+        let channels = JSON.parse(fetch(channels_path))
 
-    d.push({
-        title: has_collect ? "取消关注" : "关注用户",
-        url: $(empty).lazyRule(params => {
-            const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
-            if (params.has_collect) {
-                params.channels.splice(params.index, 1)
-                writeFile(channels_path, JSON.stringify(params.channels))
-                if (parseInt(channel_select) === params.index) putVar("tyrantgenesis.huashi6.channel_select", '0')
-                refreshPage(false)
-                return 'toast://取消关注'
-            } else {
-                params.channels.push(params.userObj)
-                writeFile(channels_path, JSON.stringify(params.channels))
-                refreshPage(false)
-                return 'toast://关注成功'
-            }
-        }, {
-            index: has_collect,
-            channel_select: channel_select,
-            has_collect: has_collect,
-            channels: channels,
-            userObj: userObj
-        }),
-        col_type: 'text_center_1'
-    })
+        let has_collect = false
 
-    d.push({
-        col_type: 'blank_block'
-    })
+        channels.forEach((item, index) => {
+            if (item.uid.toString() === userObj.uid.toString()) has_collect = index
+        })
 
+        d.push({
+            title: has_collect ? "取消关注" : "关注用户",
+            url: $(empty).lazyRule(params => {
+                const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
+                if (params.has_collect) {
+                    params.channels.splice(params.index, 1)
+                    writeFile(channels_path, JSON.stringify(params.channels))
+                    if (parseInt(channel_select) === params.index) putVar("tyrantgenesis.huashi6.channel_select", '0')
+                    refreshPage(false)
+                    return 'toast://取消关注'
+                } else {
+                    params.channels.push(params.userObj)
+                    writeFile(channels_path, JSON.stringify(params.channels))
+                    refreshPage(false)
+                    return 'toast://关注成功'
+                }
+            }, {
+                index: has_collect,
+                channel_select: channel_select,
+                has_collect: has_collect,
+                channels: channels,
+                userObj: userObj
+            }),
+            col_type: 'text_center_1'
+        })
+
+        d.push({
+            col_type: 'blank_block'
+        })
+    }
 
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
 
