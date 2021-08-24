@@ -131,6 +131,9 @@ const baseParse = _ => {
                         col_type: 'icon_round_4',
                     })
                 })
+                d.push({
+                    col_type: 'blank_block',
+                })
             }
 
             let uid = channels[channel_select].uid
