@@ -1,9 +1,9 @@
 const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
+const base_url = "https://www.huashi6.com"
 
 const baseParse = _ => {
     // 初始化
     let d = [];
-    const base_url = "https://www.huashi6.com"
     const empty = "hiker://empty"
     const page = MY_URL.split('##')[1]
     const cateArray = [
