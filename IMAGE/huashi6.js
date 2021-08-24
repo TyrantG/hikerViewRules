@@ -278,7 +278,7 @@ const secParse = _ => {
     let has_collect = false
     setError(channels)
 
-    /*channels.forEach((item, index) => {
+    channels.forEach((item, index) => {
         if (item.uid.toString() === uid.toString()) has_collect = index
     })
 
@@ -313,16 +313,16 @@ const secParse = _ => {
 
 
 
-    let list = parseDomForArray(html, '.detail-painter-info&&a')[0]
+    /* let list = parseDomForArray(html, '.detail-painter-info&&a')[0]
 
 
-    list.forEach(item => {
-        d.push({
-            pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
-            url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
-            col_type: 'pic_1_full'
-        })
-    })*/
+     list.forEach(item => {
+         d.push({
+             pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
+             url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
+             col_type: 'pic_1_full'
+         })
+     })*/
 
     setResult(d);
 }
