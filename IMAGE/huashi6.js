@@ -133,7 +133,7 @@ const baseParse = _ => {
         case '4': {
             let list_json = fetch(cateArray[parseInt(cate)].url, {headers:{"User-Agent": PC_UA}})
 
-            let list = JSON.parse(list_json.data.datas)
+            let list = JSON.parse(list_json.data)
             setError(list_json)
 
             /*list.forEach(item => {
