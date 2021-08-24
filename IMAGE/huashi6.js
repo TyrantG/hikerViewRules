@@ -257,9 +257,14 @@ const secParse = _ => {
     let d = [];
 
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
-
     let list = parseDomForArray(html, '.pic&&.work-img-box')
-    setError(list)
+
+    list.forEach(item => {
+        d.push({
+            pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
+            col_type: 'pic_1_full'
+        })
+    })
 
     setResult(d);
 }
