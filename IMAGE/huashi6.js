@@ -17,13 +17,13 @@ const baseParse = _ => {
             title: '热门',
             url: "https://www.huashi6.com/hot_"+page,
         },
-        {
+        /*{
             title: '标签',
             url: "https://www.huashi6.com/tags",
-        },
+        },*/
         {
             title: '今日榜单',
-            url: empty,
+            url: "https://rt.huashi6.com/front/works/rank_page",
         },
         {
             title: '推荐画师',
@@ -84,7 +84,7 @@ const baseParse = _ => {
             break
         }
         case '3': {
-            if (parseInt(page) === 1) {
+            /*if (parseInt(page) === 1) {
                 let html = fetch(cateArray[parseInt(cate)].url, {headers:{"User-Agent": PC_UA}})
 
                 let list = parseDomForArray(html, '.c-tag-alphabet-list&&li')
@@ -106,6 +106,24 @@ const baseParse = _ => {
                         })
                     d.push({
                         col_type: 'line_blank'
+                    })
+                })
+            }*/
+            if (parseInt(page) === 1) {
+                let list_json = fetch(cateArray[parseInt(cate)].url, {headers:{
+                    "User-Agent": PC_UA,
+                    "body": "index=0&size=50"
+                }})
+
+                let list = JSON.parse(list_json).data.works.datas
+
+                list.forEach(item => {
+                    d.push({
+                        title: item.title,
+                        pic_url: "https://img2.huashi6.com/"+item.coverImage+'@Referer='+base_url,
+                        url: "https://www.huashi6.com/draw/"+item.id,
+                        desc: item.description,
+                        col_type: 'movie_3'
                     })
                 })
             }
