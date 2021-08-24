@@ -262,6 +262,8 @@ const secParse = _ => {
     let userinfo = parseDomForArray(html, '.pic&&.work-img-box')
 
     let url = parseDomForHtml(userinfo, 'a&&href')[0]
+    setError(url)
+    return false
     let url_arr = url.split('/')
     let uid = url_arr[url_arr.length-1]
 
