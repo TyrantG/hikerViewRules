@@ -126,6 +126,15 @@
     "title": "图片",
     "data": [
       {
+        "title": "图站",
+        "rules": [
+          {
+            "title": "触站",
+            "rule": {"title":"触站","author":"TyrantGenesis","version":1,"url":"hiker://empty##fypage","col_type":"movie_3","class_name":"","class_url":"","area_name":"","area_url":"","sort_name":"","year_name":"","sort_url":"","year_url":"","find_rule":"js:\neval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))\nbaseParse()","searchFind":"js:\neval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))\nsearchParse()","search_url":"https://rt.huashi6.com/front/works/search?index=fypage&title=**","titleColor":"#bdb2ff","group":"⑳TyrantG","detail_col_type":"movie_1","detail_find_rule":"js:\neval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))\nsecParse()","sdetail_col_type":"movie_1","sdetail_find_rule":"js:\neval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))\nsecParse()","ua":"pc","preRule":"eval(fetch(\"https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/God_Plan.js\"))\nhuashi6()","pages":"[]"},
+          }
+        ]
+      },
+      {
         "title": "艺术",
         "rules": [
           {
