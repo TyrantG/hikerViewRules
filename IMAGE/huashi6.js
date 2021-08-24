@@ -260,7 +260,6 @@ const secParse = _ => {
 
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
     let userinfo = parseDomForArray(html, '.pic&&.work-img-box')
-    let list = parseDomForArray(html, '.detail-painter-info&&a')[0]
 
     let url = parseDomForHtml(userinfo, 'a&&href')
     let url_arr = url.split('/')
@@ -277,8 +276,9 @@ const secParse = _ => {
     })
 
     let has_collect = false
+    setError(channels)
 
-    channels.forEach((item, index) => {
+    /*channels.forEach((item, index) => {
         if (item.uid.toString() === uid.toString()) has_collect = index
     })
 
@@ -313,6 +313,7 @@ const secParse = _ => {
 
 
 
+    let list = parseDomForArray(html, '.detail-painter-info&&a')[0]
 
 
     list.forEach(item => {
@@ -321,7 +322,7 @@ const secParse = _ => {
             url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
             col_type: 'pic_1_full'
         })
-    })
+    })*/
 
     setResult(d);
 }
