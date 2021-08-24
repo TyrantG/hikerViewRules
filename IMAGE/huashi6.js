@@ -117,23 +117,27 @@ const baseParse = _ => {
                     }),
                     col_type: 'scroll_button',
                 })
-                channels.forEach((channel, index) => {
-                    d.push({
-                        title: parseInt(channel_select) === index ? '✓'+channel.name : channel.name,
-                        pic_url: channel.avatar+'@Referer='+base_url,
-                        url: $(empty).lazyRule(param => {
-                            putVar("tyrantgenesis.huashi6.channel_select", param.index.toString())
-                            refreshPage(true)
-                            return "hiker://empty"
-                        }, {
-                            index: index
-                        }),
-                        col_type: 'icon_round_4',
+
+                if (button_show !== '2') {
+                    let prefix = button_show === '1' ? '✓' : (button_show === '3' ? '🔝' : '❌')
+                    channels.forEach((channel, index) => {
+                        d.push({
+                            title: parseInt(channel_select) === index ? '✓'+channel.name : channel.name,
+                            pic_url: channel.avatar+'@Referer='+base_url,
+                            url: $(empty).lazyRule(param => {
+                                putVar("tyrantgenesis.huashi6.channel_select", param.index.toString())
+                                refreshPage(true)
+                                return "hiker://empty"
+                            }, {
+                                index: index
+                            }),
+                            col_type: 'icon_round_4',
+                        })
                     })
-                })
-                d.push({
-                    col_type: 'blank_block',
-                })
+                    d.push({
+                        col_type: 'blank_block',
+                    })
+                }
             }
 
             let uid = channels[channel_select].uid
