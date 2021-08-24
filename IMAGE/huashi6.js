@@ -111,9 +111,15 @@ const baseParse = _ => {
                 })
 
                 if (button_show !== '2') {
+                    let prefix = ''
+                    switch (button_show) {
+                        case '1': prefix = '';break
+                        case '3': prefix = '🔝';break
+                        case '4': prefix = '❌';break
+                    }
                     channels.forEach((channel, index) => {
                         d.push({
-                            title: parseInt(channel_select) === index ? (button_show === '1' ? '✓' : (button_show === '3' ? '🔝' : '❌'))+channel.name : (button_show === '3' ? '🔝' : '❌')+channel.name,
+                            title: parseInt(channel_select) === index && button_show === '1' ? '✓'+channel.name : prefix+channel.name,
                             pic_url: channel.avatar+'@Referer='+base_url,
                             url: $(empty).lazyRule(params => {
                                 const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
