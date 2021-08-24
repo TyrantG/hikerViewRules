@@ -27,7 +27,7 @@ const baseParse = _ => {
         },
         {
             title: '推荐画师',
-            url: empty,
+            url: "https://rt.huashi6.com/front/painter/list?index="+page+"&size=12",
         },
         {
             title: '取消关注',
@@ -127,6 +127,23 @@ const baseParse = _ => {
                     })
                 })
             }
+
+            break
+        }
+        case '4': {
+            let list_json = fetch(cateArray[parseInt(cate)].url, {headers:{"User-Agent": PC_UA}})
+
+            let list = JSON.parse(list_json.data.datas)
+
+            list.forEach(item => {
+                d.push({
+                    title: item.name,
+                    pic_url: "https://img2.huashi6.com/"+item.coverImageUrl+'@Referer='+base_url,
+                    url: "https://www.huashi6.com/painter/"+item.id,
+                    desc: item.profile,
+                    col_type: 'movie_3_marquee'
+                })
+            })
 
             break
         }
