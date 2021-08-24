@@ -95,13 +95,14 @@ const baseParse = _ => {
                     title: '首字母：'+title,
                     col_type: 'text_1'
                 })
-                tagList.forEach(tag => {
-                    d.push({
-                        title: parseDomForHtml(tag, 'a&&Text'),
-                        url: parseDomForHtml(tag, 'a&&href'),
-                        col_type: 'flex_button',
+                if (index === 0)
+                    tagList.forEach(tag => {
+                        d.push({
+                            title: parseDomForHtml(tag, 'a&&Text'),
+                            url: parseDomForHtml(tag, 'a&&href'),
+                            col_type: 'flex_button',
+                        })
                     })
-                })
                 d.push({
                     col_type: 'line_blank'
                 })
