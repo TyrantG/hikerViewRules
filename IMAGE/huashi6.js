@@ -292,7 +292,7 @@ const secParse = _ => {
     d.push({
         title: has_collect ? "取消关注" : "关注用户",
         url: $(empty).lazyRule(params => {
-            const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
+            const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
             if (params.has_collect) {
                 params.channels.splice(params.index, 1)
                 writeFile(channels_path, JSON.stringify(params.channels))
