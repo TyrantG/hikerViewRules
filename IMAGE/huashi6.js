@@ -132,8 +132,9 @@ const baseParse = _ => {
         }
         case '4': {
             let list_json = fetch(cateArray[parseInt(cate)].url, {headers:{"User-Agent": PC_UA}})
+            setError(list_json)
 
-            let list = JSON.parse(list_json.data.datas)
+            /*let list = JSON.parse(list_json.data.datas)
 
             list.forEach(item => {
                 d.push({
@@ -143,7 +144,7 @@ const baseParse = _ => {
                     desc: item.profile,
                     col_type: 'movie_3_marquee'
                 })
-            })
+            })*/
 
             break
         }
