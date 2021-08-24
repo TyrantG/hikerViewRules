@@ -118,6 +118,7 @@ const baseParse = _ => {
                 channels.forEach((channel, index) => {
                     d.push({
                         title: parseInt(channel_select) === index ? '✓'+channel.name : channel.name,
+                        pic_url: channel.avatar+'@Referer='+base_url,
                         url: $(empty).lazyRule(param => {
                             putVar("tyrantgenesis.huashi6.channel_select", param.index.toString())
                             refreshPage(true)
