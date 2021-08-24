@@ -149,7 +149,7 @@ const baseParse = _ => {
                     pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
                     url: parseDomForHtml(item, 'a&&href'),
                     desc: parseDomForHtml(item, '.painter-name&&Text'),
-                    col_type: 'movie_3'
+                    col_type: 'movie_2'
                 })
             })
 
