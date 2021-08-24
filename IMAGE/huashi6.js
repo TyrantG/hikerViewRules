@@ -138,7 +138,7 @@ const baseParse = _ => {
             list.forEach(item => {
                 d.push({
                     title: item.name,
-                    pic_url: "https://img2.huashi6.com/"+item.coverImageUrl+'@Referer='+base_url,
+                    pic_url: item.coverImageUrl ? "https://img2.huashi6.com/"+item.coverImageUrl+'@Referer='+base_url : "https://res2.huashi6.com/static/hst/pc/imgs/default_avatar.d59d546.png"+'@Referer='+base_url,
                     url: "https://www.huashi6.com/painter/"+item.id,
                     desc: item.profile,
                     col_type: 'movie_3_marquee'
