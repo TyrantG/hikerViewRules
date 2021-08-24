@@ -184,7 +184,7 @@ const baseParse = _ => {
                     pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
                     url: parseDomForHtml(item, 'a&&href'),
                     desc: parseDomForHtml(item, '.painter-name&&Text'),
-                    col_type: 'movie_3'
+                    col_type: 'movie_2'
                 })
             })
 
@@ -230,7 +230,7 @@ const baseParse = _ => {
                         pic_url: "https://img2.huashi6.com/"+item.coverImage.path+'@Referer='+base_url,
                         url: "https://www.huashi6.com/draw/"+item.id,
                         desc: item.description,
-                        col_type: 'movie_3_marquee'
+                        col_type: 'movie_2_marquee'
                     })
                 })
             }
@@ -248,7 +248,7 @@ const baseParse = _ => {
                     pic_url: item.coverImageUrl ? "https://img2.huashi6.com/"+item.coverImageUrl+'@Referer='+base_url : "https://res2.huashi6.com/static/hst/pc/imgs/default_avatar.d59d546.png"+'@Referer='+base_url,
                     url: "https://www.huashi6.com/painter/"+item.id,
                     desc: item.profile,
-                    col_type: 'movie_3_marquee'
+                    col_type: 'movie_2_marquee'
                 })
             })
 
