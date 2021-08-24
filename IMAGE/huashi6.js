@@ -251,7 +251,7 @@ const baseParse = _ => {
                 d.push({
                     title: userObj.name,
                     pic_url: userObj.avatar+'@Referer='+base_url,
-                    url: $("https://www.huashi6.com/painter/"+item.id+"?p=fypage").rule(userObj => {
+                    url: $("https://www.huashi6.com/painter/"+item.id+"?p=fypage##fypage").rule(userObj => {
                         eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
                         userParse(userObj)
                     }, userObj),
@@ -290,7 +290,7 @@ const secParse = _ => {
     d.push({
         title: title,
         pic_url: avatar+'@Referer='+base_url,
-        url: $(parseDomForHtml(userinfo, 'a&&href')+"?p=fypage").rule(userObj => {
+        url: $(parseDomForHtml(userinfo, 'a&&href')+"?p=fypage##fypage").rule(userObj => {
             eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
             userParse(userObj)
         }, userObj),
@@ -351,8 +351,8 @@ const secParse = _ => {
 const userParse = userObj => {
     let d = [];
 
-    const page = MY_URL.match(/p=(.*?)/)[1]
-    setError(page)
+    const url = MY_URL.split('##')[0]
+    const page = MY_URL.split('##')[1]
 
     if (page === '1') {
         let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
@@ -395,7 +395,7 @@ const userParse = userObj => {
         })
     }
 
-    let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
+    let html = fetch(url, {headers:{"User-Agent": PC_UA}})
 
     let list = parseDomForArray(html, '.px-container&&.px-waterfall-item')
 
