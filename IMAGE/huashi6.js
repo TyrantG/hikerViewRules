@@ -264,10 +264,18 @@ const secParse = _ => {
     let url = parseDomForHtml(userinfo, 'a&&href')
     let url_arr = url.split('/')
     let uid = url_arr[url_arr.length-1]
+    let title = parseDomForHtml(userinfo, 'a&&title')
+    let avatar = parseDomForHtml(userinfo, 'img&&src')
+
+    let userObj = {
+        name: title,
+        uid: uid,
+        avatar: avatar
+    }
 
     d.push({
-        title: parseDomForHtml(userinfo, 'a&&title'),
-        pic_url: parseDomForHtml(userinfo, 'img&&src')+'@Referer='+base_url,
+        title: title,
+        pic_url: avatar+'@Referer='+base_url,
         url: $(parseDomForHtml(userinfo, 'a&&href')+'##fypage').rule(userinfo => {
             eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
             userParse(userinfo)
@@ -292,11 +300,7 @@ const secParse = _ => {
                 refreshPage(false)
                 return 'toast://取消关注'
             } else {
-                params.channels.push({
-                    name: params.author.nickname,
-                    uid: params.author.sec_uid,
-                    avatar: params.author.avatar_thumb.url_list[0],
-                })
+                params.channels.push(params.userObj)
                 writeFile(channels_path, JSON.stringify(params.channels))
                 refreshPage(false)
                 return 'toast://关注成功'
@@ -306,6 +310,7 @@ const secParse = _ => {
             channel_select: channel_select,
             has_collect: has_collect,
             channels: channels,
+            userObj: userObj
         }),
         col_type: 'text_2'
     })
