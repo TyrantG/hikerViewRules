@@ -29,7 +29,7 @@ const baseParse = _ => {
         },
         {
             title: '推荐画师',
-            url: "https://rt.huashi6.com/front/painter/list?index="+page+"&size=12",
+            url: "https://rt.huashi6.com/front/painter/list?index="+(parseInt(page)-1)+"&size=12",
         },
     ]
     let channels
@@ -246,7 +246,10 @@ const baseParse = _ => {
                 d.push({
                     title: item.name,
                     pic_url: item.coverImageUrl ? "https://img2.huashi6.com/"+item.coverImageUrl+'@Referer='+base_url : "https://res2.huashi6.com/static/hst/pc/imgs/default_avatar.d59d546.png"+'@Referer='+base_url,
-                    url: "https://www.huashi6.com/painter/"+item.id,
+                    url: $("https://www.huashi6.com/painter/"+item.id+"?p=fypage").rule(_ => {
+                        eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
+                        userParse()
+                    }),
                     desc: item.profile,
                     col_type: 'movie_2_marquee'
                 })
@@ -282,9 +285,9 @@ const secParse = _ => {
     d.push({
         title: title,
         pic_url: avatar+'@Referer='+base_url,
-        url: $(parseDomForHtml(userinfo, 'a&&href')+'##fypage').rule(userinfo => {
-            eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
-            userParse(userinfo)
+        url: $(parseDomForHtml(userinfo, 'a&&href')+"?p=fypage").rule(_ => {
+            eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
+            userParse()
         }),
         col_type: 'icon_2_round',
     })
@@ -336,6 +339,31 @@ const secParse = _ => {
              col_type: 'pic_1_full'
          })
      })
+
+    setResult(d);
+}
+
+const userParse = _ => {
+    let d = [];
+    // let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
+    // let channels = JSON.parse(fetch(channels_path))
+
+    let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
+
+    let list = parseDomForArray(html, '.px-container&&.px-waterfall-item')
+
+    list.forEach(item => {
+        d.push({
+            title: parseDomForHtml(item, '.px-info-title&&Text'),
+            pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
+            url: $(parseDomForHtml(item, 'a&&href')).rule(_ => {
+                eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
+                secParse()
+            }),
+            desc: parseDomForHtml(item, '.painter-name&&Text'),
+            col_type: 'movie_2'
+        })
+    })
 
     setResult(d);
 }
