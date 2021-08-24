@@ -259,11 +259,9 @@ const secParse = _ => {
     let channels = JSON.parse(fetch(channels_path))
 
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
-    let userinfo = parseDomForArray(html, '.pic&&.work-img-box')[0]
+    let userinfo = parseDomForArray(html, '.detail-painter-info&&a')[0]
 
-    // let url = parseDomForHtml(userinfo, 'a&&href')
-    setError(userinfo)
-    return false
+    let url = parseDomForHtml(userinfo, 'a&&href')
     let url_arr = url.split('/')
     let uid = url_arr[url_arr.length-1]
 
@@ -314,7 +312,7 @@ const secParse = _ => {
 
 
 
-    let list = parseDomForArray(html, '.detail-painter-info&&a')
+    let list = parseDomForArray(html, '.pic&&.work-img-box')
 
 
      list.forEach(item => {
