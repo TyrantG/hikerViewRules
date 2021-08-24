@@ -132,11 +132,11 @@ const baseParse = _ => {
         }
         case '4': {
             let list_json = fetch(cateArray[parseInt(cate)].url, {headers:{"User-Agent": PC_UA}})
+
+            let list = JSON.parse(list_json.data.datas)
             setError(list_json)
 
-            /*let list = JSON.parse(list_json.data.datas)
-
-            list.forEach(item => {
+            /*list.forEach(item => {
                 d.push({
                     title: item.name,
                     pic_url: "https://img2.huashi6.com/"+item.coverImageUrl+'@Referer='+base_url,
