@@ -415,3 +415,20 @@ const userParse = userObj => {
 
     setResult(d);
 }
+
+const searchParse = _ => {
+    let d = [];
+    let list = parseDomForArray(getResCode(), '.px-container&&.px-waterfall-item')
+
+    list.forEach(item => {
+        d.push({
+            title: parseDomForHtml(item, '.px-info-title&&Text'),
+            pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
+            url: parseDomForHtml(item, 'a&&href'),
+            desc: parseDomForHtml(item, '.painter-name&&Text'),
+            col_type: 'movie_2'
+        })
+    })
+
+    setResult(d);
+}
