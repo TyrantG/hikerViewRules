@@ -80,6 +80,9 @@ const baseParse = _ => {
             let uid = channels[channel_select].uid
             if (parseInt(page) === 1) {
                 d.push({
+                    col_type: 'blank_block',
+                })
+                d.push({
                     title: button_show === '1' ? '‘‘’’<strong><font color="red">关注画师</font></strong>' : '关注画师',
                     url: $(empty).lazyRule(_ => {
                         putVar("tyrantgenesis.huashi6.button_show", '1')
