@@ -126,7 +126,7 @@ const baseParse = _ => {
                         }, {
                             index: index
                         }),
-                        col_type: 'icon_4',
+                        col_type: 'icon_round_4',
                     })
                 })
             }
