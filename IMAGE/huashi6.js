@@ -1,10 +1,10 @@
 const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
 const base_url = "https://www.huashi6.com"
+const empty = "hiker://empty"
 
 const baseParse = _ => {
     // 初始化
     let d = [];
-    const empty = "hiker://empty"
     const page = MY_URL.split('##')[1]
     const cateArray = [
         {
@@ -255,13 +255,70 @@ const baseParse = _ => {
 
 const secParse = _ => {
     let d = [];
+    let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
+    let channels = JSON.parse(fetch(channels_path))
 
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
-    let list = parseDomForArray(html, '.pic&&.work-img-box')
+    let userinfo = parseDomForArray(html, '.pic&&.work-img-box')
+    let list = parseDomForArray(html, '.detail-painter-info&&a')[0]
+
+    let url = parseDomForHtml(userinfo, 'a&&href')
+    let url_arr = url.split('/')
+    let uid = url_arr[url_arr.length-1]
+
+    d.push({
+        title: parseDomForHtml(userinfo, 'a&&title'),
+        pic_url: parseDomForHtml(userinfo, 'img&&src')+'@Referer='+base_url,
+        url: $(parseDomForHtml(userinfo, 'a&&href')+'##fypage').rule(userinfo => {
+            eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
+            userParse(userinfo)
+        }),
+        col_type: 'icon_2_round',
+    })
+
+    let has_collect = false
+
+    channels.forEach((item, index) => {
+        if (item.uid.toString() === uid.toString()) has_collect = index
+    })
+
+    d.push({
+        title: has_collect ? "取消关注" : "关注用户",
+        url: $(empty).lazyRule(params => {
+            const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
+            if (params.has_collect) {
+                params.channels.splice(params.index, 1)
+                writeFile(channels_path, JSON.stringify(params.channels))
+                if (parseInt(channel_select) === params.index) putVar("tyrantgenesis.huashi6.channel_select", '0')
+                refreshPage(false)
+                return 'toast://取消关注'
+            } else {
+                params.channels.push({
+                    title: params.author.nickname,
+                    sec_uid: params.author.sec_uid,
+                    avatar_url: params.author.avatar_thumb.url_list[0],
+                })
+                writeFile(channels_path, JSON.stringify(params.channels))
+                refreshPage(false)
+                return 'toast://关注成功'
+            }
+        }, {
+            index: has_collect,
+            channel_select: channel_select,
+            has_collect: has_collect,
+            channels: channels,
+        }),
+        col_type: 'text_2'
+    })
+
+
+
+
 
     list.forEach(item => {
         d.push({
             pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
+            url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
             col_type: 'pic_1_full'
         })
     })
