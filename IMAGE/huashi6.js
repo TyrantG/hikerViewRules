@@ -31,14 +31,6 @@ const baseParse = _ => {
             title: '推荐画师',
             url: "https://rt.huashi6.com/front/painter/list?index="+page+"&size=12",
         },
-        {
-            title: '取消关注',
-            url: empty,
-        },
-        {
-            title: '置顶关注',
-            url: empty,
-        }
     ]
     let channels
 
@@ -109,7 +101,7 @@ const baseParse = _ => {
                     col_type: 'scroll_button',
                 })
                 d.push({
-                    title: button_show === '4' ? '‘‘’’<strong><font color="red">取消</font></strong>' : '取消',
+                    title: button_show === '4' ? '‘‘’’<strong><font color="red">取关</font></strong>' : '取关',
                     url: $(empty).lazyRule(_ => {
                         putVar("tyrantgenesis.huashi6.button_show", '4')
                         refreshPage(true)
@@ -257,6 +249,17 @@ const baseParse = _ => {
             break
         }
     }
+
+    setResult(d);
+}
+
+const secParse = _ => {
+    let d = [];
+
+    let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
+
+    let list = parseDomForArray(html, '.pic&&.work-img-box')
+    setError(list)
 
     setResult(d);
 }
