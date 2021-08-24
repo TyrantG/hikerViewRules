@@ -120,11 +120,10 @@ const baseParse = _ => {
                 list.forEach(item => {
                     d.push({
                         title: item.title,
-                        pic_url: "https://img2.huashi6.com/"+item.coverImage+'@Referer='+base_url,
-                        // url: "https://www.huashi6.com/draw/"+item.id,
-                        url: "https://img2.huashi6.com/"+item.coverImage,
+                        pic_url: "https://img2.huashi6.com/"+item.coverImage.path+'@Referer='+base_url,
+                        url: "https://www.huashi6.com/draw/"+item.id,
                         desc: item.description,
-                        col_type: 'movie_3'
+                        col_type: 'movie_3_marquee'
                     })
                 })
             }
