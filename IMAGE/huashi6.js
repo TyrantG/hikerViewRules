@@ -276,7 +276,6 @@ const secParse = _ => {
     })
 
     let has_collect = false
-    setError(channels)
 
     channels.forEach((item, index) => {
         if (item.uid.toString() === uid.toString()) has_collect = index
