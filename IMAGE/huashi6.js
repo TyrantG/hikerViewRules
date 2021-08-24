@@ -418,7 +418,9 @@ const userParse = userObj => {
 
 const searchParse = _ => {
     let d = [];
-    let list = parseDomForArray(getResCode(), '.px-container&&.px-waterfall-item')
+    let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
+
+    let list = parseDomForArray(html, '.px-container&&.px-waterfall-item')
 
     list.forEach(item => {
         d.push({
