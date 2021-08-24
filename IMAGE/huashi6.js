@@ -278,6 +278,7 @@ const secParse = _ => {
     let url = parseDomForHtml(userinfo, 'a&&href')
     let url_arr = url.split('/')
     let uid = url_arr[url_arr.length-1]
+    setError(uid)
     let title = parseDomForHtml(userinfo, 'a&&title')
     let avatar = parseDomForHtml(userinfo, 'img&&src')
 
