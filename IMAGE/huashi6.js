@@ -261,8 +261,8 @@ const secParse = _ => {
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
     let userinfo = parseDomForArray(html, '.pic&&.work-img-box')[0]
 
-    let url = parseDomForHtml(userinfo, 'a&&href')
-    setError(url)
+    // let url = parseDomForHtml(userinfo, 'a&&href')
+    setError(userinfo)
     return false
     let url_arr = url.split('/')
     let uid = url_arr[url_arr.length-1]
