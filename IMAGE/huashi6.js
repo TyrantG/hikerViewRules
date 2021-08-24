@@ -230,7 +230,7 @@ const baseParse = _ => {
                         pic_url: "https://img2.huashi6.com/"+item.coverImage.path+'@Referer='+base_url,
                         url: "https://www.huashi6.com/draw/"+item.id,
                         desc: item.description,
-                        col_type: 'movie_3'
+                        col_type: 'movie_2'
                     })
                 })
             }
@@ -256,7 +256,7 @@ const baseParse = _ => {
                         userParse(userObj)
                     }, userObj),
                     desc: item.profile,
-                    col_type: 'movie_2_marquee'
+                    col_type: 'movie_3_marquee'
                 })
             })
 
