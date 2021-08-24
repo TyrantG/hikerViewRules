@@ -243,13 +243,18 @@ const baseParse = _ => {
             let list = JSON.parse(list_json).data.datas
 
             list.forEach(item => {
+                let userObj = {
+                    name: item.name,
+                    uid: item.id,
+                    avatar: item.coverImageUrl ? "https://img2.huashi6.com/"+item.coverImageUrl+'@Referer='+base_url : "https://res2.huashi6.com/static/hst/pc/imgs/default_avatar.d59d546.png"
+                }
                 d.push({
-                    title: item.name,
-                    pic_url: item.coverImageUrl ? "https://img2.huashi6.com/"+item.coverImageUrl+'@Referer='+base_url : "https://res2.huashi6.com/static/hst/pc/imgs/default_avatar.d59d546.png"+'@Referer='+base_url,
-                    url: $("https://www.huashi6.com/painter/"+item.id+"?p=fypage").rule(_ => {
+                    title: userObj.name,
+                    pic_url: userObj.avatar+'@Referer='+base_url,
+                    url: $("https://www.huashi6.com/painter/"+item.id+"?p=fypage").rule(userObj => {
                         eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
-                        userParse()
-                    }),
+                        userParse(userObj)
+                    }, userObj),
                     desc: item.profile,
                     col_type: 'movie_2_marquee'
                 })
@@ -285,10 +290,10 @@ const secParse = _ => {
     d.push({
         title: title,
         pic_url: avatar+'@Referer='+base_url,
-        url: $(parseDomForHtml(userinfo, 'a&&href')+"?p=fypage").rule(_ => {
+        url: $(parseDomForHtml(userinfo, 'a&&href')+"?p=fypage").rule(userObj => {
             eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
-            userParse()
-        }),
+            userParse(userObj)
+        }, userObj),
         col_type: 'icon_2_round',
     })
 
@@ -343,10 +348,47 @@ const secParse = _ => {
     setResult(d);
 }
 
-const userParse = _ => {
+const userParse = userObj => {
     let d = [];
-    // let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
-    // let channels = JSON.parse(fetch(channels_path))
+    let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
+    let channels = JSON.parse(fetch(channels_path))
+
+    let has_collect = false
+
+    channels.forEach((item, index) => {
+        if (userObj.uid.toString() === uid.toString()) has_collect = index
+    })
+
+    d.push({
+        title: has_collect ? "取消关注" : "关注用户",
+        url: $(empty).lazyRule(params => {
+            const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
+            if (params.has_collect) {
+                params.channels.splice(params.index, 1)
+                writeFile(channels_path, JSON.stringify(params.channels))
+                if (parseInt(channel_select) === params.index) putVar("tyrantgenesis.huashi6.channel_select", '0')
+                refreshPage(false)
+                return 'toast://取消关注'
+            } else {
+                params.channels.push(params.userObj)
+                writeFile(channels_path, JSON.stringify(params.channels))
+                refreshPage(false)
+                return 'toast://关注成功'
+            }
+        }, {
+            index: has_collect,
+            channel_select: channel_select,
+            has_collect: has_collect,
+            channels: channels,
+            userObj: userObj
+        }),
+        col_type: 'text_center_1'
+    })
+
+    d.push({
+        col_type: 'blank_block'
+    })
+
 
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
 
