@@ -157,25 +157,25 @@ const baseParse = _ => {
                             col_type: 'blank_block',
                         })
                     }
+
+                    let uid = channels[channel_select].uid
+                    let url = "https://www.huashi6.com/painter/"+uid+"?p="+page
+
+                    let html = fetch(url, {headers:{"User-Agent": PC_UA}})
+
+                    let list = parseDomForArray(html, '.px-container&&.px-waterfall-item')
+
+                    list.forEach(item => {
+                        d.push({
+                            title: parseDomForHtml(item, '.px-info-title&&Text'),
+                            pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
+                            url: parseDomForHtml(item, 'a&&href'),
+                            desc: parseDomForHtml(item, '.painter-name&&Text'),
+                            col_type: 'movie_2'
+                        })
+                    })
                 }
             }
-
-            let uid = channels[channel_select].uid
-            let url = "https://www.huashi6.com/painter/"+uid+"?p="+page
-
-            let html = fetch(url, {headers:{"User-Agent": PC_UA}})
-
-            let list = parseDomForArray(html, '.px-container&&.px-waterfall-item')
-
-            list.forEach(item => {
-                d.push({
-                    title: parseDomForHtml(item, '.px-info-title&&Text'),
-                    pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
-                    url: parseDomForHtml(item, 'a&&href'),
-                    desc: parseDomForHtml(item, '.painter-name&&Text'),
-                    col_type: 'movie_2'
-                })
-            })
 
             break
         }
