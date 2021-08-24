@@ -121,7 +121,8 @@ const baseParse = _ => {
                     d.push({
                         title: item.title,
                         pic_url: "https://img2.huashi6.com/"+item.coverImage+'@Referer='+base_url,
-                        url: "https://www.huashi6.com/draw/"+item.id,
+                        // url: "https://www.huashi6.com/draw/"+item.id,
+                        url: "https://img2.huashi6.com/"+item.coverImage,
                         desc: item.description,
                         col_type: 'movie_3'
                     })
