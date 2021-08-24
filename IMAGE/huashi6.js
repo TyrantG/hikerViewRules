@@ -278,7 +278,7 @@ const secParse = _ => {
     let url = parseDomForHtml(userinfo, 'a&&href')
     let url_arr = url.split('/')
     let uid = url_arr[url_arr.length-1]
-    setError(uid)
+
     let title = parseDomForHtml(userinfo, 'a&&title')
     let avatar = parseDomForHtml(userinfo, 'img&&src')
 
@@ -291,7 +291,7 @@ const secParse = _ => {
     d.push({
         title: title,
         pic_url: avatar+'@Referer='+base_url,
-        url: $(parseDomForHtml(userinfo, 'a&&href')+"?p=fypage##fypage").rule(userObj => {
+        url: $(url+"?p=fypage##fypage").rule(userObj => {
             eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
             userParse(userObj)
         }, userObj),
@@ -305,7 +305,7 @@ const secParse = _ => {
     })
 
     d.push({
-        title: has_collect ? "取消关注" : "关注用户",
+        title: has_collect === false ? "关注用户" : "取消关注",
         url: $(empty).lazyRule(params => {
             const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
             if (params.has_collect) {
