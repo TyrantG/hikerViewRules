@@ -109,7 +109,7 @@ const baseParse = _ => {
                     col_type: 'scroll_button',
                 })
                 d.push({
-                    title: button_show === '4' ? '‘‘’’<strong><font color="red">取消</font></strong>' : '✓取消',
+                    title: button_show === '4' ? '‘‘’’<strong><font color="red">取消</font></strong>' : '取消',
                     url: $(empty).lazyRule(_ => {
                         putVar("tyrantgenesis.huashi6.button_show", '4')
                         refreshPage(true)
@@ -119,17 +119,32 @@ const baseParse = _ => {
                 })
 
                 if (button_show !== '2') {
-                    let prefix = button_show === '1' ? '✓' : (button_show === '3' ? '🔝' : '❌')
                     channels.forEach((channel, index) => {
                         d.push({
-                            title: parseInt(channel_select) === index ? '✓'+channel.name : channel.name,
+                            title: parseInt(channel_select) === index ? (button_show === '1' ? '✓' : (button_show === '3' ? '🔝' : '❌'))+channel.name : channel.name,
                             pic_url: channel.avatar+'@Referer='+base_url,
-                            url: $(empty).lazyRule(param => {
-                                putVar("tyrantgenesis.huashi6.channel_select", param.index.toString())
+                            url: $(empty).lazyRule(params => {
+                                const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
+                                if (params.button_show === '1') {
+                                    putVar("tyrantgenesis.huashi6.channel_select", params.index.toString())
+                                } else if (params.button_show === '3') {
+                                    let current = params.channels[params.index]
+                                    params.channels.splice(params.index, 1)
+                                    params.channels.unshift(current)
+                                    writeFile(channels_path, JSON.stringify(params.channels))
+                                    putVar("tyrantgenesis.huashi6.channel_select", '0')
+                                } else {
+                                    params.channels.splice(params.index, 1)
+                                    writeFile(channels_path, JSON.stringify(params.channels))
+                                    putVar("tyrantgenesis.huashi6.channel_select", '0')
+                                }
+
                                 refreshPage(true)
                                 return "hiker://empty"
                             }, {
-                                index: index
+                                index: index,
+                                button_show: button_show,
+                                channels: channels
                             }),
                             col_type: 'icon_round_4',
                         })
