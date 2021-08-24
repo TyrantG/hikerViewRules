@@ -356,7 +356,7 @@ const userParse = userObj => {
     let has_collect = false
 
     channels.forEach((item, index) => {
-        if (userObj.uid.toString() === uid.toString()) has_collect = index
+        if (item.uid.toString() === userObj.uid.toString()) has_collect = index
     })
 
     d.push({
