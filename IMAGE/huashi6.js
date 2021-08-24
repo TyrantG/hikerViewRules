@@ -77,13 +77,12 @@ const baseParse = _ => {
 
     switch (cate) {
         case '0': {
-            let uid = channels[channel_select].uid
             if (parseInt(page) === 1) {
                 d.push({
                     col_type: 'blank_block',
                 })
                 d.push({
-                    title: button_show === '1' ? '‘‘’’<strong><font color="red">关注画师</font></strong>' : '关注画师',
+                    title: button_show === '1' ? '‘‘’’<strong><font color="red">展开</font></strong>' : '展开',
                     url: $(empty).lazyRule(_ => {
                         putVar("tyrantgenesis.huashi6.button_show", '1')
                         refreshPage(true)
@@ -133,6 +132,24 @@ const baseParse = _ => {
                     })
                 })
             }
+
+            let uid = channels[channel_select].uid
+            let url = "https://www.huashi6.com/painter/"+uid+"?p="+page
+
+            let html = fetch(url, {headers:{"User-Agent": PC_UA}})
+
+            let list = parseDomForArray(html, '.px-container&&.px-waterfall-item')
+
+            list.forEach(item => {
+                d.push({
+                    title: parseDomForHtml(item, '.px-info-title&&Text'),
+                    pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
+                    url: parseDomForHtml(item, 'a&&href'),
+                    desc: parseDomForHtml(item, '.painter-name&&Text'),
+                    col_type: 'movie_3'
+                })
+            })
+
             break
         }
         case '1':
