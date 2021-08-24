@@ -29,7 +29,7 @@ const baseParse = _ => {
         },
         {
             title: '推荐画师',
-            url: "https://rt.huashi6.com/front/painter/list?index="+(parseInt(page)-1)+"&size=12",
+            url: "https://rt.huashi6.com/front/painter/list?index="+page+"&size=12",
         },
     ]
     let channels
