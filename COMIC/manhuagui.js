@@ -43,7 +43,7 @@ const baseParse = _ => {
                             params.cate_temp[params.index] = params.key.toString()
 
                             putVar("tyrantgenesis.manhuagui.category", JSON.stringify(params.cate_temp))
-                            putVar("tyrantgenesis.manhuagui.url", "https://www.manhuagui.com"+input+"index_p"+page+".html")
+                            putVar("tyrantgenesis.manhuagui.url", "https://www.manhuagui.com"+input)
                             refreshPage(true)
                             return "hiker://empty"
                         }, {
