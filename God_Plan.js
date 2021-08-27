@@ -172,6 +172,10 @@ const huashi6 = _ => {
   godWriteFile(BASE_URL+"IMAGE/huashi6.js?t="+time, 'hiker://files/TyrantG/IMAGE/huashi6.js')
 }
 
+const manhuagui = _ => {
+  godWriteFile(BASE_URL+"COMIC/manhuagui.js?t="+time, 'hiker://files/TyrantG/COMIC/manhuagui.js')
+}
+
 const picacg = _ => {
   godWriteFile(BASE_URL+"COMIC/picacg.js?t="+time, 'hiker://files/TyrantG/COMIC/picacg.js')
 }
