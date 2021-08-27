@@ -1,7 +1,7 @@
 const baseParse = _ => {
     let d = [];
-    let true_url = getVar("tyrantgenesis.manhuagui.url", "https://www.manhuagui.com/list/")+"index_p"+page+".html"
     const page = MY_URL.split('##')[1]
+    let true_url = getVar("tyrantgenesis.manhuagui.url", "https://www.manhuagui.com/list/")+"index_p"+page+".html"
 
     let html = fetch(true_url)
 
