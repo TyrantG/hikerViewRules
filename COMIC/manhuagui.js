@@ -7,6 +7,7 @@ const baseParse = _ => {
     const empty = "hiker://empty"
 
     const categories = parseDomForArray(html, '.filter-nav&&.filter');
+    setError(categories)
 
     let init_cate = []
 
