@@ -3,8 +3,8 @@ const baseParse = _ => {
     let true_url = getVar("tyrantgenesis.manhuagui.url", "https://www.manhuagui.com/list/")
     const page = MY_URL.split('##')[1]
     true_url = true_url+"index_p"+page+".html"
-    let html = fetch("https://www.manhuagui.com/list/")
-    setError(html)
+    let html = fetch(true_url)
+
     const empty = "hiker://empty"
 
     const categories = parseDomForArray(html, '.filter-nav&&.filter');
@@ -21,7 +21,7 @@ const baseParse = _ => {
     const cate_temp = JSON.parse(cate_temp_json)
 
 
-    /*if (parseInt(page) === 1) {
+    if (parseInt(page) === 1) {
         d.push({
             title: fold === '1' ?  '““””<b><span style="color: #FF0000">∨</span></b>': '““””<b><span style="color: #1aad19">∧</span></b>',
             url: $(empty).lazyRule((fold) => {
@@ -98,7 +98,7 @@ const baseParse = _ => {
             url: "https://www.manhuagui.com"+parseDom(comic, '.bcover&&href'),
             col_type: 'movie_3_marquee',
         })
-    })*/
+    })
 
     setResult(d);
 }
