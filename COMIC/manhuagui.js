@@ -3,11 +3,10 @@ const baseParse = _ => {
     let true_url = getVar("tyrantgenesis.manhuagui.url", "https://www.manhuagui.com/list/")
     const page = MY_URL.split('##')[1]
     true_url = true_url+"index_p"+page+".html"
-    const html = fetch(true_url, {headers:{"User-Agent": PC_UA}})
+    let html = fetch(true_url, {headers:{"User-Agent": PC_UA}})
     const empty = "hiker://empty"
 
     const categories = parseDomForArray(html, '.filter-nav&&.filter');
-    setError(true_url)
 
     let init_cate = []
 
