@@ -1,8 +1,8 @@
 const baseParse = _ => {
     let d = [];
-    let true_url = getVar("tyrantgenesis.manhuagui.url", "https://www.manhuagui.com/list/")
+    let true_url = getVar("tyrantgenesis.manhuagui.url", "https://www.manhuagui.com/list/")+"index_p"+page+".html"
     const page = MY_URL.split('##')[1]
-    true_url = true_url+"index_p"+page+".html"
+
     let html = fetch(true_url)
 
     const empty = "hiker://empty"
@@ -40,7 +40,7 @@ const baseParse = _ => {
                     let title = parseDomForHtml(item, 'a&&Text')
                     d.push({
                         title: key.toString()===cate_temp[index]? "““"+title+"””":title,
-                        url: $(parseDom(item, 'a&&href')).lazyRule((params) => {
+                        url: $(parseDomForHtml(item, 'a&&href')).lazyRule((params) => {
                             params.cate_temp[params.index] = params.key.toString()
 
                             putVar("tyrantgenesis.manhuagui.category", JSON.stringify(params.cate_temp))
@@ -94,8 +94,8 @@ const baseParse = _ => {
         d.push({
             title: parseDomForHtml(comic, '.ell&&a&&Text'),
             desc: parseDomForHtml(comic, '.tt&&Text'),
-            pic_url: parseDom(comic, 'img&&src')+"@Referer=https://www.manhuagui.com/",
-            url: "https://www.manhuagui.com"+parseDom(comic, '.bcover&&href'),
+            pic_url: parseDomForHtml(comic, 'img&&src')+"@Referer=https://www.manhuagui.com/",
+            url: "https://www.manhuagui.com"+parseDomForHtml(comic, '.bcover&&href'),
             col_type: 'movie_3_marquee',
         })
     })
