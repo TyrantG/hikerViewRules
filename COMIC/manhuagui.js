@@ -3,13 +3,7 @@ const baseParse = _ => {
     let true_url = getVar("tyrantgenesis.manhuagui.url", "https://www.manhuagui.com/list/")
     const page = MY_URL.split('##')[1]
     true_url = true_url+"index_p"+page+".html"
-    let html = request(true_url)
-    // setError(true_url)
-    d.push({
-        title: 'sb',
-        url: true_url,
-        col_type: 'text_1',
-    })
+    let html = fetch(true_url)
 
     const empty = "hiker://empty"
 
