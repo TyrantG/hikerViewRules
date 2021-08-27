@@ -4,7 +4,7 @@ const baseParse = _ => {
     const page = MY_URL.split('##')[1]
     true_url = true_url+"index_p"+page+".html"
     let html = request(true_url, {headers: {withHeaders: true, withStatusCode: true}})
-    setError(html)
+    setError(fetch("https://www.baidu.com"))
 
     const empty = "hiker://empty"
 
