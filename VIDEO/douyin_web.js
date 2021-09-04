@@ -209,10 +209,6 @@ const baseParse = _ => {
         })
     }
 
-    /*d.push({
-        col_type:"blank_block"
-    })*/
-
     switch (button_show) {
         case "1": {
             if (current_page === '1') {
@@ -228,6 +224,9 @@ const baseParse = _ => {
                     {title: '时尚', id: '300208'},
                     {title: '音乐', id: '300209'},
                 ]
+                d.push({
+                    col_type:"blank_block"
+                })
                 category.forEach(cate => {
                     d.push({
                         title: cate_select === cate.id ? '‘‘’’<strong><font color="red">'+cate.title+'</font></strong>' : cate.title,
@@ -285,6 +284,9 @@ const baseParse = _ => {
         }
         case "2": {
             if (current_page === '1') {
+                d.push({
+                    col_type:"blank_block"
+                })
                 html = fetch("https://www.douyin.com/live", {headers:{"User-Agent": PC_UA}})
                 let cate_1st_list = parseDomForArray(html, '._1ccdf9ef5e1baec8470ed46e874b49fd-scss&&.ece80b1afae1c9f97b41337a7ccdfaa3-scss')
                 d.push({
