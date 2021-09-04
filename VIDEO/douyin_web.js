@@ -279,7 +279,7 @@ const baseParse = _ => {
                         } else {
                             d.push({
                                 title: item.cell_room.rawdata,
-                                col_type: 'text_1'
+                                col_type: 'long_text'
                             })
                         }
                     })
