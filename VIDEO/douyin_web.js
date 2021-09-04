@@ -277,10 +277,11 @@ const baseParse = _ => {
                                 col_type: 'movie_2',
                             })
                         } else {
-                            d.push({
+                            setError(JSON.parse(item.cell_room.rawdata.replace(/([1-9]\d*)/, '"$1"')))
+                            /*d.push({
                                 title: item.cell_room.rawdata.replace(/([1-9]\d*)/, '"$1"'),
                                 col_type: 'long_text'
-                            })
+                            })*/
                         }
                     })
                 }
