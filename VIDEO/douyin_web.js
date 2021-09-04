@@ -265,20 +265,18 @@ const baseParse = _ => {
                 let list = JSON.parse(data_json).aweme_list
                 // setError(list[0].video.cover.url_list[0])
                 if (list && list.length > 0) {
-                    if (item.video) {
-                        list.forEach(item => {
-                            d.push({
-                                title: item.desc,
-                                pic_url: item.video.cover.url_list[0],
-                                desc: item.author.nickname,
-                                url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(item => {
-                                    eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
-                                    videoParse(item)
-                                }, item),
-                                col_type: 'movie_2',
-                            })
+                    list.forEach(item => {
+                        d.push({
+                            title: item.desc,
+                            pic_url: item.video ? item.video.cover.url_list[0] : '',
+                            desc: item.author.nickname,
+                            url: $("https://www.douyin.com/video/"+item.aweme_id+"##fypage").rule(item => {
+                                eval(fetch('hiker://files/TyrantG/VIDEO/douyin_web.js'))
+                                videoParse(item)
+                            }, item),
+                            col_type: 'movie_2',
                         })
-                    }
+                    })
                 }
             }
 
