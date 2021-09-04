@@ -215,7 +215,7 @@ const baseParse = _ => {
 
     switch (button_show) {
         case "1": {
-            if (current_page === '1') {
+            /*if (current_page === '1') {
                 category = parseDomForArray(html, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
                 d.push({
                     title: cate_select === '' ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
@@ -243,7 +243,7 @@ const baseParse = _ => {
                         })
                     }
                 })
-            }
+            }*/
 
             // let not_sign_url = "https://www.douyin.com/aweme/v1/web/channel/feed/?device_platform=webapp&aid=6383&channel=channel_pc_web&tag_id="+cate_select+"&count=20&version_code=160100&version_name=16.1.0"
 
