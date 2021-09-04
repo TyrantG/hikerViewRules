@@ -278,7 +278,7 @@ const baseParse = _ => {
                             })
                         } else {
                             // let data = JSON.parse()
-                            setError(item.cell_room.rawdata.id)
+                            setError(unescape(item.cell_room.rawdata))
                         }
                     })
                 }
