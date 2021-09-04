@@ -263,8 +263,8 @@ const baseParse = _ => {
                 })
             } else {
                 let list = JSON.parse(data_json).aweme_list
-                setError(list[0].video.cover.url_list[0])
-                /*if (list && list.length > 0) {
+                // setError(list[0].video.cover.url_list[0])
+                if (list && list.length > 0) {
                     list.forEach(item => {
                         d.push({
                             title: item.desc,
@@ -277,7 +277,7 @@ const baseParse = _ => {
                             col_type: 'movie_2',
                         })
                     })
-                }*/
+                }
             }
 
             break
