@@ -31,7 +31,7 @@ const baseParse = _ => {
         channels = defaultChannels
     }
 
-    let cate_select = getVar("tyrantgenesis.douyin_web.cate_select", "")
+    let cate_select = getVar("tyrantgenesis.douyin_web.cate_select", "void")
     let channel_select = getVar("tyrantgenesis.douyin_web.channel_select", "0")
     let button_show = getVar("tyrantgenesis.douyin_web.button_show", "1") // 1:热门,2:直播,3:关注,4:收起,5:取消,6:置顶
     let max_cursor = getVar("tyrantgenesis.douyin_web.max_cursor", "")
@@ -217,7 +217,7 @@ const baseParse = _ => {
         case "1": {
             if (current_page === '1') {
                 category = [
-                    {title: '全部', id: ''},
+                    {title: '全部', id: 'void'},
                     {title: '娱乐', id: '300201'},
                     {title: '知识', id: '300203'},
                     {title: '二次元', id: '300206'},
