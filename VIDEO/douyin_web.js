@@ -278,7 +278,7 @@ const baseParse = _ => {
                             })
                         } else {
                             // let data = JSON.parse()
-                            setError(item.cell_room.rawdata)
+                            setError(item.cell_room.rawdata.cover.url_list)
                         }
                     })
                 }
