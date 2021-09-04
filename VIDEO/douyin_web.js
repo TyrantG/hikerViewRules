@@ -263,7 +263,7 @@ const baseParse = _ => {
                 })
             } else {
                 let list = JSON.parse(data_json).aweme_list
-                setError(list[0].video)
+                setError(list[0].video.cover.url_list[0])
                 /*if (list && list.length > 0) {
                     list.forEach(item => {
                         d.push({
