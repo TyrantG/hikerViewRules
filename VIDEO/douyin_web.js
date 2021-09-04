@@ -369,7 +369,7 @@ const baseParse = _ => {
                     "cookie": home_cookie,
                 }
             })
-            SetError(data_json)
+            setError(data_json)
             /*if (data_json === 'Need Verifying') {
                 d.push({
                     title: 'signature 获取失败，待修复',
