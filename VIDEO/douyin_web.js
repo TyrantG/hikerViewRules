@@ -365,11 +365,12 @@ const baseParse = _ => {
             let true_url = not_sign_url + "&_signature="+sign
             let data_json = fetch(true_url, {
                 headers: {
-                    "referer" : "https://live.douyin.com/hot_live",
+                    "referer" : "https://live.douyin.com",
                     "cookie": home_cookie,
                 }
             })
-            if (data_json === 'Need Verifying') {
+            SetError(data_json)
+            /*if (data_json === 'Need Verifying') {
                 d.push({
                     title: 'signature 获取失败，待修复',
                     col_type: "long_text",
@@ -391,7 +392,7 @@ const baseParse = _ => {
                         })
                     })
                 }
-            }
+            }*/
             break
         }
         case "3":
