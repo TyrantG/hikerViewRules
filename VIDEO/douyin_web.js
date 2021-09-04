@@ -278,7 +278,7 @@ const baseParse = _ => {
                             })
                         } else {
                             d.push({
-                                title: item.cell_room.rawdata.replace(/"id":(.*),/, ''),
+                                title: item.cell_room.rawdata.replace(/"id":(.*)"id_str"/, '"id_str"'),
                                 col_type: 'long_text'
                             })
                         }
