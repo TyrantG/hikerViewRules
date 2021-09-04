@@ -277,7 +277,8 @@ const baseParse = _ => {
                                 col_type: 'movie_2',
                             })
                         } else {
-                            setError(item)
+                            let data = JSON.parse(item.cell_room.rawdata)
+                            setError(data)
                         }
                     })
                 }
