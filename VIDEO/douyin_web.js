@@ -215,39 +215,37 @@ const baseParse = _ => {
 
     switch (button_show) {
         case "1": {
-            /*if (current_page === '1') {
-                category = parseDomForArray(html, '._92400026d1182d4f8f006dada62ebc1c-scss&&a')
-                d.push({
-                    title: cate_select === '' ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
-                    url: $("hiker://empty").lazyRule(_ => {
-                        putVar("tyrantgenesis.douyin_web.cate_select", "")
-                        refreshPage(true)
-                        return "hiker://empty"
-                    }),
-                    col_type: 'scroll_button',
-                })
+            if (current_page === '1') {
+                category = [
+                    {title: '全部', id: ''},
+                    {title: '娱乐', id: '300201'},
+                    {title: '知识', id: '300203'},
+                    {title: '二次元', id: '300206'},
+                    {title: '游戏', id: '300205'},
+                    {title: '游戏', id: '300205'},
+                    {title: '美食', id: '300204'},
+                    {title: '体育', id: '300207'},
+                    {title: '时尚', id: '300208'},
+                    {title: '音乐', id: '300209'},
+                ]
                 category.forEach(cate => {
-                    let href = parseDomForHtml(cate, 'a&&href')
-                    let cate_id = href.split('/').pop()
-                    if (/^[\d]+$/.test(cate_id)) {
-                        d.push({
-                            title: cate_select === cate_id.toString() ? '‘‘’’<strong><font color="red">'+parseDomForHtml(cate, 'a&&Text')+'</font></strong>' : parseDomForHtml(cate, 'a&&Text'),
-                            url: $("hiker://empty").lazyRule(params => {
-                                putVar("tyrantgenesis.douyin_web.cate_select", params.cate_id.toString())
-                                refreshPage(true)
-                                return "hiker://empty"
-                            }, {
-                                cate_id: cate_id
-                            }),
-                            col_type: 'scroll_button',
-                        })
-                    }
+                    d.push({
+                        title: cate_select === cate.id ? '‘‘’’<strong><font color="red">'+cate.title+'</font></strong>' : cate.title,
+                        url: $("hiker://empty").lazyRule(params => {
+                            putVar("tyrantgenesis.douyin_web.cate_select", params.id)
+                            refreshPage(false)
+                            return "hiker://empty"
+                        }, {
+                            id: cate.id
+                        }),
+                        col_type: 'scroll_button',
+                    })
                 })
-            }*/
+            }
 
             // let not_sign_url = "https://www.douyin.com/aweme/v1/web/channel/feed/?device_platform=webapp&aid=6383&channel=channel_pc_web&tag_id="+cate_select+"&count=20&version_code=160100&version_name=16.1.0"
 
-            let sign_url = fetch("http://douyin_signature.dev.tyrantg.com")
+            let sign_url = fetch("http://douyin_signature.dev.tyrantg.com?type=feed&params="+cate_select)
             // let true_url = not_sign_url + "&_signature="+sign
             let data_json = fetch(sign_url, {
                 headers: {
@@ -277,11 +275,7 @@ const baseParse = _ => {
                                 col_type: 'movie_2',
                             })
                         } else {
-                            // setError(JSON.parse())
-                            d.push({
-                                title: item.cell_room.rawdata.replace(/:([1-9]\d*),/g, ':"$1",'),
-                                col_type: 'long_text'
-                            })
+                            //item.cell_room.rawdata.replace(/:([1-9]\d*),/g, ':"$1",')
                         }
                     })
                 }
