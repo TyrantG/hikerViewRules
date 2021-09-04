@@ -2,7 +2,7 @@
 const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
 
 const baseParse = _ => {
-    let d = [], category
+    let d = [], category, html
     let home_cookie = request(douyin_cookie)
     const empty = "hiker://empty"
     if (! home_cookie) {
@@ -14,8 +14,7 @@ const baseParse = _ => {
 
     let current_page = MY_URL.split('##')[1].toString()
 
-    let cate_select = getVar("tyrantgenesis.douyin_web.cate_select", "void")
-    putVar("tyrantgenesis.douyin_web.video_other_button", "0")
+    let cate_select = getVar("tyrantgenesis.simple_douyin_web.cate_select", "")
 
 
     /*d.push({
@@ -24,7 +23,7 @@ const baseParse = _ => {
 
     if (current_page === '1') {
         category = [
-            {title: '全部', id: 'void'},
+            {title: '全部', id: ''},
             {title: '娱乐', id: '300201'},
             {title: '知识', id: '300203'},
             {title: '二次元', id: '300206'},
@@ -39,7 +38,7 @@ const baseParse = _ => {
             d.push({
                 title: cate_select === cate.id ? '‘‘’’<strong><font color="red">'+cate.title+'</font></strong>' : cate.title,
                 url: $(empty).lazyRule(params => {
-                    putVar("tyrantgenesis.douyin_web.cate_select", params.id)
+                    putVar("tyrantgenesis.simple_douyin_web.cate_select", params.id)
                     refreshPage(false)
                     return "hiker://empty"
                 }, {
@@ -76,7 +75,7 @@ const baseParse = _ => {
                         pic_url: item.video.cover.url_list[0],
                         desc: item.author.nickname,
                         url: $(empty).lazyRule(item => {
-                            return item.video.play_addr.url_list[0]
+                            return item.video.play_addr.url_list[0] + "#isVideo=true#"
                         }, item),
                         col_type: 'movie_2',
                     })
