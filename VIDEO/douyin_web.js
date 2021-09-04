@@ -278,7 +278,7 @@ const baseParse = _ => {
                             })
                         } else {
                             d.push({
-                                title: item.cell_room.rawdata.replace(/:([1-9]\d)*,/, ':"$1",'),
+                                title: item.cell_room.rawdata.replace(/([1-9]\d*)/, '"$1"'),
                                 col_type: 'long_text'
                             })
                         }
