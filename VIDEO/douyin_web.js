@@ -369,8 +369,8 @@ const baseParse = _ => {
                     "cookie": home_cookie,
                 }
             })
-            setError(data_json)
-            /*if (data_json === 'Need Verifying') {
+
+            if (data_json === '') {
                 d.push({
                     title: 'signature 获取失败，待修复',
                     col_type: "long_text",
@@ -392,7 +392,7 @@ const baseParse = _ => {
                         })
                     })
                 }
-            }*/
+            }
             break
         }
         case "3":
