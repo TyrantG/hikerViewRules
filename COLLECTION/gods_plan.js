@@ -12,6 +12,7 @@ const baseParse = _ => {
         syncTitle = "God's Plan可更新.当前版本"+VERSION+'.最新版本: '+request(VERSION_FILE)
     }
 
+    log(ASSET_PATH+'images/avatar.jpg')
     d.push({
         title: syncTitle,
         image_url: ASSET_PATH+'images/avatar.jpg',
