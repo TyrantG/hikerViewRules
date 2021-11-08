@@ -50,8 +50,16 @@
                     this.value = 0
                     const title = this.getQueryVariable('title')
 
-                    let detailRule = "js:const pageList = JSON.parse(getVar('tyrantgenesis.douyu.pageList'));Object.assign(MY_RULE, { pageList: pageList });"
-                    //const { cateGroupParse } = $.require('hiker://page/utils');cateGroupParse('"+title+"');
+                    // let detailRule = "js:const pageList = JSON.parse(getVar('tyrantgenesis.douyu.pageList'));Object.assign(MY_RULE, { pageList: pageList });"
+                    let detailRule = 'js:' + $$$.toString(params => {
+                        const pageList = JSON.parse(getVar('tyrantgenesis.douyu.pageList'))
+                        pageList.map(item => {
+                            eval(item.rule)
+                            cateGroupParse(params.title)
+                        })
+                    }, {
+                        title: title
+                    })
 
                     fy_bridge_app.toDetailPage('所有分类', "https://m.douyu.com/api/cate/list", '', '', detailRule, '')
                 }
