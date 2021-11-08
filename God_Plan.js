@@ -46,7 +46,7 @@ const tyrantgenesis = _ => {
 
 const acfun = _ => {
   godWriteFile(BASE_URL+"TEST/acfun-bangumilist.js?t="+time, 'hiker://files/TyrantG/TEST/acfun-bangumilist.js')
-  godWriteFile(BASE_URL+"public/category.html?t="+time, 'hiker://files/rules/TyrantG/public/category.html')
+  godWriteFile(BASE_URL+"public/category.html?t="+time, 'hiker://files/TyrantG/public/category.html')
   godSaveFile(BASE_URL+"public/js/vue.min.js", 'hiker://files/TyrantG/public/js/vue.min.js')
   godSaveFile(BASE_URL+"public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
 }
