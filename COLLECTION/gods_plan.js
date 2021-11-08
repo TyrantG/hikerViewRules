@@ -14,7 +14,7 @@ const baseParse = _ => {
 
     d.push({
         title: syncTitle,
-        image_url: request(ASSET_PATH+'images/avatar.jpg'),
+        image_url: ASSET_PATH+'images/avatar.jpg',
         url: $().lazyRule(_ => {
             const LOCAL_FILE = 'hiker://files/rules/TyrantG/gods_plan.js'
             const FETCH_FILE = 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gods_plan.js'
