@@ -29,9 +29,14 @@ const baseParse = _ => {
 
   putVar('tab-panel', JSON.stringify(category_list))
 
-  d.push({
+  /* d.push({
     desc: '118 && float',
     url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/rules/TyrantG/public/category.html?filters='+filters,
+    col_type:"x5_webview_single"
+  }) */
+  d.push({
+    desc: '118 && float',
+    url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/category.html?filters='+filters,
     col_type:"x5_webview_single"
   })
 
