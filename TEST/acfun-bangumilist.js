@@ -29,14 +29,9 @@ const baseParse = _ => {
 
   putVar('tab-panel', JSON.stringify(category_list))
 
-  /* d.push({
-    desc: '118 && float',
-    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/rules/TyrantG/public/category.html?filters='+filters,
-    col_type:"x5_webview_single"
-  }) */
   d.push({
     desc: '118 && float',
-    url: 'https://www.baidu.com',
+    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/category.html?filters='+filters,
     col_type:"x5_webview_single"
   })
 
