@@ -50,7 +50,8 @@
                     this.value = 0
                     const title = this.getQueryVariable('title')
                     // if(MY_RULE)Object.assign(MY_RULE, $.stringify({ pageList: getVar('tyrantgenesis.douyu.pageList') }));
-                    let detailRule = "js:const pageList = getVar('tyrantgenesis.douyu.pageList');setError(typeof pageList);const { cateGroupParse } = $.require('hiker://page/utils');cateGroupParse('"+title+"');"
+                    // const { cateGroupParse } = $.require('hiker://page/utils');cateGroupParse('"+title+"');
+                    let detailRule = "js:const pageList = getVar('tyrantgenesis.douyu.pageList');setError(pageList[0]);"
 
                     fy_bridge_app.toDetailPage('所有分类', "https://m.douyu.com/api/cate/list", '', '', detailRule, '')
                 }
