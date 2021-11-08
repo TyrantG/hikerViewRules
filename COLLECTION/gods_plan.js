@@ -7,7 +7,7 @@ const VERSION = '1.0.0-beta'
 
 const baseParse = _ => {
     let d = [], syncTitle = "God's Plan 当前版本："+VERSION
-    log(fetch(ASSET_PATH+'images/avatar.jpg'))
+    log(fileExist(ASSET_PATH+'images/avatar.jpg'))
 
     if (VERSION !== request(VERSION_FILE)) {
         syncTitle = "God's Plan可更新.当前版本"+VERSION+'.最新版本: '+request(VERSION_FILE)
