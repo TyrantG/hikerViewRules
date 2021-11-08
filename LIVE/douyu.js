@@ -22,7 +22,7 @@ const baseParse = _ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
                 categoryParse()
             }),
-            col_type: 'icon_2'
+            col_type: 'avatar'
         })
         d.push({
             col_type: 'line'
