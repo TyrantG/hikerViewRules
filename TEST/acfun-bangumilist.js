@@ -36,7 +36,7 @@ const baseParse = _ => {
   }) */
   d.push({
     desc: '118 && float',
-    url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/category.html?filters='+filters,
+    url: 'https://www.baidu.com',
     col_type:"x5_webview_single"
   })
 
