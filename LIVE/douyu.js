@@ -47,6 +47,7 @@ const baseParse = _ => {
 }
 
 const secParse = input => {
+    log(input)
     const html = fetch(input);
     const script_raw = parseDomForHtml(html, "script&&Html");
 
