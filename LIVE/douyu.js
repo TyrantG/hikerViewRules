@@ -24,9 +24,6 @@ const baseParse = _ => {
             }),
             col_type: 'avatar'
         })
-        d.push({
-            col_type: 'line'
-        })
 
         element.list.forEach(item => {
             d.push({
