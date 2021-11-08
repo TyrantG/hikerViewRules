@@ -1,6 +1,6 @@
-// const LOCAL_FILE = 'hiker://files/rules/TyrantG/gods_plan.js'
+const LOCAL_FILE = 'hiker://files/rules/TyrantG/gods_plan.js'
 // const LOCAL_ASSETS = 'hiker://files/rules/TyrantG/assets.js'
-// const FETCH_FILE = 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gods_plan.js'
+const FETCH_FILE = 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gods_plan.js'
 const FETCH_ASSETS = 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/assets.js'
 const ASSET_PATH = 'hiker://files/rules/TyrantG/assets/'
 const VERSION_FILE = 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/data/version'
