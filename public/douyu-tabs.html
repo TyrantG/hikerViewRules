@@ -33,6 +33,15 @@
 <script src="./js/vue.min.js"></script>
 <script src="./js/element-ui.js"></script>
 <script>
+    const getQueryVariable = variable => {
+        let query = window.location.search.substring(1)
+        let vars = query.split("&");
+        for (let i=0;i<vars.length;i++) {
+            let pair = vars[i].split("=");
+            if(pair[0] === variable) return pair[1]
+        }
+        return false
+    }
     new Vue({
         el: '#app',
         data() {
@@ -48,21 +57,12 @@
             switchTab(num) {
                 if (num === 1) {
                     this.value = 0
-                    const title = this.getQueryVariable('title')
+                    const title = getQueryVariable('title')
                     let detailRule = "js:log("+title+");const { cateGroupParse } = $.require('hiker://page/utils?rule="+title+"');cateGroupParse("+title+");"
 
                     fy_bridge_app.toDetailPage('所有分类', "https://m.douyu.com/api/cate/list", '', '', detailRule, '')
                 }
             },
-            getQueryVariable(variable) {
-                let query = window.location.search.substring(1)
-                let vars = query.split("&");
-                for (let i=0;i<vars.length;i++) {
-                    let pair = vars[i].split("=");
-                    if(pair[0] === variable) return pair[1]
-                }
-                return false
-            }
         },
     });
 </script>
