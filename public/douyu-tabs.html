@@ -50,6 +50,7 @@
                     this.value = 0
                     const title = this.getQueryVariable('title')
                     let detailRule = 'js:' + $$$.toString(params => {
+                        log(params)
                         let d = []
                         let list_json = fetch(MY_URL)
                         let list = JSON.parse(list_json).data
