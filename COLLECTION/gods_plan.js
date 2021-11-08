@@ -4,15 +4,6 @@ const VERSION_FILE = 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/m
 
 const VERSION = '1.0.0-beta'
 
-const saveFile = _ => {
-    writeFile(LOCAL_FILE, request(FETCH_FILE))
-}
-
-const init = _ => {
-    let local = request(LOCAL_FILE)
-    if (! local) saveFile()
-}
-
 const baseParse = _ => {
     let d = [];
 
