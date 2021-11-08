@@ -48,11 +48,11 @@ const baseParse = _ => {
 
 const secParse = input => {
     const html = fetch(input);
-    /* const script_raw = parseDomForHtml(html, "script&&Html");
+    const script_raw = parseDomForHtml(html, "script&&Html");
 
     const script = script_raw.substring(0, script_raw.length-569);
 
-    eval(script) */
+    eval(script)
 
     const rid = parseInt(MY_URL.replace("https://m.douyu.com/", ""))
     const tt = Date.parse(new Date()).toString().substr(0,10)
