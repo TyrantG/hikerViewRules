@@ -69,7 +69,7 @@
                                             desc: item.nickname,
                                             pic_url: item.roomSrc,
                                             url: $("https://m.douyu.com/"+item.rid).lazyRule(params => {
-                                                const { getSign } = $$$.require('hiker://page/utils?rule='+params.title)
+                                                const { getSign } = $.require('hiker://page/utils?rule='+params.title)
                                                 log(getSign)
                                                 const html = fetch(input)
 
