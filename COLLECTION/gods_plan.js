@@ -23,7 +23,7 @@ const baseParse = _ => {
             refreshPage(false)
             return "hiker://empty"
         }),
-        col_type: 'avatar'
+        col_type: 'text_1'
     })
 
     d.push({
