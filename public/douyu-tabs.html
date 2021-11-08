@@ -49,7 +49,7 @@
                 if (num === 1) {
                     this.value = 0
                     const title = getQueryVariable('title')
-                    let detailRule = `js:const { cateGroupParse } = $.require('hiker://page/utils?rule=${title}');cateGroupParse(${title});`
+                    let detailRule = "js:log("+title+");const { cateGroupParse } = $.require('hiker://page/utils?rule="+title+"');cateGroupParse("+title+");"
 
                     fy_bridge_app.toDetailPage('所有分类', "https://m.douyu.com/api/cate/list", '', '', detailRule, '')
                 }
