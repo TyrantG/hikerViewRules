@@ -49,7 +49,58 @@
                 if (num === 1) {
                     this.value = 0
                     const title = this.getQueryVariable('title')
-                    let detailRule = "js:const { cateGroupParse } = $.require('hiker://page/utils?rule="+title+"');cateGroupParse('"+title+"');"
+                    let detailRule = 'js:' + $$$.toString(params => {
+                        let d = []
+                        let list_json = fetch(MY_URL)
+                        let list = JSON.parse(list_json).data
+                        list.cate2Info.forEach(cate2 => {
+                            let category_url = "https://m.douyu.com/api/room/list?page=fypage&type="+cate2.shortName
+                            d.push({
+                                title:cate2.cate2Name,
+                                pic_url:cate2.icon,
+                                url: $(category_url).rule(params => {
+                                    let d = []
+                                    const html = getResCode();
+                                    const list = JSON.parse(html).data
+
+                                    list.list.forEach(item => {
+                                        d.push({
+                                            title: item.roomName,
+                                            desc: item.nickname,
+                                            pic_url: item.roomSrc,
+                                            url: $("https://m.douyu.com/"+item.rid).lazyRule(params => {
+                                                const { getSign } = $.require('hiker://page/utils?rule='+params.title)
+                                                const html = fetch(input)
+
+                                                const rid = parseInt(input.replace("https://m.douyu.com/", ""))
+                                                const tt = Date.parse(new Date()).toString().substr(0,10)
+                                                const did = "10000000000000000000000000001501"
+
+                                                let param_body = getSign(html, rid, did, tt)
+
+                                                const stream_json = fetch('https://m.douyu.com/api/room/ratestream', {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
+                                                const stream = JSON.parse(stream_json).data
+
+                                                return stream.url
+                                            }, {
+                                                title: params.title
+                                            }),
+                                            col_type: 'movie_2'
+                                        })
+                                    })
+
+                                    setResult(d);
+                                }, {
+                                    title: params.title
+                                }),
+                                col_type:"icon_round_4"
+                            });
+                        });
+                        setResult(d);
+                    }, {
+                        title: title
+                    })
+                    // let detailRule = "js:const { cateGroupParse } = $.require('hiker://page/utils?rule="+title+"');cateGroupParse('"+title+"');"
 
                     fy_bridge_app.toDetailPage('所有分类', "https://m.douyu.com/api/cate/list", '', '', detailRule, '')
                 }
