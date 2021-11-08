@@ -50,7 +50,7 @@
                 if (num === 1) {
                     this.value = 0
 
-                    let detailRule = `js:const { cateGroupParse } = $$$.require('hiker://page/utils');cateGroupParse();`
+                    let detailRule = `js:const { cateGroupParse } = $.require('hiker://page/utils');cateGroupParse();`
 
                     fy_bridge_app.toDetailPage('所有分类', "https://m.douyu.com/api/cate/list", '333', '', detailRule, '')
                 }
