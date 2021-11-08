@@ -50,9 +50,9 @@
                 if (num === 1) {
                     this.value = 0
 
-                    let detailRule = `js: $.require('hiker://page/utils').cateGroupParse();`
+                    let detailRule = `js:const { cateGroupParse } = $.require('hiker://page/utils?rule=斗鱼直播');cateGroupParse();`
 
-                    fy_bridge_app.toDetailPage('所有分类', "https://m.douyu.com/api/cate/list", '333', '', detailRule, '')
+                    fy_bridge_app.toDetailPage('所有分类', "https://m.douyu.com/api/cate/list", '', '', detailRule, '')
                 }
 
             }
