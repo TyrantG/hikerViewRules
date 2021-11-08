@@ -27,7 +27,7 @@ const baseParse = _ => {
             eval(LOCAL_FILE)
             sync()
         }),
-        col_type: 'avatar'
+        col_type: 'avatar_marquee'
     })
 
     setResult(d);
