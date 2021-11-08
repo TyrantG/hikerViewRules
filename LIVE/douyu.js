@@ -30,7 +30,10 @@ const baseParse = _ => {
                 title: item.roomName,
                 desc: item.nickname,
                 pic_url: item.roomSrc,
-                url: "https://m.douyu.com/"+item.rid,
+                url: $("https://m.douyu.com/"+item.rid).lazyRule(_ => {
+                    eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+                    return secParse()
+                }),
                 col_type: 'movie_2'
             })
         })
@@ -44,6 +47,28 @@ const baseParse = _ => {
 }
 
 const secParse = _ => {
+    let res = {};
+    let d = [];
+    const html = getResCode();
+    /* const script_raw = parseDomForHtml(html, "script&&Html");
+
+    const script = script_raw.substring(0, script_raw.length-569);
+
+    eval(script) */
+
+    const rid = parseInt(MY_URL.replace("https://m.douyu.com/", ""))
+    const tt = Date.parse(new Date()).toString().substr(0,10)
+    const did = "10000000000000000000000000001501"
+
+    let param_body = getSign(html, rid, did, tt)
+
+    const stream_json = fetch('https://m.douyu.com/api/room/ratestream', {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
+    const stream = JSON.parse(stream_json).data
+
+    return stream.url
+}
+
+const ____secParse = _ => {
     let res = {};
     let d = [];
     const html = getResCode();
@@ -106,9 +131,9 @@ const categoryParse = _ =>{
             title: item.roomName,
             desc: item.nickname,
             pic_url: item.roomSrc,
-            url: $("https://m.douyu.com/"+item.rid).rule(_ => {
+            url: $("https://m.douyu.com/"+item.rid).lazyRule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
-                secParse()
+                return secParse()
             }),
             col_type: 'movie_2'
         })
@@ -125,27 +150,18 @@ const searchParse = () => {
     const html = getResCode();
     const list = JSON.parse(html).data
 
-    /*if (getVar('chooseOption') && getVar('chooseOption') == 'video') {
-        list.list.forEach(item => {
-            d.push({
-                title: item.title,
-                desc: item.roomName,
-                pic_url: item.videoPic,
-                url: "https://vmobile.douyu.com/show/"+item.hashID,
-                col_type: 'movie_2'
-            })
+    list.list.forEach(item => {
+        d.push({
+            title: item.nickname,
+            desc: item.roomName,
+            pic_url: item.roomSrc,
+            url: $("https://m.douyu.com/"+item.roomId).lazyRule(_ => {
+                eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+                return secParse()
+            }),
+            col_type: 'movie_2'
         })
-    } else {*/
-        list.list.forEach(item => {
-            d.push({
-                title: item.nickname,
-                desc: item.roomName,
-                pic_url: item.roomSrc,
-                url: "https://m.douyu.com/"+item.roomId,
-                col_type: 'movie_2'
-            })
-        })
-    // }
+    })
 
     res.data = d;
     setHomeResult(res);
