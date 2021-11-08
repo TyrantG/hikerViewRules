@@ -69,8 +69,9 @@
                                             desc: item.nickname,
                                             pic_url: item.roomSrc,
                                             url: $("https://m.douyu.com/"+item.rid).lazyRule(params => {
+                                                const data = $.require('hiker://page/utils?rule='+params.title)
                                                 const { getSign } = $.require('hiker://page/utils?rule='+params.title)
-                                                log(getSign)
+                                                log(data)
                                                 const html = fetch(input)
 
                                                 const rid = parseInt(input.replace("https://m.douyu.com/", ""))
