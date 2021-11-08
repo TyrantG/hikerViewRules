@@ -50,8 +50,8 @@
                     this.value = 0
                     const title = this.getQueryVariable('title')
                     const pageList = this.getQueryVariable('pageList')
-                    alert(pageList)
-                    let detailRule = "js:const { cateGroupParse } = $.require('hiker://page/utils?rule="+title+"');cateGroupParse('"+title+"');"
+
+                    let detailRule = "js:MY_RULE.pageList = "+pageList+"; const { cateGroupParse } = $.require('hiker://page/utils');cateGroupParse('"+title+"');"
 
                     fy_bridge_app.toDetailPage('所有分类', "https://m.douyu.com/api/cate/list", '', '', detailRule, '')
                 }
