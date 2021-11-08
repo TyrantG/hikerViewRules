@@ -10,6 +10,7 @@ const VERSION = '1.0.0-beta'
 const sync = _ => {
     writeFile(LOCAL_FILE, request(FETCH_FILE))
     eval(request(FETCH_ASSETS))
+    godSaveFile('images/avatar.jpg')
 }
 
 const baseParse = _ => {
@@ -27,7 +28,7 @@ const baseParse = _ => {
             eval(LOCAL_FILE)
             sync()
         }),
-        col_type: 'avatar_marquee'
+        col_type: 'avatar'
     })
 
     setResult(d);

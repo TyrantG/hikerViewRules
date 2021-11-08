@@ -4,5 +4,3 @@ const LOCAL_URL = 'hiker://files/rules/TyrantG/assets/'
 const godSaveFile = (asset_path) => {
   writeFile(local_file+asset_path, request(fetch_file+asset_path))
 }
-
-godSaveFile('images/avatar.jpg')
