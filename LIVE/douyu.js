@@ -32,7 +32,7 @@ const baseParse = _ => {
                 pic_url: item.roomSrc,
                 url: $("https://m.douyu.com/"+item.rid).lazyRule(_ => {
                     eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
-                    return secParse()
+                    return secParse(input)
                 }),
                 col_type: 'movie_2'
             })
@@ -46,10 +46,8 @@ const baseParse = _ => {
     setHomeResult(res);
 }
 
-const secParse = _ => {
-    let res = {};
-    let d = [];
-    const html = getResCode();
+const secParse = input => {
+    const html = fetch(input);
     /* const script_raw = parseDomForHtml(html, "script&&Html");
 
     const script = script_raw.substring(0, script_raw.length-569);
@@ -133,7 +131,7 @@ const categoryParse = _ =>{
             pic_url: item.roomSrc,
             url: $("https://m.douyu.com/"+item.rid).lazyRule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
-                return secParse()
+                return secParse(input)
             }),
             col_type: 'movie_2'
         })
@@ -157,7 +155,7 @@ const searchParse = () => {
             pic_url: item.roomSrc,
             url: $("https://m.douyu.com/"+item.roomId).lazyRule(_ => {
                 eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
-                return secParse()
+                return secParse(input)
             }),
             col_type: 'movie_2'
         })
