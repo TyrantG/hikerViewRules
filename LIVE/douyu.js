@@ -47,7 +47,7 @@ const secParse = input => {
     // const rid = parseInt(input.replace("https://m.douyu.com/", ""))
     const rid = html.match(/rid":(.*?),"vipId/)[1]
     
-    const html = fetch('https://www.douyu.com/'+rid, {headers:{"User-Agent": PC_UA})
+    const html = fetch('https://www.douyu.com/'+rid, {headers:{"User-Agent": PC_UA}})
     const tt = Date.parse(new Date()).toString().substr(0,10)
     const did = "10000000000000000000000000001501"
 
@@ -192,8 +192,4 @@ const getSign = (script, rid, did, tt) => {
 
     let params = sign(rid, did, tt) + "&cdn=ws-h5&rate=0"
     return params
-}
-
-const makeKey = (rid) => {
-    auth = DouYu.md5(self.rid + self.t13)
 }
