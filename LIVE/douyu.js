@@ -43,23 +43,19 @@ const baseParse = _ => {
 }
 
 const secParse = input => {
+    const html = fetch(input)
 
-    const h5_html = fetch(input)
     // const rid = parseInt(input.replace("https://m.douyu.com/", ""))
-    const rid = h5_html.match(/rid":(.*?),"vipId/)[1]
-    
-    const html = fetch('https://www.douyu.com/'+rid, {headers:{"User-Agent": PC_UA}})
-
+    const rid = html.match(/rid":(.*?),"vipId/)[1]
     const tt = Date.parse(new Date()).toString().substr(0,10)
     const did = "10000000000000000000000000001501"
 
     let param_body = getSign(html, rid, did, tt)
 
-    const stream_json = fetch('https://www.douyu.com/lapi/live/getH5Play/'+rid, {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
-    
+    const stream_json = fetch('https://m.douyu.com/api/room/ratestream', {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
     const stream = JSON.parse(stream_json).data
 
-    return stream.rtmp_url + stream.rtmp_live
+    return stream.url
 }
 
 const _secParse = _ => {
@@ -177,8 +173,8 @@ const cateGroupParse = _ => {
 }
 
 const getSign = (script, rid, did, tt) => {
-    let result = script.match(/(vdwdae325w_64we[\s\S]*function ub98484234[\s\S]*?)function/)[1]
 
+    let result = script.match(/(function ub98484234.*)\s(var.*)/)[0]
     let func_ub9 = result.replace(/eval.*;}/, 'strc;}', result)
     eval(func_ub9)
 
@@ -191,6 +187,6 @@ const getSign = (script, rid, did, tt) => {
     func_sign = func_sign.replace('CryptoJS.MD5(cb).toString()', '"' + rb + '"')
     eval(func_sign)
 
-    let params = sign(rid, did, tt) + "&cdn=ws-h5&rate=0"
+    let params = sign(rid, did, tt) + "&ver=219032101&rid={}&rate=-1&rid="+rid
     return params
 }
