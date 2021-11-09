@@ -178,8 +178,7 @@ const cateGroupParse = _ => {
 }
 
 const getSign = (script, rid, did, tt) => {
-    setError(rid)
-    /* let result = script.match(/(vdwdae325w_64we[\s\S]*function ub98484234[\s\S]*?)function/)[0]
+    let result = script.match(/(vdwdae325w_64we[\s\S]*function ub98484234[\s\S]*?)function/)[0]
     setError(result)
     let func_ub9 = result.replace(/eval.*;}/, 'strc;}', result)
     eval(func_ub9)
@@ -194,5 +193,5 @@ const getSign = (script, rid, did, tt) => {
     eval(func_sign)
 
     let params = sign(rid, did, tt) + "&cdn=ws-h5&rate=0"
-    return params */
+    return params
 }
