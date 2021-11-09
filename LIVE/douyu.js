@@ -49,7 +49,7 @@ const secParse = input => {
     const rid = h5_html.match(/rid":(.*?),"vipId/)[1]
     
     const html = fetch('https://www.douyu.com/'+rid, {headers:{"User-Agent": PC_UA}})
-
+    setError(html)
     const tt = Date.parse(new Date()).toString().substr(0,10)
     const did = "10000000000000000000000000001501"
 
@@ -178,7 +178,7 @@ const cateGroupParse = _ => {
 
 const getSign = (script, rid, did, tt) => {
 
-    let result = script.match(/vdwdae325w_64we[\s\S]*function ub98484234[\s\S]*?function/)[0]
+    let result = script.match(/(vdwdae325w_64we[\s\S]*function ub98484234[\s\S]*?)function/)[0]
     setError(result)
     let func_ub9 = result.replace(/eval.*;}/, 'strc;}', result)
     eval(func_ub9)
