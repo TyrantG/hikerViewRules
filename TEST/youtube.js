@@ -77,7 +77,7 @@ const baseParse = _ => {
     }
 
     if (search_show === '1') {
-        d.push({
+        /* d.push({
             title: search_select === 'video' ? '‘‘’’<strong>搜索：<font color="red">视频</font></strong>' : '搜索：视频',
             url: $('').lazyRule(_ => {
                 putVar("tyrantgenesis.youtube.search_select", "video")
@@ -94,7 +94,7 @@ const baseParse = _ => {
                 return 'toast://频道搜索未完成'
             }),
             col_type: 'text_2'
-        })
+        }) */
 
         d.push({
             url: "input.trim() ? $('hiker://empty').rule(params => {eval(fetch('hiker://files/TyrantG/TEST/youtube.js'));searchParse(params);}, {input: input.trim(), search_select: '"+search_select+"'}) : 'toast://请输入搜索内容'",
