@@ -56,9 +56,9 @@ const secParse = input => {
     let param_body = getSign(html, rid, did, tt)
 
     const stream_json = fetch('https://www.douyu.com/lapi/live/getH5Play/'+rid, {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
-    log(stream_json)
+    
     const stream = JSON.parse(stream_json).data
-
+    log(stream)
     return stream.rmtp_url + '/' + stream.rmtp_live
 }
 
