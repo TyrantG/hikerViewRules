@@ -85,7 +85,7 @@ const secParse = _ => {
                     let urls = [];
                     let names = [];
                     for (let i = 4; i < lines.length; i += 3) {
-                        urls.push(lines[i]);
+                        urls.push(m3u8Parse(lines[i], i));
                         names.push(lines[i - 2].split('NAME="')[1].split('"')[0]);
                         // d.push({
                         //     title: lines[i - 2].split('NAME="')[1].split('"')[0],
@@ -103,4 +103,22 @@ const secParse = _ => {
     })
 
     setResult(d);
+}
+
+
+const m3u8Parse = (url, id) => {
+    const oriM3U8Content = fetch(url).split('\n')
+    const newM3U8Content = []
+    const position = []
+    oriM3U8Content.forEach((item, index) => {
+        if (item.indexOf('#EXTINF:2.002,Amazon') != -1) {
+            position.push(index+1)
+        }
+        if (position.indexOf(index) == -1) {
+            newM3U8Content.push(item)
+        }
+    })
+
+    writeFile("hiker://files/cache/TyrantG/twitch_temp_"+id+".m3u8", newM3U8Content.join('\n'))
+    return "file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/cache/TyrantG/twitch_temp_"+id+".m3u8"
 }
