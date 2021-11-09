@@ -55,6 +55,9 @@ const baseParse = _ => {
                     col_type: 'movie_2'
                 })
             })
+            d.push({
+                col_type: 'line_blank'
+            })
         } catch (e) {}
     })
 
