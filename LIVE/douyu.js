@@ -57,9 +57,9 @@ const secParse = input => {
 
     const stream_json = fetch('https://www.douyu.com/lapi/live/getH5Play/'+rid, {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
     
-    const stream = JSON.parse(stream_json).data
-    log(JSON.parse(stream))
-    return stream.rmtp_url + '/' + stream.rmtp_live
+    const stream = JSON.parse(stream_json)
+    log(stream)
+    return stream.rmtp_url
 }
 
 const _secParse = _ => {
