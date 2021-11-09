@@ -36,7 +36,7 @@ const baseParse = _ => {
 
             d.push({
                 title: group,
-                image_uel: cate.sIcon,
+                pic_url: cate.sIcon,
                 url: $(group_url).rule(params => {
                     eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
                     categoryParse(params.index)
