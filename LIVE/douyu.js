@@ -45,15 +45,15 @@ const baseParse = _ => {
 const secParse = input => {
     const html = fetch(input)
 
-    log(html.match(/rid":(.*?),"vipId/))
-
-    const rid = parseInt(input.replace("https://m.douyu.com/", ""))
+    // const rid = parseInt(input.replace("https://m.douyu.com/", ""))
+    const rid = html.match(/rid":(.*?),"vipId/)[1]
     const tt = Date.parse(new Date()).toString().substr(0,10)
     const did = "10000000000000000000000000001501"
 
     let param_body = getSign(html, rid, did, tt)
 
-    const stream_json = fetch('https://m.douyu.com/api/room/ratestream', {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
+    const stream_json = fetch('https://www.douyu.com/lapi/live/getH5Play/'+rid, {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
+    log(stream_json)
     const stream = JSON.parse(stream_json).data
 
     return stream.url
@@ -188,6 +188,10 @@ const getSign = (script, rid, did, tt) => {
     func_sign = func_sign.replace('CryptoJS.MD5(cb).toString()', '"' + rb + '"')
     eval(func_sign)
 
-    let params = sign(rid, did, tt) + "&ver=219032101&rid={}&rate=-1&rid="+rid
+    let params = sign(rid, did, tt) + "&cdn=ws-h5&rate=0"
     return params
+}
+
+const makeKey = (rid) => {
+    auth = DouYu.md5(self.rid + self.t13)
 }
