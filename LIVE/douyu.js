@@ -54,7 +54,6 @@ const secParse = input => {
     const did = "10000000000000000000000000001501"
 
     let param_body = getSign(html, rid, did, tt)
-    log(param_body)
 
     const stream_json = fetch('https://www.douyu.com/lapi/live/getH5Play/'+rid, {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
     log(stream_json)
