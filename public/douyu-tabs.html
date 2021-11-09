@@ -50,27 +50,14 @@
                     this.value = 0
                     const title = this.getQueryVariable('title')
 
-                    // let detailRule = "js:const pageList = JSON.parse(getVar('tyrantgenesis.douyu.pageList'));Object.assign(MY_RULE, { pageList: pageList });"
-                    let detailRule = 'js:' + $$$.toString(params => {
-                        const pageList = JSON.parse(getVar('tyrantgenesis.douyu.pageList'))
-                        eval(pageList[0].rule)
-                        cateGroupParse(params.title)
-                    }, {
-                        title: title
+                    let detailRule = 'js:' + $$$.toString(_ => {
+                        eval(fetch('hiker://files/rules/TyrantG/LIVE/douyu.js'))
+                        cateGroupParse()
                     })
 
                     fy_bridge_app.toDetailPage('所有分类', "https://m.douyu.com/api/cate/list", '', '', detailRule, '')
                 }
             },
-            getQueryVariable(variable) {
-                let query = window.location.search.substring(1)
-                let vars = query.split("&");
-                for (let i=0;i<vars.length;i++) {
-                    let pair = vars[i].split("=");
-                    if(pair[0] === variable) return decodeURIComponent(pair[1])
-                }
-                return false
-            }
         },
     });
 </script>
