@@ -76,15 +76,15 @@ const _17live = _ => {
 }
 
 const huya_live = _ => {
-  godWriteFile(BASE_URL+"LIVE/huya.js?t="+time, 'hiker://files/TyrantG/LIVE/huya.js')
-  godWriteFile(BASE_URL+"public/huya-tabs.html?t="+time, 'hiker://files/TyrantG/public/huya-tabs.html')
-  godWriteFile(BASE_URL+"public/huya-category.html?t="+time, 'hiker://files/TyrantG/public/huya-category.html')
-  godWriteFile(BASE_URL+"public/huya-player.html?t="+time, 'hiker://files/TyrantG/public/huya-player.html')
-  godSaveFile(BASE_URL+"public/utils/huya_lib.js", 'hiker://files/TyrantG/public/utils/huya_lib.js')
+  godWriteFile(BASE_URL+"LIVE/huya.js", 'hiker://files/TyrantG/LIVE/huya.js')
+  godWriteFile(BASE_URL+"public/huya-tabs.html", 'hiker://files/TyrantG/public/huya-tabs.html')
+  godWriteFile(BASE_URL+"public/huya-category.html", 'hiker://files/TyrantG/public/huya-category.html')
+  // godWriteFile(BASE_URL+"public/huya-player.html?t="+time, 'hiker://files/TyrantG/public/huya-player.html')
+  // godSaveFile(BASE_URL+"public/utils/huya_lib.js", 'hiker://files/TyrantG/public/utils/huya_lib.js')
   godSaveFile(BASE_URL+"public/css/element-ui.css", 'hiker://files/TyrantG/public/css/element-ui.css')
-  godSaveFile(BASE_URL+"public/css/aliplayer-min.css", 'hiker://files/TyrantG/public/css/aliplayer-min.css')
+  // godSaveFile(BASE_URL+"public/css/aliplayer-min.css", 'hiker://files/TyrantG/public/css/aliplayer-min.css')
   godSaveFile(BASE_URL+"public/js/vue.min.js", 'hiker://files/TyrantG/public/js/vue.min.js')
-  godSaveFile(BASE_URL+"public/js/aliplayer-min.js", 'hiker://files/TyrantG/public/js/aliplayer-min.js')
+  // godSaveFile(BASE_URL+"public/js/aliplayer-min.js", 'hiker://files/TyrantG/public/js/aliplayer-min.js')
   godSaveFile(BASE_URL+"public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
 }
 
