@@ -17,7 +17,7 @@ const baseParse = _ => {
 
     d.push({
         desc: '48',
-        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-tabs.html?time='+(new Date()).getTime(),
+        url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-tabs.html',
         col_type:"x5_webview_single"
     })
 
