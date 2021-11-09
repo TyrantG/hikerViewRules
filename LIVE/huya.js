@@ -41,7 +41,7 @@ const baseParse = _ => {
                     eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
                     categoryParse(params.index)
                 }, {index: index}),
-                col_type: 'text_center_1'
+                col_type: 'avatar'
             })
             videoDom.forEach(item => {
                 d.push({
