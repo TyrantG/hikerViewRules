@@ -59,7 +59,7 @@ const secParse = input => {
     log(stream_json)
     const stream = JSON.parse(stream_json).data
 
-    return stream.url
+    return stream.rmtp_url + '/' + stream.rmtp_live
 }
 
 const _secParse = _ => {
