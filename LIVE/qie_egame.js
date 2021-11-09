@@ -3,7 +3,7 @@ const baseParse = _ => {
   const list = JSON.parse(getResCode()).data[0].retBody.data.live_data.live_list
 
   d.push({
-    desc: '48 && float',
+    desc: '48',
     url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/qieEgame-tabs.html?time='+(new Date()).getTime(),
     col_type:"x5_webview_single"
   })
@@ -15,29 +15,35 @@ const baseParse = _ => {
       desc: data.anchor_name,
       pic_url: data.program_res.cover_url,
       col_type: 'movie_2',
-      url: data.jump_url
+      url: $(data.jump_url).lazyRule(_ => {
+        eval(fetch('hiker://files/rules/TyrantG/LIVE/qie_egame.js'))
+        return secParse(input)
+      })
     })
   })
 
   setResult(d);
 }
 
-const secParse = _ => {
-  let d = [];
-  const anchor_id = MY_URL.match(/anchorid=(.*?)&/)[1]
+const secParse = input => {
+  let urls = []
+  let names = []
+  const anchor_id = input.match(/anchorid=(.*?)&/)[1]
   const data_json = fetch("https://share.egame.qq.com/cgi-bin/pgg_async_fcgi", {headers: {"Content-Type": "application/x-www-form-urlencoded"}, method: 'POST', body: "param={\"0\":{\"module\":\"pgg_live_read_svr\",\"method\":\"get_live_and_profile_info\",\"param\":{\"anchor_id\":"+anchor_id+",\"layout_id\":\"hot\",\"index\":1,\"other_uid\":0}}}"})
 
   const list = JSON.parse(data_json).data[0].retBody.data.video_info.stream_infos
 
   list.forEach(item => {
-    d.push({
-      title: item.desc,
-      col_type: 'text_2',
-      url: item.play_url
-    })
+    urls.push(item.play_url)
+    names.push(item.desc)
+    // d.push({
+    //   title: item.desc,
+    //   col_type: 'text_2',
+    //   url: item.play_url
+    // })
   })
 
-  setResult(d);
+  return JSON.stringify({urls: urls, names: names})
 }
 
 const cateGroupParse = _ => {
@@ -64,9 +70,9 @@ const cateGroupParse = _ => {
             desc: item.anchor_name,
             pic_url: item.program_res.cover_url,
             col_type: 'movie_2',
-            url: $(item.jump_url).rule(_ => {
+            url: $(item.jump_url).lazyRule(_ => {
               eval(fetch('hiker://files/TyrantG/LIVE/qie_egame.js'))
-              secParse()
+              return secParse(input)
             })
           })
         })
@@ -90,9 +96,12 @@ const searchParse = _ => {
       title: parseDomForHtml(item, 'a&&title'),
       pic_url: parseDom(item, 'img&&src'),
       col_type: 'movie_2',
-      url: "https://m.egame.qq.com/live?anchorid="+parseDomForHtml(item, 'a&&href').split('/').pop()+"&_=_"
+      url: $("https://m.egame.qq.com/live?anchorid="+parseDomForHtml(item, 'a&&href').split('/').pop()+"&_=_").lazyRule(_ => {
+        eval(fetch('hiker://files/TyrantG/LIVE/qie_egame.js'))
+        return secParse(input)
+      })
     })
   })
 
-  setResult(d);
+  setResult(d)
 }
