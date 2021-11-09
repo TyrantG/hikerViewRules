@@ -28,12 +28,12 @@ const secParse = _ => {
             title: channel.status,
             desc: channel.display_name,
             pic_url: item.preview.medium,
-            url: $(channel.url).rule(_ => {
+            url: $(channel.url).lazyRule(_ => {
                 let d = [];
                 const header = {'User-Agent': PC_UA}
-                const html = fetch(MY_URL, {headers: header})
+                const html = fetch(input, {headers: header})
                 const client_id = html.match(/"Client-ID":"(.*?)"/)[1]
-                const rid = MY_URL.split('/').pop()
+                const rid = input.split('/').pop()
 
                 const data = {
                     "operationName": "PlaybackAccessToken",
@@ -73,7 +73,8 @@ const secParse = _ => {
                 const playlist = fetch(stream_url)
 
                 const lines = playlist.split('\n');
-                if (lines.length < 5) {
+                log(lines)
+                /* if (lines.length < 5) {
                     d.push({
                         title: "当前主播没有在直播",
                         col_type: 'text_center_1'
@@ -91,9 +92,9 @@ const secParse = _ => {
                             col_type: 'text_2'
                         });
                     }
-                }
+                } */
 
-                setResult(d);
+                return {urls: lines}
             }),
             col_type: 'movie_2'
         })
