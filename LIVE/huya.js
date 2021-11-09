@@ -48,7 +48,7 @@ const baseParse = _ => {
                     title: item.sTitle,
                     desc: item.sNickName,
                     pic_url: item.sCoverUrl,
-                    url: $(item.sAction).lazyRule( _ => {
+                    url: $("https://m.huya.com"+item.sAction).lazyRule( _ => {
                         eval(fetch('hiker://files/TyrantG/LIVE/huya.js'))
                         return secParse()
                     }),
