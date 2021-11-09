@@ -55,8 +55,8 @@
                         const pageList = JSON.parse(getVar('tyrantgenesis.douyu.pageList'))
                         pageList.map(item => {
                             eval(item.rule)
-                            cateGroupParse(params.title)
                         })
+                        cateGroupParse(params.title)
                     }, {
                         title: title
                     })
