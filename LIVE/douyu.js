@@ -45,7 +45,7 @@ const baseParse = _ => {
 const secParse = input => {
     const html = fetch(input)
 
-    log(html.match('rid":(\d{1,8}),"vipId'))
+    log(html.match(/rid":(\d{1,8}),"vipId/))
 
     const rid = parseInt(input.replace("https://m.douyu.com/", ""))
     const tt = Date.parse(new Date()).toString().substr(0,10)
