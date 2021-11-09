@@ -53,10 +53,8 @@
                     // let detailRule = "js:const pageList = JSON.parse(getVar('tyrantgenesis.douyu.pageList'));Object.assign(MY_RULE, { pageList: pageList });"
                     let detailRule = 'js:' + $$$.toString(params => {
                         const pageList = JSON.parse(getVar('tyrantgenesis.douyu.pageList'))
-                        pageList.map(item => {
-                            eval(item.rule)
-                            cateGroupParse(params.title)
-                        })
+                        eval(pageList[0].rule)
+                        cateGroupParse(params.title)
                     }, {
                         title: title
                     })
