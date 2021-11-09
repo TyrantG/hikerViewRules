@@ -97,7 +97,7 @@ const baseParse = _ => {
                     desc: obj.creatorObj.username,
                     pic_url: obj.cover,
                     url: $(obj.pageUrl).rule(_ => {
-                        eval(fetch('hiker://files/TyrantG/IMAGES/zcool.js'))
+                        eval(fetch('hiker://files/TyrantG/IMAGE/zcool.js'))
                         secParse()
                     }),
                     col_type: 'movie_2'
@@ -134,7 +134,7 @@ const searchParse = _ => {
                     desc: obj.creatorObj.username,
                     pic_url: obj.cover,
                     url: $(obj.pageUrl).rule(_ => {
-                        eval(fetch('hiker://files/TyrantG/IMAGES/zcool.js'))
+                        eval(fetch('hiker://files/TyrantG/IMAGE/zcool.js'))
                         secParse()
                     }),
                     col_type: 'movie_2'
