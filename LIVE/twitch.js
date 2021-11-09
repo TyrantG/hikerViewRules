@@ -94,9 +94,9 @@ const secParse = _ => {
                         //     col_type: 'text_2'
                         // });
                     }
+                    return JSON.stringify({urls: urls, names: names})
                 }
 
-                return JSON.stringify({urls: urls, names: names})
             }),
             col_type: 'movie_2'
         })
