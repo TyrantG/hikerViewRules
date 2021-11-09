@@ -29,7 +29,6 @@ const secParse = _ => {
             desc: channel.display_name,
             pic_url: item.preview.medium,
             url: $(channel.url).lazyRule(_ => {
-                let d = [];
                 const header = {'User-Agent': PC_UA}
                 const html = fetch(input, {headers: header})
                 const client_id = html.match(/"Client-ID":"(.*?)"/)[1]
@@ -73,28 +72,30 @@ const secParse = _ => {
                 const playlist = fetch(stream_url)
 
                 const lines = playlist.split('\n');
-                log(lines)
-                /* if (lines.length < 5) {
-                    d.push({
-                        title: "当前主播没有在直播",
-                        col_type: 'text_center_1'
-                    });
+                log(11)
+                log(stream_url)
+                if (lines.length < 5) {
+                    return "toast://当前主播没有在直播"
                 } else {
-                    d.push({
+                    /* d.push({
                         title: "如果显示“commercial break in progress”请等15秒",
                         col_type: 'text_center_1'
-                    });
+                    }); */
+                    let urls = [];
+                    let names = [];
                     for (let i = 4; i < lines.length; i += 3) {
-                        d.push({
-                            title: lines[i - 2].split('NAME="')[1].split('"')[0],
-                            // resolution: (lines[i - 1].indexOf('RESOLUTION') != -1 ? lines[i - 1].split('RESOLUTION=')[1].split(',')[0] : null),
-                            url: lines[i],
-                            col_type: 'text_2'
-                        });
+                        urls.push(lines[i]);
+                        names.push(lines[i - 2].split('NAME="')[1].split('"')[0]);
+                        // d.push({
+                        //     title: lines[i - 2].split('NAME="')[1].split('"')[0],
+                        //     // resolution: (lines[i - 1].indexOf('RESOLUTION') != -1 ? lines[i - 1].split('RESOLUTION=')[1].split(',')[0] : null),
+                        //     url: lines[i],
+                        //     col_type: 'text_2'
+                        // });
                     }
-                } */
+                }
 
-                return JSON.stringify({urls: lines})
+                return JSON.stringify({urls: urls, names: names})
             }),
             col_type: 'movie_2'
         })
