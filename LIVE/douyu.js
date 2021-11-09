@@ -53,9 +53,8 @@ const secParse = input => {
     const tt = Date.parse(new Date()).toString().substr(0,10)
     const did = "10000000000000000000000000001501"
 
-    setError(html)
-
-    // let param_body = getSign(html, rid, did, tt)
+    let param_body = getSign(html, rid, did, tt)
+    setError(param_body)
 
     // const stream_json = fetch('https://www.douyu.com/lapi/live/getH5Play/'+rid, {headers:{'content-type':'application/x-www-form-urlencoded'}, body: param_body, method:'POST'})
     // log(stream_json)
@@ -179,8 +178,8 @@ const cateGroupParse = _ => {
 }
 
 const getSign = (script, rid, did, tt) => {
-
-    let result = script.match(/(vdwdae325w_64we[\s\S]*function ub98484234[\s\S]*?)function/)[0]
+    setError(rid)
+    /* let result = script.match(/(vdwdae325w_64we[\s\S]*function ub98484234[\s\S]*?)function/)[0]
     setError(result)
     let func_ub9 = result.replace(/eval.*;}/, 'strc;}', result)
     eval(func_ub9)
@@ -195,5 +194,5 @@ const getSign = (script, rid, did, tt) => {
     eval(func_sign)
 
     let params = sign(rid, did, tt) + "&cdn=ws-h5&rate=0"
-    return params
+    return params */
 }
