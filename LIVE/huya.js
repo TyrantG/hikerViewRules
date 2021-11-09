@@ -22,7 +22,6 @@ const baseParse = _ => {
 
     list.forEach((cate, index) => {
         let group = cate.sName, current_cate, cate_id
-        if(index === 0) log(cate)
             
         try {
 
