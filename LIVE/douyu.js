@@ -119,9 +119,9 @@ const categoryParse = _ =>{
             title: item.roomName,
             desc: item.nickname,
             pic_url: item.roomSrc,
-            url: $("https://m.douyu.com/"+item.rid).rule(_ => {
+            url: $("https://m.douyu.com/"+item.rid).lazyRule(_ => {
                 eval(fetch('hiker://files/rules/TyrantG/LIVE/douyu.js'))
-                secParse()
+                return secParse(input)
             }),
             col_type: 'movie_2'
         })
