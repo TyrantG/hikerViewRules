@@ -29,6 +29,7 @@ const secParse = _ => {
             desc: channel.display_name,
             pic_url: item.preview.medium,
             url: $(channel.url).lazyRule(_ => {
+                eval(fetch('hiker://files/rules/TyrantG/LIVE/twitch.js'))
                 const header = {'User-Agent': PC_UA}
                 const html = fetch(input, {headers: header})
                 const client_id = html.match(/"Client-ID":"(.*?)"/)[1]
@@ -72,8 +73,6 @@ const secParse = _ => {
                 const playlist = fetch(stream_url)
 
                 const lines = playlist.split('\n');
-                log(11)
-                log(stream_url)
                 
                 if (lines.length < 5) {
                     return "toast://当前主播没有在直播"
