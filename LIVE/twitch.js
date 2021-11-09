@@ -75,8 +75,6 @@ const secParse = _ => {
                 log(11)
                 log(stream_url)
                 
-                let urls = [];
-                let names = [];
                 if (lines.length < 5) {
                     return "toast://当前主播没有在直播"
                 } else {
@@ -84,6 +82,8 @@ const secParse = _ => {
                         title: "如果显示“commercial break in progress”请等15秒",
                         col_type: 'text_center_1'
                     }); */
+                    let urls = [];
+                    let names = [];
                     for (let i = 4; i < lines.length; i += 3) {
                         urls.push(lines[i]);
                         names.push(lines[i - 2].split('NAME="')[1].split('"')[0]);
