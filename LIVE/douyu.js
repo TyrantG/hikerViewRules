@@ -48,6 +48,7 @@ const secParse = input => {
     const rid = html.match(/rid":(.*?),"vipId/)[1]
     
     const html = fetch('https://www.douyu.com/'+rid, {headers:{"User-Agent": PC_UA}})
+    setError(html)
     const tt = Date.parse(new Date()).toString().substr(0,10)
     const did = "10000000000000000000000000001501"
 
