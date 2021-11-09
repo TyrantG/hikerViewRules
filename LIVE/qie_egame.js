@@ -16,7 +16,7 @@ const baseParse = _ => {
       pic_url: data.program_res.cover_url,
       col_type: 'movie_2',
       url: $(data.jump_url).lazyRule(_ => {
-        eval(fetch('hiker://files/rules/TyrantG/LIVE/qie_egame.js'))
+        eval(fetch('hiker://files/TyrantG/LIVE/qie_egame.js'))
         return secParse(input)
       })
     })
