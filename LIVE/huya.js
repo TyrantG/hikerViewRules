@@ -18,14 +18,15 @@ const baseParse = _ => {
     const list = json.recommendList
 
     d.push({
-        desc: '48 && float',
+        desc: '48',
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-tabs.html?time='+(new Date()).getTime(),
         col_type:"x5_webview_single"
     })
 
     list.forEach((cate, index) => {
         let group = cate.sName, current_cate, cate_id
-
+        if(index === 0) log(cate)
+            
         try {
 
             let videoDom = cate.vItems.value
@@ -156,7 +157,7 @@ const cateGroupParse = _ => {
     }
 
     d.push({
-        desc: '45 && float',
+        desc: '45',
         url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/huya-category.html',
         col_type:"x5_webview_single"
     })
