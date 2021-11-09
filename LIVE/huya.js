@@ -205,5 +205,5 @@ const getRealUrl = (live_url) => {
     let t = '0'
     let h = [p, t, s, f, ll].join('_')
     let m = md5(h)
-    return "https:"+i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+tmp2
+    return (i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+tmp2).replace('http://', 'https://')
 }
