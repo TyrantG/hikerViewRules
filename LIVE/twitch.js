@@ -94,7 +94,7 @@ const secParse = _ => {
                     }
                 } */
 
-                return {urls: lines}
+                return JSON.stringify({urls: lines})
             }),
             col_type: 'movie_2'
         })
