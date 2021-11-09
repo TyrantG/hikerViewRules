@@ -8,7 +8,6 @@ const getQueryVariable = (host, variable) => {
 }
 
 const baseParse = _ => {
-    let res = {};
     let d = [];
     // const list_json = parseDomForHtml(getResCode(), "#ssrData&&Text")
     const list_json = getResCode().match(/window\.HNF_GLOBAL_INIT = (.*?) <\/script>/)[1]
@@ -59,8 +58,7 @@ const baseParse = _ => {
         } catch (e) {}
     })
 
-    res.data = d;
-    setHomeResult(res);
+    setResult(d);
 }
 
 const secParse = params => {
@@ -95,7 +93,6 @@ const secParse = params => {
 }
 
 const categoryParse = index =>{
-    let res = {};
     let d = [];
     let id = getQueryVariable(MY_URL, 'id')
     let page = getQueryVariable(MY_URL, 'page')
@@ -116,9 +113,7 @@ const categoryParse = index =>{
         })
     })
 
-    
-    res.data = d;
-    setHomeResult(res);
+    setResult(d);
 }
 
 const searchParse = () => {
