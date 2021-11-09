@@ -29,7 +29,7 @@ const secParse = _ => {
             desc: channel.display_name,
             pic_url: item.preview.medium,
             url: $(channel.url).lazyRule(_ => {
-                eval(fetch('hiker://files/rules/TyrantG/LIVE/twitch.js'))
+                eval(fetch('hiker://files/TyrantG/LIVE/twitch.js'))
                 const header = {'User-Agent': PC_UA}
                 const html = fetch(input, {headers: header})
                 const client_id = html.match(/"Client-ID":"(.*?)"/)[1]
