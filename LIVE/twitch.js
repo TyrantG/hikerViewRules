@@ -84,7 +84,8 @@ const secParse = _ => {
                     let urls = [];
                     let names = [];
                     for (let i = 4; i < lines.length; i += 3) {
-                        urls.push(m3u8Parse(lines[i], i));
+                        // urls.push(m3u8Parse(lines[i], i));
+                        urls.push(lines[i]);
                         names.push(lines[i - 2].split('NAME="')[1].split('"')[0]);
                         // d.push({
                         //     title: lines[i - 2].split('NAME="')[1].split('"')[0],
