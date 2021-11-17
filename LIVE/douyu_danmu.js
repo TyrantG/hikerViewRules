@@ -57,8 +57,8 @@ const secParse = input => {
 
     return JSON.stringify({
         urls: [stream.url],
-        danmu: 'web://file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu_danmu.html?rid='+rid
-        // danmu: 'web://http://douyu_danmu.dev.tyrantg.com/?rid='+rid
+        // danmu: 'web://file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/douyu_danmu.html?rid='+rid
+        danmu: 'web://http://douyu_danmu.dev.tyrantg.com/?rid='+rid
     })
 }
 
