@@ -16,7 +16,7 @@ const baseParse = _ => {
         title: element.cate2Info[0].cate2Name,
         pic_url: element.icon,
         url: $(category_url).rule(_ => {
-            eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+            eval(fetch('hiker://files/TyrantG/LIVE/douyu_danmu.js'))
             categoryParse()
         }),
         col_type: 'avatar'
@@ -28,7 +28,7 @@ const baseParse = _ => {
           desc: item.nickname,
           pic_url: item.roomSrc,
           url: $("https://m.douyu.com/"+item.rid).lazyRule(_ => {
-            eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+            eval(fetch('hiker://files/TyrantG/LIVE/douyu_danmu.js'))
             return secParse(input)
           }),
           col_type: 'movie_2'
@@ -72,7 +72,7 @@ const categoryParse = _ =>{
             desc: item.nickname,
             pic_url: item.roomSrc,
             url: $("https://m.douyu.com/"+item.rid).lazyRule(_ => {
-                eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+                eval(fetch('hiker://files/TyrantG/LIVE/douyu_danmu.js'))
                 return secParse(input)
             }),
             col_type: 'movie_2'
@@ -94,7 +94,7 @@ const searchParse = () => {
         desc: item.roomName,
         pic_url: item.roomSrc,
         url: $("https://m.douyu.com/"+item.roomId).lazyRule(_ => {
-            eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+            eval(fetch('hiker://files/TyrantG/LIVE/douyu_danmu.js'))
             return secParse(input)
         }),
         col_type: 'movie_2'
@@ -114,7 +114,7 @@ const cateGroupParse = _ => {
             title:cate2.cate2Name,
             pic_url:cate2.icon,
             url: $(category_url).rule(_ => {
-                eval(fetch('hiker://files/TyrantG/LIVE/douyu.js'))
+                eval(fetch('hiker://files/TyrantG/LIVE/douyu_danmu.js'))
                 categoryParse()
             }),
             col_type:"icon_round_4"
