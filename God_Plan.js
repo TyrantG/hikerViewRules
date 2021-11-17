@@ -67,6 +67,14 @@ const douyu_live = _ => {
   godSaveFile(BASE_URL+"public/js/element-ui.js", 'hiker://files/TyrantG/public/js/element-ui.js')
 }
 
+const douyu_danmu = _ => {
+  godWriteFile(BASE_URL+"LIVE/douyu_danmu.js", 'hiker://files/TyrantG/LIVE/douyu_danmu.js')
+  godWriteFile(BASE_URL+"public/douyu-tabs.html?t="+time, 'hiker://files/TyrantG/public/douyu-tabs.html')
+  godSaveFile(BASE_URL+"public/css/douyu_danmu.css", 'hiker://files/TyrantG/public/css/douyu_danmu.css')
+  godSaveFile(BASE_URL+"public/js/douyu_danmu.js", 'hiker://files/TyrantG/public/js/douyu_danmu.js')
+  godSaveFile(BASE_URL+"public/douyu_danmu.html", 'hiker://files/TyrantG/public/douyu_danmu.html')
+}
+
 const twitch = _ => {
   godWriteFile(BASE_URL+"LIVE/twitch.js?t="+time, 'hiker://files/TyrantG/LIVE/twitch.js')
 }
