@@ -1,87 +1,129 @@
 js:
-let d = []
+addListener("onClose", $.toString(() => {
+    clearItem('cate_level_1_id')
+    clearItem('cate_level_2_id')
+    clearItem('cursor')
+}))
+const d = []
+const EMPTY = 'hiker://empty'
+const CATE_URL              = 'https://juejin.cn'
+const SEC_CARE_API          = 'https://api.juejin.cn/recommend_api/v1/tag/recommend_tag_list'
+const CONTENT_LIST_API      = 'https://api.juejin.cn/recommend_api/v1/article/recommend_cate_tag_feed'
+const CURRENT_PAGE          = MY_URL.split('##')[1].toString()
+const CATE_LEVEL_1_ID       = getItem('cate_level_1_id', '')
+const CATE_LEVEL_2_ID       = getItem('cate_level_2_id', '')
 
-// 网址前缀
-const URL_PREFIX            = 'https://www.xinpianchang.com'
-// 取分页
-const CURRENT_PAGE          = MY_URL.split('##')[1]
-// 当前 url
-const CURRENT_URL           = getItem('current_url', URL_PREFIX+'/channel/')
-// 已知动态分类最多二级
-const CATE_LEVEL_1          = getItem("cate_1", "0")
-const CATE_LEVEL_2          = getItem("cate_2", "0")
+const CATE_LEVEL_1_ARRAY    = pdfa(fetch(CATE_URL, {headers: {"User-Agent": PC_UA}}), '.view-nav&&a')
 
-// 获取页面内容
-let html = request(CURRENT_URL, {headers: {"User-Agent": PC_UA}})
+if (CURRENT_PAGE === '1') {
+    clearItem('cursor')
+    CATE_LEVEL_1_ARRAY.forEach(item => {
+        let id = pdfh(item, '.category-popover-box&&st:state') || ''
+        let title = pdfh(item, '.category-popover-box&&Text')
 
-// 第一页独占
-if (parseInt(CURRENT_PAGE) === 1) {
-    // 取一级标签
-    const categorie_level_1 = parseDomForArray(html, '.first-type&&li')
-    // 循环一级标签
-    categorie_level_1.forEach((cate_1, index_1) => {
-        let title = parseDomForHtml(cate_1, 'a&&Text')
-        let link = parseDomForHtml(cate_1, 'a&&href')
         d.push({
-            title: parseInt(CATE_LEVEL_1)===index_1? "““"+title+"””":title,
-            col_type: 'scroll_button',
-            url: $().lazyRule(params => {
-                // 存在链接的情况下更新缓存
-                if (params.link) {
-                    setItem('cate_1', params.index.toString())
-
-                    // 重置二级
-                    setItem('cate_2', '0')
-
-                    setItem('current_url', params.prefix+params.link)
-                    refreshPage(true)
-                }
-                
-                return "hiker://empty"
+            title: id === CATE_LEVEL_1_ID ? '‘‘’’<strong><font color="red">'+title+'</font></strong>' : title,
+            url: $(EMPTY).lazyRule(params => {
+                setItem('cursor', '0')
+                setItem('cate_level_1_id', params.id)
+                setItem('cate_level_2_id', '')
+                refreshPage(true)
+                return 'hiker://empty'
             }, {
-                prefix: URL_PREFIX,
-                index: index_1,
-                link: link
-            })
+                id: id
+            }),
+            col_type: 'scroll_button'
         })
     })
     d.push({
-        col_type:"blank_block"
+        col_type: "blank_block"
     })
 
-    // 取二级标签
-    let categorie_level_2 = parseDomForArray(html, '.second-type&&li')
-    // 循环二级标签
-    categorie_level_2.forEach((cate_2, index_2) => {
-        let title = parseDomForHtml(cate_2, 'a&&Text')
-        let link = parseDomForHtml(cate_2, 'a&&href')
+    if (CATE_LEVEL_1_ID) {
         d.push({
-            title: parseInt(CATE_LEVEL_2)===index_2? "““"+title+"””":title,
-            col_type: 'scroll_button',
-            url: $().lazyRule(params => {
-                // 存在链接的情况下更新缓存
-                if (params.link) {
-                    setItem('cate_2', params.index.toString())
-                    setItem('current_url', params.prefix+params.link)
-                    refreshPage(true)
-                }
-
-                return "hiker://empty"
-            }, {
-                prefix: URL_PREFIX,
-                index: index_2,
-                link: link
-            })
+            title: CATE_LEVEL_2_ID === '' ? '‘‘’’<strong><font color="red">全部</font></strong>' : '全部',
+            url: $(EMPTY).lazyRule(_ => {
+                setItem('cate_level_2_id', '')
+                refreshPage(true)
+                return 'hiker://empty'
+            }),
+            col_type: 'scroll_button'
         })
-    })
-    
-    d.push({
-        col_type:"blank_block"
-    })
+        let data = {"cate_id": CATE_LEVEL_1_ID}
 
-    d.push({
-        title: '当前URL：'+CURRENT_URL,
-        col_type: 'long_text',
+        let headers = {
+            "User-Agent": PC_UA,
+            "Content-Type": 'application/json',
+            "Referer": 'https://juejin.cn/',
+        }
+        const CATE_LEVEL_2_JSON = fetch(SEC_CARE_API, {headers: headers, method:'POST', body: JSON.stringify(data)})
+        const CATE_LEVEL_2_RESULT = JSON.parse(CATE_LEVEL_2_JSON)
+
+        if (CATE_LEVEL_2_RESULT && CATE_LEVEL_2_RESULT.err_no === 0) {
+            const CATE_LEVEL_2_ARRAY = CATE_LEVEL_2_RESULT.data
+            CATE_LEVEL_2_ARRAY.forEach(item => {
+                d.push({
+                    title: CATE_LEVEL_2_ID === item.tag_id.toString() ? '‘‘’’<strong><font color="'+item.color+'">'+item.tag_name+'</font></strong>' : item.tag_name,
+                    url: $(EMPTY).lazyRule(params => {
+                        setItem('cursor', '0')
+                        setItem('cate_level_2_id', params.id)
+                        refreshPage(true)
+                        return 'hiker://empty'
+                    }, {
+                        id: item.tag_id
+                    }),
+                    col_type: 'scroll_button'
+                })
+            })
+            d.push({
+                col_type: "blank_block"
+            })
+        }
+    }
+}
+
+const CURSOR = getItem('cursor', '0')
+data = {
+    cate_id: "6809637769959178254",
+    cursor: CURSOR,
+    id_type: 2,
+    limit: 20,
+    sort_type: 200,
+}
+if (CATE_LEVEL_1_ID) data.cate_id = CATE_LEVEL_1_ID
+if (CATE_LEVEL_2_ID) data.tag_id = CATE_LEVEL_2_ID
+
+headers = {
+    "User-Agent": PC_UA,
+    "Content-Type": 'application/json',
+    "Referer": 'https://juejin.cn/',
+}
+const LIST_JSON = fetch(CONTENT_LIST_API, {headers: headers, method:'POST', body: JSON.stringify(data)})
+const LIST_RESULT = JSON.parse(LIST_JSON)
+
+if (LIST_RESULT && LIST_RESULT.err_no === 0) {
+    setItem('cursor', LIST_RESULT.cursor)
+    log('Data')
+    log(getItem('cursor', '0'))
+    const LIST = LIST_RESULT.data
+    LIST.forEach(item => {
+        d.push({
+            title: item.article_info.title,
+            desc: item.article_info.brief_content,
+            pic_url: item.article_info.cover_image,
+            url: $(CATE_URL+'/post/'+item.article_id).rule(_ => {
+                const d = []
+
+                d.push({
+                    desc: '100% && float',
+                    url: MY_URL,
+                    col_type:"x5_webview_single"
+                })
+
+                setResult(d)
+            }),
+            col_type: 'movie_1'
+        })
     })
 }
 
