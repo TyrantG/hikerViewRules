@@ -89,13 +89,13 @@ const baseParse = _ => {
     })
   }
 
-  const video_list = parseDomForArray(parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], '.mo-cols-lays&&.mo-cols-rows')[1], 'ul&&li')
+  const video_list = parseDomForArray(html, '.module-items&&.module-item')
   video_list.forEach(video => {
     d.push({
-      title: parseDomForHtml(video, '.mo-situ-name&&Text'),
-      desc: parseDomForHtml(video, 'span&&Text'),
-      pic_url: parseDom(video, 'a&&data-original')+"@Referer=",
-      url: parseDom(video, '.mo-situ-name&&href'),
+      title: parseDomForHtml(video, '.module-item-title&&Text'),
+      desc: parseDomForHtml(video, '.module-item-caption&&Text'),
+      pic_url: parseDom(video, 'img&&src')+"@Referer=",
+      url: parseDom(video, 'a&&href'),
       col_type: 'movie_3_marquee',
     })
   })
