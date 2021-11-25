@@ -6,11 +6,11 @@ const baseParse = _ => {
   const html = fetch(true_url)
   const empty = "hiker://empty"
 
-  const categories = parseDomForArray(html, '.mo-java-waps&&.mo-cols-rows&&dl');
+  const categories = parseDomForArray(html, '.box&&.library-box');
 
   let init_cate = []
 
-  for (let i = 0; i < 20; i ++) {
+  for (let i = 0; i < 10; i ++) {
     init_cate.push("0")
   }
 
@@ -33,7 +33,7 @@ const baseParse = _ => {
 
 
     categories.forEach((category, index) => {
-      let sub_categories = parseDomForArray(category, 'dl&&dd');
+      let sub_categories = parseDomForArray(category, '.library-box&&a');
       if (index === 0) {
         sub_categories.forEach((item, key) => {
           let title = parseDomForHtml(item, 'a&&Text')
@@ -87,32 +87,6 @@ const baseParse = _ => {
         });
       }
     })
-
-    const by_cate = parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], 'h2&&a')
-    by_cate.forEach((item, key) => {
-      let title = parseDomForHtml(item, 'a&&Text')
-      let index = 15
-      d.push({
-        title: key.toString()===cate_temp[index]? "““"+title+"””":title,
-        url: $(parseDom(item, 'a&&href')).lazyRule((params) => {
-          params.cate_temp[params.index] = params.key.toString()
-
-          putVar("tyrantgenesis.ednovas.category", JSON.stringify(params.cate_temp))
-          putVar("tyrantgenesis.ednovas.url", input)
-          refreshPage(true)
-          return "hiker://empty"
-        }, {
-          cate_temp: cate_temp,
-          index: index,
-          key: key,
-          page: page,
-        }),
-        col_type: 'scroll_button',
-      })
-    })
-    d.push({
-      col_type:"blank_block"
-    });
   }
 
   const video_list = parseDomForArray(parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], '.mo-cols-lays&&.mo-cols-rows')[1], 'ul&&li')
