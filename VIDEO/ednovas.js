@@ -95,7 +95,7 @@ const baseParse = _ => {
       title: parseDomForHtml(video, '.module-item-title&&Text'),
       desc: parseDomForHtml(video, '.module-item-caption&&Text'),
       pic_url: parseDomForHtml(video, 'img&&data-src')+"@Referer=https://ednovas.video/",
-      url: parseDom(video, 'a&&href'),
+      url: parseDom(video, 'a&&href')+'#immersiveTheme#',
       col_type: 'movie_3_marquee',
     })
   })
@@ -152,12 +152,13 @@ const searchParse = _ => {
   let d = [];
   const html = getResCode()
 
-  const list = parseDomForArray(html, '.mo-cols-lays&&dl')
+  const list = parseDomForArray(html, '.module-items&&.module-item')
   list.forEach(item => {
     d.push({
-      title: parseDomForHtml(item, '.mo-wrap-arow&&Text'),
-      pic_url: parseDom(item, 'a&&data-original')+"@Referer=",
-      url: parseDom(item, 'a&&href'),
+      title: parseDomForHtml(item, 'a&&Text'),
+      desc: parseDomForHtml(item, '.video-info-aux&&Text'),
+      pic_url: parseDomForHtml(item, 'img&&data-src')+"@Referer=https://ednovas.video/",
+      url: parseDom(item, 'a&&href')+'#immersiveTheme#',
     })
   })
 
