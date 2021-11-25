@@ -107,43 +107,15 @@ const secParse = _ => {
   let d = [];
   const html = getResCode()
 
-  const video_info = parseDomForArray(html, '.mo-cols-lays')[0]
+  const video_info = parseDomForHtml(html, '.view-heading')
 
   d.push({
-    title: parseDomForHtml(video_info, 'h1&&a&&Text'),
-    desc: parseDomForHtml(html, '.mo-word-info&&Text'),
-    pic_url: parseDomForHtml(video_info, 'img&&src'),
-    url: parseDom(video_info, 'a&&href'),
-    col_type: 'pic_1'
+    title: parseDomForHtml(video_info, 'page-title&&Text'),
+    desc: parseDomForHtml(video_info, '.video-info-aux&&Text'),
+    pic_url: parseDomForHtml(video_info, 'img&&data-src')+"@Referer=https://ednovas.video/",
+    url: MY_URL,
+    col_type: 'movie_1_vertical_pic_blur'
   })
-
-  const select_title = parseDomForArray(html, '.mo-sort-head')[0]
-  const select_item = parseDomForArray(html, '.mo-movs-item')
-
-  parseDomForArray(select_title, 'h2&&a').forEach((title, index) => {
-    let video_num = parseDomForArray(select_item[index], 'ul&&li')
-    if (video_num.length > 0) {
-      d.push({
-        title: parseDomForHtml(title, 'a&&Text'),
-        col_type: 'text_1'
-      })
-      video_num.forEach(item => {
-        d.push({
-          title: parseDomForHtml(item, 'a&&Text'),
-          url: $(parseDom(item, 'a&&href')).lazyRule(_ => {
-            eval(getCryptoJS())
-            const html = fetch(input)
-            const player = parseDomForArray(html, '[data-play]')[0]
-            const base64 = parseDomForHtml(player, "div&&data-play")
-            return base64Decode(base64.substring(3))
-          }),
-          col_type: 'text_4'
-        })
-      })
-    }
-
-  })
-
 
   setResult(d);
 }
