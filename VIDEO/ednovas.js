@@ -94,7 +94,7 @@ const baseParse = _ => {
     d.push({
       title: parseDomForHtml(video, '.module-item-title&&Text'),
       desc: parseDomForHtml(video, '.module-item-caption&&Text'),
-      pic_url: parseDomForHtml(video, 'img&&src')+"@Referer=https://ednovas.video/",
+      pic_url: parseDomForHtml(video, 'img&&data-src')+"@Referer=https://ednovas.video/",
       url: parseDom(video, 'a&&href'),
       col_type: 'movie_3_marquee',
     })
