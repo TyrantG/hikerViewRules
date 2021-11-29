@@ -6,11 +6,11 @@ const baseParse = _ => {
   const html = fetch(true_url)
   const empty = "hiker://empty"
 
-  const categories = parseDomForArray(html, '.mo-java-waps&&.mo-cols-rows&&dl');
+  const categories = parseDomForArray(html, '.box&&.library-box');
 
   let init_cate = []
 
-  for (let i = 0; i < 20; i ++) {
+  for (let i = 0; i < 10; i ++) {
     init_cate.push("0")
   }
 
@@ -33,7 +33,7 @@ const baseParse = _ => {
 
 
     categories.forEach((category, index) => {
-      let sub_categories = parseDomForArray(category, 'dl&&dd');
+      let sub_categories = parseDomForArray(category, '.library-box&&a');
       if (index === 0) {
         sub_categories.forEach((item, key) => {
           let title = parseDomForHtml(item, 'a&&Text')
@@ -87,41 +87,15 @@ const baseParse = _ => {
         });
       }
     })
-
-    const by_cate = parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], 'h2&&a')
-    by_cate.forEach((item, key) => {
-      let title = parseDomForHtml(item, 'a&&Text')
-      let index = 15
-      d.push({
-        title: key.toString()===cate_temp[index]? "““"+title+"””":title,
-        url: $(parseDom(item, 'a&&href')).lazyRule((params) => {
-          params.cate_temp[params.index] = params.key.toString()
-
-          putVar("tyrantgenesis.ednovas.category", JSON.stringify(params.cate_temp))
-          putVar("tyrantgenesis.ednovas.url", input)
-          refreshPage(true)
-          return "hiker://empty"
-        }, {
-          cate_temp: cate_temp,
-          index: index,
-          key: key,
-          page: page,
-        }),
-        col_type: 'scroll_button',
-      })
-    })
-    d.push({
-      col_type:"blank_block"
-    });
   }
 
-  const video_list = parseDomForArray(parseDomForArray(parseDomForArray(html, '.mo-java-waps&&.mo-cols-lays')[1], '.mo-cols-lays&&.mo-cols-rows')[1], 'ul&&li')
+  const video_list = parseDomForArray(html, '.module-items&&.module-item')
   video_list.forEach(video => {
     d.push({
-      title: parseDomForHtml(video, '.mo-situ-name&&Text'),
-      desc: parseDomForHtml(video, 'span&&Text'),
-      pic_url: parseDom(video, 'a&&data-original')+"@Referer=",
-      url: parseDom(video, '.mo-situ-name&&href'),
+      title: parseDomForHtml(video, '.module-item-title&&Text'),
+      desc: parseDomForHtml(video, '.module-item-caption&&Text'),
+      pic_url: parseDomForHtml(video, 'img&&data-src')+"@Referer=https://ednovas.video/",
+      url: parseDom(video, 'a&&href')+'#immersiveTheme#',
       col_type: 'movie_3_marquee',
     })
   })
@@ -133,43 +107,16 @@ const secParse = _ => {
   let d = [];
   const html = getResCode()
 
-  const video_info = parseDomForArray(html, '.mo-cols-lays')[0]
-
+  const video_info = parseDomForHtml(html, '[id=main]')
+  log(video_info)
+  log(parseDomForHtml(video_info, '.video-cover'))
   d.push({
-    title: parseDomForHtml(video_info, 'h1&&a&&Text'),
-    desc: parseDomForHtml(html, '.mo-word-info&&Text'),
-    pic_url: parseDomForHtml(video_info, 'img&&src'),
-    url: parseDom(video_info, 'a&&href'),
-    col_type: 'pic_1'
+    title: parseDomForHtml(video_info, '.page-title&&Text'),
+    desc: parseDomForHtml(video_info, '.sqjj_a&&Text'),
+    // pic_url: parseDomForHtml(video_info, '.module-item-pic&&img&&data-src')+"@Referer=https://ednovas.video/",
+    url: MY_URL,
+    col_type: 'movie_1_vertical_pic_blur'
   })
-
-  const select_title = parseDomForArray(html, '.mo-sort-head')[0]
-  const select_item = parseDomForArray(html, '.mo-movs-item')
-
-  parseDomForArray(select_title, 'h2&&a').forEach((title, index) => {
-    let video_num = parseDomForArray(select_item[index], 'ul&&li')
-    if (video_num.length > 0) {
-      d.push({
-        title: parseDomForHtml(title, 'a&&Text'),
-        col_type: 'text_1'
-      })
-      video_num.forEach(item => {
-        d.push({
-          title: parseDomForHtml(item, 'a&&Text'),
-          url: $(parseDom(item, 'a&&href')).lazyRule(_ => {
-            eval(getCryptoJS())
-            const html = fetch(input)
-            const player = parseDomForArray(html, '[data-play]')[0]
-            const base64 = parseDomForHtml(player, "div&&data-play")
-            return base64Decode(base64.substring(3))
-          }),
-          col_type: 'text_4'
-        })
-      })
-    }
-
-  })
-
 
   setResult(d);
 }
@@ -178,12 +125,13 @@ const searchParse = _ => {
   let d = [];
   const html = getResCode()
 
-  const list = parseDomForArray(html, '.mo-cols-lays&&dl')
+  const list = parseDomForArray(html, '.module-items&&.module-item')
   list.forEach(item => {
     d.push({
-      title: parseDomForHtml(item, '.mo-wrap-arow&&Text'),
-      pic_url: parseDom(item, 'a&&data-original')+"@Referer=",
-      url: parseDom(item, 'a&&href'),
+      title: parseDomForHtml(item, 'a&&Text'),
+      desc: parseDomForHtml(item, '.video-info-aux&&Text'),
+      pic_url: parseDomForHtml(item, 'img&&data-src')+"@Referer=https://ednovas.video/",
+      url: parseDom(item, 'a&&href')+'#immersiveTheme#',
     })
   })
 
