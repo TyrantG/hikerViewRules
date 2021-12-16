@@ -8,6 +8,7 @@ const baseParse = _ => {
     if (! home_cookie) {
         html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}, withHeaders: true})
         html = JSON.parse(html)
+        log(html)
         home_cookie = html.headers["set-cookie"][0].split(';')[0]
         writeFile(douyin_cookie, home_cookie)
     }
