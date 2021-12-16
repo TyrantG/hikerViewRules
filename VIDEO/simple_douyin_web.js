@@ -1,26 +1,36 @@
 // const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
 const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
+const slide_cookie = "hiker://files/TyrantG/cookie/douyin_slide.txt"
 
 const baseParse = _ => {
     let d = [], category, html
     let home_cookie = request(douyin_cookie)
+    let slide_d_cookie = request(slide_cookie)
     const empty = "hiker://empty"
-    if (! home_cookie) {
-        html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA}, withHeaders: true})
+    // 首页cookie
+    if (! home_cookie || ! home_cookie.match(/ttwid=/) || html.body.match(/<body><\/body>/)) {
+        html = fetch("https://www.douyin.com", {headers:{"User-Agent": PC_UA, "cookie": home_cookie+slide_cookie}, withHeaders: true})
         html = JSON.parse(html)
-        log(html)
-        home_cookie = html.headers["set-cookie"][0].split(';')[0]
-        writeFile(douyin_cookie, home_cookie)
+        try {
+            home_cookie = html.headers["set-cookie"][0].split(';')[0] + ';'
+            writeFile(douyin_cookie, request(douyin_cookie)+home_cookie)
+        } catch (e) {
+            log(e)
+        }
+        refreshPage(true)
+    }
+    log(slide_d_cookie)
+    // 滑块验证
+    if (! slide_d_cookie || html.body.match(/验证码中间页/)) {
+        slide_d_cookie = fetch("http://douyin_signature.dev.tyrantg.com/slide.php", {timeout: 30000})
+        log(slide_d_cookie)
+        writeFile(slide_cookie, slide_d_cookie)
+        refreshPage(true)
     }
 
     let current_page = MY_URL.split('##')[1].toString()
 
     let cate_select = getVar("tyrantgenesis.simple_douyin_web.cate_select", "")
-
-
-    /*d.push({
-        col_type:"blank_block"
-    })*/
 
     if (current_page === '1') {
         category = [
@@ -28,7 +38,6 @@ const baseParse = _ => {
             {title: '娱乐', id: '300201'},
             {title: '知识', id: '300203'},
             {title: '二次元', id: '300206'},
-            {title: '游戏', id: '300205'},
             {title: '游戏', id: '300205'},
             {title: '美食', id: '300204'},
             {title: '体育', id: '300207'},
@@ -57,7 +66,7 @@ const baseParse = _ => {
     let data_json = fetch(sign_url, {
         headers: {
             "referer" : "https://www.douyin.com/",
-            "cookie": home_cookie,
+            "cookie": home_cookie+slide_d_cookie,
         }
     })
 
