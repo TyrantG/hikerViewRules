@@ -115,7 +115,10 @@ if (LIST_RESULT && LIST_RESULT.err_no === 0) {
                 const md = html.match(/mark_content:"(.*?)",/)
 
                 if (md) {
-                    log(decodeURIComponent(md[1]))
+                    const reg = /\\u([\d\w]{4})/gi;
+                    const res = md[1].replace('/"', '"').replace(reg, function (match, grp) {
+                        return String.fromCharCode(parseInt(grp, 16)); } );
+                    log(decodeURIComponent(res))
                     putVar('md_content', md[1])
                 }
 
