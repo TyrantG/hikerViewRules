@@ -114,7 +114,10 @@ if (LIST_RESULT && LIST_RESULT.err_no === 0) {
 
                 writeFile("hiker://files/TyrantG/public/markdown.html", request("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/markdown.html"))
                 const html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
-                log(html)
+                const md = html.match(/mark_content:"(.*?)",/)
+
+                if (md) putVar('md_content', md[1])
+
                 d.push({
                     desc: '100% && float',
                     url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/markdown.html',
