@@ -32,7 +32,7 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
     return String.fromCharCode(parseInt(grp, 16));
   })
   document.getElementById('md').innerHTML =
-          marked.parse(res);
+          marked.parse(res.replace('\\n', '\n'));
 </script>
 </body>
 </html>
