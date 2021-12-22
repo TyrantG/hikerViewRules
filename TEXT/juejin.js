@@ -114,13 +114,7 @@ if (LIST_RESULT && LIST_RESULT.err_no === 0) {
                 const html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
                 const md = html.match(/mark_content:"(.*?)",/)
 
-                if (md) {
-                    const reg = /\\u([\d\w]{4})/gi;
-                    const res = md[1].replace('/"', '"').replace(reg, function (match, grp) {
-                        return String.fromCharCode(parseInt(grp, 16)); } );
-                    log(decodeURIComponent(res))
-                    putVar('md_content', md[1])
-                }
+                if (md) putVar('md_content', md[1])
 
                 d.push({
                     desc: '100% && float',
