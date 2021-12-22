@@ -111,12 +111,18 @@ if (LIST_RESULT && LIST_RESULT.err_no === 0) {
             pic_url: item.article_info.cover_image,
             url: $(CATE_URL+'/post/'+item.article_id).rule(_ => {
                 const d = []
-
-                writeFile("hiker://files/TyrantG/public/markdown.html", request("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/markdown.html"))
                 const html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
                 const md = html.match(/mark_content:"(.*?)",/)
 
-                if (md) putVar('md_content', md[1])
+                function decodeUnicode(str) {
+                    str = str.replace(/\\/g, "%");
+                    return unescape(str);
+                }
+
+                if (md) {
+                    log(decodeUnicode(md[1]))
+                    putVar('md_content', md[1])
+                }
 
                 d.push({
                     desc: '100% && float',

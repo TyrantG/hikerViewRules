@@ -26,17 +26,12 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
 </script>
 <article class="markdown-body" id="md"></article>
 <script>
-  function toChineseWords(data) {
-    if(data === '' || typeof data == 'undefined') return '请输入十六进制unicode';
-    data = data.split("\\u");
-    var str ='';
-    for(var i=0;i<data.length;i++){
-      str+=String.fromCharCode(parseInt(data[i],16).toString(10));
-    }
-    return str;
+  function decodeUnicode(str) {
+    str = str.replace(/\\/g, "%");
+    return unescape(str);
   }
   document.getElementById('md').innerHTML =
-          marked.parse(toChineseWords(fba.getVar('md_content')));
+          marked.parse(decodeUnicode(fba.getVar('md_content')));
 </script>
 </body>
 </html>
