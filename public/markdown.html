@@ -26,12 +26,9 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
 </script>
 <article class="markdown-body" id="md"></article>
 <script>
-  const md_content = fba.getVar('md_content')
-  const reg = /\\u([\d\w]{4})/gi;
-  const res = md_content.replace('\\"', '"').replace('\\\\n', '\\n').replace(reg, function (match, grp) {
-    return String.fromCharCode(parseInt(grp, 16)); } );
+  const md_content = fba.getVar('md_content').replace('\u002F', '/')
   document.getElementById('md').innerHTML =
-          marked.parse(decodeURIComponent(res));
+          marked.parse(decodeURIComponent(md_content));
 </script>
 </body>
 </html>
