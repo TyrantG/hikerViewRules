@@ -114,13 +114,8 @@ if (LIST_RESULT && LIST_RESULT.err_no === 0) {
                 const html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
                 const md = html.match(/mark_content:"(.*?)",/)
 
-                function decodeUnicode(str) {
-                    str = str.replace(/\\/g, "%");
-                    return unescape(str);
-                }
-
                 if (md) {
-                    log(decodeUnicode(md[1]))
+                    log(decodeURIComponent(md[1]))
                     putVar('md_content', md[1])
                 }
 

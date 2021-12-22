@@ -26,12 +26,8 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
 </script>
 <article class="markdown-body" id="md"></article>
 <script>
-  function decodeUnicode(str) {
-    str = str.replace(/\\/g, "%");
-    return unescape(str);
-  }
   document.getElementById('md').innerHTML =
-          marked.parse(decodeUnicode(fba.getVar('md_content')));
+          marked.parse(decodeURIComponent(fba.getVar('md_content')));
 </script>
 </body>
 </html>
