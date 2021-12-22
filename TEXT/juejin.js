@@ -103,8 +103,6 @@ const LIST_RESULT = JSON.parse(LIST_JSON)
 
 if (LIST_RESULT && LIST_RESULT.err_no === 0) {
     setItem('cursor', LIST_RESULT.cursor)
-    log('Data')
-    log(getItem('cursor', '0'))
     const LIST = LIST_RESULT.data
     LIST.forEach(item => {
         d.push({
@@ -114,9 +112,12 @@ if (LIST_RESULT && LIST_RESULT.err_no === 0) {
             url: $(CATE_URL+'/post/'+item.article_id).rule(_ => {
                 const d = []
 
+                writeFile("hiker://files/TyrantG/public/markdown.html", request("https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/public/markdown.html"))
+                const html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
+                log(html)
                 d.push({
                     desc: '100% && float',
-                    url: MY_URL,
+                    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/markdown.html',
                     col_type:"x5_webview_single"
                 })
 
