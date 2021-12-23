@@ -120,7 +120,8 @@ if (LIST_RESULT && LIST_RESULT.err_no === 0) {
                     const res = md_content.replace(reg, function (match, grp) {
                         return String.fromCharCode(parseInt(grp, 16));
                     })
-                    writeFile("hiker://files/cache/markdown.md", res)
+                    log(res)
+                    // writeFile("hiker://files/cache/markdown.md", res)
                     putVar('md_content', md[1])
                 }
 
