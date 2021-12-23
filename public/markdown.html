@@ -37,7 +37,7 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
     document.getElementById('md').innerHTML =
             marked.parse(res);*/
     document.getElementById('md').innerHTML =
-            eval('marked.parse(md_content)')
+            marked.parse(eval('md_content'))
     clearTimeout(timeout)
   }, 300)
 </script>
