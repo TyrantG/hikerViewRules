@@ -26,7 +26,17 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
 </script>
 <article class="markdown-body" id="md"></article>
 <script>
-  const md_content = fba.getVar('md_content')
+  const getQueryVariable = variable => {
+    let query = window.location.search.substring(1)
+    let vars = query.split("&");
+    for (let i=0;i<vars.length;i++) {
+      let pair = vars[i].split("=");
+      if(pair[0] === variable) return pair[1]
+    }
+    return false
+  }
+  // const md_content = fba.getVar('md_content')
+  const md_content = getQueryVariable('md_content')
   const reg = /\\u([\d\w]{4})/gi;
   const res = md_content.replace(reg, function (match, grp) {
     return String.fromCharCode(parseInt(grp, 16));

@@ -114,20 +114,9 @@ if (LIST_RESULT && LIST_RESULT.err_no === 0) {
                 const html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
                 const md = html.match(/mark_content:"(.*?)",/)
 
-                if (md) {
-                    const md_content = md[1]
-                    const reg = /\\u([\d\w]{4})/gi;
-                    const res = md_content.replace(reg, function (match, grp) {
-                        return String.fromCharCode(parseInt(grp, 16));
-                    })
-                    log(res)
-                    // writeFile("hiker://files/cache/markdown.md", res)
-                    putVar('md_content', md[1])
-                }
-
                 d.push({
                     desc: '100% && float',
-                    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/markdown.html',
+                    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/markdown.html?md_content='+md ? md[1] : '#解析失败',
                     col_type:"x5_webview_single"
                 })
 
