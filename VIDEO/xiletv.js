@@ -100,8 +100,8 @@ const baseParse = _ => {
     list.forEach(item => {
         d.push({
             title: pdfh(item, 'h3&&a&&Text'),
-            desc: pdfh(video, '.bottom&&Text'),
-            pic_url: pdfh(video, 'img&&src')+"@Referer=",
+            desc: pdfh(item, '.bottom&&Text'),
+            pic_url: pdfh(item, 'img&&src')+"@Referer=",
             url: parseDom(item, 'h3&&a&&href')+'#immersiveTheme#',
             col_type: 'movie_3_marquee',
         })
