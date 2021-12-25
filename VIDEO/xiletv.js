@@ -2,7 +2,7 @@ const baseParse = _ => {
     let d = [];
     const BASE_URL = 'http://www.xiletv.com'
     const current_page = MY_URL.split('##')[1]
-    let current_url = getVar('true_url', MY_URL)
+    let current_url = getVar('true_url')
 
     if (! current_url) {
         const ori_html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
