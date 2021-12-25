@@ -64,6 +64,7 @@ const baseParse = _ => {
             col_type:"blank_block"
         })
 
+        log(cate_temp)
         if (fold === '1') {
             categories.forEach((category, index) => {
                 let sub_categories = pdfa(category, 'dl&&dd');
