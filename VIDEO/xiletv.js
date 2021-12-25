@@ -9,8 +9,8 @@ const baseParse = _ => {
         const ori_html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
         let top_temp = pdfa(ori_html, '.nav&&ul&&li')
         const true_url = pdfh(top_temp[1], 'a&&href')
-        putVar('true_url', true_url)
-        current_url = true_url
+        putVar('true_url', BASE_URL+true_url)
+        current_url = BASE_URL+true_url
     }
 
     log(2)
