@@ -129,8 +129,24 @@ const secParse = _ => {
         }
     )
 
-    const list = pdfa(html, '.main-left-1&&.sBox')
-    log(list)
+    const sBox_list = pdfa(html, '.main-left-1&&.sBox')
+    sBox_list.forEach(sb => {
+        d.push({
+            title: pdfh(sb, 'h2&&Text') || '默认线路',
+            url: "hiker://empty",
+            col_type: 'text_1',
+        })
+        let list = pdfa(sb, '.player&&li')
+        list.forEach(item => {
+            d.push({
+                title: pdfh(sb, 'a&&Text'),
+                url: $(parseDom(sb, 'a&&href')).lazyRule(() => {
+                    return pdfh(fetch(input), 'iframe&&src')
+                }),
+                col_type: 'text_5',
+            })
+        })
+    })
 
     setResult(d);
 }
