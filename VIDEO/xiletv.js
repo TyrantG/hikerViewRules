@@ -10,7 +10,7 @@ const baseParse = _ => {
         putVar('true_url', top_temp[1])
         current_url = top_temp[1]
     }
-
+    log(current_url)
     const html = fetch(current_url, {headers: {"User-Agent": PC_UA}})
     let top_cate = pdfa(html, '.nav&&ul&&li')
     top_cate.shift()
