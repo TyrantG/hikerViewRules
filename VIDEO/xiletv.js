@@ -17,10 +17,12 @@ const baseParse = _ => {
     if (! current_url) {
         const ori_html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
         let top_temp = pdfa(ori_html, '.nav&&ul&&li')
-        const true_url = pdfh(top_temp[1], 'a&&href')
-        putVar('true_url', BASE_URL+true_url)
-        current_url = BASE_URL+true_url
+        const true_url = parseDom(top_temp[1], 'a&&href')
+        putVar('true_url', true_url)
+        current_url = true_url
     }
+
+    current_url = current_url.replace(/\d\.html/, current_page+'.html')
 
     const html = fetch(current_url, {headers: {"User-Agent": PC_UA}})
     let top_cate = pdfa(html, '.nav&&ul&&li')
@@ -42,7 +44,7 @@ const baseParse = _ => {
 
         top_cate.forEach((item, index) => {
             let title = pdfh(item, 'a&&Text')
-            let url = BASE_URL + pdfh(item, 'a&&href')
+            let url = parseDom(item, 'a&&href')
             d.push({
                 title: cate_temp[0] === index.toString() ?  '““””<b><span style="color: #FF0000">'+title+'</span></b>': title,
                 url: $(url).lazyRule(params => {
@@ -64,7 +66,6 @@ const baseParse = _ => {
             col_type:"blank_block"
         })
 
-        log(cate_temp)
         if (fold === '1') {
             categories.forEach((category, index) => {
                 let sub_categories = pdfa(category, 'dl&&dd');
@@ -94,6 +95,17 @@ const baseParse = _ => {
         }
 
     }
+
+    const list = pdfa(html, '.content-list&&li')
+    list.forEach(item => {
+        d.push({
+            title: pdfh(item, 'h3&&a&&Text'),
+            desc: pdfh(video, '.bottom&&Text'),
+            pic_url: pdfh(video, 'img&&src')+"@Referer=",
+            url: parseDom(item, 'h3&&a&&href')+'#immersiveTheme#',
+            col_type: 'movie_3_marquee',
+        })
+    })
 
     setResult(d);
 }
