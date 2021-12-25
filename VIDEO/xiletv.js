@@ -139,8 +139,8 @@ const secParse = _ => {
         let list = pdfa(sb, '.player&&li')
         list.forEach(item => {
             d.push({
-                title: pdfh(sb, 'a&&Text'),
-                url: $(parseDom(sb, 'a&&href')).lazyRule(() => {
+                title: pdfh(item, 'a&&Text'),
+                url: $(parseDom(item, 'a&&href')).lazyRule(() => {
                     return pdfh(fetch(input), 'iframe&&src').split("?url=")[1]
                 }),
                 col_type: 'text_5',
