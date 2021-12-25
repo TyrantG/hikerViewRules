@@ -164,18 +164,27 @@ const baseParse = _ => {
                 }
 
                 let uid = channels[channel_select].uid
-                let url = "https://www.huashi6.com/painter/"+uid+"?p="+page
+                let url = "https://rt.huashi6.com/front/works/painter?_ts_=1640448122355&painterId="+uid+"&index="+page
 
                 let html = fetch(url, {headers:{"User-Agent": PC_UA}})
 
-                let list = parseDomForArray(html, '.px-container&&.c-px-waterfall-item')
+                // let list = parseDomForArray(html, '.px-container&&.c-px-waterfall-item')
+                let list = JSON.parse(html).data.datas
 
-                list.forEach(item => {
+                /*list.forEach(item => {
                     d.push({
                         title: parseDomForHtml(item, '.px-info-title&&Text'),
                         pic_url: parseDomForHtml(item, 'img&&src')+'@Referer='+base_url,
                         url: parseDomForHtml(item, 'a&&href'),
                         desc: parseDomForHtml(item, '.px-info-title&&Text'),
+                        col_type: 'movie_2'
+                    })
+                })*/
+                list.forEach(item => {
+                    d.push({
+                        title: item.title,
+                        pic_url: "https://img2.huashi6.com/"+item.thumbnailPath+'@Referer',
+                        url: "https://www.huashi6.com/draw/"+item.id,
                         col_type: 'movie_2'
                     })
                 })
