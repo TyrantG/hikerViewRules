@@ -35,9 +35,9 @@ const baseParse = _ => {
     let channels
 
     // 缓存
-    let cate = getVar("tyrantgenesis.huashi6.cate_select", "0")
-    let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
-    let button_show = getVar("tyrantgenesis.huashi6.button_show", "1") // 1:热门,2:收起,3:取消,4:置顶
+    let cate = getItem("cate_select", "0")
+    let channel_select = getItem("channel_select", "0")
+    let button_show = getItem("button_show", "1") // 1:热门,2:收起,3:取消,4:置顶
 
     if (fetch(channels_path)) {
         let local_channels = fetch(channels_path)
@@ -55,7 +55,7 @@ const baseParse = _ => {
             d.push({
                 title: parseInt(cate) === index ? '‘‘’’<strong><font color="red">'+item.title+'</font></strong>' : item.title,
                 url: $(empty).lazyRule(params => {
-                    putVar("tyrantgenesis.huashi6.cate_select", params.index.toString())
+                    setItem("cate_select", params.index.toString())
                     refreshPage(true)
                     return "hiker://empty"
                 }, {
@@ -76,7 +76,7 @@ const baseParse = _ => {
                 d.push({
                     title: button_show === '1' ? '‘‘’’<strong><font color="red">展开</font></strong>' : '展开',
                     url: $(empty).lazyRule(_ => {
-                        putVar("tyrantgenesis.huashi6.button_show", '1')
+                        setItem("button_show", '1')
                         refreshPage(true)
                         return "hiker://empty"
                     }),
@@ -85,7 +85,7 @@ const baseParse = _ => {
                 d.push({
                     title: button_show === '2' ? '‘‘’’<strong><font color="red">收起</font></strong>' : '收起',
                     url: $(empty).lazyRule(_ => {
-                        putVar("tyrantgenesis.huashi6.button_show", '2')
+                        setItem("button_show", '2')
                         refreshPage(true)
                         return "hiker://empty"
                     }),
@@ -94,7 +94,7 @@ const baseParse = _ => {
                 d.push({
                     title: button_show === '3' ? '‘‘’’<strong><font color="red">置顶</font></strong>' : '置顶',
                     url: $(empty).lazyRule(_ => {
-                        putVar("tyrantgenesis.huashi6.button_show", '3')
+                        setItem("button_show", '3')
                         refreshPage(true)
                         return "hiker://empty"
                     }),
@@ -103,7 +103,7 @@ const baseParse = _ => {
                 d.push({
                     title: button_show === '4' ? '‘‘’’<strong><font color="red">取关</font></strong>' : '取关',
                     url: $(empty).lazyRule(_ => {
-                        putVar("tyrantgenesis.huashi6.button_show", '4')
+                        setItem("button_show", '4')
                         refreshPage(true)
                         return "hiker://empty"
                     }),
@@ -126,39 +126,41 @@ const baseParse = _ => {
                         case '3': prefix = '🔝';break
                         case '4': prefix = '❌';break
                     }
-                    channels.forEach((channel, index) => {
-                        d.push({
-                            title: parseInt(channel_select) === index && button_show === '1' ? '✓'+channel.name : prefix+channel.name,
-                            pic_url: channel.avatar+'@Referer='+base_url,
-                            url: $(empty).lazyRule(params => {
-                                const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
-                                if (params.button_show === '1') {
-                                    putVar("tyrantgenesis.huashi6.channel_select", params.index.toString())
-                                } else if (params.button_show === '3') {
-                                    let current = params.channels[params.index]
-                                    params.channels.splice(params.index, 1)
-                                    params.channels.unshift(current)
-                                    writeFile(channels_path, JSON.stringify(params.channels))
-                                    putVar("tyrantgenesis.huashi6.channel_select", '0')
-                                } else {
-                                    params.channels.splice(params.index, 1)
-                                    writeFile(channels_path, JSON.stringify(params.channels))
-                                    putVar("tyrantgenesis.huashi6.channel_select", '0')
-                                }
+                    if (parseInt(page) === 1) {
+                        channels.forEach((channel, index) => {
+                            d.push({
+                                title: parseInt(channel_select) === index && button_show === '1' ? '✓' + channel.name : prefix + channel.name,
+                                pic_url: channel.avatar + '@Referer=' + base_url,
+                                url: $(empty).lazyRule(params => {
+                                    const channels_path = "hiker://files/rules/js/TyrantGenesis_触站关注.js"
+                                    if (params.button_show === '1') {
+                                        setItem("channel_select", params.index.toString())
+                                    } else if (params.button_show === '3') {
+                                        let current = params.channels[params.index]
+                                        params.channels.splice(params.index, 1)
+                                        params.channels.unshift(current)
+                                        writeFile(channels_path, JSON.stringify(params.channels))
+                                        setItem("channel_select", '0')
+                                    } else {
+                                        params.channels.splice(params.index, 1)
+                                        writeFile(channels_path, JSON.stringify(params.channels))
+                                        setItem("channel_select", '0')
+                                    }
 
-                                refreshPage(true)
-                                return "hiker://empty"
-                            }, {
-                                index: index,
-                                button_show: button_show,
-                                channels: channels
-                            }),
-                            col_type: 'icon_round_4',
+                                    refreshPage(true)
+                                    return "hiker://empty"
+                                }, {
+                                    index: index,
+                                    button_show: button_show,
+                                    channels: channels
+                                }),
+                                col_type: 'icon_round_4',
+                            })
                         })
-                    })
-                    d.push({
-                        col_type: 'blank_block',
-                    })
+                        d.push({
+                            col_type: 'blank_block',
+                        })
+                    }
                 }
 
                 let uid = channels[channel_select].uid
@@ -278,7 +280,7 @@ const baseParse = _ => {
 
 const secParse = _ => {
     let d = [];
-    let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
+    let channel_select = getItem("channel_select", "0")
     let channels = JSON.parse(fetch(channels_path))
 
     let html = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
@@ -320,7 +322,7 @@ const secParse = _ => {
             if (params.has_collect) {
                 params.channels.splice(params.index, 1)
                 writeFile(channels_path, JSON.stringify(params.channels))
-                if (parseInt(channel_select) === params.index) putVar("tyrantgenesis.huashi6.channel_select", '0')
+                if (parseInt(channel_select) === params.index) setItem("channel_select", '0')
                 refreshPage(false)
                 return 'toast://取消关注'
             } else {
@@ -365,7 +367,7 @@ const userParse = userObj => {
     const page = MY_URL.split('##')[1]
 
     if (page === '1') {
-        let channel_select = getVar("tyrantgenesis.huashi6.channel_select", "0")
+        let channel_select = getItem("channel_select", "0")
         let channels = JSON.parse(fetch(channels_path))
 
         let has_collect = false
@@ -381,7 +383,7 @@ const userParse = userObj => {
                 if (params.has_collect) {
                     params.channels.splice(params.index, 1)
                     writeFile(channels_path, JSON.stringify(params.channels))
-                    if (parseInt(channel_select) === params.index) putVar("tyrantgenesis.huashi6.channel_select", '0')
+                    if (parseInt(channel_select) === params.index) setItem("channel_select", '0')
                     refreshPage(false)
                     return 'toast://取消关注'
                 } else {
