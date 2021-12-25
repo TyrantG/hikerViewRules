@@ -183,8 +183,9 @@ const baseParse = _ => {
                 list.forEach(item => {
                     d.push({
                         title: item.title,
-                        pic_url: "https://img2.huashi6.com/"+item.coverImage.originalPath+'@Referer',
+                        pic_url: "https://img2.huashi6.com/"+item.coverImage.originalPath+'@Referer='+base_url,
                         url: "https://www.huashi6.com/draw/"+item.id,
+                        desc: item.viewNum+'次浏览',
                         col_type: 'movie_2'
                     })
                 })
