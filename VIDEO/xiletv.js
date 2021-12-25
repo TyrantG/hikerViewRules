@@ -109,3 +109,21 @@ const baseParse = _ => {
 
     setResult(d);
 }
+
+const secParse = _ => {
+    let d = [];
+    const html = getResCode()
+
+    const video_info = pdfh(html, '.main-left&&Html')
+    log(video_info)
+    // log(parseDomForHtml(video_info, '.video-cover'))
+    /*d.push({
+        title: parseDomForHtml(video_info, '.page-title&&Text'),
+        desc: parseDomForHtml(video_info, '.sqjj_a&&Text'),
+        // pic_url: parseDomForHtml(video_info, '.module-item-pic&&img&&data-src')+"@Referer=https://ednovas.video/",
+        url: MY_URL,
+        col_type: 'movie_1_vertical_pic_blur'
+    })*/
+
+    setResult(d);
+}
