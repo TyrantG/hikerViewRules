@@ -3,7 +3,6 @@ const baseParse = _ => {
     const BASE_URL = 'http://www.xiletv.com'
     const current_page = MY_URL.split('##')[1]
     let current_url = getVar('true_url')
-    const empty = "hiker://empty"
 
     const fold = getVar("fold", "0")
     const cate_temp_json = getVar("category")
@@ -21,12 +20,11 @@ const baseParse = _ => {
     let top_cate = pdfa(html, '.nav&&ul&&li')
     top_cate.shift()
     top_cate.pop()
-
-
+    
     if (parseInt(current_page) === 1) {
         d.push({
             title: fold === '1' ?  '““””<b><span style="color: #FF0000">∨</span></b>': '““””<b><span style="color: #1aad19">∧</span></b>',
-            url: $(empty).lazyRule((fold) => {
+            url: $("hiker://empty").lazyRule((fold) => {
                 putVar("fold", fold === '1' ? '0' : '1');
                 refreshPage(false);
                 return "hiker://empty"
