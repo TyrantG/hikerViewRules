@@ -13,7 +13,8 @@ const baseParse = _ => {
 
     const html = fetch(current_url, {headers: {"User-Agent": PC_UA}})
     let top_cate = pdfa(html, '.nav&&ul&&li')
-    top_cate.shift().pop()
+    top_cate.shift()
+    top_cate.pop()
 
     log(html)
 
