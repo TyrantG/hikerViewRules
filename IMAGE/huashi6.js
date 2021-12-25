@@ -173,9 +173,9 @@ const baseParse = _ => {
                 list.forEach(item => {
                     d.push({
                         title: parseDomForHtml(item, '.px-info-title&&Text'),
-                        pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
+                        pic_url: parseDomForHtml(item, 'img&&src')+'@Referer='+base_url,
                         url: parseDomForHtml(item, 'a&&href'),
-                        desc: parseDomForHtml(item, '.painter-name&&Text'),
+                        desc: parseDomForHtml(item, '.px-info-title&&Text'),
                         col_type: 'movie_2'
                     })
                 })
