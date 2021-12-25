@@ -4,9 +4,15 @@ const baseParse = _ => {
     const current_page = MY_URL.split('##')[1]
     let current_url = getVar('true_url')
 
+    let init_cate = []
+
+    for (let i = 0; i < 5; i ++) {
+        init_cate.push("0")
+    }
+
     const fold = getVar("fold", "0")
-    const cate_temp_json = getVar("category")
-    let cate_temp = cate_temp_json ? JSON.parse(cate_temp_json) : ['0']
+    const cate_temp_json = getVar("category", JSON.stringify(init_cate))
+    let cate_temp = JSON.parse(cate_temp_json)
 
     if (! current_url) {
         const ori_html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
@@ -62,9 +68,8 @@ const baseParse = _ => {
                 sub_categories.forEach((item, key) => {
                     let title = pdfh(item, 'a&&Text')
                     let url = parseDom(item, 'a&&href')
-                    let title_show = (cate_temp[index+1] && key.toString() === cate_temp[index+1]) || key === 0 ? '““””<b><span style="color: #FF0000">'+title+'</span></b>' : title
                     d.push({
-                        title: title_show,
+                        title: key.toString() === cate_temp[index+1]? '““””<b><span style="color: #FF0000">'+title+'</span></b>' : title,
                         url: $(url).lazyRule((params) => {
                             params.cate_temp[params.index] = params.key.toString()
                             putVar("category", JSON.stringify(params.cate_temp))
