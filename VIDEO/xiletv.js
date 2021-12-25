@@ -3,6 +3,7 @@ const baseParse = _ => {
     const BASE_URL = 'http://www.xiletv.com'
     const current_page = MY_URL.split('##')[1]
     let current_url = getVar('true_url')
+    const empty = "hiker://empty"
 
     const fold = getVar("fold", "0")
     const cate_temp_json = getVar("category")
