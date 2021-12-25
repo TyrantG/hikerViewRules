@@ -129,7 +129,7 @@ const secParse = _ => {
         }
     )
 
-    const list = pdfa(video_info, '.main-left&&.sBox')
+    const list = pdfa(video_info, '.sBox')
     log(list)
 
     setResult(d);
