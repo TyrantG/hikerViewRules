@@ -62,7 +62,7 @@ const baseParse = _ => {
                 sub_categories.forEach((item, key) => {
                     let title = pdfh(item, 'a&&Text')
                     let url = parseDom(item, 'a&&href')
-                    let title_show = cate_temp[index+1] ? (key.toString() === cate_temp[index+1]? '““””<b><span style="color: #FF0000">'+title+'</span></b>':title) : '““””<b><span style="color: #FF0000">'+title+'</span></b>'
+                    let title_show = (cate_temp[index+1] && key.toString() === cate_temp[index+1]) || key === 0 ? '““””<b><span style="color: #FF0000">'+title+'</span></b>' : title
                     d.push({
                         title: title_show,
                         url: $(url).lazyRule((params) => {
