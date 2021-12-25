@@ -3,10 +3,11 @@ const baseParse = _ => {
     const BASE_URL = 'http://www.xiletv.com'
     const current_page = MY_URL.split('##')[1]
     let current_url = getVar('true_url')
+    clearVar('true_url')
 
     if (! current_url) {
         const ori_html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
-        let top_temp = pdfa(ori_html, '.nav&&ul&&li')
+        let top_temp = pdfa(ori_html, '.nav&&ul&&li&&a&&href')
         log(1)
         log(top_temp)
         putVar('true_url', top_temp[1])
