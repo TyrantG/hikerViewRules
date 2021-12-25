@@ -13,11 +13,11 @@ const baseParse = _ => {
         },
         {
             title: '新作',
-            url: "https://www.huashi6.com/share_"+page,
+            url: "https://rt.huashi6.com/front/works/sharelist?index="+page,
         },
         {
             title: '热门',
-            url: "https://www.huashi6.com/hot_"+page,
+            url: "https://rt.huashi6.com/front/works/hotlist?index="+page,
         },
         /*{
             title: '标签',
@@ -185,7 +185,7 @@ const baseParse = _ => {
                         title: item.title,
                         pic_url: "https://img2.huashi6.com/"+item.coverImage.originalPath+'@Referer='+base_url,
                         url: "https://www.huashi6.com/draw/"+item.id,
-                        desc: item.viewNum+'次浏览',
+                        desc: item.likeNum+'次喜欢',
                         col_type: 'movie_2'
                     })
                 })
@@ -196,14 +196,13 @@ const baseParse = _ => {
         case '2': {
             let html = fetch(cateArray[parseInt(cate)].url, {headers:{"User-Agent": PC_UA}})
 
-            let list = parseDomForArray(html, '.px-container&&.c-px-waterfall-item')
-
+            let list = JSON.parse(html).data.datas
             list.forEach(item => {
                 d.push({
-                    title: parseDomForHtml(item, '.px-info-title&&Text'),
-                    pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
-                    url: parseDomForHtml(item, 'a&&href'),
-                    desc: parseDomForHtml(item, '.painter-name&&Text'),
+                    title: item.title,
+                    pic_url: "https://img2.huashi6.com/"+item.coverImage.originalPath+'@Referer='+base_url,
+                    url: "https://www.huashi6.com/draw/"+item.id,
+                    desc: item.likeNum+'次喜欢',
                     col_type: 'movie_2'
                 })
             })
@@ -431,7 +430,7 @@ const userParse = userObj => {
                 eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
                 secParse()
             }),
-            desc: item.viewNum+'次浏览',
+            desc: item.likeNum+'次喜欢',
             col_type: 'movie_2'
         })
     })
