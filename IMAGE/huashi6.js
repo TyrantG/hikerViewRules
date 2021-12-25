@@ -183,7 +183,7 @@ const baseParse = _ => {
                 list.forEach(item => {
                     d.push({
                         title: item.title,
-                        pic_url: "https://img2.huashi6.com/"+item.thumbnailPath+'@Referer',
+                        pic_url: "https://img2.huashi6.com/"+item.originalPath+'@Referer=https://www.huashi6.com/',
                         url: "https://www.huashi6.com/draw/"+item.id,
                         col_type: 'movie_2'
                     })
