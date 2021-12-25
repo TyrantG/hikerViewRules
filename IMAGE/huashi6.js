@@ -168,7 +168,7 @@ const baseParse = _ => {
 
                 let html = fetch(url, {headers:{"User-Agent": PC_UA}})
 
-                let list = parseDomForArray(html, '.px-container&&.px-waterfall-item')
+                let list = parseDomForArray(html, '.px-container&&.c-px-waterfall-item')
 
                 list.forEach(item => {
                     d.push({
@@ -186,7 +186,7 @@ const baseParse = _ => {
         case '2': {
             let html = fetch(cateArray[parseInt(cate)].url, {headers:{"User-Agent": PC_UA}})
 
-            let list = parseDomForArray(html, '.px-container&&.px-waterfall-item')
+            let list = parseDomForArray(html, '.px-container&&.c-px-waterfall-item')
 
             list.forEach(item => {
                 d.push({
@@ -409,7 +409,7 @@ const userParse = userObj => {
 
     let html = fetch(url, {headers:{"User-Agent": PC_UA}})
 
-    let list = parseDomForArray(html, '.px-container&&.px-waterfall-item')
+    let list = parseDomForArray(html, '.px-container&&.c-px-waterfall-item')
 
     list.forEach(item => {
         d.push({
