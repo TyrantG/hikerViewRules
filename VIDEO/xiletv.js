@@ -141,7 +141,7 @@ const secParse = _ => {
             d.push({
                 title: pdfh(sb, 'a&&Text'),
                 url: $(parseDom(sb, 'a&&href')).lazyRule(() => {
-                    return pdfh(fetch(input), 'iframe&&src')
+                    return pdfh(fetch(input), 'iframe&&src').split("?url=")[1]
                 }),
                 col_type: 'text_5',
             })
