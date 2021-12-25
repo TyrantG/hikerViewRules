@@ -356,13 +356,13 @@ const secParse = _ => {
     })
 
 
-    let list = parseDomForArray(html, '.pic&&.work-img-box')
+    let list = fetch("https://rt.huashi6.com/front/works/detail?id="+MY_URL.split('/').pop())
+    let images = JSON.parse(list).data.images
 
-
-     list.forEach(item => {
+    images.forEach(item => {
          d.push({
-             pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
-             url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
+             pic_url: "https://img2.huashi6.com/"+item.originalPath+'@Referer='+base_url,
+             url: "https://img2.huashi6.com/"+item.originalPath+'@Referer='+base_url,
              col_type: 'pic_1_full'
          })
      })
