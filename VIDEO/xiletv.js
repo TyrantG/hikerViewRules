@@ -46,13 +46,9 @@ const baseParse = _ => {
             d.push({
                 title: cate_temp[0] === index.toString() ?  '““””<b><span style="color: #FF0000">'+title+'</span></b>': title,
                 url: $(url).lazyRule(params => {
-                    let new_cate = []
-                    params.cate_temp.forEach((cate, index) => {
-                        new_cate.push(index === 0 ? params.key.toString() : "0")
-                    })
-                    putVar("category", JSON.stringify(new_cate))
+                    params.cate_temp[0] = params.index.toString()
                     putVar("true_url", input);
-
+                    putVar("category", JSON.stringify(params.cate_temp));
                     refreshPage(false);
                     return "hiker://empty"
                 }, {
