@@ -20,7 +20,9 @@ const baseParse = _ => {
     let top_cate = pdfa(html, '.nav&&ul&&li')
     top_cate.shift()
     top_cate.pop()
-    
+
+    const categories = pdfa(html, '.list-box&&dl');
+
     if (parseInt(current_page) === 1) {
         d.push({
             title: fold === '1' ?  '““””<b><span style="color: #FF0000">∨</span></b>': '““””<b><span style="color: #1aad19">∧</span></b>',
@@ -53,6 +55,34 @@ const baseParse = _ => {
         d.push({
             col_type:"blank_block"
         })
+
+        if (fold === '1') {
+            categories.forEach((category, index) => {
+                let sub_categories = pdfa(category, 'dl&&dd');
+                sub_categories.forEach((item, key) => {
+                    let title = pdfh(item, 'a&&Text')
+                    let url = parseDom(item, 'a&&href')
+                    d.push({
+                        title: key.toString() === cate_temp[index]? '““””<b><span style="color: #FF0000">'+title+'</span></b>':title,
+                        url: $(url).lazyRule((params) => {
+                            params.cate_temp[params.index] = params.key.toString()
+                            putVar("category", JSON.stringify(params.cate_temp))
+                            putVar("true_url", input)
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            cate_temp: cate_temp,
+                            index: index,
+                            key: key,
+                        }),
+                        col_type: 'scroll_button',
+                    })
+                })
+                d.push({
+                    col_type:"blank_block"
+                })
+            })
+        }
 
     }
 
