@@ -381,8 +381,8 @@ const userParse = userObj => {
 
         let has_collect = false
 
-        channels.forEach((item, index) => {
-            if (item.uid.toString() === userObj.uid.toString()) has_collect = index
+        channels.forEach(item => {
+            if (item.uid.toString() === userObj.uid.toString()) has_collect = true
         })
 
         d.push({
@@ -416,22 +416,6 @@ const userParse = userObj => {
         })
     }
 
-    /*let html = fetch(url, {headers:{"User-Agent": PC_UA}})
-
-    let list = parseDomForArray(html, '.px-container&&.c-px-waterfall-item')
-
-    list.forEach(item => {
-        d.push({
-            title: parseDomForHtml(item, '.px-info-title&&Text'),
-            pic_url: parseDomForHtml(item, 'source&&srcset').split(' ')[0]+'@Referer='+base_url,
-            url: $(parseDomForHtml(item, 'a&&href')).rule(_ => {
-                eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
-                secParse()
-            }),
-            desc: parseDomForHtml(item, '.painter-name&&Text'),
-            col_type: 'movie_2'
-        })
-    })*/
     let api_url = "https://rt.huashi6.com/front/works/painter?painterId="+userObj.uid+"&index="+page
 
     let html = fetch(api_url, {headers:{"User-Agent": PC_UA}})
@@ -439,20 +423,14 @@ const userParse = userObj => {
     // let list = parseDomForArray(html, '.px-container&&.c-px-waterfall-item')
     let list = JSON.parse(html).data.datas
 
-    /*list.forEach(item => {
-        d.push({
-            title: parseDomForHtml(item, '.px-info-title&&Text'),
-            pic_url: parseDomForHtml(item, 'img&&src')+'@Referer='+base_url,
-            url: parseDomForHtml(item, 'a&&href'),
-            desc: parseDomForHtml(item, '.px-info-title&&Text'),
-            col_type: 'movie_2'
-        })
-    })*/
     list.forEach(item => {
         d.push({
             title: item.title,
             pic_url: "https://img2.huashi6.com/"+item.coverImage.originalPath+'@Referer='+base_url,
-            url: "https://www.huashi6.com/draw/"+item.id,
+            url: $("https://www.huashi6.com/draw/"+item.id).rule(_ => {
+                eval(fetch('hiker://files/TyrantG/IMAGE/huashi6.js'))
+                secParse()
+            }),
             desc: item.viewNum+'次浏览',
             col_type: 'movie_2'
         })
