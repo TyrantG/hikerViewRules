@@ -5,16 +5,15 @@ const baseParse = _ => {
     let current_url = getVar('true_url')
     clearVar('true_url')
 
-    if (! current_url) {
+    // if (! current_url) {
         const ori_html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
         let top_temp = pdfa(ori_html, '.nav&&ul&&li')
         const true_url = pdfh(top_temp[1], 'a&&href')
         putVar('true_url', BASE_URL+true_url)
         current_url = BASE_URL+true_url
-    }
+        log(current_url)
+    // }
 
-    log(2)
-    log(current_url)
     const html = fetch(current_url, {headers: {"User-Agent": PC_UA}})
     let top_cate = pdfa(html, '.nav&&ul&&li')
     top_cate.shift()
