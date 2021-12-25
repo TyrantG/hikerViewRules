@@ -432,7 +432,7 @@ const userParse = userObj => {
             col_type: 'movie_2'
         })
     })*/
-    let api_url = "https://rt.huashi6.com/front/works/painter?painterId="+uid+"&index="+page
+    let api_url = "https://rt.huashi6.com/front/works/painter?painterId="+userObj.uid+"&index="+page
 
     let html = fetch(api_url, {headers:{"User-Agent": PC_UA}})
 
