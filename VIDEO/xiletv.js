@@ -143,7 +143,8 @@ const secParse = _ => {
                 url: $(parseDom(item, 'a&&href')).lazyRule(() => {
                     return pdfh(fetch(input), 'iframe&&src').split("?url=")[1]
                 }),
-                col_type: 'text_5',
+                // col_type: 'text_5',
+                col_type: 'flex_button',
             })
         })
     })
