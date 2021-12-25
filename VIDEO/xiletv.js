@@ -9,6 +9,7 @@ const baseParse = _ => {
     for (let i = 0; i < 5; i ++) {
         init_cate.push("0")
     }
+    clearVar('category')
 
     const fold = getVar("fold", "0")
     const cate_temp_json = getVar("category", JSON.stringify(init_cate))
