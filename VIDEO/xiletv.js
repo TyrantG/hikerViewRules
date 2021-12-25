@@ -115,15 +115,14 @@ const secParse = _ => {
     const html = getResCode()
 
     const video_info = pdfh(html, '.main-left&&Html')
-    log(video_info)
-    // log(parseDomForHtml(video_info, '.video-cover'))
-    /*d.push({
-        title: parseDomForHtml(video_info, '.page-title&&Text'),
-        desc: parseDomForHtml(video_info, '.sqjj_a&&Text'),
-        // pic_url: parseDomForHtml(video_info, '.module-item-pic&&img&&data-src')+"@Referer=https://ednovas.video/",
+
+    d.push({
+        title: pdfh(video_info, 'h1&&Text'),
+        desc: pdfh(video_info, '.movie-introduce&&Text'),
+        pic_url: pdfh(video_info, 'img&&src')+"@Referer",
         url: MY_URL,
         col_type: 'movie_1_vertical_pic_blur'
-    })*/
+    })
 
     setResult(d);
 }
