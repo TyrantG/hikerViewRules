@@ -36,7 +36,7 @@ const baseParse = _ => {
       let sub_categories = pdfa(category, '.library-box&&a');
       if (index === 0) {
         sub_categories.forEach((item, key) => {
-          let title = pdfd(item, 'a&&Text')
+          let title = pdfh(item, 'a&&Text')
           d.push({
               title: key.toString()===cate_temp[index]? "““"+title+"””":title,
               url: $(parseDom(item, 'a&&href')).lazyRule((params) => {
@@ -61,7 +61,7 @@ const baseParse = _ => {
         });
       } else if (fold === '1') {
         sub_categories.forEach((item, key) => {
-          let title = pdfd(item, 'a&&Text')
+          let title = pdfh(item, 'a&&Text')
           d.push({
             title: key.toString()===cate_temp[index]? "““"+title+"””":title,
             url: $(parseDom(item, 'a&&href')).lazyRule((params) => {
@@ -90,9 +90,9 @@ const baseParse = _ => {
   const video_list = pdfa(html, '.module-items&&.module-item')
   video_list.forEach(video => {
     d.push({
-      title: pdfd(video, '.module-item-title&&Text'),
-      desc: pdfd(video, '.module-item-caption&&Text'),
-      pic_url: pdfd(video, 'img&&data-src')+"@Referer=https://ednovas.video/",
+      title: pdfh(video, '.module-item-title&&Text'),
+      desc: pdfh(video, '.module-item-caption&&Text'),
+      pic_url: pdfh(video, 'img&&data-src')+"@Referer=https://ednovas.video/",
       url: parseDom(video, 'a&&href')+'#immersiveTheme#',
       col_type: 'movie_3_marquee',
     })
@@ -107,13 +107,13 @@ const secParse = _ => {
   const html = getResCode()
 
   let current_tab = getVar("tyrantgenesis.ednovas.select_tab", '0')
-  const video_info = pdfd(html, '#main&&Html')
+  const video_info = pdfh(html, '#main&&Html')
 
   d.push(
       {
-        title: pdfd(video_info, 'h1&&Text'),
-        desc: pdfd(video_info, '.sqjj_a&&Text'),
-        pic_url: pdfd(video_info, '.video-cover&&img&&data-src')+"@Referer=https://ednovas.video/",
+        title: pdfh(video_info, 'h1&&Text'),
+        desc: pdfh(video_info, '.sqjj_a&&Text'),
+        pic_url: pdfh(video_info, '.video-cover&&img&&data-src')+"@Referer=https://ednovas.video/",
         url: MY_URL,
         col_type: 'movie_1_vertical_pic_blur'
       },
@@ -155,9 +155,9 @@ const searchParse = _ => {
   const list = pdfa(html, '.module-items&&.module-item')
   list.forEach(item => {
     d.push({
-      title: pdfd(item, 'a&&Text'),
-      desc: pdfd(item, '.video-info-aux&&Text'),
-      pic_url: pdfd(item, 'img&&data-src')+"@Referer=https://ednovas.video/",
+      title: pdfh(item, 'a&&Text'),
+      desc: pdfh(item, '.video-info-aux&&Text'),
+      pic_url: pdfh(item, 'img&&data-src')+"@Referer=https://ednovas.video/",
       url: parseDom(item, 'a&&href')+'#immersiveTheme#',
     })
   })
