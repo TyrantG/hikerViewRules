@@ -108,12 +108,11 @@ const secParse = _ => {
   const html = getResCode()
 
   const video_info = parseDomForHtml(html, '#main&&Html')
-  log(video_info)
-  log(parseDomForHtml(video_info, '.video-cover'))
+
   d.push({
-    title: parseDomForHtml(video_info, '.page-title&&Text'),
-    desc: parseDomForHtml(video_info, '.sqjj_a&&Text'),
-    // pic_url: parseDomForHtml(video_info, '.module-item-pic&&img&&data-src')+"@Referer=https://ednovas.video/",
+    title: parseDomForHtml(video_info, 'h1&&Text'),
+    desc: parseDomForHtml(video_info, '.video-info-content&&Text'),
+    pic_url: parseDom(video_info, '.module-item-pic&&img&&src')+"@Referer",
     url: MY_URL,
     col_type: 'movie_1_vertical_pic_blur'
   })
