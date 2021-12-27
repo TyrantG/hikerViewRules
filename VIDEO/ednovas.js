@@ -159,7 +159,7 @@ const secParse = _ => {
         const host = pre_url.split('/')[2]
         const info = fetch(pre_url)
         let match = info.match(/'(.*?)m3u8'/)
-        if (! match) match = info.match(/"(.*?)m3u8"/)
+        if (! match) match = info.match(/:"(.*?)m3u8"/)
         if (match) {
           return "https://"+host+match[1]+'m3u8'
         } else {
