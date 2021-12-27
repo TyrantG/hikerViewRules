@@ -6,7 +6,7 @@ const baseParse = _ => {
   const html = fetch(true_url)
   const empty = "hiker://empty"
 
-  const categories = parseDomForArray(html, '.box&&.library-box');
+  const categories = pdfa(html, '.box&&.library-box');
 
   let init_cate = []
 
@@ -33,12 +33,11 @@ const baseParse = _ => {
 
 
     categories.forEach((category, index) => {
-      let sub_categories = parseDomForArray(category, '.library-box&&a');
+      let sub_categories = pdfa(category, '.library-box&&a');
       if (index === 0) {
         sub_categories.forEach((item, key) => {
-          let title = parseDomForHtml(item, 'a&&Text')
-          if (title !== 'GHS' || GHS === 1) {
-            d.push({
+          let title = pdfd(item, 'a&&Text')
+          d.push({
               title: key.toString()===cate_temp[index]? "““"+title+"””":title,
               url: $(parseDom(item, 'a&&href')).lazyRule((params) => {
                 let new_cate = []
@@ -56,14 +55,13 @@ const baseParse = _ => {
               }),
               col_type: 'scroll_button',
             })
-          }
         })
         d.push({
           col_type:"blank_block"
         });
       } else if (fold === '1') {
         sub_categories.forEach((item, key) => {
-          let title = parseDomForHtml(item, 'a&&Text')
+          let title = pdfd(item, 'a&&Text')
           d.push({
             title: key.toString()===cate_temp[index]? "““"+title+"””":title,
             url: $(parseDom(item, 'a&&href')).lazyRule((params) => {
@@ -89,12 +87,12 @@ const baseParse = _ => {
     })
   }
 
-  const video_list = parseDomForArray(html, '.module-items&&.module-item')
+  const video_list = pdfa(html, '.module-items&&.module-item')
   video_list.forEach(video => {
     d.push({
-      title: parseDomForHtml(video, '.module-item-title&&Text'),
-      desc: parseDomForHtml(video, '.module-item-caption&&Text'),
-      pic_url: parseDomForHtml(video, 'img&&data-src')+"@Referer=https://ednovas.video/",
+      title: pdfd(video, '.module-item-title&&Text'),
+      desc: pdfd(video, '.module-item-caption&&Text'),
+      pic_url: pdfd(video, 'img&&data-src')+"@Referer=https://ednovas.video/",
       url: parseDom(video, 'a&&href')+'#immersiveTheme#',
       col_type: 'movie_3_marquee',
     })
@@ -105,23 +103,47 @@ const baseParse = _ => {
 
 const secParse = _ => {
   let d = [];
+  const empty = "hiker://empty"
   const html = getResCode()
 
-  const video_info = parseDomForHtml(html, '#main&&Html')
+  let current_tab = getVar("tyrantgenesis.ednovas.select_tab", '0')
+  const video_info = pdfd(html, '#main&&Html')
 
-  d.push({
-    title: parseDomForHtml(video_info, 'h1&&Text'),
-    desc: parseDomForHtml(video_info, '.sqjj_a&&Text'),
-    pic_url: parseDomForHtml(video_info, '.video-cover&&img&&data-src')+"@Referer=https://ednovas.video/",
-    url: MY_URL,
-    col_type: 'movie_1_vertical_pic_blur'
-  })
+  d.push(
+      {
+        title: pdfd(video_info, 'h1&&Text'),
+        desc: pdfd(video_info, '.sqjj_a&&Text'),
+        pic_url: pdfd(video_info, '.video-cover&&img&&data-src')+"@Referer=https://ednovas.video/",
+        url: MY_URL,
+        col_type: 'movie_1_vertical_pic_blur'
+      },
+      {
+        col_type: 'line'
+      }
+  )
 
   const tabs = pdfa(html, '.module-player-tab&&.module-tab-content&&.module-tab-item')
   const lists = pdfa(html, '.module&&.module-list')
 
-  log(tabs)
-  log(lists)
+  d.push({
+    title: '选择线路',
+    url: empty,
+    col_type: 'scroll_button',
+  })
+  tabs.forEach((item, index) => {
+    let title = pdfh(item, 'span&&Text')
+    d.push({
+      title: index.toString() === current_tab? "““"+title+"””":title,
+      url: $(empty).lazyRule((params) => {
+        putVar("tyrantgenesis.ednovas.select_tab", params.index.toString())
+        refreshPage(true)
+        return "hiker://empty"
+      }, {
+        index: index,
+      }),
+      col_type: 'scroll_button',
+    })
+  })
 
   setResult(d);
 }
@@ -130,12 +152,12 @@ const searchParse = _ => {
   let d = [];
   const html = getResCode()
 
-  const list = parseDomForArray(html, '.module-items&&.module-item')
+  const list = pdfa(html, '.module-items&&.module-item')
   list.forEach(item => {
     d.push({
-      title: parseDomForHtml(item, 'a&&Text'),
-      desc: parseDomForHtml(item, '.video-info-aux&&Text'),
-      pic_url: parseDomForHtml(item, 'img&&data-src')+"@Referer=https://ednovas.video/",
+      title: pdfd(item, 'a&&Text'),
+      desc: pdfd(item, '.video-info-aux&&Text'),
+      pic_url: pdfd(item, 'img&&data-src')+"@Referer=https://ednovas.video/",
       url: parseDom(item, 'a&&href')+'#immersiveTheme#',
     })
   })
