@@ -117,6 +117,12 @@ const secParse = _ => {
     col_type: 'movie_1_vertical_pic_blur'
   })
 
+  const tabs = pdfa(html, '.module-player-tab&&.module-tab-content&&.module-tab-item')
+  const lists = pdfa(html, '.module&&.module-list')
+
+  log(tabs)
+  log(lists)
+
   setResult(d);
 }
 
