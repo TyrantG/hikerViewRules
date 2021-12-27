@@ -111,8 +111,8 @@ const secParse = _ => {
 
   d.push({
     title: parseDomForHtml(video_info, 'h1&&Text'),
-    desc: parseDomForHtml(video_info, '.video-info-content&&Text'),
-    pic_url: parseDomForHtml(video_info, '.video-cover&&.module-item-pic&&img&&src')+"@Referer=https://ednovas.video/",
+    desc: parseDomForHtml(video_info, '.sqjj_a&&Text'),
+    pic_url: parseDomForHtml(video_info, '.video-cover&&img&&data-src')+"@Referer=https://ednovas.video/",
     url: MY_URL,
     col_type: 'movie_1_vertical_pic_blur'
   })
