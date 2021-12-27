@@ -355,7 +355,9 @@ const secParse = _ => {
     })
 
     let list = fetch("https://rt.huashi6.com/front/works/detail?id="+MY_URL.split('/').pop())
-    let images = JSON.parse(list).data.images
+    const data = JSON.parse(list).data
+    setPageTitle(data.title)
+    let images = data.images
 
     images.forEach(item => {
          d.push({
@@ -370,6 +372,8 @@ const secParse = _ => {
 
 const userParse = userObj => {
     let d = [];
+
+    setPageTitle(userObj.name)
 
     const url = MY_URL.split('##')[0]
     const page = MY_URL.split('##')[1]
