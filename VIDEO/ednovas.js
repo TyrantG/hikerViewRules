@@ -153,10 +153,11 @@ const secParse = _ => {
   list.forEach(item => {
     d.push({
       title: pdfh(item, 'a&&Text'),
-      url: $(parseDom(item, 'a&&href')).lazyRule(() => {
+      /*url: $(parseDom(item, 'a&&href')).lazyRule(() => {
         eval(fetch(input).match(/var player_aaaa=(.*?)}/)[0])
         return player_aaaa.url
-      }),
+      }),*/
+      url: parseDom(item,'a&&href') +`@lazyRule=.player-wrapper&&script&&Html.js:eval(input);var jsurl=player_aaaa.url;if('qq|qiyi|mgtv|youku|bilibili|letv|sohu|mgtv|pptv|m1095'.split('|').indexOf(player_aaaa.from)>-1){'https://bai.tymov.cc/?url='+jsurl}else{jsurl}`,
       // col_type: 'text_5',
       col_type: 'flex_button',
     })
