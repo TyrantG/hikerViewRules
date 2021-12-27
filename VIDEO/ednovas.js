@@ -118,7 +118,7 @@ const secParse = _ => {
         col_type: 'movie_1_vertical_pic_blur'
       },
       {
-        col_type: 'line_blank'
+        col_type: 'blank_block'
       }
   )
 
@@ -144,6 +144,25 @@ const secParse = _ => {
       col_type: 'scroll_button',
     })
   })
+
+  d.push({
+    col_type: 'blank_block'
+  })
+
+  const list = pdfa(lists[parseInt(current_tab)], '.scroll-content&&a')
+  list.forEach(item => {
+    d.push({
+      title: pdfh(item, 'a&&Text'),
+      url: $(parseDom(item, 'a&&href')).lazyRule(() => {
+        eval(fetch(input).match(/var player_aaaa=(.*?)}/)[0])
+        return player_aaaa.url
+      }),
+      // col_type: 'text_5',
+      col_type: 'flex_button',
+    })
+  })
+
+
 
   setResult(d);
 }
