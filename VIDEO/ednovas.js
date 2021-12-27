@@ -107,7 +107,7 @@ const secParse = _ => {
   let d = [];
   const html = getResCode()
 
-  const video_info = parseDomForHtml(html, '[id=main]')
+  const video_info = parseDomForHtml(html, '#main&&Html')
   log(video_info)
   log(parseDomForHtml(video_info, '.video-cover'))
   d.push({
