@@ -125,7 +125,7 @@ const secParse = _ => {
             col_type: 'movie_1_vertical_pic_blur'
         },
         {
-            col_type: 'line_blank'
+            col_type: 'blank_block'
         }
     )
 
