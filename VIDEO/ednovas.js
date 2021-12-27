@@ -156,12 +156,13 @@ const secParse = _ => {
       url: $(parseDom(item, 'a&&href')).lazyRule(() => {
         eval(fetch(input).match(/var player_aaaa=(.*?)}/)[0])
         const pre_url = player_aaaa.url
+        const protocol = pre_url.split('/')[0]
         const host = pre_url.split('/')[2]
         const info = fetch(pre_url)
         const match = info.match(/var main = "(.*?)";/)
         if (match) {
           eval(match[0])
-          return host+main
+          return protocol+host+main
         } else {
           return pre_url
         }
