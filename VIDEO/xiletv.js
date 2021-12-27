@@ -116,18 +116,16 @@ const secParse = _ => {
 
     const video_info = pdfh(html, '.main-left&&Html')
 
-    d.push(
-        {
-            title: pdfh(video_info, 'h1&&Text'),
-            desc: pdfh(video_info, '.movie-introduce&&Text'),
-            pic_url: pdfh(video_info, 'img&&src')+"@Referer=http://www.xiletv.com/",
-            url: MY_URL,
-            col_type: 'movie_1_vertical_pic_blur'
-        },
-        {
-            col_type: 'blank_block'
-        }
-    )
+    d.push({
+        title: pdfh(video_info, 'h1&&Text'),
+        desc: pdfh(video_info, '.movie-introduce&&Text'),
+        pic_url: pdfh(video_info, 'img&&src')+"@Referer=http://www.xiletv.com/",
+        url: MY_URL,
+        col_type: 'movie_1_vertical_pic_blur'
+    })
+    d.push({
+        col_type: 'line_blank'
+    })
 
     const sBox_list = pdfa(html, '.main-left-1&&.sBox')
     sBox_list.forEach(sb => {
