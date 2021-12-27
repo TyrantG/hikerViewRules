@@ -158,10 +158,10 @@ const secParse = _ => {
         const pre_url = player_aaaa.url
         const host = pre_url.split('/')[2]
         const info = fetch(pre_url)
-        const match = info.match(/var main = "(.*?)";/)
+        let match = info.match(/'(.*?)m3u8'/)
+        if (! match) match = info.match(/"(.*?)m3u8"/)
         if (match) {
-          eval(match[0])
-          return "https://"+host+main
+          return "https://"+host+match[1]+'m3u8'
         } else {
           return pre_url
         }
