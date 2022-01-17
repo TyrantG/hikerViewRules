@@ -1,5 +1,5 @@
 const baseParse = _ => {
-    const role_path = "hiker://files/rules/js/TyrantGenesis_永劫无间绑定.js"
+    const role_path = "hiker://files/rules/js/TyrantGenesis_永劫无间用户绑定.js"
     let d = [];
     let roleId = ''
     let empty = 'hiker://empty'
@@ -12,9 +12,9 @@ const baseParse = _ => {
 
     if (current_page === '1') {
         d.push({
-            title: '查询',
-            desc: '请输入游戏ID',
-            url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/TOOL/naraka_score.js'));return setRoleId(params);}, {input: input.trim()}) : 'toast://请输入游戏ID'",
+            title: '添加',
+            desc: '请输入游戏昵称',
+            url: "input.trim() ? $('hiker://empty').lazyRule(params => {eval(fetch('hiker://files/TyrantG/TOOL/naraka_score.js'));return setRoleId(params);}, {input: input.trim()}) : 'toast://请输入游戏昵称''",
             col_type: "input"
         })
         d.push({
@@ -382,10 +382,12 @@ const baseParse = _ => {
 }
 
 const setRoleId = params => {
-    const role_path = "hiker://files/rules/js/TyrantGenesis_永劫无间绑定.js"
+    const role_path = "hiker://files/rules/js/TyrantGenesis_永劫无间用户绑定.js"
     let res_json = fetch("https://gamedb.gamersky.com/yjwujian/search/getSearchResult?serverId=163&roleName="+params.input)
+    // let data = fetch(role_path)
     let res = JSON.parse(res_json)
     if (res.code === 0) {
+        // data += (params.input+'\r\n')
         writeFile(role_path, res.data.roleId)
         refreshPage(false)
         return 'hiker://empty'
