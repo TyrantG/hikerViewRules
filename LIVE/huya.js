@@ -74,7 +74,7 @@ const secParse = params => {
     let live_url = ''
 
     if (gameName === '一起看') {
-        live_url = base64Decode(live.roomProfile.liveLineUrl)
+        live_url = "http:"+base64Decode(live.roomProfile.liveLineUrl)
     } else {
         streamInfo.forEach(info => {
             if (info.sCdnType === 'TX') {
