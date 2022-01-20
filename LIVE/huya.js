@@ -62,8 +62,7 @@ const baseParse = _ => {
 
 const secParse = params => {
     let rid = input.split('/').pop()
-    return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
-    /*let html = fetch(input, {headers:{"User-Agent": MOBILE_UA}})
+    let html = fetch(input, {headers:{"User-Agent": MOBILE_UA}})
 
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
@@ -75,15 +74,15 @@ const secParse = params => {
     let live_url = ''
 
     if (gameName === '一起看') {
-        live_url = "http:"+base64Decode(live.roomProfile.liveLineUrl)
+        return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
     } else {
         streamInfo.forEach(info => {
             if (info.sCdnType === 'TX') {
                 live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
             }
         })
-    }*/
-    // return live_url ? getRealUrl(live_url) : 'toast://主播尚未开播'
+        return live_url ? getRealUrl(live_url) : 'toast://主播尚未开播'
+    }
 }
 
 const categoryParse = index =>{
