@@ -118,13 +118,13 @@ const secParse = params => {
                 liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
             }*/
         })
-        return JSON.stringify({urls: urls, names: names, headers: [
+        return JSON.stringify({urls: urls, names: names, /*headers: [
                 {'Referer': 'https://m.huya.com/'},
                 {'User-Agent': MOBILE_UA},
                 {'Sec-Fetch-Dest': 'empty'},
                 {'Sec-Fetch-Mode': 'cors'},
                 {'Sec-Fetch-Site': 'same-site'},
-            ]})
+            ]*/})
         // return liva_url ? getRealUrl(liva_url) : 'toast://主播尚未开播'
     }
 }
