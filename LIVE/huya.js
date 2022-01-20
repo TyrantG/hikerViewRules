@@ -73,13 +73,23 @@ const secParse = params => {
 
     let liva_url = ''
 
+    streamInfo.forEach(info => {
+        if (info.sCdnType === 'TX') {
+            liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
+        }
+    })
+
     if (gameName === '一起看') {
+        if (liva_url) {
+            liva_url.split('//')
+            liva_url = liva_url[0]+'121.12.115.26/'+liva_url[1]
+        }
         /*streamInfo.forEach(info => {
             if (info.sCdnType === 'AL') {
                 liva_url = info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
             }
         })*/
-        const bstrUrl = "https://mp.huya.com/cache.php?m=Live&do=profileRoom&roomid="+rid
+        /*const bstrUrl = "https://mp.huya.com/cache.php?m=Live&do=profileRoom&roomid="+rid
         const json_data = fetch(bstrUrl)
         try {
             const data = JSON.parse(json_data)
@@ -102,17 +112,13 @@ const secParse = params => {
             return szURL
         } catch (e) {
             return 'toast://主播尚未开播'
-        }
+        }*/
 
     } else {
-        streamInfo.forEach(info => {
-            if (info.sCdnType === 'TX') {
-                liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
-            }
-        })
 
-        return liva_url ? getRealUrl(liva_url) : 'toast://主播尚未开播'
+
     }
+    return liva_url ? getRealUrl(liva_url) : 'toast://主播尚未开播'
 }
 
 const categoryParse = index =>{
