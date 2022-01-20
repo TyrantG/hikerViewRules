@@ -62,7 +62,8 @@ const baseParse = _ => {
 
 const secParse = params => {
     let rid = input.split('/').pop()
-    let html = fetch(input, {headers:{"User-Agent": MOBILE_UA}})
+    return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
+    /*let html = fetch(input, {headers:{"User-Agent": MOBILE_UA}})
 
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
@@ -81,8 +82,8 @@ const secParse = params => {
                 live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
             }
         })
-    }
-    return live_url ? getRealUrl(live_url) : 'toast://主播尚未开播'
+    }*/
+    // return live_url ? getRealUrl(live_url) : 'toast://主播尚未开播'
 }
 
 const categoryParse = index =>{
