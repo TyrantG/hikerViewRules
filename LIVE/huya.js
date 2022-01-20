@@ -72,27 +72,14 @@ const secParse = params => {
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     let liva_url = ''
-    log(gameName)
-
-    streamInfo.forEach(info => {
-        if (info.sCdnType === 'TX') {
-            liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
-        }
-    })
 
     if (gameName === '一起看') {
-        if (liva_url) {
-            liva_url.replace('https://', 'http://121.12.115.26/').replace('http://', 'http://121.12.115.26/')
-            return liva_url
-        } else {
-            return 'toast://主播尚未开播'
-        }
         /*streamInfo.forEach(info => {
             if (info.sCdnType === 'AL') {
                 liva_url = info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
             }
         })*/
-        /*const bstrUrl = "https://mp.huya.com/cache.php?m=Live&do=profileRoom&roomid="+rid
+        const bstrUrl = "https://mp.huya.com/cache.php?m=Live&do=profileRoom&roomid="+rid
         const json_data = fetch(bstrUrl)
         try {
             const data = JSON.parse(json_data)
@@ -101,11 +88,11 @@ const secParse = params => {
             const sHlsUrl = bStreamLst.sHlsUrl;
             const sAntiCode = bStreamLst.sHlsAntiCode;
 
-            let fm = sAntiCode.match(/fm=(.*?)&/)[1]
+            let fm = getQueryVariable(sAntiCode, 'fm')
             fm = base64Decode(decodeURIComponent(fm))
-            let wsTime = sAntiCode.match(/wsTime=(.*?)&/)[1]
-            let t = sAntiCode.match(/t=(.*?)&/)[1]
-            let ctype = sAntiCode.match(/ctype=(.*?)&/)[1]
+            let wsTime = getQueryVariable(sAntiCode, 'wsTime')
+            let t = getQueryVariable(sAntiCode, 't')/*sAntiCode.match(/t=(.*?)&/)[1]*/
+            let ctype = getQueryVariable(sAntiCode, 'ctype')/*sAntiCode.match(/ctype=(.*?)&/)[1]*/
             let seqid = new Date().getTime()
             const i = md5(seqid+'|'+ctype+'|'+t); // t = 100 若为动态请从AntiCode获取
 
@@ -115,9 +102,15 @@ const secParse = params => {
             return szURL
         } catch (e) {
             return 'toast://主播尚未开播'
-        }*/
+        }
 
     } else {
+        streamInfo.forEach(info => {
+            if (info.sCdnType === 'TX') {
+                liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
+            }
+        })
+
         return liva_url ? getRealUrl(liva_url) : 'toast://主播尚未开播'
     }
 }
