@@ -1,5 +1,6 @@
 const channels_path = "hiker://files/rules/js/TyrantGenesis_抖音关注.js"
 const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
+const slide_cookie = "hiker://files/TyrantG/cookie/douyin_slide.txt"
 
 const baseParse = _ => {
     let d = [], category, html
