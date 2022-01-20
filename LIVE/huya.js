@@ -68,12 +68,13 @@ const secParse = params => {
     let live  = JSON.parse(live_json)
 
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
-    let gameName = live.roomInfo.tLiveInfo.sGameFullName
+    // let gameName = live.roomInfo.tLiveInfo.sGameFullName
+    let iGameId = live.roomInfo.tLiveInfo.iGameId
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     let live_url = ''
 
-    if (gameName === '一起看') {
+    if (parseInt(iGameId) === 2135) {
         return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
     } else {
         streamInfo.forEach(info => {
