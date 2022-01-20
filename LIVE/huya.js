@@ -89,8 +89,8 @@ const secParse = params => {
                 names.push(bStreamLst.sCdnType)
 
                 let sStreamName = bStreamLst.sStreamName;
-                let sHlsUrl = bStreamLst.sHlsUrl;
-                let sAntiCode = bStreamLst.sHlsAntiCode;
+                let sFlvUrl = bStreamLst.sFlvUrl;
+                let sAntiCode = bStreamLst.sFlvAntiCode;
 
                 let fm = getQueryVariable(sAntiCode, 'fm')
                 fm = base64Decode(decodeURIComponent(fm))
@@ -101,7 +101,7 @@ const secParse = params => {
                 const i = md5(seqid+'|'+ctype+'|'+t); // t = 100 若为动态请从AntiCode获取
 
                 const wsSecret = md5(fm.replace('$0', '0').replace('$1', sStreamName).replace('$2', i).replace('$3', wsTime))
-                const szURL = sHlsUrl+'/'+sStreamName+'.m3u8?wsSecret='+wsSecret+'&wsTime='+wsTime+'&uid=0&fm='+encodeURIComponent(base64Encode(fm))+'&ctype='+ctype+'&seqid='+seqid+'&ver=1&t='+t
+                const szURL = sFlvUrl+'/'+sStreamName+'.'+bStreamLst.sFlvUrlSuffix+'?wsSecret='+wsSecret+'&wsTime='+wsTime+'&uid=0&fm='+encodeURIComponent(base64Encode(fm))+'&ctype='+ctype+'&seqid='+seqid+'&ver=1&t='+t
                 urls.push(szURL)
             })
             return JSON.stringify({urls: urls, names: names})
