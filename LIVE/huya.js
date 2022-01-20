@@ -82,8 +82,9 @@ const secParse = params => {
 
     if (gameName === '一起看') {
         if (liva_url) {
-            liva_url.split('//')
-            liva_url = liva_url[0]+'121.12.115.26/'+liva_url[1]
+            liva_url.replace('http://', 'http://121.12.115.26/')
+        } else {
+            return 'toast://主播尚未开播'
         }
         /*streamInfo.forEach(info => {
             if (info.sCdnType === 'AL') {
@@ -116,10 +117,8 @@ const secParse = params => {
         }*/
 
     } else {
-
-
+        return liva_url ? getRealUrl(liva_url) : 'toast://主播尚未开播'
     }
-    return liva_url ? getRealUrl(liva_url) : 'toast://主播尚未开播'
 }
 
 const categoryParse = index =>{
