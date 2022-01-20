@@ -71,62 +71,18 @@ const secParse = params => {
     let gameName = live.roomInfo.tLiveInfo.sGameFullName
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
-    let liva_url = ''
-    let urls = [], names = []
+    let live_url = ''
 
     if (gameName === '一起看') {
-        /*streamInfo.forEach(info => {
-            if (info.sCdnType === 'AL') {
-                liva_url = info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
-            }
-        })*/
-        const bstrUrl = "https://mp.huya.com/cache.php?m=Live&do=profileRoom&roomid="+rid
-        const json_data = fetch(bstrUrl)
-        try {
-            const data = JSON.parse(json_data)
-            const bStreamLsts = data.data.stream.baseSteamInfoList
-            bStreamLsts.forEach(bStreamLst => {
-                names.push(bStreamLst.sCdnType)
-
-                let sStreamName = bStreamLst.sStreamName;
-                let sFlvUrl = bStreamLst.sFlvUrl;
-                let sAntiCode = bStreamLst.sFlvAntiCode;
-
-                let fm = getQueryVariable(sAntiCode, 'fm')
-                fm = base64Decode(decodeURIComponent(fm))
-                let wsTime = getQueryVariable(sAntiCode, 'wsTime')
-                let t = getQueryVariable(sAntiCode, 't')/*sAntiCode.match(/t=(.*?)&/)[1]*/
-                let ctype = getQueryVariable(sAntiCode, 'ctype')/*sAntiCode.match(/ctype=(.*?)&/)[1]*/
-                let seqid = new Date().getTime()
-                const i = md5(seqid+'|'+ctype+'|'+t); // t = 100 若为动态请从AntiCode获取
-
-                const wsSecret = md5(fm.replace('$0', '0').replace('$1', sStreamName).replace('$2', i).replace('$3', wsTime))
-                const szURL = sFlvUrl+'/'+sStreamName+'.'+bStreamLst.sFlvUrlSuffix+'?wsSecret='+wsSecret+'&wsTime='+wsTime+'&u=0&fm='+encodeURIComponent(base64Encode(fm))/*+'&ctype='+ctype*/+'&seqid='+seqid/*+'&ver=1&t='+t*/
-                urls.push(szURL)
-            })
-            return JSON.stringify({urls: urls, names: names})
-
-        } catch (e) {
-            return 'toast://主播尚未开播'
-        }
-
+        live_url = base64Decode(live.roomProfile.liveLineUrl)
     } else {
         streamInfo.forEach(info => {
-            names.push(info.sCdnType)
-            urls.push(info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode)
-            /*if (info.sCdnType === 'TX') {
-                liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
-            }*/
+            if (info.sCdnType === 'TX') {
+                live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
+            }
         })
-        return JSON.stringify({urls: urls, names: names, /*headers: [
-                {'Referer': 'https://m.huya.com/'},
-                {'User-Agent': MOBILE_UA},
-                {'Sec-Fetch-Dest': 'empty'},
-                {'Sec-Fetch-Mode': 'cors'},
-                {'Sec-Fetch-Site': 'same-site'},
-            ]*/})
-        // return liva_url ? getRealUrl(liva_url) : 'toast://主播尚未开播'
     }
+    return live_url ? getRealUrl(live_url) : 'toast://主播尚未开播'
 }
 
 const categoryParse = index =>{
