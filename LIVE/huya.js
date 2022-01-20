@@ -97,7 +97,9 @@ const secParse = params => {
             const i = md5(seqid+'|'+ctype+'|'+t); // t = 100 若为动态请从AntiCode获取
 
             const wsSecret = md5(fm.replace('$0', '0').replace('$1', sStreamName).replace('$2', i).replace('$3', wsTime))
-            log(wsSecret)
+            const szURL = sHlsUrl+'/'+sStreamName+'.m3u8?wsSecret='+wsSecret+'&wsTime='+wsTime+'&uid=0&fm='+encodeURIComponent(base64Encode(fm))+'&ctype='+ctype+'&seqid='+seqid+'&ver=1&t='+t
+            log(szURL)
+            return szURL
         } catch (e) {
             return 'toast://主播尚未开播'
         }
