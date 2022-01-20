@@ -69,28 +69,49 @@ const secParse = params => {
 
     log(live)
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
-    // let gameName = live.roomInfo.tLiveInfo.sGameFullName
+    let gameName = live.roomInfo.tLiveInfo.sGameFullName
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
-    let liva_url
+    let liva_url = ''
 
-    /*if (gameName === '一起看') {
-        streamInfo.forEach(info => {
+    if (gameName === '一起看') {
+        /*streamInfo.forEach(info => {
             if (info.sCdnType === 'AL') {
                 liva_url = info.sHlsUrl + '/' + info.sStreamName + '.' + info.sHlsUrlSuffix + '?' + info.sHlsAntiCode
             }
-        })
-    } else {
+        })*/
+        const bstrUrl = "https://mp.huya.com/cache.php?m=Live&do=profileRoom&roomid="+rid
+        const json_data = fetch(bstrUrl)
+        try {
+            const data = JSON.parse(json_data)
+            const bStreamLst = data.data.stream.baseSteamInfoList[0]
+            const sStreamName = bStreamLst.sStreamName;
+            const sHlsUrl = bStreamLst.sHlsUrl;
+            const sAntiCode = bStreamLst.sHlsAntiCode;
 
-    }*/
+            let fm = sAntiCode.match(/fm=(.*?)&?/)[1]
+            fm = sAntiCode.match(/fm=(.*?)&?/)[1]
+            fm = base64Decode(fm)
+            log(fm)
+            /*let wsTime = sAntiCode.match(/wsTime=(.*?)&?/)[1]
+            let ctype = sAntiCode.match(/ctype=(.*?)&?/)[1]
+            let seqid = new Date().getTime()
+            const i = md5(seqid+'|'.ctype+'|100'); // t = 100 若为动态请从AntiCode获取
 
-    streamInfo.forEach(info => {
-        if (info.sCdnType === 'TX') {
-            liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
+            const wsSecret = md5(str_replace(['$0','$1','$2','$3'],['0',$sStreamName,$i,$wsTime],$fm));*/
+        } catch (e) {
+            return 'toast://主播尚未开播'
         }
-    })
 
-    return getRealUrl(liva_url)
+    } else {
+        streamInfo.forEach(info => {
+            if (info.sCdnType === 'TX') {
+                liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
+            }
+        })
+
+        return liva_url ? getRealUrl(liva_url) : 'toast://主播尚未开播'
+    }
 }
 
 const categoryParse = index =>{
