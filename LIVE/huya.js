@@ -72,6 +72,7 @@ const secParse = params => {
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     let liva_url = ''
+    log(gameName)
 
     streamInfo.forEach(info => {
         if (info.sCdnType === 'TX') {
