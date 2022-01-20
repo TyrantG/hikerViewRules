@@ -89,7 +89,8 @@ const secParse = params => {
             const sAntiCode = bStreamLst.sHlsAntiCode;
 
             let fm = sAntiCode.match(/fm=(.*?)&/)[1]
-            fm = base64Decode(decodeURIComponent(fm))
+            fm = decodeURIComponent(fm)
+            // fm = base64Decode(decodeURIComponent(fm))
             log(fm)
             /*let wsTime = sAntiCode.match(/wsTime=(.*?)&/)[1]
             let t = sAntiCode.match(/t=(.*?)&/)[1]
