@@ -72,7 +72,7 @@ const secParse = params => {
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     let liva_url = ''
-    let urls, names
+    let urls = [], names = []
 
     if (gameName === '一起看') {
         /*streamInfo.forEach(info => {
