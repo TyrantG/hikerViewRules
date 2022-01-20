@@ -167,7 +167,7 @@ const cateGroupParse = _ => {
 }
 
 const getRealUrl = (live_url) => {
-    let [i, b] = live_url.split('?')
+    /*let [i, b] = live_url.split('?')
     let r = i.split('/').pop()
     let s = r.replace(/\.(flv|m3u8)/, '')
     let c_tmp = b.split('&').filter(n => n)
@@ -193,5 +193,29 @@ const getRealUrl = (live_url) => {
     let t = '0'
     let h = [p, t, s, f, ll].join('_')
     let m = md5(h)
-    return (i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+tmp2)/*.replace('http://', 'https://')*/
+    return (i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+tmp2)/!*.replace('http://', 'https://')*!/*/
+    let query = live_url.split('?');
+    let i = query[0];
+    let b = query[1];
+    let r = i.split('/');
+    let s = r[r.length - 1].replace(/\.(flv|m3u8)/g, '');
+    let c = b.split('&', 4);
+    let n = {};
+
+    for (let i of c) {
+        if (i != '') {
+            let pair = i.split('=');
+            n[pair[0]] = pair[1];
+        }
+    }
+    let fm = unescape(n['fm']);
+    let u = base64Decode(fm);
+    let p = u.split('_')[0];
+    let f = (new Date()).valueOf()*1000+'';
+    let l = n['wsTime'];
+    let t = '0';
+    let h = [p, t, s, f, l].join('_');
+    let m = md5(h);
+    let y = c[c.length - 1];
+    return  i + "?wsSecret=" + m + "&wsTime=" + l + "&u=" + t + "&seqid=" + f + "&" + y;
 }
