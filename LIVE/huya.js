@@ -88,11 +88,12 @@ const secParse = params => {
             const sHlsUrl = bStreamLst.sHlsUrl;
             const sAntiCode = bStreamLst.sHlsAntiCode;
 
-            let fm = sAntiCode.match(/fm=(.*?)&?/)[1]
-            fm = base64Decode(fm)
-            log(sAntiCode)
-            /*let wsTime = sAntiCode.match(/wsTime=(.*?)&?/)[1]
-            let ctype = sAntiCode.match(/ctype=(.*?)&?/)[1]
+            let fm = sAntiCode.match(/fm=(.*?)&/)[1]
+            // fm = base64Decode(fm)
+            log(fm)
+            /*let wsTime = sAntiCode.match(/wsTime=(.*?)&/)[1]
+            let t = sAntiCode.match(/t=(.*?)&/)[1]
+            let ctype = sAntiCode.match(/ctype=(.*?)&/)[1]
             let seqid = new Date().getTime()
             const i = md5(seqid+'|'.ctype+'|100'); // t = 100 若为动态请从AntiCode获取
 
