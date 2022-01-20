@@ -89,16 +89,15 @@ const secParse = params => {
             const sAntiCode = bStreamLst.sHlsAntiCode;
 
             let fm = sAntiCode.match(/fm=(.*?)&/)[1]
-            fm = decodeURIComponent(fm)
-            // fm = base64Decode(decodeURIComponent(fm))
-            log(fm)
-            /*let wsTime = sAntiCode.match(/wsTime=(.*?)&/)[1]
+            fm = base64Decode(decodeURIComponent(fm))
+            let wsTime = sAntiCode.match(/wsTime=(.*?)&/)[1]
             let t = sAntiCode.match(/t=(.*?)&/)[1]
             let ctype = sAntiCode.match(/ctype=(.*?)&/)[1]
             let seqid = new Date().getTime()
-            const i = md5(seqid+'|'.ctype+'|100'); // t = 100 若为动态请从AntiCode获取
+            const i = md5(seqid+'|'+ctype+'|'+t); // t = 100 若为动态请从AntiCode获取
 
-            const wsSecret = md5(str_replace(['$0','$1','$2','$3'],['0',$sStreamName,$i,$wsTime],$fm));*/
+            const wsSecret = md5(fm.replace('$0', '0').replace('$1', sStreamName).replace('$2', i).replace('$3', wsTime))
+            log(wsSecret)
         } catch (e) {
             return 'toast://主播尚未开播'
         }
