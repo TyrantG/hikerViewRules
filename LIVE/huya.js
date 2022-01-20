@@ -66,6 +66,8 @@ const secParse = params => {
 
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
+
+    log(live)
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
     // let gameName = live.roomInfo.tLiveInfo.sGameFullName
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
@@ -83,7 +85,6 @@ const secParse = params => {
     }*/
 
     streamInfo.forEach(info => {
-        log(info)
         if (info.sCdnType === 'TX') {
             liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
         }
