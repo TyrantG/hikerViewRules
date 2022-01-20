@@ -83,6 +83,7 @@ const secParse = params => {
     if (gameName === '一起看') {
         if (liva_url) {
             liva_url.replace('http://', 'http://121.12.115.26/')
+            return liva_url
         } else {
             return 'toast://主播尚未开播'
         }
