@@ -217,5 +217,5 @@ const getRealUrl = (live_url) => {
     let h = [p, t, s, f, l].join('_');
     let m = md5(h);
     let y = c[c.length - 1];
-    return  i + "?wsSecret=" + m + "&wsTime=" + l + "&u=" + t + "&seqid=" + f + "&" + y;
+    return (i + "?wsSecret=" + m + "&wsTime=" + l + "&u=" + t + "&seqid=" + f + "&" + y).replace('.m3u8', '.flv')
 }
