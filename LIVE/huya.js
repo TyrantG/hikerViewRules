@@ -89,9 +89,8 @@ const secParse = params => {
             const sAntiCode = bStreamLst.sHlsAntiCode;
 
             let fm = sAntiCode.match(/fm=(.*?)&?/)[1]
-            fm = sAntiCode.match(/fm=(.*?)&?/)[1]
             fm = base64Decode(fm)
-            log(fm)
+            log(sAntiCode)
             /*let wsTime = sAntiCode.match(/wsTime=(.*?)&?/)[1]
             let ctype = sAntiCode.match(/ctype=(.*?)&?/)[1]
             let seqid = new Date().getTime()
