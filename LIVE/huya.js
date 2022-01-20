@@ -72,6 +72,7 @@ const secParse = params => {
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     let liva_url = ''
+    let urls, names
 
     if (gameName === '一起看') {
         /*streamInfo.forEach(info => {
@@ -83,35 +84,42 @@ const secParse = params => {
         const json_data = fetch(bstrUrl)
         try {
             const data = JSON.parse(json_data)
-            const bStreamLst = data.data.stream.baseSteamInfoList[0]
-            const sStreamName = bStreamLst.sStreamName;
-            const sHlsUrl = bStreamLst.sHlsUrl;
-            const sAntiCode = bStreamLst.sHlsAntiCode;
+            const bStreamLsts = data.data.stream.baseSteamInfoList
+            bStreamLsts.forEach(bStreamLst => {
+                names.push(bStreamLst.sCdnType)
 
-            let fm = getQueryVariable(sAntiCode, 'fm')
-            fm = base64Decode(decodeURIComponent(fm))
-            let wsTime = getQueryVariable(sAntiCode, 'wsTime')
-            let t = getQueryVariable(sAntiCode, 't')/*sAntiCode.match(/t=(.*?)&/)[1]*/
-            let ctype = getQueryVariable(sAntiCode, 'ctype')/*sAntiCode.match(/ctype=(.*?)&/)[1]*/
-            let seqid = new Date().getTime()
-            const i = md5(seqid+'|'+ctype+'|'+t); // t = 100 若为动态请从AntiCode获取
+                let sStreamName = bStreamLst.sStreamName;
+                let sHlsUrl = bStreamLst.sHlsUrl;
+                let sAntiCode = bStreamLst.sHlsAntiCode;
 
-            const wsSecret = md5(fm.replace('$0', '0').replace('$1', sStreamName).replace('$2', i).replace('$3', wsTime))
-            const szURL = sHlsUrl+'/'+sStreamName+'.m3u8?wsSecret='+wsSecret+'&wsTime='+wsTime+'&uid=0&fm='+encodeURIComponent(base64Encode(fm))+'&ctype='+ctype+'&seqid='+seqid+'&ver=1&t='+t
-            log(szURL)
-            return szURL
+                let fm = getQueryVariable(sAntiCode, 'fm')
+                fm = base64Decode(decodeURIComponent(fm))
+                let wsTime = getQueryVariable(sAntiCode, 'wsTime')
+                let t = getQueryVariable(sAntiCode, 't')/*sAntiCode.match(/t=(.*?)&/)[1]*/
+                let ctype = getQueryVariable(sAntiCode, 'ctype')/*sAntiCode.match(/ctype=(.*?)&/)[1]*/
+                let seqid = new Date().getTime()
+                const i = md5(seqid+'|'+ctype+'|'+t); // t = 100 若为动态请从AntiCode获取
+
+                const wsSecret = md5(fm.replace('$0', '0').replace('$1', sStreamName).replace('$2', i).replace('$3', wsTime))
+                const szURL = sHlsUrl+'/'+sStreamName+'.m3u8?wsSecret='+wsSecret+'&wsTime='+wsTime+'&uid=0&fm='+encodeURIComponent(base64Encode(fm))+'&ctype='+ctype+'&seqid='+seqid+'&ver=1&t='+t
+                urls.push(szURL)
+            })
+            return JSON.stringify({urls: urls, names: names})
+
         } catch (e) {
             return 'toast://主播尚未开播'
         }
 
     } else {
         streamInfo.forEach(info => {
-            if (info.sCdnType === 'TX') {
+            names.push(info.sCdnType)
+            urls.push(info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode)
+            /*if (info.sCdnType === 'TX') {
                 liva_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
-            }
+            }*/
         })
-
-        return liva_url ? getRealUrl(liva_url) : 'toast://主播尚未开播'
+        return JSON.stringify({urls: urls, names: names})
+        // return liva_url ? getRealUrl(liva_url) : 'toast://主播尚未开播'
     }
 }
 
@@ -223,5 +231,5 @@ const getRealUrl = (live_url) => {
     let t = '0'
     let h = [p, t, s, f, ll].join('_')
     let m = md5(h)
-    return (i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+tmp2).replace('http://', 'https://')
+    return (i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+tmp2)/*.replace('http://', 'https://')*/
 }
