@@ -85,7 +85,7 @@ const gcores = {
         data.forEach(item => {
             gcores.dom.push({
                 title: item.attributes.title,
-                desc: item.attributes.desc || item.attributes.description,
+                desc: item.attributes.desc,
                 pic_url: gcores.imageUrl+item.attributes.thumb+'@Referer='+gcores.headers.referer,
                 url: "https://www.gcores.com/articles/"+item.id,
                 col_type: 'pic_1'
@@ -148,7 +148,7 @@ const gcores = {
                 desc: item.attributes.description,
                 pic_url: gcores.imageUrl+item.attributes.cover+'@Referer='+gcores.headers.referer,
                 url: "https://www.gcores.com/albums/"+item.id,
-                col_type: 'movie_1_vertical_pic_blur'
+                col_type: 'pic_1'
             })
         })
     },
@@ -187,6 +187,9 @@ const gcores = {
             url = url.replace('$'+i, params[i])
         }
         return url
+    },
+    articleDesc: () => {
+
     },
 }
 
