@@ -40,9 +40,8 @@ const baseParse = _ => {
             channels = JSON.parse(local_channels)
         } else {
             let defaultChannels = [
-                {title: '法老_Pharaoh', sec_uid: 'MS4wLjABAAAAENcAhhKYCY80DmEdGk9gH2jlG42xW_5kRh33ynV8Ii4', avatar_url: 'https://p3.douyinpic.com/img/tos-cn-i-0813/833a09e8f9b14bcf87ee5a9c5435b825~c5_1080x1080.jpeg?from=116350172'},
-                {title: '马思唯马思唯', sec_uid: 'MS4wLjABAAAA508qPG3qA_ogo6wjQ9QTIEW_n_NBemKv8ujnHDxt-4OjNI0vC_rqs8x7I0EOoywP', avatar_url: 'https://p3.douyinpic.com/img/tos-cn-avt-0015/cd07db037361174d855251b2854d8b49~c5_1080x1080.jpeg?from=116350172'},
-                {title: '乃万NINEONE', sec_uid: 'MS4wLjABAAAAPqhPtBXeQ1E3eow8onFHRaZsfKXZnb9gLii-8QvhiJ4', avatar_url: 'https://p9.douyinpic.com/aweme/1080x1080/31afc0003a07472f77daf.jpeg?from=116350172'},
+                {"title":"橄榄（联盟记者）","sec_uid":"MS4wLjABAAAAx9uv2rkiSVYxg3-4kygWEpsR0XWPnajnaKsuq3XGxMc","avatar_url":"https://p11.douyinpic.com/img/tos-cn-i-0813/ce41336f7815445db7345c78b4f0da1e~c5_100x100.jpeg?from=2956013662"},
+                {"title":"FPX电子竞技俱乐部","sec_uid":"MS4wLjABAAAAgzF_TI-AIxTUjfTfv_u3YXxsOFgEP2lS-Lff4gzMkeY","avatar_url":"https://p3.douyinpic.com/img/tos-cn-avt-0015/2a54c1044e99fe01200f207d06342931~c5_100x100.jpeg?from=2956013662"},
             ]
             writeFile(channels_path, JSON.stringify(defaultChannels))
             channels = defaultChannels
@@ -564,7 +563,7 @@ const baseParse = _ => {
     setResult(d);
 }
 
-/*const searchParse = _ => {
+const searchParse = _ => {
     let d = [];
     let input = MY_URL.split('##')[1].toString()
 
@@ -679,9 +678,9 @@ const baseParse = _ => {
         }),
     })
     setResult(d);
-}*/
+}
 
-const searchParse = _ => {
+/*const searchParse = _ => {
     const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
     let home_cookie = request(douyin_cookie)
     // let home_cookie = getVar("tyrantgenesis.douyin_web.home_cookie")
@@ -731,7 +730,7 @@ const searchParse = _ => {
         }
     }
     setResult(d);
-}
+}*/
 
 const userParse = userinfo => {
     const douyin_cookie = "hiker://files/TyrantG/cookie/douyin.txt"
