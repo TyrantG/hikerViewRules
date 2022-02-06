@@ -109,14 +109,26 @@ const gcores = {
                 gcores.gamesParse(data)
                 break
             default:
-                gcores.homeParse(data)
+                gcores.homeParse()
         }
     },
     homeParse: () => {
-        const pageData = fetch(gcores.currentUrl, {headers: gcores.headers})
+        /*const pageData = fetch(gcores.currentUrl, {headers: gcores.headers})
         const jsonString = pageData.match(/__PRELOADED_STATE__ = (.*?)<\/script>/)[1]
-        const data = JSON.parse(jsonString.trim())
+        const data = JSON.parse(jsonString.trim())*/
 
+        gcores.dom.push(
+            {
+                title: '资讯',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/news.svg',
+                col_type: 'icon_round_4'
+            },
+            {
+                title: '视频',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/video.svg',
+                col_type: 'icon_round_4'
+            }
+        )
     },
     videosParse: data => {
         data.forEach(item => {
