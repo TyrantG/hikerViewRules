@@ -506,7 +506,7 @@ const gcores = {
                         gcores.dom.push({
                             title: item.attributes.title,
                             pic_url: gcores.imageUrl+item.attributes.thumb,
-                            url: gcores.audioUrl+ra.attributes.audio,
+                            url: ra.attributes.audio.includes('http') ? ra.attributes.audio : gcores.audioUrl+ra.attributes.audio,
                             desc: item.attributes.desc,
                             col_type: 'movie_1_left_pic'
                         })
