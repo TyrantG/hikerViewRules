@@ -74,6 +74,7 @@ const gcores = {
         }
     },
     x5SubUrlBuild: bannerItem => {
+        log(bannerItem)
         switch (bannerItem.type) {
             case 'articles':
                 return gcores.articlesDescParse(bannerItem.id, bannerItem.url)
