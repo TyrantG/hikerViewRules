@@ -302,11 +302,11 @@ const gcores = {
             hot_data.data.forEach(hot => {
                 gcores.dom.push({
                     title: hot,
-                    url: $(gcores.empty).lazyRule(() => {
-                        setItem('searchValue', input)
+                    url: $(gcores.empty).lazyRule(hot => {
+                        setItem('searchValue', hot)
                         refreshPage(true)
                         return "hiker://empty"
-                    }),
+                    }, hot),
                     col_type: 'flex_button'
                 })
             })
