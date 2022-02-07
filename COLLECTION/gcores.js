@@ -496,6 +496,7 @@ const gcores = {
     },
     albumsDescParse: (id, url) => {
         const page = url.split('##')[1]
+        log(url)
         if (parseInt(page) === 1) {
             const api_url = "https://www.gcores.com/gapi/v1/albums/"+id+"?include=sale-options,shop-item,album-bundles.sale-options,wallpapers"
             const apiData = fetch(api_url, {headers: gcores.headers})
