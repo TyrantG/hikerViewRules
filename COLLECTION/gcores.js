@@ -41,7 +41,11 @@ const gcores = {
         })
 
         gcores.dom.push({
-            url: '',
+            url: $(gcores.empty).rule(() => {
+                eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                gcores.searchParse()
+            }),
+            desc: '搜索',
             col_type: "icon_1_search",
             extra: {
                 newWindow: true,
@@ -260,6 +264,17 @@ const gcores = {
                 col_type: 'movie_2'
             })
         })
+    },
+    searchParse: () => {
+        gcores.dom.push({
+            title: '搜索',
+            col_type: 'input',
+            extra: {
+                defaultValue: 'test'
+            }
+        })
+
+        setResult(gcores.dom);
     },
     urlParamsBuild: (url, params) => {
         for (let i in params) {
