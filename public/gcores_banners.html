@@ -92,11 +92,13 @@
                 // alert($$$.require('hiker://page/gcores?rule=机核GCORES').name)
                 // this.$message.success()
                 // fy_bridge_app.showPic(window.location.origin+item)
-                eval(request('hiker://page/gcores?rule=机核GCORES'))
-                alert(gcores.name)
+                // eval(request())
+                let findRule = 'js:' + $$$.toString(bannerItem => {
+                    $.require('hiker://page/gcores?rule=机核GCORES').x5SubUrlBuild(bannerItem)
+                }, bannerItem)
                 fba.open(JSON.stringify({
                     url: bannerItem.url,
-                    findRule: gcores.x5SubUrlBuild(bannerItem),
+                    findRule: findRule,
                     extra:
                         {
                             newWindow: true,
