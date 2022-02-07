@@ -275,20 +275,46 @@ const gcores = {
         }))
 
         const page = MY_URL.split('##')[1]
-        log(page)
-        gcores.dom.push({
-            title: '搜索',
-            url: $.toString(() => {
-                setItem('searchValue', input)
-                refreshPage(true)
-                return "hiker://empty"
-            }),
-            desc: '请输入关键词',
-            col_type: 'input',
-            extra: {
-                defaultValue: gcores.searchValue
+
+        if (parseInt(page) === 1) {
+            gcores.dom.push({
+                title: '搜索',
+                url: $.toString(() => {
+                    setItem('searchValue', input)
+                    refreshPage(true)
+                    return "hiker://empty"
+                }),
+                desc: '请输入关键词',
+                col_type: 'input',
+                extra: {
+                    defaultValue: gcores.searchValue
+                }
+            })
+
+            if (! gcores.searchValue) {
+                const hot_json = fetch("https://www.gcores.com/gapi/v1/search/recent-hot", {headers: gcores.headers})
+                const hot_data = JSON.parse(hot_json)
+                gcores.dom.push({
+                    title: '热门搜索：',
+                    url: gcores.empty,
+                    col_type: 'text_1',
+                    extra: {
+                        lineVisible: false
+                    },
+                })
+                hot_data.data.forEach(hot => {
+                    gcores.dom.push({
+                        title: hot,
+                        url: $(gcores.empty).lazyRule(hot => {
+                            setItem('searchValue', hot)
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, hot),
+                        col_type: 'flex_button'
+                    })
+                })
             }
-        })
+        }
 
         if (gcores.searchValue) {
             const tabs = [
@@ -296,30 +322,19 @@ const gcores = {
                 {title: '游戏', type: 'games'},
                 {title: '电台', type: 'radios'},
                 {title: '视频', type: 'videos'},
-                {title: '用户', type: 'users'},
             ]
 
-            const url = "https://www.gcores.com/gapi/v1/search?page[limit]=12&page[offset]=0&type=users&query=%E8%BE%90%E5%B0%84&order-by=score"
-        } else {
-            const hot_json = fetch("https://www.gcores.com/gapi/v1/search/recent-hot", {headers: gcores.headers})
-            const hot_data = JSON.parse(hot_json)
-            gcores.dom.push({
-                title: '热门搜索：',
-                url: gcores.empty,
-                col_type: 'text_1',
-                extra: {
-                    lineVisible: false
-                },
-            })
-            hot_data.data.forEach(hot => {
+            const url = "https://www.gcores.com/gapi/v1/search?page[limit]=12&page[offset]="+(page-1)*12+"&type="+gcores.searchTab+"&query="+encodeURIComponent(gcores.searchValue)+"&order-by="+gcores.searchOrderBy
+            const json = fetch(url, {headers: gcores.headers})
+            const result = JSON.parse(json)
+
+            result.data.for(item => {
                 gcores.dom.push({
-                    title: hot,
-                    url: $(gcores.empty).lazyRule(hot => {
-                        setItem('searchValue', hot)
-                        refreshPage(true)
-                        return "hiker://empty"
-                    }, hot),
-                    col_type: 'flex_button'
+                    title: item.attributes.title,
+                    desc: item.attributes.desc || item.attributes.description,
+                    pic_url: gcores.imageUrl+(item.attributes.thumb || item.attributes.cover)+'@Referer='+gcores.headers.referer,
+                    url: gcores.subUrlBuild(item.id, 'articles'),
+                    col_type: 'pic_1'
                 })
             })
         }
