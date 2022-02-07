@@ -94,10 +94,9 @@
                 // fy_bridge_app.showPic(window.location.origin+item)
                 // eval(request())
                 let findRule = 'js:' + $$$.toString(bannerItem => {
-                    $.require('hiker://page/gcores?rule=机核GCORES').x5SubUrlBuild(bannerItem)
+                    $$$.require('hiker://page/gcores?rule=机核GCORES').x5SubUrlBuild(bannerItem)
                 }, bannerItem)
-                alert(findRule)
-                /*fba.open(JSON.stringify({
+                fba.open(JSON.stringify({
                     url: bannerItem.url,
                     findRule: findRule,
                     extra:
@@ -105,7 +104,7 @@
                             newWindow: true,
                             windowId: ""
                         }
-                }))*/
+                }))
             },
         },
     });
