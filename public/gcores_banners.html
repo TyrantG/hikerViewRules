@@ -62,6 +62,7 @@
         methods: {
             initData() {
                 const html = request("https://www.gcores.com")
+                fba.log(html)
                 const json = fba.parseDomForHtml(html, '.focusImages&&.focusImages_item')
                 alert(json)
                 // const arr = JSON.parse(json)
