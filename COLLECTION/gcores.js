@@ -337,7 +337,7 @@ const gcores = {
 
                 tabs.forEach(tab => {
                     gcores.dom.push({
-                        title: gcores.searchValue === tab.type ? '‘‘’’<strong><font color="red">'+tab.title+'</font></strong>' : tab.title,
+                        title: gcores.searchTab === tab.type ? '‘‘’’<strong><font color="red">'+tab.title+'</font></strong>' : tab.title,
                         url: $(gcores.empty).lazyRule(params => {
                             setItem("searchTab", params.type)
                             refreshPage(true)
