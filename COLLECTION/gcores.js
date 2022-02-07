@@ -268,7 +268,10 @@ const gcores = {
         })
     },
     searchParse: () => {
-        // setPageTitle('')
+        addListener('onClose', $.toString(() => {
+            clearItem('searchValue')
+            clearItem('searchTab')
+        }))
         gcores.dom.push({
             title: '搜索',
             url: $.toString(() => {
@@ -282,6 +285,32 @@ const gcores = {
                 defaultValue: gcores.searchValue
             }
         })
+
+        if (gcores.searchValue) {
+
+        } else {
+            const hot_json = fetch("https://www.gcores.com/gapi/v1/search/recent-hot", {headers: gcores.headers})
+            const hot_data = JSON.parse(hot_json)
+            gcores.dom.push({
+                title: '热门搜索：',
+                url: gcores.empty,
+                col_type: 'text_1',
+                extra: {
+                    lineVisible: false
+                },
+            })
+            hot_data.data.forEach(hot => {
+                gcores.dom.push({
+                    title: hot,
+                    url: $(gcores.empty).lazyRule(() => {
+                        setItem('searchValue', input)
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }),
+                    col_type: 'scroll_button'
+                })
+            })
+        }
 
         setResult(gcores.dom);
     },
