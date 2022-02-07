@@ -75,10 +75,12 @@
                 let list = []
                 arr.forEach(item => {
                     let href = fba.parseDomForHtml(item, '.focusImages_item&&href')
+                    const [type, id] = href.split('/').filter(item => item)
                     list.push({
                         src: item.match(/url\((.*?)\)/)[1],
                         url: 'https://www.gcores.com'+href,
-                        type: href.match(/\/(.*?)\//)[1]
+                        type: type,
+                        id: id,
                     })
                 })
                 localStorage.setItem('imageList', JSON.stringify(list))
@@ -92,6 +94,7 @@
                 // fy_bridge_app.showPic(window.location.origin+item)
                 fba.open(JSON.stringify({
                     url: bannerItem.url,
+                    findRule: $$$.require('hiker://page/gcores?rule=机核GCORES').x5SubUrlBuild(bannerItem),
                     extra:
                         {
                             newWindow: true,

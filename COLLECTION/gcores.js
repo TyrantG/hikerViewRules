@@ -73,6 +73,38 @@ const gcores = {
                 })
         }
     },
+    x5SubUrlBuild: bannerItem => {
+        switch (bannerItem.type) {
+            case 'articles':
+                return $(bannerItem.url+"#immersiveTheme#").rule(params => {
+                    $.require('hiker://page/gcores').articlesDescParse(params.id, params.url)
+                }, {
+                    id: bannerItem.id,
+                    url: bannerItem.url,
+                })
+            case 'videos':
+                return $(bannerItem.url+"#immersiveTheme#").rule(params => {
+                    $.require('hiker://page/gcores').videosDescParse(params.id, params.url)
+                }, {
+                    id: bannerItem.id,
+                    url: bannerItem.url,
+                })
+            case 'radios':
+                return $(bannerItem.url+"#immersiveTheme#").rule(params => {
+                    $.require('hiker://page/gcores').audiosDescParse(params.id, params.url)
+                }, {
+                    id: bannerItem.id,
+                    url: bannerItem.url,
+                })
+            case 'albums':
+                return $(bannerItem.url+"#immersiveTheme##fypage").rule(params => {
+                    $.require('hiker://page/gcores').albumsDescParse(params.id, params.url)
+                }, {
+                    id: bannerItem.id,
+                    url: bannerItem.url,
+                })
+        }
+    },
     baseAdapter: selected => {
         const url = gcores.urlParamsBuild(gcores.currentUrl, {limit: 12, offset: 12 * (gcores.page-1)})
         const apiData = fetch(url, {headers: gcores.headers})
