@@ -12,11 +12,6 @@ const gcores = {
     imageUrl: 'https://image.gcores.com/',
     audioUrl: 'https://alioss.gcores.com/uploads/audio/',
     category: [
-        {title: '资讯', url: 'https://www.gcores.com/gapi/v1/originals?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=1&filter[list-all]=0&fields[articles]=title,desc,thumb'},
-        {title: '视频', url: 'https://www.gcores.com/gapi/v1/videos?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[list-all]=0&fields[videos]=title,desc,thumb'},
-        {title: '电台', url: 'https://www.gcores.com/gapi/v1/radios?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[list-all]=0&fields[radios]=title,desc,thumb'},
-        {title: '文章', url: 'https://www.gcores.com/gapi/v1/articles?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=0&filter[list-all]=0&fields[articles]=title,desc,thumb'},
-        {title: '播单', url: 'https://www.gcores.com/gapi/v1/albums?page[limit]=$limit&page[offset]=$offset&sort=-updated-at&filter[is-on-sale]=0'},
         // {title: '专题', url: 'https://www.gcores.com/gapi/v1/collections?page[limit]=$limit&page[offset]=$offset&sort=-updated-at'},
         // {title: '游戏', url: 'https://www.gcores.com/gapi/v1//games/search?page[limit]=$limit&page[offset]=$offset&sort=-onsale-start&include=game-stores&filter[revised]=true&filter[onsale]=true'},
     ],
@@ -39,12 +34,19 @@ const gcores = {
             gcores.dom.push({col_type: 'blank_block'})
         }*/
 
-        // gcores.baseAdapter(parseInt(gcores.cateSelected))
-
         gcores.dom.push({
             url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
             col_type:"x5_webview_single",
             extra: {ua: MOBILE_UA}
+        })
+
+        gcores.dom.push({
+            url: '',
+            col_type: "icon_1_search",
+            extra: {
+                newWindow: true,
+                windowId: ""
+            }
         })
 
         const grid = [
@@ -56,10 +58,6 @@ const gcores = {
                 }),
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/资讯.svg',
                 col_type: 'icon_round_small_4',
-                extra: {
-                    newWindow: true,
-                    windowId: "",
-                },
             },
             {
                 title: '视频',
@@ -69,10 +67,6 @@ const gcores = {
                 }),
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/视频.svg',
                 col_type: 'icon_round_small_4',
-                extra: {
-                    newWindow: true,
-                    windowId: ""
-                }
             },
             {
                 title: '电台',
@@ -82,10 +76,6 @@ const gcores = {
                 }),
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/电台.svg',
                 col_type: 'icon_round_small_4',
-                extra: {
-                    newWindow: true,
-                    windowId: ""
-                }
             },
             {
                 title: '文章',
@@ -95,10 +85,6 @@ const gcores = {
                 }),
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/文章.svg',
                 col_type: 'icon_round_small_4',
-                extra: {
-                    newWindow: true,
-                    windowId: ""
-                }
             },
             {
                 title: '播单',
@@ -108,37 +94,21 @@ const gcores = {
                 }),
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/播单.svg',
                 col_type: 'icon_round_small_4',
-                extra: {
-                    newWindow: true,
-                    windowId: ""
-                }
             },
             {
                 title: '关注',
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
                 col_type: 'icon_round_small_4',
-                extra: {
-                    newWindow: true,
-                    windowId: ""
-                }
             },
             {
                 title: '收藏',
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
                 col_type: 'icon_round_small_4',
-                extra: {
-                    newWindow: true,
-                    windowId: ""
-                }
             },
             {
                 title: '设置',
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/设置.svg',
                 col_type: 'icon_round_small_4',
-                extra: {
-                    newWindow: true,
-                    windowId: ""
-                }
             }
         ]
 
