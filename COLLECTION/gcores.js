@@ -290,7 +290,7 @@ const gcores = {
                 extra: {
                     defaultValue: gcores.searchValue,
                     onChange: $.toString(() => {
-                        if (! input) {
+                        if (getItem('searchValue', '') && ! input) {
                             clearItem('searchValue')
                             clearItem('searchTab')
                             clearItem('searchOrderBy')
