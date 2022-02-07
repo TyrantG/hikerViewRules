@@ -47,7 +47,7 @@ const gcores = {
             extra: {ua: MOBILE_UA}
         })
 
-        gcores.dom.push(
+        const grid = [
             {
                 title: '资讯',
                 url: $('https://www.gcores.com/gapi/v1/originals?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=1&filter[list-all]=0&fields[articles]=title,desc,thumb').rule(() => {
@@ -124,7 +124,9 @@ const gcores = {
                     windowId: ""
                 }
             }
-        )
+        ]
+
+        grid.forEach(item => gcores.dom.push(item))
 
         setResult(gcores.dom);
     },
