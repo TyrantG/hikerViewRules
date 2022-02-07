@@ -81,9 +81,8 @@
                 this.imageList = list
             },
             imageClickHandle(index) {
-                alert(index)
-                // alert(JSON.stringify(item))
-                // fba.log($$$.require('hiker://page/gcores?rule=机核GCORES'))
+                const bannerItem = this.imageList[index]
+                fba.log($$$.require('hiker://page/gcores?rule=机核GCORES').name)
                 // this.$message.success()
                 // fy_bridge_app.showPic(window.location.origin+item)
                 /*fba.open(JSON.stringify({
