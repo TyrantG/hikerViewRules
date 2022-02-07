@@ -307,7 +307,7 @@ const gcores = {
                         refreshPage(true)
                         return "hiker://empty"
                     }),
-                    col_type: 'scroll_button'
+                    col_type: 'flex_button'
                 })
             })
         }
