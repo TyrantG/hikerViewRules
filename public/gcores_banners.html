@@ -37,7 +37,7 @@
 <div id="app">
     <el-carousel class="carousel" indicator-position="outside" trigger="click" arrow="always">
         <el-carousel-item v-for="(item, index) in imageList" :key="index">
-            <el-image class="image" :src="item.src" fit="cover" @click="imageClickHandle(item)"></el-image>
+            <el-image class="image" :src="item.src" fit="cover" @click="imageClickHandle(index)"></el-image>
         </el-carousel-item>
     </el-carousel>
 </div>
@@ -80,8 +80,8 @@
                 localStorage.setItem('time', new Date().getTime().toString())
                 this.imageList = list
             },
-            imageClickHandle(item) {
-                alert(item)
+            imageClickHandle(index) {
+                alert(index)
                 // alert(JSON.stringify(item))
                 // fba.log($$$.require('hiker://page/gcores?rule=机核GCORES'))
                 // this.$message.success()
