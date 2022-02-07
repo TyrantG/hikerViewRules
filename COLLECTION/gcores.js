@@ -380,7 +380,7 @@ const gcores = {
                     title: item.attributes.title,
                     desc: item.attributes.desc || item.attributes.description,
                     pic_url: gcores.imageUrl+(item.attributes.thumb || item.attributes.cover)+'@Referer='+gcores.headers.referer,
-                    url: gcores.subUrlBuild(item.id, 'articles'),
+                    url: gcores.subUrlBuild(item.id, gcores.searchTab),
                     col_type: 'pic_1'
                 })
             })
@@ -427,7 +427,7 @@ const gcores = {
         if (media.type === 'IMAGE')
             images += '<img src="'+gcores.imageUrl+media.data.path+'" alt="'+key+'" />'
         else if (media.type === 'EMBED') {
-            if (media.data.content.includes('bilibili')) media.data.content = "https:"+media.data.content.replace(/\\"/g, '"').match(/src="(.*?)"/)[1]
+            if (media.data.content.includes('bilibili')) media.data.content = "https:"+decodeURIComponent(media.data.content).replace(/\\"/g, '"').match(/src="(.*?)"/)[1]
             gcores.playlist.push({
                 title: '媒体'+(gcores.playlist.length+1),
                 url: "web://"+media.data.content
