@@ -126,7 +126,7 @@ const gcores = {
             }
         ]
 
-        gcores.dom.push(grid)
+        gcores.dom.push(...grid)
 
         setResult(gcores.dom);
     },
