@@ -631,7 +631,7 @@ const gcores = {
                 })
                 gcores.dom.push({
                     title: item.attributes.title,
-                    url: gcores.audioUrl+item.attributes.audio,
+                    url: item.attributes.audio.includes('http') ? item.attributes.audio : gcores.audioUrl+item.attributes.audio,
                     col_type: 'text_2'
                 })
             }
