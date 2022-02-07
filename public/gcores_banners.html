@@ -63,9 +63,9 @@
             initData() {
                 const html = request("https://www.gcores.com")
                 const json = fba.parseDomForArray(html, '.focusImages&&.focusImages_item')
+                fba.log(typeof json)
                 const arr = JSON.parse(json)
                 arr.forEach(item => {
-                    fba.log(item.match(/url\((.*?)\)/)[1])
                     this.imageList.push({
                         src: item.match(/url\((.*?)\)/)[1]
                     })
