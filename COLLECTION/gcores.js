@@ -74,6 +74,7 @@ const gcores = {
         }
     },
     x5SubUrlBuild: bannerItem => {
+        log(bannerItem)
         switch (bannerItem.type) {
             case 'articles':
                 return gcores.articlesDescParse(bannerItem.id, bannerItem.url)
@@ -495,8 +496,8 @@ const gcores = {
         setResult(gcores.dom);
     },
     albumsDescParse: (id, url) => {
-        const page = url.split('##')[1]
         log(url)
+        const page = url.split('##')[1]
         if (parseInt(page) === 1) {
             const api_url = "https://www.gcores.com/gapi/v1/albums/"+id+"?include=sale-options,shop-item,album-bundles.sale-options,wallpapers"
             const apiData = fetch(api_url, {headers: gcores.headers})
