@@ -499,7 +499,6 @@ const gcores = {
         setResult(gcores.dom);
     },
     albumsDescParse: (id, url) => {
-        log(url)
         const page = url.split('##')[1]
         if (parseInt(page) === 1) {
             const api_url = "https://www.gcores.com/gapi/v1/albums/"+id+"?include=sale-options,shop-item,album-bundles.sale-options,wallpapers"
@@ -521,7 +520,7 @@ const gcores = {
             )
         }
 
-        const published_radios_url = "https://www.gcores.com/gapi/v1/albums/"+id+"/published-radios?page[limit]=2&page[offset]="+(page-1)*2+"&include=media,category,albums"
+        const published_radios_url = "https://www.gcores.com/gapi/v1/albums/"+id+"/published-radios?page[limit]=16&page[offset]="+(page-1)*16+"&include=media,category,albums"
         const published_radios_api_data = fetch(published_radios_url, {headers: gcores.headers})
         const published_radios_data = JSON.parse(published_radios_api_data)
 
