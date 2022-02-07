@@ -116,6 +116,11 @@ const gcores = {
         /*const pageData = fetch(gcores.currentUrl, {headers: gcores.headers})
         const jsonString = pageData.match(/__PRELOADED_STATE__ = (.*?)<\/script>/)[1]
         const data = JSON.parse(jsonString.trim())*/
+        gcores.dom.push({
+            url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
+            col_type:"x5_webview_single",
+            extra: {ua: MOBILE_UA}
+        })
 
         gcores.dom.push(
             {
