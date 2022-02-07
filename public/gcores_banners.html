@@ -54,10 +54,10 @@
         created() {
             eval(fba.getInternalJs());
             const saveTime = localStorage.getItem('time') || 0
-            if (new Date().getTime() - parseInt(saveTime) > 1000*60*60*2)
+            // if (new Date().getTime() - parseInt(saveTime) > 1000*60*60*2)
                 this.initData()
-            else
-                this.initImageList()
+            // else
+            //     this.initImageList()
         },
         methods: {
             initImageList() {
@@ -69,8 +69,11 @@
                 const arr = JSON.parse(json)
                 let list = []
                 arr.forEach(item => {
+                    let href = fba.parseDomForHtml(item, '.focusImages_item&&href')
                     list.push({
-                        src: item.match(/url\((.*?)\)/)[1]
+                        src: item.match(/url\((.*?)\)/)[1],
+                        url: 'https://www.gcores.com'+href,
+                        type: href.match(/\/(.*?)\//)[1]
                     })
                 })
                 localStorage.setItem('imageList', JSON.stringify(list))
@@ -78,8 +81,19 @@
                 this.imageList = list
             },
             imageClickHandle(item) {
+                fba.log(item)
+                fba.log($$$.require('hiker://page/gcores?rule=机核GCORES'))
                 // this.$message.success()
                 // fy_bridge_app.showPic(window.location.origin+item)
+                /*fba.open(JSON.stringify({
+                    url: 'hiker://page/Sdetail#noHistory##immersiveTheme#?rule=机核GCORES',
+                    rule: $$$.require('hiker://page/gcores').articlesDescParse(params.id, MY_URL),
+                    extra:
+                        {
+                            newWindow: true,
+                            windowId: ""
+                        }
+                }))*/
             },
         },
     });
