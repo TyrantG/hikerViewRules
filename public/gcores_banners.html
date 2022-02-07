@@ -62,9 +62,9 @@
         methods: {
             initData() {
                 const html = request("https://www.gcores.com")
-                fba.log(html)
-                /*const json = fba.parseDomForArray(html, '.focusImages&&.focusImages_item&&style')
-                const arr = JSON.parse(json)*/
+                const json = fba.parseDomForHtml(html, '.focusImages&&.focusImages_item')
+                const arr = JSON.parse(json)
+                fba.log(arr)
             },
             imageClickHandle(item) {
                 // this.$message.success()
