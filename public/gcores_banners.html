@@ -53,7 +53,11 @@
         },
         created() {
             eval(fba.getInternalJs());
-            this.initData()
+            const saveTime = localStorage.getItem('time') || 0
+            if (new Date().getTime() - parseInt(saveTime) > 1000*60*60*2)
+                this.initData()
+            else
+                this.initImageList()
         },
         methods: {
             initImageList() {
@@ -70,6 +74,7 @@
                     })
                 })
                 localStorage.setItem('imageList', JSON.stringify(list))
+                localStorage.setItem('time', new Date().getTime().toString())
                 this.imageList = list
             },
             imageClickHandle(item) {
