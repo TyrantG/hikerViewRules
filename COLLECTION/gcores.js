@@ -327,6 +327,7 @@ const gcores = {
             const url = "https://www.gcores.com/gapi/v1/search?page[limit]=12&page[offset]="+(page-1)*12+"&type="+gcores.searchTab+"&query="+encodeURIComponent(gcores.searchValue)+"&order-by="+gcores.searchOrderBy
             const json = fetch(url, {headers: gcores.headers})
             const result = JSON.parse(json)
+            log(result)
 
             result.data.for(item => {
                 gcores.dom.push({
