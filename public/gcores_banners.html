@@ -48,11 +48,7 @@
         el: '#app',
         data() {
             return {
-                imageList: [
-                    /*{src: "https://image.gcores.com/ef5f0cb3-3e12-4c6a-89cc-bf4ac530a402.jpg?x-oss-process=image/resize,limit_1,m_fill,w_1500,h_840/quality,q_90"},
-                    {src: "http://test-homepage.dev.tyrantg.com/img/3.jpg"},
-                    {src: "http://test-homepage.dev.tyrantg.com/img/4.jpg"},*/
-                ]
+                imageList: []
             }
         },
         created() {
@@ -60,16 +56,21 @@
             this.initData()
         },
         methods: {
+            initImageList() {
+                this.imageList = JSON.parse(localStorage.getItem('imageList'))
+            },
             initData() {
                 const html = request("https://www.gcores.com")
                 const json = fba.parseDomForArray(html, '.focusImages&&.focusImages_item')
-                fba.log(typeof json)
                 const arr = JSON.parse(json)
+                let list = []
                 arr.forEach(item => {
-                    this.imageList.push({
+                    list.push({
                         src: item.match(/url\((.*?)\)/)[1]
                     })
                 })
+                localStorage.setItem('imageList', JSON.stringify(list))
+                this.imageList = list
             },
             imageClickHandle(item) {
                 // this.$message.success()
