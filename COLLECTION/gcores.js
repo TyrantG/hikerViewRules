@@ -9,6 +9,8 @@ const gcores = {
     playlist: [],
     page: MY_URL.split('##')[1],
     currentUrl: getItem('currentUrl', 'https://www.gcores.com'),
+    searchValue: getItem('searchValue', ''),
+    searchTab: getItem('searchTab', 'all'),
     imageUrl: 'https://image.gcores.com/',
     audioUrl: 'https://alioss.gcores.com/uploads/audio/',
     category: [
@@ -41,11 +43,11 @@ const gcores = {
         })
 
         gcores.dom.push({
-            url: $(gcores.empty).rule(() => {
+            url: $(gcores.empty+"#immersiveTheme#").rule(() => {
                 eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                 gcores.searchParse()
             }),
-            desc: '搜索',
+            title: '请输入关键词',
             col_type: "icon_1_search",
             extra: {
                 newWindow: true,
@@ -268,9 +270,15 @@ const gcores = {
     searchParse: () => {
         gcores.dom.push({
             title: '搜索',
+            url: $.toString(() => {
+                setItem('searchValue', input)
+                refreshPage(true)
+                return "hiker://empty"
+            }),
+            desc: '请输入关键词',
             col_type: 'input',
             extra: {
-                defaultValue: 'test'
+                defaultValue: gcores.searchValue
             }
         })
 
