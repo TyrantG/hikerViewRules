@@ -323,17 +323,54 @@ const gcores = {
                         col_type: 'flex_button'
                     })
                 })
+            } else {
+                const tabs = [
+                    {title: '文章', type: 'articles'},
+                    {title: '游戏', type: 'games'},
+                    {title: '电台', type: 'radios'},
+                    {title: '视频', type: 'videos'},
+                ]
+                const orders = [
+                    {title: '相关度', type: 'score'},
+                    {title: '时间', type: 'date'},
+                ]
+
+                tabs.forEach(tab => {
+                    gcores.dom.push({
+                        title: gcores.searchValue === tab.type ? '‘‘’’<strong><font color="red">'+tab.title+'</font></strong>' : tab.title,
+                        url: $(gcores.empty).lazyRule(params => {
+                            setItem("searchTab", params.type)
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            type: tab.type
+                        }),
+                        col_type: 'scroll_button',
+                    })
+                })
+                d.push({
+                    col_type: 'blank_block',
+                })
+                orders.forEach(order => {
+                    gcores.dom.push({
+                        title: gcores.searchOrderBy === order.type ? '‘‘’’<strong><font color="red">'+order.title+'</font></strong>' : order.title,
+                        url: $(gcores.empty).lazyRule(params => {
+                            setItem("searchOrderBy", params.type)
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            type: order.type
+                        }),
+                        col_type: 'scroll_button',
+                    })
+                })
+                d.push({
+                    col_type: 'blank_block',
+                })
             }
         }
 
         if (gcores.searchValue) {
-            const tabs = [
-                {title: '文章', type: 'articles'},
-                {title: '游戏', type: 'games'},
-                {title: '电台', type: 'radios'},
-                {title: '视频', type: 'videos'},
-            ]
-
             const url = "https://www.gcores.com/gapi/v1/search?page[limit]=12&page[offset]="+(page-1)*12+"&type="+gcores.searchTab+"&query="+encodeURIComponent(gcores.searchValue)+"&order-by="+gcores.searchOrderBy
             const json = fetch(url, {headers: gcores.headers})
             const result = JSON.parse(json)
