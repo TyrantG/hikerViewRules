@@ -43,7 +43,7 @@ const gcores = {
         })
 
         gcores.dom.push({
-            url: $(gcores.empty+"#immersiveTheme#").rule(() => {
+            url: $(gcores.empty+"#fullTheme##fypage").rule(() => {
                 eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                 gcores.searchParse()
             }),
@@ -268,6 +268,7 @@ const gcores = {
         })
     },
     searchParse: () => {
+        // setPageTitle('')
         gcores.dom.push({
             title: '搜索',
             url: $.toString(() => {
