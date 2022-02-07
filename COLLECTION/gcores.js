@@ -272,6 +272,7 @@ const gcores = {
         addListener('onClose', $.toString(() => {
             clearItem('searchValue')
             clearItem('searchTab')
+            clearItem('searchOrderBy')
         }))
 
         const page = MY_URL.split('##')[1]
@@ -287,7 +288,16 @@ const gcores = {
                 desc: '请输入关键词',
                 col_type: 'input',
                 extra: {
-                    defaultValue: gcores.searchValue
+                    defaultValue: gcores.searchValue,
+                    onChange: $.toString(() => {
+                        if (! input) {
+                            clearItem('searchValue')
+                            clearItem('searchTab')
+                            clearItem('searchOrderBy')
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }
+                    })
                 }
             })
 
