@@ -10,7 +10,8 @@ const gcores = {
     page: MY_URL.split('##')[1],
     currentUrl: getItem('currentUrl', 'https://www.gcores.com'),
     searchValue: getItem('searchValue', ''),
-    searchTab: getItem('searchTab', 'all'),
+    searchTab: getItem('searchTab', 'articles'),
+    searchOrderBy: getItem('searchOrderBy', 'score'),
     imageUrl: 'https://image.gcores.com/',
     audioUrl: 'https://alioss.gcores.com/uploads/audio/',
     category: [
@@ -272,6 +273,9 @@ const gcores = {
             clearItem('searchValue')
             clearItem('searchTab')
         }))
+
+        const page = url.split('##')[1]
+        log(page)
         gcores.dom.push({
             title: '搜索',
             url: $.toString(() => {
@@ -287,7 +291,15 @@ const gcores = {
         })
 
         if (gcores.searchValue) {
+            const tabs = [
+                {title: '文章', type: 'articles'},
+                {title: '游戏', type: 'games'},
+                {title: '电台', type: 'radios'},
+                {title: '视频', type: 'videos'},
+                {title: '用户', type: 'users'},
+            ]
 
+            const url = "https://www.gcores.com/gapi/v1/search?page[limit]=12&page[offset]=0&type=users&query=%E8%BE%90%E5%B0%84&order-by=score"
         } else {
             const hot_json = fetch("https://www.gcores.com/gapi/v1/search/recent-hot", {headers: gcores.headers})
             const hot_data = JSON.parse(hot_json)
