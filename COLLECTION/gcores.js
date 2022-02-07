@@ -516,7 +516,7 @@ const gcores = {
             )
         }
 
-        const published_radios_url = "https://www.gcores.com/gapi/v1/albums/"+id+"/published-radios?page[limit]=16&page[offset]="+(page-1)*16+"&include=media,category,albums"
+        const published_radios_url = "https://www.gcores.com/gapi/v1/albums/"+id+"/published-radios?page[limit]=2&page[offset]="+(page-1)*2+"&include=media,category,albums"
         const published_radios_api_data = fetch(published_radios_url, {headers: gcores.headers})
         const published_radios_data = JSON.parse(published_radios_api_data)
 
