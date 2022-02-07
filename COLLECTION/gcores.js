@@ -51,7 +51,7 @@ const gcores = {
             col_type: "icon_1_search",
             extra: {
                 newWindow: true,
-                windowId: ""
+                windowId: "机核GCORES·搜索"
             }
         })
 
