@@ -348,7 +348,7 @@ const gcores = {
                         col_type: 'scroll_button',
                     })
                 })
-                d.push({
+                gcores.dom.push({
                     col_type: 'blank_block',
                 })
                 orders.forEach(order => {
@@ -364,7 +364,7 @@ const gcores = {
                         col_type: 'scroll_button',
                     })
                 })
-                d.push({
+                gcores.dom.push({
                     col_type: 'blank_block',
                 })
             }
