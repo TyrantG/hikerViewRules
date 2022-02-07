@@ -49,15 +49,15 @@
         data() {
             return {
                 imageList: [
-                    /*{src: "http://test-homepage.dev.tyrantg.com/img/2.jpg"},
+                    /*{src: "https://image.gcores.com/ef5f0cb3-3e12-4c6a-89cc-bf4ac530a402.jpg?x-oss-process=image/resize,limit_1,m_fill,w_1500,h_840/quality,q_90"},
                     {src: "http://test-homepage.dev.tyrantg.com/img/3.jpg"},
                     {src: "http://test-homepage.dev.tyrantg.com/img/4.jpg"},*/
                 ]
             }
         },
         created() {
-            eval(fba.getInternalJs());
-            this.initData()
+            // eval(fba.getInternalJs());
+            // this.initData()
         },
         methods: {
             initData() {
@@ -65,7 +65,9 @@
                 const json = fba.parseDomForArray(html, '.focusImages&&.focusImages_item')
                 const arr = JSON.parse(json)
                 arr.forEach(item => {
-                    this.imageList.push(item.match(/url\((.*?)\)/))
+                    this.imageList.push({
+                        src: item.match(/url\((.*?)\)/)[1]
+                    })
                 })
             },
             imageClickHandle(item) {
