@@ -94,8 +94,8 @@
                 // fy_bridge_app.showPic(window.location.origin+item)
                 // eval(request())
                 let findRule = 'js:' + $$$.toString(bannerItem => {
-                    log($.require('hiker://page/gcores?rule=机核GCORES'))
-                    $.require('hiker://page/gcores?rule=机核GCORES').x5SubUrlBuild(bannerItem)
+                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                    gcores.x5SubUrlBuild(bannerItem)
                 }, bannerItem)
                 fba.open(JSON.stringify({
                     url: bannerItem.url,
