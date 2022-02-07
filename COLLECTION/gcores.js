@@ -76,33 +76,13 @@ const gcores = {
     x5SubUrlBuild: bannerItem => {
         switch (bannerItem.type) {
             case 'articles':
-                return $(bannerItem.url+"#immersiveTheme#").rule(params => {
-                    $.require('hiker://page/gcores').articlesDescParse(params.id, params.url)
-                }, {
-                    id: bannerItem.id,
-                    url: bannerItem.url,
-                })
+                return gcores.articlesDescParse(bannerItem.id, bannerItem.url)
             case 'videos':
-                return $(bannerItem.url+"#immersiveTheme#").rule(params => {
-                    $.require('hiker://page/gcores').videosDescParse(params.id, params.url)
-                }, {
-                    id: bannerItem.id,
-                    url: bannerItem.url,
-                })
+                return gcores.videosDescParse(bannerItem.id, bannerItem.url)
             case 'radios':
-                return $(bannerItem.url+"#immersiveTheme#").rule(params => {
-                    $.require('hiker://page/gcores').audiosDescParse(params.id, params.url)
-                }, {
-                    id: bannerItem.id,
-                    url: bannerItem.url,
-                })
+                return gcores.audiosDescParse(bannerItem.id, bannerItem.url)
             case 'albums':
-                return $(bannerItem.url+"#immersiveTheme##fypage").rule(params => {
-                    $.require('hiker://page/gcores').albumsDescParse(params.id, params.url)
-                }, {
-                    id: bannerItem.id,
-                    url: bannerItem.url,
-                })
+                return gcores.albumsDescParse(bannerItem.id, bannerItem.url)
         }
     },
     baseAdapter: selected => {
