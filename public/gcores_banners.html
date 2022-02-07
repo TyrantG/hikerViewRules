@@ -59,10 +59,10 @@
         created() {
             eval(fba.getInternalJs());
             const saveTime = localStorage.getItem('time') || 0
-            // if (new Date().getTime() - parseInt(saveTime) > 1000*60*60*2)
+            if (new Date().getTime() - parseInt(saveTime) > 1000*60*60*2)
                 this.initData()
-            // else
-            //     this.initImageList()
+            else
+                this.initImageList()
         },
         methods: {
             initImageList() {
@@ -89,10 +89,6 @@
             },
             imageClickHandle(index) {
                 const bannerItem = this.imageList[index]
-                // alert($$$.require('hiker://page/gcores?rule=机核GCORES').name)
-                // this.$message.success()
-                // fy_bridge_app.showPic(window.location.origin+item)
-                // eval(request())
                 let detailRule = 'js:' + $$$.toString(bannerItem => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.x5SubUrlBuild(bannerItem)

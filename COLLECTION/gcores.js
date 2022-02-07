@@ -284,6 +284,7 @@ const gcores = {
             text += gcores.htmlTagParse(block, media)
         })
 
+        setPageTitle(data.data.attributes.title)
         gcores.dom.push(
             {
                 title: data.data.attributes.title,
@@ -344,6 +345,7 @@ const gcores = {
             text += gcores.htmlTagParse(block, media)
         })
 
+        setPageTitle(data.data.attributes.title)
         gcores.dom.push(
             {
                 title: data.data.attributes.title,
@@ -428,6 +430,7 @@ const gcores = {
             text += gcores.htmlTagParse(block, media)
         })
 
+        setPageTitle(data.data.attributes.title)
         gcores.dom.push(
             {
                 title: data.data.attributes.title,
@@ -498,6 +501,7 @@ const gcores = {
             const apiData = fetch(api_url, {headers: gcores.headers})
             const data = JSON.parse(apiData)
 
+            setPageTitle(data.data.attributes.title)
             gcores.dom.push(
                 {
                     title: data.data.attributes.title,
