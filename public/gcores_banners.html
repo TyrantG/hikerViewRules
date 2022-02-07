@@ -87,18 +87,17 @@
             },
             imageClickHandle(index) {
                 const bannerItem = this.imageList[index]
-                alert($$$.require('hiker://page/gcores?rule=机核GCORES').name)
+                // alert($$$.require('hiker://page/gcores?rule=机核GCORES').name)
                 // this.$message.success()
                 // fy_bridge_app.showPic(window.location.origin+item)
-                /*fba.open(JSON.stringify({
-                    url: 'hiker://page/Sdetail#noHistory##immersiveTheme#?rule=机核GCORES',
-                    rule: $$$.require('hiker://page/gcores').articlesDescParse(params.id, MY_URL),
+                fba.open(JSON.stringify({
+                    url: bannerItem.url,
                     extra:
                         {
                             newWindow: true,
                             windowId: ""
                         }
-                }))*/
+                }))
             },
         },
     });
