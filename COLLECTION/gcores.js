@@ -141,12 +141,42 @@ const gcores = {
         gcores.dom.push(
             {
                 title: '资讯',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/news.svg',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/资讯.svg',
                 col_type: 'icon_round_4'
             },
             {
                 title: '视频',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/video.svg',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/视频.svg',
+                col_type: 'icon_round_4'
+            },
+            {
+                title: '电台',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/电台.svg',
+                col_type: 'icon_round_4'
+            },
+            {
+                title: '文章',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/文章.svg',
+                col_type: 'icon_round_4'
+            },
+            {
+                title: '播单',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/播单.svg',
+                col_type: 'icon_round_4'
+            },
+            {
+                title: '关注',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
+                col_type: 'icon_round_4'
+            },
+            {
+                title: '收藏',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
+                col_type: 'icon_round_4'
+            },
+            {
+                title: '设置',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/设置.svg',
                 col_type: 'icon_round_4'
             }
         )
@@ -543,5 +573,3 @@ const gcores = {
         setResult(gcores.dom);
     },
 }
-
-$.exports = gcores
