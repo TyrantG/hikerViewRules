@@ -93,11 +93,12 @@
                 // this.$message.success()
                 // fy_bridge_app.showPic(window.location.origin+item)
                 // eval(request())
-                let findRule = 'js:' + $$$.toString(bannerItem => {
+                let detailRule = 'js:' + $$$.toString(bannerItem => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.x5SubUrlBuild(bannerItem)
                 }, bannerItem)
-                fba.open(JSON.stringify({
+                fy_bridge_app.toDetailPage('所有分类', bannerItem.url, '', '', detailRule, '')
+                /*fba.open(JSON.stringify({
                     url: bannerItem.url,
                     findRule: findRule,
                     extra:
@@ -105,7 +106,7 @@
                             newWindow: true,
                             windowId: ""
                         }
-                }))
+                }))*/
             },
         },
     });
