@@ -12,8 +12,6 @@ const gcores = {
     imageUrl: 'https://image.gcores.com/',
     audioUrl: 'https://alioss.gcores.com/uploads/audio/',
     category: [
-        {title: '首页', url: 'https://www.gcores.com'},
-        {title: '关注用户', url: 'hiker://empty'},
         {title: '资讯', url: 'https://www.gcores.com/gapi/v1/originals?page[limit]=$limit&page[offset]=$offset&sort=-published-at&include=category,user&filter[is-news]=1&filter[list-all]=0&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user'},
         {title: '视频', url: 'https://www.gcores.com/gapi/v1/videos?page[limit]=$limit&page[offset]=$offset&sort=-published-at&include=category,user,djs&filter[list-all]=0&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user,djs'},
         {title: '电台', url: 'https://www.gcores.com/gapi/v1/radios?page[limit]=$limit&page[offset]=$offset&sort=-published-at&include=category,user,djs&filter[list-all]=0&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user,djs'},
@@ -24,7 +22,7 @@ const gcores = {
     ],
     cateSelected: getItem('cateSelected', '0'),
     baseParse: () => {
-        if (parseInt(gcores.page) === 1) {
+        /*if (parseInt(gcores.page) === 1) {
             gcores.category.forEach((category, index) => {
                 category.index = index.toString()
                 gcores.dom.push({
@@ -39,9 +37,96 @@ const gcores = {
                 })
             })
             gcores.dom.push({col_type: 'blank_block'})
-        }
+        }*/
 
-        gcores.baseAdapter(parseInt(gcores.cateSelected))
+        // gcores.baseAdapter(parseInt(gcores.cateSelected))
+
+        gcores.dom.push({
+            url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
+            col_type:"x5_webview_single",
+            extra: {ua: MOBILE_UA}
+        })
+
+        const grid = [
+            {
+                title: '资讯',
+                url: $('https://www.gcores.com/gapi/v1/originals?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=1&filter[list-all]=0&fields[articles]=title,desc,thumb').rule(() => {
+                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                    gcores.baseAdapter(0)
+                }),
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/资讯.svg',
+                col_type: 'icon_round_small_4',
+                extra: {
+                    newWindow: true,
+                    windowId: "",
+                },
+            },
+            {
+                title: '视频',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/视频.svg',
+                col_type: 'icon_round_small_4',
+                extra: {
+                    newWindow: true,
+                    windowId: ""
+                }
+            },
+            {
+                title: '电台',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/电台.svg',
+                col_type: 'icon_round_small_4',
+                extra: {
+                    newWindow: true,
+                    windowId: ""
+                }
+            },
+            {
+                title: '文章',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/文章.svg',
+                col_type: 'icon_round_small_4',
+                extra: {
+                    newWindow: true,
+                    windowId: ""
+                }
+            },
+            {
+                title: '播单',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/播单.svg',
+                col_type: 'icon_round_small_4',
+                extra: {
+                    newWindow: true,
+                    windowId: ""
+                }
+            },
+            {
+                title: '关注',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
+                col_type: 'icon_round_small_4',
+                extra: {
+                    newWindow: true,
+                    windowId: ""
+                }
+            },
+            {
+                title: '收藏',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
+                col_type: 'icon_round_small_4',
+                extra: {
+                    newWindow: true,
+                    windowId: ""
+                }
+            },
+            {
+                title: '设置',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/设置.svg',
+                col_type: 'icon_round_small_4',
+                extra: {
+                    newWindow: true,
+                    windowId: ""
+                }
+            }
+        ]
+
+        gcores.dom.push(grid)
 
         setResult(gcores.dom);
     },
@@ -90,96 +175,39 @@ const gcores = {
         }
     },
     baseAdapter: selected => {
-        const url = gcores.urlParamsBuild(gcores.currentUrl, {limit: 12, offset: 12 * (gcores.page-1)})
+        const url = gcores.urlParamsBuild(MY_URL, {limit: 12, offset: 12 * (gcores.page-1)})
         const apiData = fetch(url, {headers: gcores.headers})
         let data
 
         switch (selected) {
-            case 1:
-            case 2:
+            case 0:
+            case 3:
                 data = JSON.parse(apiData).data
                 gcores.articlesParse(data)
                 break
-            case 3:
+            case 1:
                 data = JSON.parse(apiData).data
                 gcores.videosParse(data)
                 break
-            case 4:
+            case 2:
                 data = JSON.parse(apiData).data
                 gcores.radiosParse(data)
                 break
-            case 5:
-                data = JSON.parse(apiData).data
-                gcores.articlesParse(data)
-                break
-            case 6:
+            case 4:
                 data = JSON.parse(apiData).data
                 gcores.albumsParse(data)
                 break
-            case 7:
+            /*case 7:
                 data = JSON.parse(apiData).data
                 gcores.collectionsParse(data)
                 break
             case 8:
                 data = JSON.parse(apiData).data
                 gcores.gamesParse(data)
-                break
+                break*/
             default:
-                gcores.homeParse()
         }
-    },
-    homeParse: () => {
-        /*const pageData = fetch(gcores.currentUrl, {headers: gcores.headers})
-        const jsonString = pageData.match(/__PRELOADED_STATE__ = (.*?)<\/script>/)[1]
-        const data = JSON.parse(jsonString.trim())*/
-        gcores.dom.push({
-            url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
-            col_type:"x5_webview_single",
-            extra: {ua: MOBILE_UA}
-        })
-
-        gcores.dom.push(
-            {
-                title: '资讯',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/资讯.svg',
-                col_type: 'icon_round_small_4'
-            },
-            {
-                title: '视频',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/视频.svg',
-                col_type: 'icon_round_small_4'
-            },
-            {
-                title: '电台',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/电台.svg',
-                col_type: 'icon_round_small_4'
-            },
-            {
-                title: '文章',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/文章.svg',
-                col_type: 'icon_round_small_4'
-            },
-            {
-                title: '播单',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/播单.svg',
-                col_type: 'icon_round_small_4'
-            },
-            {
-                title: '关注',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
-                col_type: 'icon_round_small_4'
-            },
-            {
-                title: '收藏',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
-                col_type: 'icon_round_small_4'
-            },
-            {
-                title: '设置',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/设置.svg',
-                col_type: 'icon_round_small_4'
-            }
-        )
+        setResult(gcores.dom);
     },
     videosParse: data => {
         data.forEach(item => {
