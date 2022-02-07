@@ -49,9 +49,9 @@
         data() {
             return {
                 imageList: [
-                    {src: "http://test-homepage.dev.tyrantg.com/img/2.jpg"},
+                    /*{src: "http://test-homepage.dev.tyrantg.com/img/2.jpg"},
                     {src: "http://test-homepage.dev.tyrantg.com/img/3.jpg"},
-                    {src: "http://test-homepage.dev.tyrantg.com/img/4.jpg"},
+                    {src: "http://test-homepage.dev.tyrantg.com/img/4.jpg"},*/
                 ]
             }
         },
@@ -63,8 +63,10 @@
             initData() {
                 const html = request("https://www.gcores.com")
                 const json = fba.parseDomForArray(html, '.focusImages&&.focusImages_item')
-                // const arr = JSON.parse(json)
-                fba.log(json)
+                const arr = JSON.parse(json)
+                arr.forEach(item => {
+                    this.imageList.push(item.match(/url\((.*?)\)/))
+                })
             },
             imageClickHandle(item) {
                 // this.$message.success()
