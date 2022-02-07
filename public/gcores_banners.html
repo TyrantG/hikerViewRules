@@ -98,7 +98,7 @@
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.x5SubUrlBuild(bannerItem)
                 }, bannerItem)
-
+                fba.log(bannerItem.url)
                 fba.open(JSON.stringify({
                     title: "",
                     url: bannerItem.url,
