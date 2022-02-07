@@ -274,7 +274,7 @@ const gcores = {
             clearItem('searchTab')
         }))
 
-        const page = url.split('##')[1]
+        const page = MY_URL.split('##')[1]
         log(page)
         gcores.dom.push({
             title: '搜索',
