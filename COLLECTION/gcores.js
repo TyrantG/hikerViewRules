@@ -49,25 +49,29 @@ const gcores = {
         switch (cate) {
             case 'articles':
                 return $("https://www.gcores.com/articles/"+id+"#immersiveTheme#").rule(params => {
-                    $.require('hiker://page/gcores').articlesDescParse(params.id, MY_URL)
+                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                    gcores.articlesDescParse(params.id, MY_URL)
                 }, {
                     id: id
                 })
             case 'videos':
                 return $("https://www.gcores.com/videos/"+id+"#immersiveTheme#").rule(params => {
-                    $.require('hiker://page/gcores').videosDescParse(params.id, MY_URL)
+                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                    gcores.videosDescParse(params.id, MY_URL)
                 }, {
                     id: id
                 })
             case 'radios':
                 return $("https://www.gcores.com/radios/"+id+"#immersiveTheme#").rule(params => {
-                    $.require('hiker://page/gcores').audiosDescParse(params.id, MY_URL)
+                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                    gcores.audiosDescParse(params.id, MY_URL)
                 }, {
                     id: id
                 })
             case 'albums':
                 return $("https://www.gcores.com/albums/"+id+"#immersiveTheme##fypage").rule(params => {
-                    $.require('hiker://page/gcores').albumsDescParse(params.id, MY_URL)
+                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                    gcores.albumsDescParse(params.id, MY_URL)
                 }, {
                     id: id
                 })
