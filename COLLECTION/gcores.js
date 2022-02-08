@@ -897,7 +897,7 @@ const gcores = {
             if (resource.type === 'users' && userId.includes(resource.id)) {
                 gcores.dom.push({
                     title: resource.attributes.nickname,
-                    pic_url: gcores.imageUrl+item.attributes.thumb,
+                    pic_url: gcores.imageUrl+resource.attributes.thumb,
                     // url: $(''),
                     col_type: 'avatar'
                 })
