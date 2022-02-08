@@ -176,7 +176,7 @@ const gcores = {
                 col_type: 'icon_2',
             },
         )
-
+        log(attention)
         if (gcores.homeSelected === 'attention') {
             attention.forEach(item => {
                 let sub = item.split('$$$')
@@ -488,7 +488,7 @@ const gcores = {
 
                 tabs.forEach(tab => {
                     gcores.dom.push({
-                        title: gcores.searchTab === tab.type ? '‘‘’’<strong><font color="ff1493">'+tab.title+'</font></strong>' : tab.title,
+                        title: gcores.searchTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
                         url: $(gcores.empty).lazyRule(params => {
                             setItem("searchTab", params.type)
                             refreshPage(true)
@@ -504,7 +504,7 @@ const gcores = {
                 })
                 orders.forEach(order => {
                     gcores.dom.push({
-                        title: gcores.searchOrderBy === order.type ? '‘‘’’<strong><font color="ff1493">'+order.title+'</font></strong>' : order.title,
+                        title: gcores.searchOrderBy === order.type ? '‘‘’’<strong><font color="#ff1493">'+order.title+'</font></strong>' : order.title,
                         url: $(gcores.empty).lazyRule(params => {
                             setItem("searchOrderBy", params.type)
                             refreshPage(true)
@@ -581,7 +581,7 @@ const gcores = {
                 return '<h5>'+block.text+'</h5>'
             case 'header-six':
                 return '<h6>'+block.text+'</h6>'
-            case 'unordeff1493-list-item':
+            case 'unordered-list-item':
                 return '<li>'+block.text+'</li>'
             case 'atomic':
                 let images = ''
