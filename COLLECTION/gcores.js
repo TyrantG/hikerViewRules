@@ -59,239 +59,255 @@ const gcores = {
 
         const attention = fetch(gcores.plugins.attention).split('\n').filter(item => item)
         // const collection = fetch(gcores.plugins.collection).split('\n').filter(item => item)
-
-        gcores.dom.push({
-            url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
-            col_type:"x5_webview_single",
-            extra: {ua: MOBILE_UA}
-        })
-
-        gcores.dom.push({
-            url: $(gcores.empty+"#fullTheme##noHistory#$$fypage").rule(() => {
-                eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
-                gcores.searchParse()
-            }),
-            title: '请输入关键词',
-            col_type: "icon_1_search",
-            extra: {
-                newWindow: true,
-                windowId: "机核GCORES·搜索"
-            }
-        })
-
-        const grid = [
-            {
-                title: '资讯',
-                url: $('https://www.gcores.com/gapi/v1/originals?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=1&filter[list-all]=0&fields[articles]=title,desc,thumb#noHistory#$$fypage').rule(() => {
-                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
-                    gcores.baseAdapter(0)
-                }),
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/资讯.svg',
-                col_type: 'icon_round_small_4',
-            },
-            {
-                title: '视频',
-                url: $('https://www.gcores.com/gapi/v1/videos?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[list-all]=0&fields[videos]=title,desc,thumb#noHistory#$$fypage').rule(() => {
-                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
-                    gcores.baseAdapter(1)
-                }),
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/视频.svg',
-                col_type: 'icon_round_small_4',
-            },
-            {
-                title: '电台',
-                url: $('https://www.gcores.com/gapi/v1/radios?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[list-all]=0&fields[radios]=title,desc,thumb#noHistory#$$fypage').rule(() => {
-                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
-                    gcores.baseAdapter(2)
-                }),
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/电台.svg',
-                col_type: 'icon_round_small_4',
-            },
-            {
-                title: '文章',
-                url: $('https://www.gcores.com/gapi/v1/articles?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=0&filter[list-all]=0&fields[articles]=title,desc,thumb#noHistory#$$fypage').rule(() => {
-                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
-                    gcores.baseAdapter(3)
-                }),
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/文章.svg',
-                col_type: 'icon_round_small_4',
-            },
-            {
-                title: '播单',
-                url: $('https://www.gcores.com/gapi/v1/albums?page[limit]=$limit&page[offset]=$offset&sort=-updated-at&filter[is-on-sale]=0#noHistory#$$fypage').rule(() => {
-                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
-                    gcores.baseAdapter(4)
-                }),
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/播单.svg',
-                col_type: 'icon_round_small_4',
-            },
-            /*{
-                title: '关注',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
-                col_type: 'icon_round_small_4',
-            },
-            {
-                title: '收藏',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
-                col_type: 'icon_round_small_4',
-            },*/
-            {
-                title: '游戏',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/游戏.svg',
-                col_type: 'icon_round_small_4',
-            },
-            {
-                title: '专题',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/专题.svg',
-                col_type: 'icon_round_small_4',
-            },
-            {
-                title: '设置',
-                url: 'toast://摆烂了',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/设置.svg',
-                col_type: 'icon_round_small_4',
-            }
-        ]
-
-        grid.forEach(item => gcores.dom.push(item))
-
-        const attentionField = gcores.userFold === 'fold' ? '展开' : '折叠'
-
-        gcores.dom.push(
-            {
-                title: gcores.homeSelected === 'attention' ? '‘‘’’<strong><font color="#ff1493">'+attentionField+'</font></strong>' : attentionField,
-                url: $(gcores.empty).lazyRule(params => {
-                    setItem('homeSelected', 'attention')
-                    setItem('userFold', params.fold === 'fold' ? 'unfold' : 'fold')
-                    refreshPage(true)
-                    return 'hiker://empty'
-                }, {
-                    fold: gcores.userFold
-                }),
-                col_type: 'text_4',
-            },
-            {
-                title: gcores.homeSelected === 'top' ? '‘‘’’<strong><font color="#ff1493">置顶</font></strong>' : '置顶',
-                url: $(gcores.empty).lazyRule(() => {
-                    setItem('userFold', 'unfold')
-                    setItem('homeSelected', 'top')
-                    refreshPage(true)
-                    return 'hiker://empty'
-                }),
-                col_type: 'text_4',
-            },
-            {
-                title: gcores.homeSelected === 'delete' ? '‘‘’’<strong><font color="#ff1493">删除</font></strong>' : '删除',
-                url: $(gcores.empty).lazyRule(() => {
-                    setItem('userFold', 'unfold')
-                    setItem('homeSelected', 'delete')
-                    refreshPage(true)
-                    return 'hiker://empty'
-                }),
-                col_type: 'text_4',
-            },
-            {
-                title: gcores.homeSelected === 'see' ? '‘‘’’<strong><font color="#ff1493">查看</font></strong>' : '查看',
-                url: $(gcores.empty).lazyRule(() => {
-                    setItem('userFold', 'unfold')
-                    setItem('homeSelected', 'see')
-                    refreshPage(true)
-                    return 'hiker://empty'
-                }),
-                col_type: 'text_4',
-            },
-            /*{
-                title: gcores.homeSelected === 'collection' ? '『收藏』：'+collection.length : '收藏：'+collection.length,
-                url: $(gcores.empty).lazyRule(() => {
-                    setItem('homeSelected', 'collection')
-                    refreshPage(true)
-                    return "toast://切换为收藏"
-                }),
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
-                col_type: 'icon_2',
-            },*/
-        )
-
-        const tabs = [
-            {title: '文章', type: 'articles'},
-            {title: '资讯', type: 'originals'},
-            {title: '视频', type: 'videos'},
-            {title: '电台', type: 'radios'},
-        ]
-
-        tabs.forEach(tab => {
+        const page = url.split('$$')[1]
+        if (parseInt(page) === 1) {
             gcores.dom.push({
-                title: gcores.authorTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
-                url: $(gcores.empty).lazyRule(params => {
-                    setItem("authorTab", params.type)
-                    refreshPage(true)
-                    return "hiker://empty"
-                }, {
-                    type: tab.type
-                }),
-                col_type: 'text_4',
+                url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
+                col_type:"x5_webview_single",
+                extra: {ua: MOBILE_UA}
             })
-        })
 
-        if (gcores.userFold === 'unfold') {
-            attention.forEach((item, index) => {
-                let sub = item.split('$$$'), titlePrefix = '', userUrl
-
-                if (gcores.homeSelected === 'attention' && index.toString() === gcores.userSelected) {
-                    titlePrefix = '☑'
-                    userUrl = $(gcores.empty).lazyRule(params => {
-                        setItem('userSelected', params.index.toString())
-                        setItem("authorTab", 'articles')
-                        refreshPage(false)
-                        return 'hiker://empty'
-                    }, {
-                        index: index
-                    })
-                } else if (gcores.homeSelected === 'top') {
-                    titlePrefix = '✵'
-                    userUrl = $(gcores.empty).lazyRule(params => {
-                        let current = params.attention[params.index]
-                        params.attention.splice(params.index, 1)
-                        params.attention.unshift(current)
-                        writeFile(params.filename, params.attention.join('\n'))
-                        setItem("userSelected", '0')
-                        refreshPage(false)
-                        return 'hiker://empty'
-                    }, {
-                        index: index,
-                        attention: attention,
-                        filename: gcores.plugins.attention
-                    })
-                } else if (gcores.homeSelected === 'delete') {
-                    titlePrefix = '❌'
-                    userUrl = $(gcores.empty).lazyRule(params => {
-                        params.attention.splice(params.index, 1)
-                        writeFile(params.filename, params.attention.join('\n'))
-                        setItem("userSelected", '0')
-                        refreshPage(false)
-                        return 'hiker://empty'
-                    }, {
-                        index: index,
-                        attention: attention,
-                        filename: gcores.plugins.attention
-                    })
-                } else {
-                    userUrl = $('https://www.gcores.com/users/'+sub[2]+'/content#noHistory#$$fypage').rule(params => {
-                        eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
-                        gcores.authorDescParse(params.id, MY_URL)
-                    }, {
-                        id: sub[2]
-                    })
+            gcores.dom.push({
+                url: $(gcores.empty+"#fullTheme##noHistory#$$fypage").rule(() => {
+                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                    gcores.searchParse()
+                }),
+                title: '请输入关键词',
+                col_type: "icon_1_search",
+                extra: {
+                    newWindow: true,
+                    windowId: "机核GCORES·搜索"
                 }
+            })
 
+            const grid = [
+                {
+                    title: '资讯',
+                    url: $('https://www.gcores.com/gapi/v1/originals?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=1&filter[list-all]=0&fields[articles]=title,desc,thumb#noHistory#$$fypage').rule(() => {
+                        eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                        gcores.baseAdapter(0)
+                    }),
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/资讯.svg',
+                    col_type: 'icon_round_small_4',
+                },
+                {
+                    title: '视频',
+                    url: $('https://www.gcores.com/gapi/v1/videos?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[list-all]=0&fields[videos]=title,desc,thumb#noHistory#$$fypage').rule(() => {
+                        eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                        gcores.baseAdapter(1)
+                    }),
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/视频.svg',
+                    col_type: 'icon_round_small_4',
+                },
+                {
+                    title: '电台',
+                    url: $('https://www.gcores.com/gapi/v1/radios?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[list-all]=0&fields[radios]=title,desc,thumb#noHistory#$$fypage').rule(() => {
+                        eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                        gcores.baseAdapter(2)
+                    }),
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/电台.svg',
+                    col_type: 'icon_round_small_4',
+                },
+                {
+                    title: '文章',
+                    url: $('https://www.gcores.com/gapi/v1/articles?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=0&filter[list-all]=0&fields[articles]=title,desc,thumb#noHistory#$$fypage').rule(() => {
+                        eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                        gcores.baseAdapter(3)
+                    }),
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/文章.svg',
+                    col_type: 'icon_round_small_4',
+                },
+                {
+                    title: '播单',
+                    url: $('https://www.gcores.com/gapi/v1/albums?page[limit]=$limit&page[offset]=$offset&sort=-updated-at&filter[is-on-sale]=0#noHistory#$$fypage').rule(() => {
+                        eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                        gcores.baseAdapter(4)
+                    }),
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/播单.svg',
+                    col_type: 'icon_round_small_4',
+                },
+                /*{
+                    title: '关注',
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
+                    col_type: 'icon_round_small_4',
+                },
+                {
+                    title: '收藏',
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
+                    col_type: 'icon_round_small_4',
+                },*/
+                {
+                    title: '游戏',
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/游戏.svg',
+                    col_type: 'icon_round_small_4',
+                },
+                {
+                    title: '专题',
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/专题.svg',
+                    col_type: 'icon_round_small_4',
+                },
+                {
+                    title: '设置',
+                    url: 'toast://摆烂了',
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/设置.svg',
+                    col_type: 'icon_round_small_4',
+                }
+            ]
+
+            grid.forEach(item => gcores.dom.push(item))
+
+            const attentionField = gcores.userFold === 'fold' ? '展开' : '折叠'
+
+            gcores.dom.push(
+                {
+                    title: gcores.homeSelected === 'attention' ? '‘‘’’<strong><font color="#ff1493">'+attentionField+'</font></strong>' : attentionField,
+                    url: $(gcores.empty).lazyRule(params => {
+                        setItem('homeSelected', 'attention')
+                        setItem('userFold', params.fold === 'fold' ? 'unfold' : 'fold')
+                        refreshPage(true)
+                        return 'hiker://empty'
+                    }, {
+                        fold: gcores.userFold
+                    }),
+                    col_type: 'text_4',
+                },
+                {
+                    title: gcores.homeSelected === 'top' ? '‘‘’’<strong><font color="#ff1493">置顶</font></strong>' : '置顶',
+                    url: $(gcores.empty).lazyRule(() => {
+                        setItem('userFold', 'unfold')
+                        setItem('homeSelected', 'top')
+                        refreshPage(true)
+                        return 'hiker://empty'
+                    }),
+                    col_type: 'text_4',
+                },
+                {
+                    title: gcores.homeSelected === 'delete' ? '‘‘’’<strong><font color="#ff1493">删除</font></strong>' : '删除',
+                    url: $(gcores.empty).lazyRule(() => {
+                        setItem('userFold', 'unfold')
+                        setItem('homeSelected', 'delete')
+                        refreshPage(true)
+                        return 'hiker://empty'
+                    }),
+                    col_type: 'text_4',
+                },
+                {
+                    title: gcores.homeSelected === 'see' ? '‘‘’’<strong><font color="#ff1493">查看</font></strong>' : '查看',
+                    url: $(gcores.empty).lazyRule(() => {
+                        setItem('userFold', 'unfold')
+                        setItem('homeSelected', 'see')
+                        refreshPage(true)
+                        return 'hiker://empty'
+                    }),
+                    col_type: 'text_4',
+                },
+                /*{
+                    title: gcores.homeSelected === 'collection' ? '『收藏』：'+collection.length : '收藏：'+collection.length,
+                    url: $(gcores.empty).lazyRule(() => {
+                        setItem('homeSelected', 'collection')
+                        refreshPage(true)
+                        return "toast://切换为收藏"
+                    }),
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
+                    col_type: 'icon_2',
+                },*/
+            )
+
+            const tabs = [
+                {title: '文章', type: 'articles'},
+                {title: '资讯', type: 'originals'},
+                {title: '视频', type: 'videos'},
+                {title: '电台', type: 'radios'},
+            ]
+
+            tabs.forEach(tab => {
                 gcores.dom.push({
-                    title: titlePrefix+sub[0],
-                    url: userUrl,
-                    pic_url: gcores.imageUrl+sub[1],
-                    col_type: 'icon_round_small_4'
+                    title: gcores.authorTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
+                    url: $(gcores.empty).lazyRule(params => {
+                        setItem("authorTab", params.type)
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }, {
+                        type: tab.type
+                    }),
+                    col_type: 'text_4',
                 })
             })
+
+            if (gcores.userFold === 'unfold') {
+                attention.forEach((item, index) => {
+                    let sub = item.split('$$$'), titlePrefix = '', userUrl
+
+                    if (gcores.homeSelected === 'attention' && index.toString() === gcores.userSelected) {
+                        titlePrefix = '☑'
+                        userUrl = $(gcores.empty).lazyRule(params => {
+                            setItem('userSelected', params.index.toString())
+                            setItem("authorTab", 'articles')
+                            refreshPage(false)
+                            return 'hiker://empty'
+                        }, {
+                            index: index
+                        })
+                    } else if (gcores.homeSelected === 'top') {
+                        titlePrefix = '✵'
+                        userUrl = $(gcores.empty).lazyRule(params => {
+                            let current = params.attention[params.index]
+                            params.attention.splice(params.index, 1)
+                            params.attention.unshift(current)
+                            writeFile(params.filename, params.attention.join('\n'))
+                            setItem("userSelected", '0')
+                            refreshPage(false)
+                            return 'hiker://empty'
+                        }, {
+                            index: index,
+                            attention: attention,
+                            filename: gcores.plugins.attention
+                        })
+                    } else if (gcores.homeSelected === 'delete') {
+                        titlePrefix = '❌'
+                        userUrl = $(gcores.empty).lazyRule(params => {
+                            params.attention.splice(params.index, 1)
+                            writeFile(params.filename, params.attention.join('\n'))
+                            setItem("userSelected", '0')
+                            refreshPage(false)
+                            return 'hiker://empty'
+                        }, {
+                            index: index,
+                            attention: attention,
+                            filename: gcores.plugins.attention
+                        })
+                    } else {
+                        userUrl = $('https://www.gcores.com/users/'+sub[2]+'/content#noHistory#$$fypage').rule(params => {
+                            eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                            gcores.authorDescParse(params.id, MY_URL)
+                        }, {
+                            id: sub[2]
+                        })
+                    }
+
+                    gcores.dom.push({
+                        title: titlePrefix+sub[0],
+                        url: userUrl,
+                        pic_url: gcores.imageUrl+sub[1],
+                        col_type: 'icon_round_small_4'
+                    })
+                })
+            }
         }
+
+        const author_url = "https://www.gcores.com/gapi/v1/users/"+id+"/"+gcores.authorTab+"?page[limit]=8&page[offset]="+(page-1)*8+"&sort=-published-at&include=category,user&filter[is-news]=0&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user"
+        const author_api_data = fetch(author_url, {headers: gcores.headers})
+        const author_data = JSON.parse(author_api_data)
+
+        author_data.data.forEach(item => {
+            gcores.dom.push({
+                title: item.attributes.title,
+                desc: item.attributes.desc || item.attributes.description,
+                pic_url: gcores.imageUrl+(item.attributes.thumb || item.attributes.cover)+'@Referer='+gcores.headers.referer,
+                url: gcores.subUrlBuild(item.id, gcores.authorTab),
+                col_type: 'pic_1'
+            })
+        })
 
         setResult(gcores.dom);
     },
