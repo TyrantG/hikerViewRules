@@ -904,7 +904,7 @@ const gcores = {
             const apiData = fetch(api_url, {headers: gcores.headers})
             const data = JSON.parse(apiData)
 
-            setPageTitle(data.data.attributes.nickname+has_attention ? '『已关注』' : '『未关注』')
+            setPageTitle(data.data.attributes.nickname+(has_attention ? '『已关注』' : '『未关注』'))
             gcores.dom.push(
                 {
                     title: data.data.attributes.nickname,
