@@ -1075,6 +1075,14 @@ const gcores = {
             },
             {
                 col_type: 'line_blank'
+            },
+            {
+                title: '游戏预览',
+                url: url,
+                col_type: 'text_center_1',
+                extra: {
+                    lineVisible: false
+                },
             }
         )
 
