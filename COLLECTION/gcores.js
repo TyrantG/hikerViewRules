@@ -1128,7 +1128,7 @@ const gcores = {
             if (item.type === 'game-stores' && stores.includes(item.id)) {
                 let info
                 eval('info = '+item.attributes['price-info'])
-
+log(info.details[0].discount)
                 gcores.dom.push(
                     {
                         title: item.attributes['platform-name'],
