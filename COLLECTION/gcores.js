@@ -702,7 +702,7 @@ const gcores = {
                         gcores.dom.push({
                             title: item.attributes.title,
                             pic_url: gcores.imageUrl+item.attributes.thumb,
-                            url: (ra.attributes.audio.includes('http') ? ra.attributes.audio : gcores.audioUrl+ra.attributes.audio)+'#noHistory#',
+                            url: ra.attributes['is-free'] ? (ra.attributes.audio.includes('http') ? ra.attributes.audio : gcores.audioUrl+ra.attributes.audio) : 'toast://该资源为付费资源',
                             desc: item.attributes.desc,
                             col_type: 'movie_1_left_pic'
                         })
