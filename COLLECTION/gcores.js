@@ -508,7 +508,7 @@ const gcores = {
         const url = "https://www.gcores.com/gapi/v1//games/search?page[limit]=8&page[offset]="+(page-1)*8+"&sort="+gcores.gameSort+"&include=game-stores&filter[revised]=true&filter[onsale]=true"+platform
         const json = fetch(url, {headers: gcores.headers})
         const result = JSON.parse(json)
-        result.forEach(item => {
+        result.data.forEach(item => {
             gcores.dom.push({
                 title: item.attributes.title,
                 desc: item.attributes.description,
