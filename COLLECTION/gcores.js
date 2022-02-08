@@ -27,6 +27,7 @@ const gcores = {
     homeSelected: getItem('homeSelected', 'attention'),
     userSelected: getItem('userSelected', '0'),
     userFold: getItem('userFold', 'unfold'),
+    homeAuthorTab: getItem('homeAuthorTab', 'articles'),
     authorTab: getItem('authorTab', 'articles'),
     searchValue: getItem('searchValue', ''),
     searchTab: getItem('searchTab', 'articles'),
@@ -222,9 +223,9 @@ const gcores = {
 
             tabs.forEach(tab => {
                 gcores.dom.push({
-                    title: gcores.authorTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
+                    title: gcores.homeAuthorTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
                     url: $(gcores.empty).lazyRule(params => {
-                        setItem("authorTab", params.type)
+                        setItem("homeAuthorTab", params.type)
                         refreshPage(true)
                         return "hiker://empty"
                     }, {
@@ -295,7 +296,7 @@ const gcores = {
             }
         }
 
-        const author_url = "https://www.gcores.com/gapi/v1/users/"+id+"/"+gcores.authorTab+"?page[limit]=8&page[offset]="+(page-1)*8+"&sort=-published-at&include=category,user&filter[is-news]=0&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user"
+        const author_url = "https://www.gcores.com/gapi/v1/users/"+id+"/"+gcores.homeAuthorTab+"?page[limit]=8&page[offset]="+(page-1)*8+"&sort=-published-at&include=category,user&filter[is-news]=0&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user"
         const author_api_data = fetch(author_url, {headers: gcores.headers})
         const author_data = JSON.parse(author_api_data)
 
@@ -304,7 +305,7 @@ const gcores = {
                 title: item.attributes.title,
                 desc: item.attributes.desc || item.attributes.description,
                 pic_url: gcores.imageUrl+(item.attributes.thumb || item.attributes.cover)+'@Referer='+gcores.headers.referer,
-                url: gcores.subUrlBuild(item.id, gcores.authorTab),
+                url: gcores.subUrlBuild(item.id, gcores.homeAuthorTab),
                 col_type: 'pic_1'
             })
         })
