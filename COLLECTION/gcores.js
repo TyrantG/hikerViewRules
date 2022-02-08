@@ -147,6 +147,10 @@ const gcores = {
                 },*/
                 {
                     title: '游戏',
+                    url: $('https://www.gcores.com/gapi/v1//games/search?page[limit]=$limit&page[offset]=$offset&sort=-onsale-start&include=game-stores&filter[revised]=true&filter[onsale]=true#noHistory#$$fypage').rule(() => {
+                        eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                        gcores.baseAdapter(5)
+                    }),
                     pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/游戏.svg',
                     col_type: 'icon_round_small_4',
                 },
