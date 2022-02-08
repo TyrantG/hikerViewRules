@@ -30,7 +30,12 @@ const gcores = {
         'videos': '&sort=-published-at&include=category,user&filter[is-news]=1&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user',
         'radios': '&sort=-published-at&include=category,user,djs&filter[list-all]=1&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user,djs',
         'albums': 'sort=-published-at&include=category,user,djs&filter[list-all]=1&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user,djs',
-        'games': '',
+    },
+    userTypeUrlParamsMaps: {
+        'articles': '&sort=-published-at&include=category,user&filter[is-news]=0&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user',
+        'videos': '&sort=-published-at&include=category,user&filter[is-news]=1&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user',
+        'radios': '&sort=-published-at&include=category,user,djs&filter[list-all]=1&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user,djs',
+        'albums': 'sort=-published-at&include=category,user,djs&filter[list-all]=1&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user,djs',
     },
     homeSelected: getItem('homeSelected', 'attention'),
     userSelected: getItem('userSelected', '0'),
@@ -43,6 +48,7 @@ const gcores = {
     searchHistoryShowStatus: getItem('searchHistoryShowStatus', '0'),
     gamePlatform: getItem('gamePlatform', ''),
     gameSort: getItem('gameSort', '-onsale-start'),
+    collectTab: getItem('collectTab', 'originals'),
     imageUrl: 'https://image.gcores.com/',
     audioUrl: 'https://alioss.gcores.com/uploads/audio/',
     category: [
@@ -1153,6 +1159,76 @@ const gcores = {
         setResult(gcores.dom);
     },
     collectionsDescParse: (id, url) => {
+        const page = url.split('$$')[1]
+
+        const map = {
+            originals: '&sort=-published-at&include=category,user,djs&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user,djs&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user,djs&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user,djs',
+            radios: '&sort=-published-at&include=category,user,djs&filter[list-all]=1&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user,djs',
+            articles: '&sort=-published-at&include=category,user&filter[is-news]=0&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user',
+            news: '&sort=-published-at&include=category,user&filter[is-news]=1&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user',
+            videos: '&sort=-published-at&include=category,user,djs&filter[list-all]=1&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user,djs'
+        }
+
+        if (parseInt(page) === 1) {
+            const api_url = "https://www.gcores.com/gapi/v1/collections/"+id
+            const apiData = fetch(api_url, {headers: gcores.headers})
+            const data = JSON.parse(apiData)
+
+            setPageTitle(data.data.attributes.title)
+            gcores.dom.push(
+                {
+                    title: data.data.attributes.title,
+                    url: url,
+                    pic_url: gcores.imageUrl+data.data.attributes.cover,
+                    desc: data.data.attributes.description,
+                    col_type: 'movie_1_vertical_pic_blur'
+                },
+                {
+                    col_type: 'line_blank'
+                }
+            )
+
+            const tabs = [
+                {title: '全部', type: 'originals', id: 'originals'},
+                {title: '电台', type: 'radios', id: 'radios'},
+                {title: '文章', type: 'articles', id: 'articles'},
+                {title: '资讯', type: 'news', id: 'originals'},
+                {title: '视频', type: 'videos', id: 'videos'},
+            ]
+
+            tabs.forEach(tab => {
+                gcores.dom.push({
+                    title: gcores.collectTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
+                    url: $(gcores.empty).lazyRule(params => {
+                        setItem("collectTab", params.type)
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }, {
+                        type: tab.type
+                    }),
+                    col_type: 'scroll_button',
+                })
+            })
+
+            gcores.dom.push({
+                col_type: 'blank_block',
+            })
+        }
+
+        const content_url = "https://www.gcores.com/gapi/v1/collections/"+id+"/"+gcores.collectTab+"?page[limit]=12&page[offset]="+(page-1)*12+map[gcores.collectTab]
+        const content_json = fetch(content_url, {headers: gcores.headers})
+        const result = JSON.parse(content_json)
+
+        result.data.forEach(item => {
+            gcores.dom.push({
+                title: item.attributes.title,
+                desc: item.attributes.desc || item.attributes.description,
+                pic_url: gcores.imageUrl+(item.attributes.thumb || item.attributes.cover),
+                url: gcores.subUrlBuild(item.id, item.type),
+                col_type: 'movie_2'
+            })
+        })
+
         setResult(gcores.dom);
     },
     authorDescParse: (id, url) => {
@@ -1222,7 +1298,7 @@ const gcores = {
             })
         }
 
-        const author_url = "https://www.gcores.com/gapi/v1/users/"+id+"/"+gcores.authorTab+"?page[limit]=8&page[offset]="+(page-1)*8+gcores.userTypeUrlParamsMaps[gcores.homeAuthorTab]
+        const author_url = "https://www.gcores.com/gapi/v1/users/"+id+"/"+gcores.authorTab+"?page[limit]=8&page[offset]="+(page-1)*8+gcores.userTypeUrlParamsMaps[gcores.authorTab]
         const author_api_data = fetch(author_url, {headers: gcores.headers})
         const author_data = JSON.parse(author_api_data)
 
