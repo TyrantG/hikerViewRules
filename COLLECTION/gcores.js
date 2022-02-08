@@ -102,7 +102,7 @@ const gcores = {
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/播单.svg',
                 col_type: 'icon_round_small_4',
             },
-            {
+            /*{
                 title: '关注',
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
                 col_type: 'icon_round_small_4',
@@ -110,6 +110,16 @@ const gcores = {
             {
                 title: '收藏',
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
+                col_type: 'icon_round_small_4',
+            },*/
+            {
+                title: '游戏',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/游戏.svg',
+                col_type: 'icon_round_small_4',
+            },
+            {
+                title: '专题',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/专题.svg',
                 col_type: 'icon_round_small_4',
             },
             {
@@ -120,6 +130,19 @@ const gcores = {
         ]
 
         grid.forEach(item => gcores.dom.push(item))
+
+        gcores.dom.push(
+            {
+                title: '关注',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
+                col_type: 'icon_2',
+            },
+            {
+                title: '收藏',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
+                col_type: 'icon_2',
+            },
+        )
 
         setResult(gcores.dom);
     },
@@ -183,7 +206,6 @@ const gcores = {
                 gcores.videosParse(data)
                 break
             case 2:
-                log(apiData)
                 data = JSON.parse(apiData).data
                 gcores.radiosParse(data)
                 break
