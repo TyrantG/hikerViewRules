@@ -345,6 +345,9 @@ const gcores = {
                 if (fileExist(gcores.plugins.searchHistory) && fetch(gcores.plugins.searchHistory)) {
                     const searchHistory = fetch(gcores.plugins.searchHistory).split('||').filter(item => item)
                     gcores.dom.push({
+                        col_type: 'line_blank'
+                    })
+                    gcores.dom.push({
                         title: '搜索记录：',
                         url: gcores.empty,
                         col_type: 'text_1',
@@ -397,6 +400,9 @@ const gcores = {
 
                 const hot_json = fetch("https://www.gcores.com/gapi/v1/search/recent-hot", {headers: gcores.headers})
                 const hot_data = JSON.parse(hot_json)
+                gcores.dom.push({
+                    col_type: 'line_blank'
+                })
                 gcores.dom.push({
                     title: '热门搜索：',
                     url: gcores.empty,
