@@ -977,7 +977,7 @@ const gcores = {
                         eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                         gcores.authorDescParse(params.id, MY_URL)
                     }, {
-                        id: sub[2]
+                        id: resource.id
                     }),
                     col_type: 'avatar'
                 })
