@@ -1076,7 +1076,6 @@ const gcores = {
     },
     gamesDescParse: (id, url) => {
         const api_url = "https://www.gcores.com/gapi/v1/games/"+id+"?include=game-stores,tags,involvements.entity.user"
-        log(api_url)
         const apiData = fetch(api_url, {headers: gcores.headers})
         const data = JSON.parse(apiData)
 
