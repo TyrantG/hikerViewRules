@@ -712,18 +712,13 @@ const gcores = {
             if (item.type === 'medias') {
                 gcores.dom.push({
                     title: '正片观看：',
-                    url: gcores.empty,
-                    col_type: 'text_1',
-                    extra: {
-                        lineVisible: false
-                    },
-                })
-                gcores.dom.push({
-                    title: item.attributes.title,
                     url: $(item.attributes.playlist).lazyRule(() => {
                         return JSON.parse(fetch(input)).m3u8
                     }),
-                    col_type: 'text_2'
+                    col_type: 'text_center_1',
+                    extra: {
+                        lineVisible: false
+                    },
                 })
             }
         })
@@ -799,16 +794,11 @@ const gcores = {
             if (item.type === 'medias') {
                 gcores.dom.push({
                     title: '电台播放：',
-                    url: gcores.empty,
-                    col_type: 'text_1',
+                    url: item.attributes.audio.includes('http') ? item.attributes.audio : gcores.audioUrl+item.attributes.audio,
+                    col_type: 'text_center_1',
                     extra: {
                         lineVisible: false
                     },
-                })
-                gcores.dom.push({
-                    title: item.attributes.title,
-                    url: item.attributes.audio.includes('http') ? item.attributes.audio : gcores.audioUrl+item.attributes.audio,
-                    col_type: 'text_2'
                 })
             }
         })
@@ -817,7 +807,7 @@ const gcores = {
             col_type: 'line_blank'
         })
 
-        if (gcores.playlist.length > 0) {
+        /*if (gcores.playlist.length > 0) {
             gcores.dom.push({
                 title: '媒体资源',
                 url: gcores.empty,
@@ -837,7 +827,7 @@ const gcores = {
             gcores.dom.push({
                 col_type: 'line_blank'
             })
-        }
+        }*/
         gcores.dom.push({
             title: text,
             col_type: 'rich_text'
@@ -890,6 +880,9 @@ const gcores = {
         setResult(gcores.dom);
     },
     authorDescParse: (id, url) => {
+        addListener('onClose', $.toString(() => {
+            clearItem('authorTab')
+        }))
         const page = url.split('$$')[1]
         if (parseInt(page) === 1) {
             const attention = fetch(gcores.plugins.attention).split('\n').filter(item => item)
@@ -968,11 +961,6 @@ const gcores = {
         })
 
         setResult(gcores.dom);
-    },
-    descListener: () => {
-        addListener('onClose', $.toString(() => {
-
-        }))
     },
     descAuthorShow: (result, type) => {
         let userId = [], title = ''
