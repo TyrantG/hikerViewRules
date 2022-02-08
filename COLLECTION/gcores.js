@@ -44,7 +44,7 @@ const gcores = {
         })
 
         gcores.dom.push({
-            url: $(gcores.empty+"#fullTheme##fypage").rule(() => {
+            url: $(gcores.empty+"#fullTheme#noHistory##fypage").rule(() => {
                 eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                 gcores.searchParse()
             }),
@@ -59,7 +59,7 @@ const gcores = {
         const grid = [
             {
                 title: '资讯',
-                url: $('https://www.gcores.com/gapi/v1/originals?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=1&filter[list-all]=0&fields[articles]=title,desc,thumb##fypage').rule(() => {
+                url: $('https://www.gcores.com/gapi/v1/originals?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=1&filter[list-all]=0&fields[articles]=title,desc,thumb#noHistory##fypage').rule(() => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.baseAdapter(0)
                 }),
@@ -68,7 +68,7 @@ const gcores = {
             },
             {
                 title: '视频',
-                url: $('https://www.gcores.com/gapi/v1/videos?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[list-all]=0&fields[videos]=title,desc,thumb##fypage').rule(() => {
+                url: $('https://www.gcores.com/gapi/v1/videos?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[list-all]=0&fields[videos]=title,desc,thumb#noHistory##fypage').rule(() => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.baseAdapter(1)
                 }),
@@ -77,7 +77,7 @@ const gcores = {
             },
             {
                 title: '电台',
-                url: $('https://www.gcores.com/gapi/v1/radios?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[list-all]=0&fields[radios]=title,desc,thumb##fypage').rule(() => {
+                url: $('https://www.gcores.com/gapi/v1/radios?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[list-all]=0&fields[radios]=title,desc,thumb#noHistory##fypage').rule(() => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.baseAdapter(2)
                 }),
@@ -86,7 +86,7 @@ const gcores = {
             },
             {
                 title: '文章',
-                url: $('https://www.gcores.com/gapi/v1/articles?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=0&filter[list-all]=0&fields[articles]=title,desc,thumb##fypage').rule(() => {
+                url: $('https://www.gcores.com/gapi/v1/articles?page[limit]=$limit&page[offset]=$offset&sort=-published-at&filter[is-news]=0&filter[list-all]=0&fields[articles]=title,desc,thumb#noHistory##fypage').rule(() => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.baseAdapter(3)
                 }),
@@ -95,7 +95,7 @@ const gcores = {
             },
             {
                 title: '播单',
-                url: $('https://www.gcores.com/gapi/v1/albums?page[limit]=$limit&page[offset]=$offset&sort=-updated-at&filter[is-on-sale]=0##fypage').rule(() => {
+                url: $('https://www.gcores.com/gapi/v1/albums?page[limit]=$limit&page[offset]=$offset&sort=-updated-at&filter[is-on-sale]=0#noHistory##fypage').rule(() => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.baseAdapter(4)
                 }),
@@ -126,28 +126,28 @@ const gcores = {
     subUrlBuild: (id, cate) => {
         switch (cate) {
             case 'articles':
-                return $("https://www.gcores.com/articles/"+id+"#immersiveTheme#").rule(params => {
+                return $("https://www.gcores.com/articles/"+id+"#immersiveTheme#noHistory#").rule(params => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.articlesDescParse(params.id, MY_URL)
                 }, {
                     id: id
                 })
             case 'videos':
-                return $("https://www.gcores.com/videos/"+id+"#immersiveTheme#").rule(params => {
+                return $("https://www.gcores.com/videos/"+id+"#immersiveTheme#noHistory#").rule(params => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.videosDescParse(params.id, MY_URL)
                 }, {
                     id: id
                 })
             case 'radios':
-                return $("https://www.gcores.com/radios/"+id+"#immersiveTheme#").rule(params => {
+                return $("https://www.gcores.com/radios/"+id+"#immersiveTheme#noHistory#").rule(params => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.audiosDescParse(params.id, MY_URL)
                 }, {
                     id: id
                 })
             case 'albums':
-                return $("https://www.gcores.com/albums/"+id+"#immersiveTheme##fypage").rule(params => {
+                return $("https://www.gcores.com/albums/"+id+"#immersiveTheme#noHistory##fypage").rule(params => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.albumsDescParse(params.id, MY_URL)
                 }, {
@@ -702,7 +702,7 @@ const gcores = {
                         gcores.dom.push({
                             title: item.attributes.title,
                             pic_url: gcores.imageUrl+item.attributes.thumb,
-                            url: ra.attributes.audio.includes('http') ? ra.attributes.audio : gcores.audioUrl+ra.attributes.audio,
+                            url: (ra.attributes.audio.includes('http') ? ra.attributes.audio : gcores.audioUrl+ra.attributes.audio)+'#noHistory#',
                             desc: item.attributes.desc,
                             col_type: 'movie_1_left_pic'
                         })
