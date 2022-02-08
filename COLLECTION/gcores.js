@@ -711,11 +711,11 @@ const gcores = {
         data.included.forEach(item => {
             if (item.type === 'medias') {
                 gcores.dom.push({
-                    title: '正片观看：',
+                    title: '正片观看',
                     url: $(item.attributes.playlist).lazyRule(() => {
                         return JSON.parse(fetch(input)).m3u8
                     }),
-                    col_type: 'text_center_1',
+                    col_type: 'text_2',
                     extra: {
                         lineVisible: false
                     },
@@ -727,7 +727,7 @@ const gcores = {
             col_type: 'line_blank'
         })
 
-        if (gcores.playlist.length > 0) {
+        /*if (gcores.playlist.length > 0) {
             gcores.dom.push({
                 title: '媒体资源',
                 url: gcores.empty,
@@ -747,7 +747,7 @@ const gcores = {
             gcores.dom.push({
                 col_type: 'line_blank'
             })
-        }
+        }*/
         gcores.dom.push({
             title: text,
             col_type: 'rich_text'
@@ -793,7 +793,7 @@ const gcores = {
         data.included.forEach(item => {
             if (item.type === 'medias') {
                 gcores.dom.push({
-                    title: '电台播放：',
+                    title: '电台播放',
                     url: item.attributes.audio.includes('http') ? item.attributes.audio : gcores.audioUrl+item.attributes.audio,
                     col_type: 'text_center_1',
                     extra: {
