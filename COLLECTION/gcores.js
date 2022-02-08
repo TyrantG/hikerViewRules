@@ -1123,7 +1123,8 @@ const gcores = {
                     },
                     {
                         title: '原价：￥'+(info.details[0].regular.amount / 100).toFixed(2)+'<br />'+
-                            '地区：'+info.details[0].area_name,
+                            info.details[0].discount ? '现价：￥'+info.details[0].discount.amount+'<br />' : ''+
+                            '地区：'+info.details[0].area_name+'<br />',
                         // url: 'toast://'+item.attributes['platform-name']+'平台',
                         col_type: 'rich_text'
                     },
