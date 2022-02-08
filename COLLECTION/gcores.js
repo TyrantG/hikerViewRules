@@ -32,8 +32,6 @@ const gcores = {
     pluginInit: () => {
         let attention, collection, config
 
-        const sb = fileExist(gcores.plugins.attention)
-        log(typeof sb)
         if (! fileExist(gcores.plugins.attention)) {
             attention = 'YT17$$$168de8e2-caee-4645-a87a-340e5c48b354.gif$$$257036\r\n'
             writeFile(gcores.plugins.attention, attention)
@@ -44,7 +42,7 @@ const gcores = {
         }
         if (! fileExist(gcores.plugins.config)) {
             config = JSON.stringify(gcores.defaultConfig)
-            writeFile(gcores.plugins.collection, config)
+            writeFile(gcores.plugins.config, config)
         }
     },
     baseParse: () => {
@@ -356,7 +354,7 @@ const gcores = {
                     })
 
                     let gcoresConfig = gcores.defaultConfig
-                    if (fetch(gcores.plugins.searchHistory)) gcoresConfig = JSON.parse(fetch(gcores.plugins.searchHistory))
+                    if (fetch(gcores.plugins.config)) gcoresConfig = JSON.parse(fetch(gcores.plugins.config))
                     searchHistory.forEach((history, index) => {
                         if (gcores.searchHistoryShowStatus === '1' || (gcores.searchHistoryShowStatus === '0' && gcoresConfig.searchHistoryShowLimit - index >= 1)) {
                             gcores.dom.push({
@@ -487,7 +485,7 @@ const gcores = {
     },
     setSearchHistory: value => {
         let gcoresConfig = gcores.defaultConfig
-        if (fetch(gcores.plugins.searchHistory)) gcoresConfig = JSON.parse(fetch(gcores.plugins.searchHistory))
+        if (fetch(gcores.plugins.config)) gcoresConfig = JSON.parse(fetch(gcores.plugins.config))
         let searchHistory = fetch(gcores.plugins.searchHistory).split('||').filter(item => item)
 
         if (searchHistory.includes(value)) {
