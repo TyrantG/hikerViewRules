@@ -1113,13 +1113,23 @@ const gcores = {
             if (item.type === 'game-stores' && stores.includes(item.id)) {
                 let info
                 eval('info = '+item.attributes['price-info'])
-                log(info)
-                gcores.dom.push({
-                    title: item.attributes['platform-name'],
-                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/'+item.attributes.platform+'.svg',
-                    url: 'toast://'+item.attributes['platform-name']+'平台',
-                    col_type: 'avatar'
-                })
+
+                gcores.dom.push(
+                    {
+                        title: item.attributes['platform-name']+' 原价：￥'+info.details[0].regular.amount+' 地区：'+info.details[0].area_name,
+                        pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/'+item.attributes.platform+'.svg',
+                        url: 'toast://'+item.attributes['platform-name']+'平台',
+                        col_type: 'avatar'
+                    },
+                    {
+                        title: item.attributes['platform-name'],
+                        // url: 'toast://'+item.attributes['platform-name']+'平台',
+                        col_type: 'text_1'
+                    },
+                    {
+                        col_type: 'line'
+                    },
+                )
             }
         })
 
