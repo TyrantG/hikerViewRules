@@ -323,13 +323,15 @@ const gcores = {
                 })
             })
         } else {
-            gcores.dom.push({
-                title: '先关注几位创作者吧',
-                col_type: 'text_center_1',
-                extra: {
-                    lineVisible: false
-                },
-            })
+            if (parseInt(page) === 1) {
+                gcores.dom.push({
+                    title: '先关注几位创作者吧',
+                    col_type: 'text_center_1',
+                    extra: {
+                        lineVisible: false
+                    },
+                })
+            }
         }
 
         setResult(gcores.dom);
