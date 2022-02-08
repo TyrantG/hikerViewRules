@@ -1112,7 +1112,7 @@ const gcores = {
         data.included.forEach(item => {
             if (item.type === 'game-stores' && stores.includes(item.id)) {
                 let info
-                eval('info = JSON.parse('+item.attributes['price-info']+')')
+                eval('info = '+item.attributes['price-info'])
                 log(info)
                 gcores.dom.push({
                     title: item.attributes['platform-name'],
