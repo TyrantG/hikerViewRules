@@ -17,6 +17,13 @@ const gcores = {
         searchHistoryMax: 100,
         searchHistoryShowLimit: 20,
     },
+    typeMaps: {
+        'articles': '文章',
+        'videos': '视频',
+        'radios': '电台',
+        'albums': '播单',
+        'games': '游戏',
+    },
     page: MY_URL.split('$$')[1],
     homeSelected: getItem('homeSelected', 'attention'),
     searchValue: getItem('searchValue', ''),
@@ -184,7 +191,7 @@ const gcores = {
                 let sub = item.split('$$$')
                 gcores.dom.push({
                     title: sub[0],
-                    desc: '类型：'+sub[3],
+                    desc: '类型：'+gcores.typeMaps[sub[3]],
                     pic_url: gcores.imageUrl+sub[1],
                     url: gcores.subUrlBuild(sub[2], sub[3]),
                     col_type: 'movie_1_left_pic'
