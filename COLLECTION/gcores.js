@@ -7,36 +7,48 @@ const gcores = {
     },
     dom: [],
     playlist: [],
+    plugins: {
+        attention: "hiker://files/rules/js/TyrantGenesis_机核GCORES关注.js",
+        collection: "hiker://files/rules/js/TyrantGenesis_机核GCORES收藏.js",
+        searchHistory: "hiker://files/rules/js/TyrantGenesis_机核GCORES搜索历史.js",
+        config: "hiker://files/rules/js/TyrantGenesis_机核GCORES设置.js",
+    },
+    defaultConfig: {
+        searchHistoryMax: 100,
+        searchHistoryShowLimit: 20,
+    },
     page: MY_URL.split('$$')[1],
     currentUrl: getItem('currentUrl', 'https://www.gcores.com'),
     searchValue: getItem('searchValue', ''),
     searchTab: getItem('searchTab', 'articles'),
     searchOrderBy: getItem('searchOrderBy', 'score'),
+    searchHistoryShowStatus: getItem('searchHistoryShowStatus', '0'),
     imageUrl: 'https://image.gcores.com/',
     audioUrl: 'https://alioss.gcores.com/uploads/audio/',
     category: [
         // {title: '专题', url: 'https://www.gcores.com/gapi/v1/collections?page[limit]=$limit&page[offset]=$offset&sort=-updated-at'},
         // {title: '游戏', url: 'https://www.gcores.com/gapi/v1//games/search?page[limit]=$limit&page[offset]=$offset&sort=-onsale-start&include=game-stores&filter[revised]=true&filter[onsale]=true'},
     ],
-    cateSelected: getItem('cateSelected', '0'),
-    baseParse: () => {
-        /*if (parseInt(gcores.page) === 1) {
-            gcores.category.forEach((category, index) => {
-                category.index = index.toString()
-                gcores.dom.push({
-                    title: index.toString() === gcores.cateSelected ? '‘‘’’<strong><font color="red">'+category.title+'</font></strong>' : category.title,
-                    url: $(gcores.empty).lazyRule(category => {
-                        setItem("cateSelected", category.index)
-                        setItem("currentUrl", category.url)
-                        refreshPage(false)
-                        return "hiker://empty"
-                    }, category),
-                    col_type: 'scroll_button',
-                })
-            })
-            gcores.dom.push({col_type: 'blank_block'})
-        }*/
+    pluginInit: () => {
+        let attention, collection, config
 
+        const sb = fileExist(gcores.plugins.attention)
+        log(typeof sb)
+        if (! fileExist(gcores.plugins.attention)) {
+            attention = 'YT17$$$168de8e2-caee-4645-a87a-340e5c48b354.gif$$$257036\r\n'
+            writeFile(gcores.plugins.attention, attention)
+        }
+        if (! fileExist(gcores.plugins.collection)) {
+            collection = 'Steam周销量排行榜:《消逝的光芒2：人与仁之战》登顶|2022年2月第一周$$$a52a0188-c5b6-445a-a129-4212d4dd7a4e.gif$$$147163$$$articles\r\n'
+            writeFile(gcores.plugins.collection, collection)
+        }
+        if (! fileExist(gcores.plugins.config)) {
+            config = JSON.stringify(gcores.defaultConfig)
+            writeFile(gcores.plugins.collection, config)
+        }
+    },
+    baseParse: () => {
+        gcores.pluginInit()
         gcores.dom.push({
             url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
             col_type:"x5_webview_single",
@@ -124,6 +136,7 @@ const gcores = {
             },
             {
                 title: '设置',
+                url: 'toast://摆烂了',
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/设置.svg',
                 col_type: 'icon_round_small_4',
             }
@@ -296,7 +309,10 @@ const gcores = {
             clearItem('searchValue')
             clearItem('searchTab')
             clearItem('searchOrderBy')
+            clearItem('searchHistoryShowStatus')
         }))
+
+        gcores.pluginInit('search')
 
         const page = MY_URL.split('$$')[1]
 
@@ -304,6 +320,8 @@ const gcores = {
             gcores.dom.push({
                 title: '搜索',
                 url: $.toString(() => {
+                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                    gcores.setSearchHistory(input)
                     setItem('searchValue', input)
                     refreshPage(true)
                     return "hiker://empty"
@@ -317,6 +335,7 @@ const gcores = {
                             clearItem('searchValue')
                             clearItem('searchTab')
                             clearItem('searchOrderBy')
+                            clearItem('searchHistoryShowStatus')
                             refreshPage(true)
                             return "hiker://empty"
                         }
@@ -325,6 +344,59 @@ const gcores = {
             })
 
             if (! gcores.searchValue) {
+                if (fileExist(gcores.plugins.searchHistory) && fetch(gcores.plugins.searchHistory)) {
+                    const searchHistory = fetch(gcores.plugins.searchHistory).split('||').filter(item => item)
+                    gcores.dom.push({
+                        title: '搜索记录：',
+                        url: gcores.empty,
+                        col_type: 'text_1',
+                        extra: {
+                            lineVisible: false
+                        },
+                    })
+
+                    let gcoresConfig = gcores.defaultConfig
+                    if (fetch(gcores.plugins.searchHistory)) gcoresConfig = JSON.parse(fetch(gcores.plugins.searchHistory))
+                    searchHistory.forEach((history, index) => {
+                        if (gcores.searchHistoryShowStatus === '1' || (gcores.searchHistoryShowStatus === '0' && gcoresConfig.searchHistoryShowLimit - index >= 1)) {
+                            gcores.dom.push({
+                                title: history,
+                                url: $(gcores.empty).lazyRule(history => {
+                                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                                    gcores.setSearchHistory(history)
+                                    setItem('searchValue', history)
+                                    refreshPage(true)
+                                    return "hiker://empty"
+                                }, history),
+                                col_type: 'flex_button'
+                            })
+                        }
+                    })
+
+                    gcores.dom.push({
+                        title: gcores.searchHistoryShowStatus === '1' ? '折叠记录' : '展开记录',
+                        url: $(gcores.empty).lazyRule(params => {
+                            setItem('searchHistoryShowStatus', params.status ? '0' : '1')
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            status: gcores.searchHistoryShowStatus === '1'
+                        }),
+                        col_type: 'text_2',
+                    })
+                    gcores.dom.push({
+                        title: '清除记录',
+                        url: $(gcores.empty).lazyRule(params => {
+                            writeFile(params.filename, '')
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            filename: gcores.plugins.searchHistory
+                        }),
+                        col_type: 'text_2',
+                    })
+                }
+
                 const hot_json = fetch("https://www.gcores.com/gapi/v1/search/recent-hot", {headers: gcores.headers})
                 const hot_data = JSON.parse(hot_json)
                 gcores.dom.push({
@@ -339,6 +411,8 @@ const gcores = {
                     gcores.dom.push({
                         title: hot,
                         url: $(gcores.empty).lazyRule(hot => {
+                            eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                            gcores.setSearchHistory(hot)
                             setItem('searchValue', hot)
                             refreshPage(true)
                             return "hiker://empty"
@@ -410,6 +484,25 @@ const gcores = {
         }
 
         setResult(gcores.dom);
+    },
+    setSearchHistory: value => {
+        let gcoresConfig = gcores.defaultConfig
+        if (fetch(gcores.plugins.searchHistory)) gcoresConfig = JSON.parse(fetch(gcores.plugins.searchHistory))
+        let searchHistory = fetch(gcores.plugins.searchHistory).split('||').filter(item => item)
+
+        if (searchHistory.includes(value)) {
+            for (let i in searchHistory) {
+                if (searchHistory[i] === value) {
+                    searchHistory.splice(i, 1)
+                    break
+                }
+            }
+        } else if (searchHistory.length >= gcoresConfig.searchHistoryMax) {
+            searchHistory = searchHistory.slice(0, 99)
+        }
+
+        searchHistory.unshift(value)
+        writeFile(gcores.plugins.searchHistory, searchHistory.join('||'))
     },
     urlParamsBuild: (url, params) => {
         for (let i in params) {
