@@ -393,7 +393,7 @@ const gcores = {
         for (let i in params) {
             url = url.replace('$'+i, params[i])
         }
-        return url.replace(/\$\$(.*?)/, '')
+        return url.replace(/\$\$.*/, '')
     },
     htmlTagParse: (block, entityMap) => {
         switch (block.type) {
