@@ -218,7 +218,7 @@ const gcores = {
 
                 if (gcores.homeSelected === 'attention' && index.toString() === gcores.userSelected) {
                     titlePrefix = '☑'
-                    userUrl = $(gcores.empty).rule(params => {
+                    userUrl = $(gcores.empty).lazyRule(params => {
                         setItem('userSelected', params.index.toString())
                         refreshPage(false)
                         return 'hiker://empty'
@@ -227,7 +227,7 @@ const gcores = {
                     })
                 } else if (gcores.homeSelected === 'top') {
                     titlePrefix = '✵'
-                    userUrl = $(gcores.empty).rule(params => {
+                    userUrl = $(gcores.empty).lazyRule(params => {
                         let current = params.attention[params.index]
                         params.attention.splice(params.index, 1)
                         params.attention.unshift(current)
@@ -242,7 +242,7 @@ const gcores = {
                     })
                 } else if (gcores.homeSelected === 'delete') {
                     titlePrefix = '❌'
-                    userUrl = $(gcores.empty).rule(params => {
+                    userUrl = $(gcores.empty).lazyRule(params => {
                         params.attention.splice(params.index, 1)
                         writeFile(params.filename, params.attention.join('\n'))
                         setItem("userSelected", '0')
