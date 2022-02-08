@@ -165,7 +165,7 @@ const gcores = {
                     url: $(gcores.empty).lazyRule(params => {
                         setItem('homeSelected', 'attention')
                         setItem('userFold', params.fold === 'fold' ? 'unfold' : 'fold')
-                        refreshPage(true)
+                        refreshPage(false)
                         return 'hiker://empty'
                     }, {
                         fold: gcores.userFold
@@ -177,7 +177,7 @@ const gcores = {
                     url: $(gcores.empty).lazyRule(() => {
                         setItem('userFold', 'unfold')
                         setItem('homeSelected', 'top')
-                        refreshPage(true)
+                        refreshPage(false)
                         return 'hiker://empty'
                     }),
                     col_type: 'text_4',
@@ -187,7 +187,7 @@ const gcores = {
                     url: $(gcores.empty).lazyRule(() => {
                         setItem('userFold', 'unfold')
                         setItem('homeSelected', 'delete')
-                        refreshPage(true)
+                        refreshPage(false)
                         return 'hiker://empty'
                     }),
                     col_type: 'text_4',
@@ -197,7 +197,7 @@ const gcores = {
                     url: $(gcores.empty).lazyRule(() => {
                         setItem('userFold', 'unfold')
                         setItem('homeSelected', 'see')
-                        refreshPage(true)
+                        refreshPage(false)
                         return 'hiker://empty'
                     }),
                     col_type: 'text_4',
