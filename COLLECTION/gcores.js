@@ -1082,7 +1082,7 @@ const gcores = {
             gcores.dom.push({
                 pic_url: gcores.imageUrl+item,
                 url: gcores.imageUrl+item,
-                col_type: 'pic_3',
+                col_type: 'pic_2',
             })
         })
 
