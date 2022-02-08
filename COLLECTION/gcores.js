@@ -20,6 +20,7 @@ const gcores = {
     },
     typeMaps: {
         'articles': '文章',
+        'originals': '资讯',
         'videos': '视频',
         'radios': '电台',
         'albums': '播单',
