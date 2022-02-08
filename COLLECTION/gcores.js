@@ -181,7 +181,7 @@ const gcores = {
                 col_type: 'text_4',
             },
             {
-                title: gcores.homeSelected === 'delete' ? '‘‘’’<strong><font color="#ff1493">删除</font></strong>' : '置顶',
+                title: gcores.homeSelected === 'delete' ? '‘‘’’<strong><font color="#ff1493">删除</font></strong>' : '删除',
                 url: $(gcores.empty).lazyRule(() => {
                     setItem('userFold', 'unfold')
                     setItem('homeSelected', 'delete')
@@ -212,6 +212,27 @@ const gcores = {
             },*/
         )
 
+        const tabs = [
+            {title: '文章', type: 'articles'},
+            {title: '资讯', type: 'originals'},
+            {title: '视频', type: 'videos'},
+            {title: '电台', type: 'radios'},
+        ]
+
+        tabs.forEach(tab => {
+            gcores.dom.push({
+                title: gcores.authorTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
+                url: $(gcores.empty).lazyRule(params => {
+                    setItem("authorTab", params.type)
+                    refreshPage(true)
+                    return "hiker://empty"
+                }, {
+                    type: tab.type
+                }),
+                col_type: 'text_4',
+            })
+        })
+
         if (gcores.userFold === 'unfold') {
             attention.forEach((item, index) => {
                 let sub = item.split('$$$'), titlePrefix = '', userUrl
@@ -220,6 +241,7 @@ const gcores = {
                     titlePrefix = '☑'
                     userUrl = $(gcores.empty).lazyRule(params => {
                         setItem('userSelected', params.index.toString())
+                        setItem("authorTab", 'articles')
                         refreshPage(false)
                         return 'hiker://empty'
                     }, {
