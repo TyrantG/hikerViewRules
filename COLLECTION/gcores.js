@@ -829,7 +829,7 @@ const gcores = {
         gcores.dom.push(
             {
                 title: data.data.attributes.title,
-                url: url,
+                url: url+'#noHistory#',
                 pic_url: gcores.imageUrl+data.data.attributes.thumb,
                 desc: data.data.attributes.desc,
                 col_type: 'movie_1_vertical_pic_blur'
@@ -853,7 +853,7 @@ const gcores = {
             gcores.playlist.forEach(item => {
                 gcores.dom.push({
                     title: item.title,
-                    url: item.url,
+                    url: item.url+'#noHistory#',
                     col_type: 'text_2',
                     // extra: {blockRules: ['.png','.jpg','.svg']}
                 })
@@ -892,7 +892,7 @@ const gcores = {
         gcores.dom.push(
             {
                 title: data.data.attributes.title,
-                url: url,
+                url: url+'#noHistory#',
                 pic_url: gcores.imageUrl+data.data.attributes.thumb,
                 desc: data.data.attributes.desc,
                 col_type: 'movie_1_vertical_pic_blur'
@@ -909,7 +909,7 @@ const gcores = {
                 gcores.dom.push({
                     title: '正片观看',
                     url: $(item.attributes.playlist).lazyRule(() => {
-                        return JSON.parse(fetch(input)).m3u8
+                        return JSON.parse(fetch(input)).m3u8+'#noHistory#'
                     }),
                     col_type: 'text_center_1',
                     extra: {
@@ -974,7 +974,7 @@ const gcores = {
         gcores.dom.push(
             {
                 title: data.data.attributes.title,
-                url: url,
+                url: url+'#noHistory#',
                 pic_url: gcores.imageUrl+data.data.attributes.thumb,
                 desc: data.data.attributes.desc,
                 col_type: 'movie_1_vertical_pic_blur'
@@ -990,7 +990,7 @@ const gcores = {
             if (item.type === 'medias') {
                 gcores.dom.push({
                     title: '电台播放',
-                    url: item.attributes.audio.includes('http') ? item.attributes.audio : gcores.audioUrl+item.attributes.audio,
+                    url: (item.attributes.audio.includes('http') ? item.attributes.audio : gcores.audioUrl+item.attributes.audio)+'#noHistory#',
                     col_type: 'text_center_1',
                     extra: {
                         lineVisible: false
@@ -1042,7 +1042,7 @@ const gcores = {
             gcores.dom.push(
                 {
                     title: data.data.attributes.title,
-                    url: url,
+                    url: url+'#noHistory#',
                     pic_url: gcores.imageUrl+data.data.attributes.cover,
                     desc: data.data.attributes.description,
                     col_type: 'movie_1_vertical_pic_blur'
@@ -1064,7 +1064,7 @@ const gcores = {
                         gcores.dom.push({
                             title: item.attributes.title,
                             pic_url: gcores.imageUrl+item.attributes.thumb,
-                            url: item.attributes['is-free'] ? (ra.attributes.audio.includes('http') ? ra.attributes.audio : gcores.audioUrl+ra.attributes.audio) : 'toast://该资源为付费资源',
+                            url: (item.attributes['is-free'] ? (ra.attributes.audio.includes('http') ? ra.attributes.audio : gcores.audioUrl+ra.attributes.audio) : 'toast://该资源为付费资源')+'#noHistory#',
                             desc: item.attributes.desc,
                             col_type: 'movie_1_left_pic'
                         })
@@ -1084,7 +1084,7 @@ const gcores = {
         gcores.dom.push(
             {
                 title: data.data.attributes.title,
-                url: url,
+                url: url+'#noHistory#',
                 pic_url: gcores.imageUrl+data.data.attributes.cover,
                 desc: data.data.attributes.description,
                 col_type: 'movie_1_vertical_pic_blur'
@@ -1098,7 +1098,7 @@ const gcores = {
         if (data.data.attributes.screenshots) {
             gcores.dom.push({
                 title: '游戏预览',
-                url: url,
+                url: url+'#noHistory#',
                 col_type: 'text_center_1',
                 extra: {
                     lineVisible: false
@@ -1107,7 +1107,7 @@ const gcores = {
             data.data.attributes.screenshots.forEach(item => {
                 gcores.dom.push({
                     pic_url: gcores.imageUrl+item,
-                    url: gcores.imageUrl+item,
+                    url: gcores.imageUrl+item+'#noHistory#',
                     col_type: 'pic_2',
                 })
             })
@@ -1124,7 +1124,7 @@ const gcores = {
             gcores.dom.push(
                 {
                     title: '发行平台与价格',
-                    url: url,
+                    url: url+'#noHistory#',
                     col_type: 'text_center_1',
                     extra: {
                         lineVisible: false
@@ -1197,7 +1197,7 @@ const gcores = {
             gcores.dom.push(
                 {
                     title: data.data.attributes.title,
-                    url: url,
+                    url: url+'#noHistory#',
                     pic_url: gcores.imageUrl+data.data.attributes.cover,
                     desc: data.data.attributes.description,
                     col_type: 'movie_1_vertical_pic_blur'
