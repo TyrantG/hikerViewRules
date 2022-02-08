@@ -40,11 +40,11 @@ const gcores = {
         let attention, collection, config
 
         if (! fileExist(gcores.plugins.attention)) {
-            attention = 'YT17$$$168de8e2-caee-4645-a87a-340e5c48b354.gif$$$257036\r\n'
+            attention = 'YT17$$$168de8e2-caee-4645-a87a-340e5c48b354.gif$$$257036\n'
             writeFile(gcores.plugins.attention, attention)
         }
         if (! fileExist(gcores.plugins.collection)) {
-            collection = 'Steam周销量排行榜:《消逝的光芒2：人与仁之战》登顶|2022年2月第一周$$$a52a0188-c5b6-445a-a129-4212d4dd7a4e.gif$$$147163$$$articles\r\n'
+            collection = 'Steam周销量排行榜:《消逝的光芒2：人与仁之战》登顶|2022年2月第一周$$$a52a0188-c5b6-445a-a129-4212d4dd7a4e.gif$$$147163$$$articles\n'
             writeFile(gcores.plugins.collection, collection)
         }
         if (! fileExist(gcores.plugins.config)) {
@@ -55,8 +55,8 @@ const gcores = {
     baseParse: () => {
         gcores.pluginInit()
 
-        const attention = fetch(gcores.plugins.attention).split('\r\n').filter(item => item)
-        const collection = fetch(gcores.plugins.collection).split('\r\n').filter(item => item)
+        const attention = fetch(gcores.plugins.attention).split('\n').filter(item => item)
+        const collection = fetch(gcores.plugins.collection).split('\n').filter(item => item)
 
         gcores.dom.push({
             url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
@@ -176,7 +176,7 @@ const gcores = {
                 col_type: 'icon_2',
             },
         )
-        log(attention)
+
         if (gcores.homeSelected === 'attention') {
             attention.forEach(item => {
                 let sub = item.split('$$$')
@@ -892,7 +892,7 @@ const gcores = {
     authorDescParse: (id, url) => {
         const page = url.split('$$')[1]
         if (parseInt(page) === 1) {
-            const attention = fetch(gcores.plugins.attention).split('\r\n').filter(item => item)
+            const attention = fetch(gcores.plugins.attention).split('\n').filter(item => item)
 
             let has_attention = false
 
@@ -911,12 +911,12 @@ const gcores = {
                     url: $(gcores.empty).lazyRule(params => {
                         if (params.has_attention) {
                             params.attention.splice(params.has_attention-1, 1)
-                            writeFile(params.filename, params.attention.join('\r\n'))
+                            writeFile(params.filename, params.attention.join('\n'))
                             refreshPage(false)
                             return 'toast://取消关注'
                         } else {
                             params.attention.push(params.userData)
-                            writeFile(params.filename, params.attention.join('\r\n'))
+                            writeFile(params.filename, params.attention.join('\n'))
                             refreshPage(false)
                             return 'toast://关注成功'
                         }
