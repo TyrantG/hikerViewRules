@@ -1122,10 +1122,10 @@ const gcores = {
                         col_type: 'avatar'
                     },
                     {
-                        title: '原价：￥'+(info.details[0].regular.amount / 100).toFixed(2)+'<br />'+
+                        title: '<p>原价：￥'+(info.details[0].regular.amount / 100).toFixed(2)+'</p><br />'+
                             // info.details[0].discount ? '现价：￥'+(info.details[0].discount.amount / 100).toFixed(2)+'<br />' : ''+
-                            '地区：'+info.details[0].area_name+
-                            info.details[0].support_chinese ? '<br />中文' : '',
+                            '<p>地区：'+info.details[0].area_name+'</p>'+
+                            info.details[0].support_chinese ? '<br /><p>中文</p>' : '',
                         url: 'toast://'+item.attributes['platform-name']+'平台',
                         col_type: 'rich_text'
                     },
