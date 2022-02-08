@@ -166,6 +166,10 @@ const gcores = {
                 },
                 {
                     title: '专题',
+                    url: $('https://www.gcores.com/gapi/v1/collections?page[limit]=$limit&page[offset]=$offset&sort=-updated-at#noHistory#$$fypage').rule(() => {
+                        eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                        gcores.baseAdapter(6)
+                    }),
                     pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/专题.svg',
                     col_type: 'icon_round_small_4',
                 },
