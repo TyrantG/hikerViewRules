@@ -1169,6 +1169,14 @@ const gcores = {
             videos: '&sort=-published-at&include=category,user,djs&filter[list-all]=1&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user,djs'
         }
 
+        const idMap = {
+            originals: originals,
+            radios: radios,
+            articles: articles,
+            news: originals,
+            videos: videos,
+        }
+
         if (parseInt(page) === 1) {
             const api_url = "https://www.gcores.com/gapi/v1/collections/"+id
             const apiData = fetch(api_url, {headers: gcores.headers})
@@ -1184,6 +1192,10 @@ const gcores = {
                     col_type: 'movie_1_vertical_pic_blur'
                 },
                 {col_type: 'line_blank'},
+                {col_type: 'blank_block'},
+                {col_type: 'blank_block'},
+                {col_type: 'blank_block'},
+                {col_type: 'blank_block'},
                 {col_type: 'blank_block'},
                 {col_type: 'blank_block'},
                 {col_type: 'blank_block'},
@@ -1218,7 +1230,7 @@ const gcores = {
             })
         }
 
-        const content_url = "https://www.gcores.com/gapi/v1/collections/"+id+"/"+gcores.collectTab+"?page[limit]=12&page[offset]="+(page-1)*12+map[gcores.collectTab]
+        const content_url = "https://www.gcores.com/gapi/v1/collections/"+id+"/"+idMap[gcores.collectTab]+"?page[limit]=12&page[offset]="+(page-1)*12+map[gcores.collectTab]
         const content_json = fetch(content_url, {headers: gcores.headers})
         const result = JSON.parse(content_json)
 
