@@ -1116,15 +1116,16 @@ const gcores = {
 
                 gcores.dom.push(
                     {
-                        title: item.attributes['platform-name']+' 原价：￥'+info.details[0].regular.amount+' 地区：'+info.details[0].area_name,
+                        title: item.attributes['platform-name'],
                         pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/'+item.attributes.platform+'.svg',
                         url: 'toast://'+item.attributes['platform-name']+'平台',
                         col_type: 'avatar'
                     },
                     {
-                        title: item.attributes['platform-name'],
+                        title: '原价：￥'+(info.details[0].regular.amount / 100).toFixed(2)+'<br />'+
+                            '地区：'+info.details[0].area_name,
                         // url: 'toast://'+item.attributes['platform-name']+'平台',
-                        col_type: 'text_1'
+                        col_type: 'rich_text'
                     },
                     {
                         col_type: 'line'
