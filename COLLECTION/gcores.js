@@ -891,7 +891,7 @@ const gcores = {
     descAuthorShow: result => {
         let userId = []
         userId.push(result.data.relationships.user.data.id)
-        if (result.data.relationships.djs) result.data.relationships.djs.data.forEach(dj => userId.push(dj.id))
+        if (result.data.relationships.djs.data) result.data.relationships.djs.data.forEach(dj => userId.push(dj.id))
 
         result.included.forEach(resource => {
             if (resource.type === 'user' && userId.includes(resource.id)) {
