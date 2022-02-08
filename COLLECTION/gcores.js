@@ -894,7 +894,7 @@ const gcores = {
         if (result.data.relationships.djs.data) result.data.relationships.djs.data.forEach(dj => userId.push(dj.id))
 
         result.included.forEach(resource => {
-            if (resource.type === 'user' && userId.includes(resource.id)) {
+            if (resource.type === 'users' && userId.includes(resource.id)) {
                 gcores.dom.push({
                     title: resource.attributes.nickname,
                     pic_url: gcores.imageUrl+item.attributes.thumb,
