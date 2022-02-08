@@ -146,12 +146,10 @@ const gcores = {
 
         grid.forEach(item => gcores.dom.push(item))
 
-        const attentionField = '关注：'+attention.length
-        const collectionField = '收藏：'+collection.length
 
         gcores.dom.push(
             {
-                title: gcores.homeSelected === 'attention' ? '‘‘’’<strong><font color="#ff1493">『'+attentionField+'』</font></strong>' : attentionField,
+                title: gcores.homeSelected === 'attention' ? '『关注』：'+attention.length : '关注：'+attention.length,
                 url: $(gcores.empty).lazyRule(() => {
                     setItem('homeSelected', 'attention')
                     refreshPage(true)
@@ -161,7 +159,7 @@ const gcores = {
                 col_type: 'icon_2',
             },
             {
-                title: gcores.homeSelected === 'collection' ? '‘‘’’<strong><font color="#ff1493">『'+collectionField+'』</font></strong>' : collectionField,
+                title: gcores.homeSelected === 'collection' ? '『收藏』：'+collection.length : '收藏：'+collection.length,
                 url: $(gcores.empty).lazyRule(() => {
                     setItem('homeSelected', 'collection')
                     refreshPage(true)
