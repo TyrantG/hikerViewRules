@@ -399,14 +399,14 @@ const gcores = {
                 data = JSON.parse(apiData).data
                 gcores.albumsParse(data)
                 break
-            /*case 7:
+            case 5:
+                data = JSON.parse(apiData).data
+                gcores.gamesParse(data)
+                break
+            case 6:
                 data = JSON.parse(apiData).data
                 gcores.collectionsParse(data)
                 break
-            case 8:
-                data = JSON.parse(apiData).data
-                gcores.gamesParse(data)
-                break*/
             default:
         }
         setResult(gcores.dom);
