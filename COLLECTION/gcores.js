@@ -182,7 +182,7 @@ const gcores = {
                 let sub = item.split('$$$')
                 gcores.dom.push({
                     title: sub[0],
-                    url: $('https://www.gcores.com/users/'+sub[2]+'/content#immersiveTheme##noHistory#$$fypage').rule(params => {
+                    url: $('https://www.gcores.com/users/'+sub[2]+'/content#noHistory#$$fypage').rule(params => {
                         eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                         gcores.authorDescParse(params.id, MY_URL)
                     }, {
@@ -973,7 +973,7 @@ const gcores = {
                 gcores.dom.push({
                     title: resource.attributes.nickname,
                     pic_url: gcores.imageUrl+resource.attributes.thumb,
-                    url: $('https://www.gcores.com/users/'+resource.id+'/content#immersiveTheme##noHistory#$$fypage').rule(params => {
+                    url: $('https://www.gcores.com/users/'+resource.id+'/content#noHistory#$$fypage').rule(params => {
                         eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                         gcores.authorDescParse(params.id, MY_URL)
                     }, {
