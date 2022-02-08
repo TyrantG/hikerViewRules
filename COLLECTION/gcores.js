@@ -155,12 +155,13 @@ const gcores = {
 
         grid.forEach(item => gcores.dom.push(item))
 
-        const attentionField = gcores.userFold === 'fold' ? '『△展开关注』' : '『▽折叠关注』：'
+        const attentionField = gcores.userFold === 'fold' ? '展开' : '折叠'
 
         gcores.dom.push(
             {
                 title: gcores.homeSelected === 'attention' ? '‘‘’’<strong><font color="#ff1493">'+attentionField+'</font></strong>' : attentionField,
                 url: $(gcores.empty).lazyRule(params => {
+                    setItem('homeSelected', 'attention')
                     setItem('userFold', params.fold === 'fold' ? 'unfold' : 'fold')
                     refreshPage(true)
                     return 'hiker://empty'
@@ -170,7 +171,7 @@ const gcores = {
                 col_type: 'text_4',
             },
             {
-                title: gcores.homeSelected === 'top' ? '‘‘’’<strong><font color="#ff1493">『置顶关注』</font></strong>' : '『置顶关注』',
+                title: gcores.homeSelected === 'top' ? '‘‘’’<strong><font color="#ff1493">置顶</font></strong>' : '置顶',
                 url: $(gcores.empty).lazyRule(() => {
                     setItem('userFold', 'unfold')
                     setItem('homeSelected', 'top')
@@ -180,7 +181,7 @@ const gcores = {
                 col_type: 'text_4',
             },
             {
-                title: gcores.homeSelected === 'delete' ? '‘‘’’<strong><font color="#ff1493">『删除关注』</font></strong>' : '『置顶关注』',
+                title: gcores.homeSelected === 'delete' ? '‘‘’’<strong><font color="#ff1493">删除</font></strong>' : '置顶',
                 url: $(gcores.empty).lazyRule(() => {
                     setItem('userFold', 'unfold')
                     setItem('homeSelected', 'delete')
@@ -190,7 +191,7 @@ const gcores = {
                 col_type: 'text_4',
             },
             {
-                title: gcores.homeSelected === 'see' ? '‘‘’’<strong><font color="#ff1493">『查看关注』</font></strong>' : '『查看关注』',
+                title: gcores.homeSelected === 'see' ? '‘‘’’<strong><font color="#ff1493">查看</font></strong>' : '查看',
                 url: $(gcores.empty).lazyRule(() => {
                     setItem('userFold', 'unfold')
                     setItem('homeSelected', 'see')
