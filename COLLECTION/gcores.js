@@ -890,6 +890,7 @@ const gcores = {
         setResult(gcores.dom);
     },
     authorDescParse: (id, url) => {
+        clearItem('authorTab')
         const page = url.split('$$')[1]
         if (parseInt(page) === 1) {
             const api_url = "https://www.gcores.com/gapi/v1/users/"+id
