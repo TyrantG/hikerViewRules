@@ -1316,9 +1316,7 @@ const gcores = {
                 gcores.dom.push({
                     title: gcores.authorTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
                     url: $(gcores.empty).lazyRule(params => {
-                        log(params.type)
                         setItem("authorTab", params.type)
-                        log(getItem('authorTab', 'sb'))
                         refreshPage(false)
                         return "hiker://empty"
                     }, {
