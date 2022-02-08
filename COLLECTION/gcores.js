@@ -1138,7 +1138,7 @@ log(info.details[0].discount)
                     },
                     {
                         title: '<p>原价：￥'+(info.details[0].regular.amount / 100).toFixed(2)+'</p>'+
-                            info.details[0].discount !== undefined ? '<p>现价：￥'+(info.details[0].discount.amount / 100).toFixed(2)+'</p>' : ''+
+                            (info.details[0].discount !== undefined ? ('<p>现价：￥'+(info.details[0].discount.amount / 100).toFixed(2)+'</p>') : '')+
                             '<p>地区：'+info.details[0].area_name+'</p>'+
                             (info.details[0].support_chinese ? '<p>中文</p>' : ''),
                         col_type: 'rich_text'
