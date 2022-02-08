@@ -365,6 +365,13 @@ const gcores = {
                 }, {
                     id: id
                 })
+            case 'collections':
+                return $("https://www.gcores.com/collections/"+id+"#immersiveTheme##noHistory#$$fypage").rule(params => {
+                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                    gcores.collectionsDescParse(params.id, MY_URL)
+                }, {
+                    id: id
+                })
         }
     },
     x5SubUrlBuild: bannerItem => {
@@ -402,6 +409,10 @@ const gcores = {
             case 4:
                 data = JSON.parse(apiData).data
                 gcores.albumsParse(data)
+                break
+            case 6:
+                data = JSON.parse(apiData).data
+                gcores.collectionsParse(data)
                 break
             default:
         }
@@ -531,7 +542,7 @@ const gcores = {
                 desc: item.attributes.description,
                 pic_url: gcores.imageUrl+item.attributes.cover+'@Referer='+gcores.headers.referer,
                 url: gcores.subUrlBuild(item.id, 'collections'),
-                col_type: 'movie_2'
+                col_type: 'movie_3'
             })
         })
     },
@@ -1135,6 +1146,9 @@ const gcores = {
             }
         })
 
+        setResult(gcores.dom);
+    },
+    collectionsDescParse: (id, url) => {
         setResult(gcores.dom);
     },
     authorDescParse: (id, url) => {
