@@ -326,6 +326,9 @@ const gcores = {
             gcores.dom.push({
                 title: '先关注几位创作者吧',
                 col_type: 'text_center_1',
+                extra: {
+                    lineVisible: false
+                },
             })
         }
 
