@@ -47,6 +47,10 @@ const gcores = {
     },
     baseParse: () => {
         gcores.pluginInit()
+
+        const attention = fetch(gcores.plugins.attention).split('\r\n').filter(item => item)
+        const collection = fetch(gcores.plugins.collection).split('\r\n').filter(item => item)
+
         gcores.dom.push({
             url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
             col_type:"x5_webview_single",
@@ -145,13 +149,15 @@ const gcores = {
         gcores.dom.push(
             {
                 title: '关注',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
-                col_type: 'icon_2',
+                desc: '0',
+                pic_url: gcores.imageUrl+attention[0].split('$$')[1],
+                col_type: 'card_pic_2',
             },
             {
                 title: '收藏',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
-                col_type: 'icon_2',
+                desc: '0',
+                pic_url: gcores.imageUrl+collection[0].split('$$')[1],
+                col_type: 'card_pic_2',
             },
         )
 
