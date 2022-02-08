@@ -893,6 +893,14 @@ const gcores = {
         userId.push(result.data.relationships.user.data.id)
         if (result.data.relationships.djs.data) result.data.relationships.djs.data.forEach(dj => userId.push(dj.id))
 
+        gcores.dom.push({
+            title: '作者及主持人：',
+            url: gcores.empty,
+            col_type: 'text_1',
+            extra: {
+                lineVisible: false
+            },
+        })
         result.included.forEach(resource => {
             if (resource.type === 'users' && userId.includes(resource.id)) {
                 gcores.dom.push({
