@@ -452,6 +452,10 @@ const gcores = {
         })
     },
     gamesParse: () => {
+        addListener('onClose', $.toString(() => {
+            clearItem('gamePlatform')
+            clearItem('gameSort')
+        }))
         const page = MY_URL.split('$$')[1]
         let platform = ''
         if (gcores.gamePlatform) platform = '&filter[platform]='+gcores.gamePlatform
@@ -1056,7 +1060,31 @@ const gcores = {
         setResult(gcores.dom);
     },
     gamesDescParse: (id, url) => {
+        const api_url = "https://www.gcores.com/gapi/v1/games/"+id+"?include=game-stores,tags,involvements.entity.user"
+        const apiData = fetch(api_url, {headers: gcores.headers})
+        const data = JSON.parse(apiData)
 
+        setPageTitle(data.data.attributes.title)
+        gcores.dom.push(
+            {
+                title: data.data.attributes.title,
+                url: url,
+                pic_url: gcores.imageUrl+data.data.attributes.cover,
+                desc: data.data.attributes.description,
+                col_type: 'movie_1_vertical_pic_blur'
+            },
+            {
+                col_type: 'line_blank'
+            }
+        )
+
+        data.data.attributes.screenshots.forEach(item => {
+            gcores.dom.push({
+                pic_url: gcores.imageUrl+item,
+                url: gcores.imageUrl+item,
+                col_type: 'pic_3',
+            })
+        })
 
         setResult(gcores.dom);
     },
