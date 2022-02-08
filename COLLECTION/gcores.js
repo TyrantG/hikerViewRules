@@ -24,12 +24,11 @@ const gcores = {
         'albums': '播单',
         'games': '游戏',
     },
-    page: MY_URL.split('$$')[1],
     homeSelected: getItem('homeSelected', 'attention'),
+    authorTab: getItem('authorTab', 'articles'),
     searchValue: getItem('searchValue', ''),
     searchTab: getItem('searchTab', 'articles'),
     searchOrderBy: getItem('searchOrderBy', 'score'),
-    searchHistoryShowStatus: getItem('searchHistoryShowStatus', '0'),
     searchHistoryShowStatus: getItem('searchHistoryShowStatus', '0'),
     imageUrl: 'https://image.gcores.com/',
     audioUrl: 'https://alioss.gcores.com/uploads/audio/',
@@ -183,6 +182,12 @@ const gcores = {
                 let sub = item.split('$$$')
                 gcores.dom.push({
                     title: sub[0],
+                    url: $('https://www.gcores.com/users/'+sub[2]+'/content#immersiveTheme##noHistory#$$fypage').rule(params => {
+                        eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                        gcores.authorDescParse(params.id, MY_URL)
+                    }, {
+                        id: sub[2]
+                    }),
                     pic_url: gcores.imageUrl+sub[1],
                     col_type: 'icon_round_small_4'
                 })
@@ -247,7 +252,8 @@ const gcores = {
         }
     },
     baseAdapter: selected => {
-        const url = gcores.urlParamsBuild(MY_URL, {limit: 12, offset: 12 * (gcores.page-1)})
+        const page = MY_URL.split('$$')[1]
+        const url = gcores.urlParamsBuild(MY_URL, {limit: 12, offset: 12 * (page-1)})
         const apiData = fetch(url, {headers: gcores.headers})
         let data
 
@@ -881,6 +887,64 @@ const gcores = {
 
         setResult(gcores.dom);
     },
+    authorDescParse: (id, url) => {
+        const page = url.split('$$')[1]
+        if (parseInt(page) === 1) {
+            const api_url = "https://www.gcores.com/gapi/v1/users/"+id
+            const apiData = fetch(api_url, {headers: gcores.headers})
+            const data = JSON.parse(apiData)
+
+            setPageTitle(data.data.attributes.nickname)
+            gcores.dom.push(
+                {
+                    title: data.data.attributes.nickname,
+                    url: url,
+                    pic_url: gcores.imageUrl+data.data.attributes.thumb,
+                    col_type: 'avatar'
+                },
+                {
+                    col_type: 'line_blank'
+                }
+            )
+
+            const tabs = [
+                {title: '文章', type: 'articles'},
+                {title: '资讯', type: 'news'},
+                {title: '视频', type: 'videos'},
+                {title: '电台', type: 'radios'},
+            ]
+
+            tabs.forEach(tab => {
+                gcores.dom.push({
+                    title: gcores.authorTab === tab.type ? '‘‘’’<strong><font color="red">'+tab.title+'</font></strong>' : tab.title,
+                    url: $(gcores.empty).lazyRule(params => {
+                        setItem("authorTab", params.type)
+                        refreshPage(true)
+                        return "hiker://empty"
+                    }, {
+                        type: tab.type
+                    }),
+                    col_type: 'scroll_button',
+                })
+            })
+        }
+
+        const author_url = "https://www.gcores.com/gapi/v1/users/"+id+"/"+gcores.authorTab+"?page[limit]=16&page[offset]="+(page-1)*16+"&sort=-published-at&include=category,user&filter[is-news]=0&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user"
+        const author_api_data = fetch(author_url, {headers: gcores.headers})
+        const author_data = JSON.parse(author_api_data)
+
+        author_data.data.forEach(item => {
+            gcores.dom.push({
+                title: item.attributes.title,
+                desc: item.attributes.desc || item.attributes.description,
+                pic_url: gcores.imageUrl+(item.attributes.thumb || item.attributes.cover)+'@Referer='+gcores.headers.referer,
+                url: gcores.subUrlBuild(item.id, gcores.authorTab),
+                col_type: 'pic_1'
+            })
+        })
+
+        setResult(gcores.dom);
+    },
     descListener: () => {
         addListener('onClose', $.toString(() => {
 
@@ -909,7 +973,13 @@ const gcores = {
                 gcores.dom.push({
                     title: resource.attributes.nickname,
                     pic_url: gcores.imageUrl+resource.attributes.thumb,
-                    // url: $(''),
+                    url:
+                    url: $('https://www.gcores.com/users/'+resource.id+'/content#immersiveTheme##noHistory#$$fypage').rule(params => {
+                    eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
+                    gcores.authorDescParse(params.id, MY_URL)
+                }, {
+                    id: sub[2]
+                }),,
                     col_type: 'avatar'
                 })
             }
