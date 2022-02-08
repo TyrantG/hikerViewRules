@@ -1170,11 +1170,11 @@ const gcores = {
         }
 
         const idMap = {
-            originals: originals,
-            radios: radios,
-            articles: articles,
-            news: originals,
-            videos: videos,
+            originals: 'originals',
+            radios: 'radios',
+            articles: 'articles',
+            news: 'originals',
+            videos: 'videos',
         }
 
         if (parseInt(page) === 1) {
