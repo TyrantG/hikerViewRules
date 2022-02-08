@@ -488,7 +488,7 @@ const gcores = {
 
                 tabs.forEach(tab => {
                     gcores.dom.push({
-                        title: gcores.searchTab === tab.type ? '‘‘’’<strong><font color="red">'+tab.title+'</font></strong>' : tab.title,
+                        title: gcores.searchTab === tab.type ? '‘‘’’<strong><font color="ff1493">'+tab.title+'</font></strong>' : tab.title,
                         url: $(gcores.empty).lazyRule(params => {
                             setItem("searchTab", params.type)
                             refreshPage(true)
@@ -504,7 +504,7 @@ const gcores = {
                 })
                 orders.forEach(order => {
                     gcores.dom.push({
-                        title: gcores.searchOrderBy === order.type ? '‘‘’’<strong><font color="red">'+order.title+'</font></strong>' : order.title,
+                        title: gcores.searchOrderBy === order.type ? '‘‘’’<strong><font color="ff1493">'+order.title+'</font></strong>' : order.title,
                         url: $(gcores.empty).lazyRule(params => {
                             setItem("searchOrderBy", params.type)
                             refreshPage(true)
@@ -581,7 +581,7 @@ const gcores = {
                 return '<h5>'+block.text+'</h5>'
             case 'header-six':
                 return '<h6>'+block.text+'</h6>'
-            case 'unordered-list-item':
+            case 'unordeff1493-list-item':
                 return '<li>'+block.text+'</li>'
             case 'atomic':
                 let images = ''
@@ -890,18 +890,42 @@ const gcores = {
         setResult(gcores.dom);
     },
     authorDescParse: (id, url) => {
-        clearItem('authorTab')
         const page = url.split('$$')[1]
         if (parseInt(page) === 1) {
+            const attention = fetch(gcores.plugins.attention).split('\r\n').filter(item => item)
+
+            let has_attention = false
+
+            attention.forEach((item, index) => {
+                if (item.includes(id)) has_attention = index+1
+            })
+
             const api_url = "https://www.gcores.com/gapi/v1/users/"+id
             const apiData = fetch(api_url, {headers: gcores.headers})
             const data = JSON.parse(apiData)
 
-            setPageTitle(data.data.attributes.nickname)
+            setPageTitle(data.data.attributes.nickname+has_attention ? '『已关注』' : '『未关注』')
             gcores.dom.push(
                 {
                     title: data.data.attributes.nickname,
-                    url: url,
+                    url: $(gcores.empty).lazyRule(params => {
+                        if (params.has_attention) {
+                            params.attention.splice(params.has_attention-1, 1)
+                            writeFile(params.filename, params.attention.join('\r\n'))
+                            refreshPage(false)
+                            return 'toast://取消关注'
+                        } else {
+                            params.attention.push(params.userData)
+                            writeFile(params.filename, params.attention.join('\r\n'))
+                            refreshPage(false)
+                            return 'toast://关注成功'
+                        }
+                    }, {
+                        attention: attention,
+                        has_attention: has_attention,
+                        filename: gcores.plugins.attention,
+                        userData: data.data.attributes.nickname+'$$$'+data.data.attributes.thumb+'$$$'+id,
+                    }),
                     pic_url: gcores.imageUrl+data.data.attributes.thumb,
                     col_type: 'avatar'
                 }
@@ -916,7 +940,7 @@ const gcores = {
 
             tabs.forEach(tab => {
                 gcores.dom.push({
-                    title: gcores.authorTab === tab.type ? '‘‘’’<strong><font color="red">'+tab.title+'</font></strong>' : tab.title,
+                    title: gcores.authorTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
                     url: $(gcores.empty).lazyRule(params => {
                         setItem("authorTab", params.type)
                         refreshPage(true)
@@ -924,7 +948,7 @@ const gcores = {
                     }, {
                         type: tab.type
                     }),
-                    col_type: 'scroll_button',
+                    col_type: 'text_4',
                 })
             })
         }
