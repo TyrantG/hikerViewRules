@@ -18,7 +18,7 @@ const gcores = {
         searchHistoryShowLimit: 20,
     },
     page: MY_URL.split('$$')[1],
-    currentUrl: getItem('currentUrl', 'https://www.gcores.com'),
+    homeSelected: getItem('homeSelected', 'attention'),
     searchValue: getItem('searchValue', ''),
     searchTab: getItem('searchTab', 'articles'),
     searchOrderBy: getItem('searchOrderBy', 'score'),
@@ -146,18 +146,52 @@ const gcores = {
 
         grid.forEach(item => gcores.dom.push(item))
 
+        const attentionField = '关注：'+attention.length
+        const collectionField = '收藏：'+collection.length
+
         gcores.dom.push(
             {
-                title: '关注：'+attention.length,
-                pic_url: gcores.imageUrl+attention[0].split('$$$')[1],
+                title: gcores.homeSelected === 'attention' ? '‘‘’’<strong><font color="#ff1493">『'+attentionField+'』</font></strong>' : attentionField,
+                url: $(gcores.empty).lazyRule(() => {
+                    setItem('homeSelected', 'attention')
+                    refreshPage(true)
+                    return "toast://切换为关注"
+                }),
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
                 col_type: 'icon_2',
             },
             {
-                title: '收藏：'+collection.length,
-                pic_url: gcores.imageUrl+collection[0].split('$$$')[1],
+                title: gcores.homeSelected === 'collection' ? '‘‘’’<strong><font color="#ff1493">『'+collectionField+'』</font></strong>' : collectionField,
+                url: $(gcores.empty).lazyRule(() => {
+                    setItem('homeSelected', 'collection')
+                    refreshPage(true)
+                    return "toast://切换为收藏"
+                }),
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
                 col_type: 'icon_2',
             },
         )
+
+        if (gcores.homeSelected === 'attention') {
+            attention.forEach(item => {
+                let sub = item.split('$$$')
+                gcores.dom.push({
+                    title: sub[0],
+                    pic_url: gcores.imageUrl+sub[1],
+                    col_type: 'icon_round_small_4'
+                })
+            })
+        } else {
+            collection.forEach(item => {
+                let sub = item.split('$$$')
+                gcores.dom.push({
+                    title: sub[0],
+                    pic_url: gcores.imageUrl+sub[1],
+                    url: gcores.subUrlBuild(sub[2], sub[3]),
+                    col_type: 'icon_round_small_4'
+                })
+            })
+        }
 
         setResult(gcores.dom);
     },
