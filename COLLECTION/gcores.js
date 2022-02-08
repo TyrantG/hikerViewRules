@@ -59,7 +59,7 @@ const gcores = {
 
         const attention = fetch(gcores.plugins.attention).split('\n').filter(item => item)
         // const collection = fetch(gcores.plugins.collection).split('\n').filter(item => item)
-        const page = url.split('$$')[1]
+        const page = MY_URL.split('$$')[1]
         if (parseInt(page) === 1) {
             gcores.dom.push({
                 url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
