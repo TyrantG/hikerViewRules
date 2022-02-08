@@ -359,7 +359,7 @@ const gcores = {
                     id: id
                 })
             case 'games':
-                return $("https://www.gcores.com/games/"+id+"#immersiveTheme##noHistory#$$fypage").rule(params => {
+                return $("https://www.gcores.com/games/"+id+"#immersiveTheme##noHistory#").rule(params => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.gamesDescParse(params.id, MY_URL)
                 }, {
@@ -1092,6 +1092,35 @@ const gcores = {
                 url: gcores.imageUrl+item,
                 col_type: 'pic_2',
             })
+        })
+        gcores.dom.push(
+            {
+                col_type: 'line_blank'
+            },
+            {
+                title: '发行平台与价格',
+                url: url,
+                col_type: 'text_center_1',
+                extra: {
+                    lineVisible: false
+                },
+            }
+        )
+
+        let stores = []
+        data.data.relationships['game-stores'].data.forEach(item => stores.push(item.id))
+        data.included.forEach(item => {
+            if (item.type === 'game-stores' && stores.includes(item.id)) {
+                let info
+                eval('info = JSON.parse('+item.attributes['price-info']+')')
+                log(info)
+                gcores.dom.push({
+                    title: item.attributes['platform-name'],
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/'+item.attributes.platform+'.svg',
+                    url: 'toast://'+item.attributes['platform-name']+'平台',
+                    col_type: 'avatar'
+                })
+            }
         })
 
         setResult(gcores.dom);
