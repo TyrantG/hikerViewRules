@@ -345,9 +345,6 @@ const gcores = {
                 if (fileExist(gcores.plugins.searchHistory) && fetch(gcores.plugins.searchHistory)) {
                     const searchHistory = fetch(gcores.plugins.searchHistory).split('||').filter(item => item)
                     gcores.dom.push({
-                        col_type: 'line_blank'
-                    })
-                    gcores.dom.push({
                         title: '搜索记录：',
                         url: gcores.empty,
                         col_type: 'text_1',
