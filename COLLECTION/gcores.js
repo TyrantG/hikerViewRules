@@ -30,6 +30,7 @@ const gcores = {
     searchTab: getItem('searchTab', 'articles'),
     searchOrderBy: getItem('searchOrderBy', 'score'),
     searchHistoryShowStatus: getItem('searchHistoryShowStatus', '0'),
+    searchHistoryShowStatus: getItem('searchHistoryShowStatus', '0'),
     imageUrl: 'https://image.gcores.com/',
     audioUrl: 'https://alioss.gcores.com/uploads/audio/',
     category: [
@@ -634,6 +635,8 @@ const gcores = {
             }
         )
 
+        gcores.descAuthorShow(data)
+
         if (gcores.playlist.length > 0) {
             gcores.dom.push({
                 title: '媒体资源',
@@ -694,6 +697,8 @@ const gcores = {
                 col_type: 'line_blank'
             }
         )
+
+        gcores.descAuthorShow(data)
 
         data.included.forEach(item => {
             if (item.type === 'medias') {
@@ -780,6 +785,8 @@ const gcores = {
             }
         )
 
+        gcores.descAuthorShow(data)
+
         data.included.forEach(item => {
             if (item.type === 'medias') {
                 gcores.dom.push({
@@ -852,6 +859,8 @@ const gcores = {
             )
         }
 
+        gcores.descAuthorShow(data)
+
         const published_radios_url = "https://www.gcores.com/gapi/v1/albums/"+id+"/published-radios?page[limit]=16&page[offset]="+(page-1)*16+"&include=media,category,albums"
         const published_radios_api_data = fetch(published_radios_url, {headers: gcores.headers})
         const published_radios_data = JSON.parse(published_radios_api_data)
@@ -874,4 +883,31 @@ const gcores = {
 
         setResult(gcores.dom);
     },
+    descListener: () => {
+        addListener('onClose', $.toString(() => {
+
+        }))
+    },
+    descAuthorShow: result => {
+        let userId = []
+        userId.push(result.data.relationships.user.data.id)
+        result.data.relationships.djs.data.forEach(dj => {
+            userId.push(dj.id)
+        })
+
+        result.included.forEach(resource => {
+            if (resource.type === 'user' && userId.includes(resource.id)) {
+                gcores.dom.push({
+                    title: resource.attributes.nickname,
+                    pic_url: gcores.imageUrl+item.attributes.thumb,
+                    // url: $(''),
+                    col_type: 'avatar'
+                })
+            }
+        })
+
+        gcores.dom.push({
+            col_type: 'line_blank'
+        })
+    }
 }
