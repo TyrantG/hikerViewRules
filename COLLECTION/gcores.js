@@ -635,7 +635,7 @@ const gcores = {
             }
         )
 
-        gcores.descAuthorShow(data)
+        gcores.descAuthorShow(data, 'user')
 
         if (gcores.playlist.length > 0) {
             gcores.dom.push({
@@ -698,7 +698,7 @@ const gcores = {
             }
         )
 
-        gcores.descAuthorShow(data)
+        gcores.descAuthorShow(data, 'user')
 
         data.included.forEach(item => {
             if (item.type === 'medias') {
@@ -785,7 +785,7 @@ const gcores = {
             }
         )
 
-        gcores.descAuthorShow(data)
+        gcores.descAuthorShow(data, 'dj')
 
         data.included.forEach(item => {
             if (item.type === 'medias') {
@@ -886,13 +886,18 @@ const gcores = {
 
         }))
     },
-    descAuthorShow: result => {
-        let userId = []
-        userId.push(result.data.relationships.user.data.id)
-        if (result.data.relationships.djs.data) result.data.relationships.djs.data.forEach(dj => userId.push(dj.id))
+    descAuthorShow: (result, type) => {
+        let userId = [], title = ''
+        if (type === 'user') {
+            title = '作者：'
+            userId.push(result.data.relationships.user.data.id)
+        } else {
+            title = '主持人：'
+            result.data.relationships.djs.data.forEach(dj => userId.push(dj.id))
+        }
 
         gcores.dom.push({
-            title: '作者及主持人：',
+            title: title,
             url: gcores.empty,
             col_type: 'text_1',
             extra: {
