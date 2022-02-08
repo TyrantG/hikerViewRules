@@ -53,7 +53,7 @@ const gcores = {
         let attention, collection, config
 
         if (! fileExist(gcores.plugins.attention)) {
-            attention = '梦非昨$$$9a9ec3fb-c31c-423b-b1cf-e742f81e926e.jpg$$$34311\n'
+            attention = 'Holy_Darklight$$$6264a202-d796-4a12-9ac4-ec05c4cb4560.jpg$$$145110\n梦非昨$$$9a9ec3fb-c31c-423b-b1cf-e742f81e926e.jpg$$$34311'
             writeFile(gcores.plugins.attention, attention)
         }
         /*if (! fileExist(gcores.plugins.collection)) {
