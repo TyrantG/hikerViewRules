@@ -1110,50 +1110,58 @@ const gcores = {
                     col_type: 'pic_2',
                 })
             })
-            gcores.dom.push({
-                col_type: 'line_blank'
-            },)
+
         }
 
-        gcores.dom.push(
+        if (data.data.relationships['game-stores'].data.length > 0) {
+            gcores.dom.push({
+                col_type: 'line_blank'
+            })
+            let stores = []
+            data.data.relationships['game-stores'].data.forEach(item => stores.push(item.id))
 
-            {
-                title: '发行平台与价格',
-                url: url,
-                col_type: 'text_center_1',
-                extra: {
-                    lineVisible: false
-                },
-            }
-        )
+            gcores.dom.push(
+                {
+                    title: '发行平台与价格',
+                    url: url,
+                    col_type: 'text_center_1',
+                    extra: {
+                        lineVisible: false
+                    },
+                }
+            )
+            data.included.forEach(item => {
+                if (item.type === 'game-stores' && stores.includes(item.id)) {
+                    let info
+                    eval('info = '+item.attributes['price-info'])
 
-        let stores = []
-        data.data.relationships['game-stores'].data.forEach(item => stores.push(item.id))
-        data.included.forEach(item => {
-            if (item.type === 'game-stores' && stores.includes(item.id)) {
-                let info
-                eval('info = '+item.attributes['price-info'])
+                    gcores.dom.push(
+                        {
+                            title: item.attributes['platform-name'],
+                            pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/'+item.attributes.platform+'.svg',
+                            url: 'toast://'+item.attributes['platform-name']+'平台',
+                            col_type: 'avatar'
+                        },
+                        {
+                            title: '<p>原价：￥'+(info.details[0].regular.amount / 100).toFixed(2)+'</p>'+
+                                (info.details[0].discount !== undefined ? ('<p>现价：￥'+(info.details[0].discount.amount / 100).toFixed(2)+'</p>') : '')+
+                                '<p>地区：'+info.details[0].area_name+'</p>'+
+                                (info.details[0].support_chinese ? '<p>中文</p>' : ''),
+                            col_type: 'rich_text'
+                        },
+                        {
+                            col_type: 'line'
+                        },
+                    )
+                }
+            })
+        } else {
+            gcores.dom.push({
+                title: '该游戏暂无信息',
+                col_type: 'rich_text'
+            })
+        }
 
-                gcores.dom.push(
-                    {
-                        title: item.attributes['platform-name'],
-                        pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/'+item.attributes.platform+'.svg',
-                        url: 'toast://'+item.attributes['platform-name']+'平台',
-                        col_type: 'avatar'
-                    },
-                    {
-                        title: '<p>原价：￥'+(info.details[0].regular.amount / 100).toFixed(2)+'</p>'+
-                            (info.details[0].discount !== undefined ? ('<p>现价：￥'+(info.details[0].discount.amount / 100).toFixed(2)+'</p>') : '')+
-                            '<p>地区：'+info.details[0].area_name+'</p>'+
-                            (info.details[0].support_chinese ? '<p>中文</p>' : ''),
-                        col_type: 'rich_text'
-                    },
-                    {
-                        col_type: 'line'
-                    },
-                )
-            }
-        })
 
         setResult(gcores.dom);
     },
