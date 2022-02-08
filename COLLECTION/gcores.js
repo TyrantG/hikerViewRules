@@ -210,6 +210,8 @@ const gcores = {
     subUrlBuild: (id, cate) => {
         switch (cate) {
             case 'articles':
+            case 'originals':
+            case 'news':
                 return $("https://www.gcores.com/articles/"+id+"#immersiveTheme##noHistory#").rule(params => {
                     eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                     gcores.articlesDescParse(params.id, MY_URL)
@@ -906,7 +908,7 @@ const gcores = {
 
             const tabs = [
                 {title: '文章', type: 'articles'},
-                {title: '资讯', type: 'news'},
+                {title: '资讯', type: 'originals'},
                 {title: '视频', type: 'videos'},
                 {title: '电台', type: 'radios'},
             ]
