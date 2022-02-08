@@ -1092,27 +1092,32 @@ const gcores = {
             {
                 col_type: 'line_blank'
             },
-            {
+
+        )
+
+        if (data.data.attributes.screenshots) {
+            gcores.dom.push({
                 title: '游戏预览',
                 url: url,
                 col_type: 'text_center_1',
                 extra: {
                     lineVisible: false
                 },
-            }
-        )
-
-        data.data.attributes.screenshots.forEach(item => {
-            gcores.dom.push({
-                pic_url: gcores.imageUrl+item,
-                url: gcores.imageUrl+item,
-                col_type: 'pic_2',
             })
-        })
-        gcores.dom.push(
-            {
+            data.data.attributes.screenshots.forEach(item => {
+                gcores.dom.push({
+                    pic_url: gcores.imageUrl+item,
+                    url: gcores.imageUrl+item,
+                    col_type: 'pic_2',
+                })
+            })
+            gcores.dom.push({
                 col_type: 'line_blank'
-            },
+            },)
+        }
+
+        gcores.dom.push(
+
             {
                 title: '发行平台与价格',
                 url: url,
