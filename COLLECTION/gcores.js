@@ -149,15 +149,13 @@ const gcores = {
         gcores.dom.push(
             {
                 title: '关注：'+attention.length,
-                desc: '0',
                 pic_url: gcores.imageUrl+attention[0].split('$$$')[1],
-                col_type: 'card_pic_2',
+                col_type: 'icon_2',
             },
             {
                 title: '收藏：'+collection.length,
-                desc: '0',
                 pic_url: gcores.imageUrl+collection[0].split('$$$')[1],
-                col_type: 'card_pic_2',
+                col_type: 'icon_2',
             },
         )
 
