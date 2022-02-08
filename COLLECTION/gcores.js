@@ -61,6 +61,14 @@ const gcores = {
         const attention = fetch(gcores.plugins.attention).split('\n').filter(item => item)
         // const collection = fetch(gcores.plugins.collection).split('\n').filter(item => item)
         const page = MY_URL.split('$$')[1]
+
+        const tabs = [
+            {title: '文章', type: 'articles', urlParams: '&sort=-published-at&include=category,user&filter[is-news]=0&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user'},
+            {title: '资讯', type: 'originals', urlParams: '&sort=-published-at&include=category,user&filter[is-news]=1&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user'},
+            {title: '视频', type: 'videos', urlParams: '&sort=-published-at&include=category,user,djs&filter[list-all]=1&fields[videos]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user,djs'},
+            {title: '电台', type: 'radios', urlParams: 'sort=-published-at&include=category,user,djs&filter[list-all]=1&fields[radios]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,is-free,category,user,djs'},
+        ]
+
         if (parseInt(page) === 1) {
             gcores.dom.push({
                 url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
@@ -215,13 +223,6 @@ const gcores = {
                 },*/
             )
 
-            const tabs = [
-                {title: '文章', type: 'articles'},
-                {title: '资讯', type: 'originals'},
-                {title: '视频', type: 'videos'},
-                {title: '电台', type: 'radios'},
-            ]
-
             tabs.forEach(tab => {
                 gcores.dom.push({
                     title: gcores.homeAuthorTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
@@ -299,8 +300,12 @@ const gcores = {
 
         if (attention.length > 0) {
             const currentUser = attention[gcores.userSelected].split('$$$')
+            let urlParams = ''
+            for (let i in tabs) {
+                if (tabs[i].type === gcores.homeAuthorTab) urlParams = tabs[i].urlParams
+            }
 
-            const author_url = "https://www.gcores.com/gapi/v1/users/"+currentUser[2]+"/"+gcores.homeAuthorTab+"?page[limit]=8&page[offset]="+(page-1)*8+"&sort=-published-at&include=category,user&filter[is-news]=0&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user"
+            const author_url = "https://www.gcores.com/gapi/v1/users/"+currentUser[2]+"/"+gcores.homeAuthorTab+"?page[limit]=8&page[offset]="+(page-1)*8+urlParams
             const author_api_data = fetch(author_url, {headers: gcores.headers})
             const author_data = JSON.parse(author_api_data)
 
