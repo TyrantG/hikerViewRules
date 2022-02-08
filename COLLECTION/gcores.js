@@ -901,9 +901,6 @@ const gcores = {
                     url: url,
                     pic_url: gcores.imageUrl+data.data.attributes.thumb,
                     col_type: 'avatar'
-                },
-                {
-                    col_type: 'line_blank'
                 }
             )
 
@@ -929,7 +926,7 @@ const gcores = {
             })
         }
 
-        const author_url = "https://www.gcores.com/gapi/v1/users/"+id+"/"+gcores.authorTab+"?page[limit]=16&page[offset]="+(page-1)*16+"&sort=-published-at&include=category,user&filter[is-news]=0&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user"
+        const author_url = "https://www.gcores.com/gapi/v1/users/"+id+"/"+gcores.authorTab+"?page[limit]=8&page[offset]="+(page-1)*8+"&sort=-published-at&include=category,user&filter[is-news]=0&filter[list-all]=1&fields[articles]=title,desc,is-published,thumb,app-cover,cover,comments-count,likes-count,bookmarks-count,is-verified,published-at,option-is-official,option-is-focus-showcase,duration,category,user"
         const author_api_data = fetch(author_url, {headers: gcores.headers})
         const author_data = JSON.parse(author_api_data)
 
