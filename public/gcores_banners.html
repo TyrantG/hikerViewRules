@@ -88,8 +88,8 @@
             imageClickHandle(index) {
                 const bannerItem = this.imageList[index]
                 switch (bannerItem.type) {
-                    case 'albums': bannerItem.url += '#immersiveTheme##fypage';break
-                    default: bannerItem.url += '#immersiveTheme#';break
+                    case 'albums': bannerItem.url += '#immersiveTheme##noHistory#$$fypage';break
+                    default: bannerItem.url += '#immersiveTheme##noHistory#';break
                 }
 
                 let findRule = 'js:' + $$$.toString(bannerItem => {

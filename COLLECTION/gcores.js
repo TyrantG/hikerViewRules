@@ -44,7 +44,7 @@ const gcores = {
         })
 
         gcores.dom.push({
-            url: $(gcores.empty+"#fullTheme##noHistory$$fypage").rule(() => {
+            url: $(gcores.empty+"#fullTheme##noHistory#$$fypage").rule(() => {
                 eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                 gcores.searchParse()
             }),
