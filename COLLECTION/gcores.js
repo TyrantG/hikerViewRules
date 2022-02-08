@@ -184,9 +184,10 @@ const gcores = {
                 let sub = item.split('$$$')
                 gcores.dom.push({
                     title: sub[0],
+                    desc: '类型：'+sub[3],
                     pic_url: gcores.imageUrl+sub[1],
                     url: gcores.subUrlBuild(sub[2], sub[3]),
-                    col_type: 'icon_round_small_4'
+                    col_type: 'movie_1_left_pic'
                 })
             })
         }
