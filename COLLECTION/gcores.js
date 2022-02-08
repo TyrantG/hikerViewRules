@@ -239,7 +239,8 @@ const gcores = {
                 attention.forEach((item, index) => {
                     let sub = item.split('$$$'), titlePrefix = '', userUrl
 
-                    if (gcores.homeSelected === 'attention' && index.toString() === gcores.userSelected) {
+                    if (gcores.homeSelected === 'attention') {
+                        if (index.toString() === gcores.userSelected) titlePrefix = '☑'
                         titlePrefix = '☑'
                         userUrl = $(gcores.empty).lazyRule(params => {
                             setItem('userSelected', params.index.toString())
