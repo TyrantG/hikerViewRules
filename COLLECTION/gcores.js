@@ -863,8 +863,6 @@ const gcores = {
         const published_radios_api_data = fetch(published_radios_url, {headers: gcores.headers})
         const published_radios_data = JSON.parse(published_radios_api_data)
 
-        gcores.descAuthorShow(published_radios_data)
-
         published_radios_data.data.forEach(item => {
             if (item.type === 'radios') {
                 published_radios_data.included.forEach(ra => {
