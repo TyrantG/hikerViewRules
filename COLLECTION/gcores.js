@@ -729,6 +729,7 @@ const gcores = {
     },
     articlesDescParse: (id, url) => {
         const api_url = "https://www.gcores.com/gapi/v1/articles/"+id+"?include=category,user,user.role,tags,entities,entries,similarities.user,similarities.djs,similarities.category,collections,operational-events.giveaways.winners,operational-events.public-candidates&preview=1"
+        log(api_url)
         const apiData = fetch(api_url, {headers: gcores.headers})
         const data = JSON.parse(apiData)
         let contentAndMedia = {blocks: [], entityMap: []}
