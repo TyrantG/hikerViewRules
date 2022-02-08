@@ -25,6 +25,8 @@ const gcores = {
         'games': '游戏',
     },
     homeSelected: getItem('homeSelected', 'attention'),
+    userSelected: getItem('userSelected', '0'),
+    userFold: getItem('userFold', 'unfold'),
     authorTab: getItem('authorTab', 'articles'),
     searchValue: getItem('searchValue', ''),
     searchTab: getItem('searchTab', 'articles'),
@@ -40,13 +42,13 @@ const gcores = {
         let attention, collection, config
 
         if (! fileExist(gcores.plugins.attention)) {
-            attention = 'YT17$$$168de8e2-caee-4645-a87a-340e5c48b354.gif$$$257036\n'
+            attention = '梦非昨$$$9a9ec3fb-c31c-423b-b1cf-e742f81e926e.jpg$$$34311\n'
             writeFile(gcores.plugins.attention, attention)
         }
-        if (! fileExist(gcores.plugins.collection)) {
+        /*if (! fileExist(gcores.plugins.collection)) {
             collection = 'Steam周销量排行榜:《消逝的光芒2：人与仁之战》登顶|2022年2月第一周$$$a52a0188-c5b6-445a-a129-4212d4dd7a4e.gif$$$147163$$$articles\n'
             writeFile(gcores.plugins.collection, collection)
-        }
+        }*/
         if (! fileExist(gcores.plugins.config)) {
             config = JSON.stringify(gcores.defaultConfig)
             writeFile(gcores.plugins.config, config)
@@ -56,7 +58,7 @@ const gcores = {
         gcores.pluginInit()
 
         const attention = fetch(gcores.plugins.attention).split('\n').filter(item => item)
-        const collection = fetch(gcores.plugins.collection).split('\n').filter(item => item)
+        // const collection = fetch(gcores.plugins.collection).split('\n').filter(item => item)
 
         gcores.dom.push({
             url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/gcores_banners.html',
@@ -153,19 +155,51 @@ const gcores = {
 
         grid.forEach(item => gcores.dom.push(item))
 
+        const attentionField = gcores.userFold === 'fold' ? '『△展开关注』' : '『▽折叠关注』：'
 
         gcores.dom.push(
             {
-                title: gcores.homeSelected === 'attention' ? '『关注』：'+attention.length : '关注：'+attention.length,
-                url: $(gcores.empty).lazyRule(() => {
-                    setItem('homeSelected', 'attention')
+                title: gcores.homeSelected === 'attention' ? '‘‘’’<strong><font color="#ff1493">'+attentionField+'</font></strong>' : attentionField,
+                url: $(gcores.empty).lazyRule(params => {
+                    setItem('userFold', params.fold === 'fold' ? 'unfold' : 'fold')
                     refreshPage(true)
-                    return "toast://切换为关注"
+                    return 'hiker://empty'
+                }, {
+                    fold: gcores.userFold
                 }),
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/关注.svg',
-                col_type: 'icon_2',
+                col_type: 'text_4',
             },
             {
+                title: gcores.homeSelected === 'top' ? '‘‘’’<strong><font color="#ff1493">『置顶关注』</font></strong>' : '『置顶关注』',
+                url: $(gcores.empty).lazyRule(() => {
+                    setItem('userFold', 'unfold')
+                    setItem('homeSelected', 'top')
+                    refreshPage(true)
+                    return 'hiker://empty'
+                }),
+                col_type: 'text_4',
+            },
+            {
+                title: gcores.homeSelected === 'delete' ? '‘‘’’<strong><font color="#ff1493">『删除关注』</font></strong>' : '『置顶关注』',
+                url: $(gcores.empty).lazyRule(() => {
+                    setItem('userFold', 'unfold')
+                    setItem('homeSelected', 'delete')
+                    refreshPage(true)
+                    return 'hiker://empty'
+                }),
+                col_type: 'text_4',
+            },
+            {
+                title: gcores.homeSelected === 'see' ? '‘‘’’<strong><font color="#ff1493">『查看关注』</font></strong>' : '『查看关注』',
+                url: $(gcores.empty).lazyRule(() => {
+                    setItem('userFold', 'unfold')
+                    setItem('homeSelected', 'see')
+                    refreshPage(true)
+                    return 'hiker://empty'
+                }),
+                col_type: 'text_4',
+            },
+            /*{
                 title: gcores.homeSelected === 'collection' ? '『收藏』：'+collection.length : '收藏：'+collection.length,
                 url: $(gcores.empty).lazyRule(() => {
                     setItem('homeSelected', 'collection')
@@ -174,33 +208,64 @@ const gcores = {
                 }),
                 pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/收藏.svg',
                 col_type: 'icon_2',
-            },
+            },*/
         )
 
-        if (gcores.homeSelected === 'attention') {
-            attention.forEach(item => {
-                let sub = item.split('$$$')
-                gcores.dom.push({
-                    title: sub[0],
-                    url: $('https://www.gcores.com/users/'+sub[2]+'/content#noHistory#$$fypage').rule(params => {
+        if (gcores.userFold === 'unfold') {
+            attention.forEach((item, index) => {
+                let sub = item.split('$$$'), titlePrefix = '', userUrl
+
+                if (gcores.homeSelected === 'attention' && index.toString() === gcores.userSelected) {
+                    titlePrefix = '☑'
+                    userUrl = $(gcores.empty).rule(params => {
+                        setItem('userSelected', params.index.toString())
+                        refreshPage(false)
+                        return 'hiker://empty'
+                    }, {
+                        index: index
+                    })
+                } else if (gcores.homeSelected === 'top') {
+                    titlePrefix = '✵'
+                    userUrl = $(gcores.empty).rule(params => {
+                        let current = params.attention[params.index]
+                        params.attention.splice(params.index, 1)
+                        params.attention.unshift(current)
+                        writeFile(params.filename, params.attention.join('\n'))
+                        setItem("userSelected", '0')
+                        refreshPage(false)
+                        return 'hiker://empty'
+                    }, {
+                        index: index,
+                        attention: attention,
+                        filename: gcores.plugins.attention
+                    })
+                } else if (gcores.homeSelected === 'delete') {
+                    titlePrefix = '❌'
+                    userUrl = $(gcores.empty).rule(params => {
+                        params.attention.splice(params.index, 1)
+                        writeFile(params.filename, params.attention.join('\n'))
+                        setItem("userSelected", '0')
+                        refreshPage(false)
+                        return 'hiker://empty'
+                    }, {
+                        index: index,
+                        attention: attention,
+                        filename: gcores.plugins.attention
+                    })
+                } else {
+                    userUrl = $('https://www.gcores.com/users/'+sub[2]+'/content#noHistory#$$fypage').rule(params => {
                         eval(fetch('https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/COLLECTION/gcores.js'))
                         gcores.authorDescParse(params.id, MY_URL)
                     }, {
                         id: sub[2]
-                    }),
+                    })
+                }
+
+                gcores.dom.push({
+                    title: titlePrefix+sub[0],
+                    url: userUrl,
                     pic_url: gcores.imageUrl+sub[1],
                     col_type: 'icon_round_small_4'
-                })
-            })
-        } else {
-            collection.forEach(item => {
-                let sub = item.split('$$$')
-                gcores.dom.push({
-                    title: sub[0],
-                    desc: '类型：'+gcores.typeMaps[sub[3]],
-                    pic_url: gcores.imageUrl+sub[1],
-                    url: gcores.subUrlBuild(sub[2], sub[3]),
-                    col_type: 'movie_1_left_pic'
                 })
             })
         }
@@ -715,7 +780,7 @@ const gcores = {
                     url: $(item.attributes.playlist).lazyRule(() => {
                         return JSON.parse(fetch(input)).m3u8
                     }),
-                    col_type: 'text_2',
+                    col_type: 'text_center_1',
                     extra: {
                         lineVisible: false
                     },
