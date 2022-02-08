@@ -225,7 +225,7 @@ const gcores = {
 
             tabs.forEach(tab => {
                 gcores.dom.push({
-                    title: gcores.homeAuthorTab === tab.type ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
+                    title: gcores.homeAuthorTab === tab.type ? '‘‘’’<strong><font color="#00bfff">'+tab.title+'</font></strong>' : tab.title,
                     url: $(gcores.empty).lazyRule(params => {
                         setItem("homeAuthorTab", params.type)
                         refreshPage(false)
