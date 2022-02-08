@@ -253,7 +253,7 @@ const gcores = {
                         if (index.toString() === gcores.userSelected) titlePrefix = '✓'
                         userUrl = $(gcores.empty).lazyRule(params => {
                             setItem('userSelected', params.index.toString())
-                            setItem("authorTab", 'articles')
+                            setItem("homeAuthorTab", 'articles')
                             refreshPage(false)
                             return 'hiker://empty'
                         }, {
