@@ -183,6 +183,7 @@ const gcores = {
                 gcores.videosParse(data)
                 break
             case 2:
+                log(apiData)
                 data = JSON.parse(apiData).data
                 gcores.radiosParse(data)
                 break
