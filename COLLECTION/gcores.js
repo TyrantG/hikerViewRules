@@ -1287,7 +1287,7 @@ const gcores = {
             setPageTitle(data.data.attributes.nickname+(has_attention ? '『已关注』' : '『未关注』'))
             gcores.dom.push(
                 {
-                    title: data.data.attributes.nickname+(has_attention ? '『取消关注』' : '『关注』'),
+                    title: data.data.attributes.nickname+(has_attention ? '『取消关注』' : '『点击关注』'),
                     url: $(gcores.empty).lazyRule(params => {
                         if (params.has_attention) {
                             params.attention.splice(params.has_attention-1, 1)
