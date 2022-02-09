@@ -1141,24 +1141,26 @@ const gcores = {
                     let info
                     eval('info = '+item.attributes['price-info'])
 
-                    gcores.dom.push(
-                        {
-                            title: item.attributes['platform-name'],
-                            pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/'+item.attributes.platform+'.svg',
-                            url: 'toast://'+item.attributes['platform-name']+'平台',
-                            col_type: 'avatar'
-                        },
-                        {
-                            title: '<p>原价：￥'+(info.details[0].regular.amount / 100).toFixed(2)+'</p>'+
-                                (info.details[0].discount !== undefined ? ('<p>现价：￥'+(info.details[0].discount.amount / 100).toFixed(2)+'</p>') : '')+
-                                '<p>地区：'+info.details[0].area_name+'</p>'+
-                                (info.details[0].support_chinese ? '<p>中文</p>' : ''),
-                            col_type: 'rich_text'
-                        },
-                        {
-                            col_type: 'line'
-                        },
-                    )
+                    if (info) {
+                        gcores.dom.push(
+                            {
+                                title: item.attributes['platform-name'],
+                                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/'+item.attributes.platform+'.svg',
+                                url: 'toast://'+item.attributes['platform-name']+'平台',
+                                col_type: 'avatar'
+                            },
+                            {
+                                title: '<p>原价：￥'+(info.details[0].regular.amount / 100).toFixed(2)+'</p>'+
+                                    (info.details[0].discount !== undefined ? ('<p>现价：￥'+(info.details[0].discount.amount / 100).toFixed(2)+'</p>') : '')+
+                                    '<p>地区：'+info.details[0].area_name+'</p>'+
+                                    (info.details[0].support_chinese ? '<p>中文</p>' : ''),
+                                col_type: 'rich_text'
+                            },
+                            {
+                                col_type: 'line'
+                            },
+                        )
+                    }
                 }
             })
         } else {
