@@ -1170,7 +1170,6 @@ const gcores = {
             })
         }
 
-
         setResult(gcores.dom);
     },
     collectionsDescParse: (id, url) => {
