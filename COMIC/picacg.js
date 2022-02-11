@@ -1,3 +1,4 @@
+js:
 const picacg = {
     BaseUrl: "https://picaapi.picacomic.com/",
     picacg_path: "hiker://files/rules/js/TyrantGenesis_哔咔设置.js",
@@ -7,12 +8,13 @@ const picacg = {
     d: [],
     headers: {
         "accept":            "application/vnd.picacomic.com.v1+json",
-        "app-channel":       "3",
+        "app-channel":       "2",
+        "time":              (new Date().getTime()/1000).toFixed(0),
         // "signature":         "",
-        "app-version":       "2.2.1.3.3.4",
+        "app-version":       "2.2.1.2.3.3",
         "app-uuid":          "defaultUuid",
         "app-platform":      "android",
-        "app-build-version": "45",
+        "app-build-version": "44",
         "Content-Type":      "application/json; charset=UTF-8",
         "User-Agent":        "okhttp/3.8.1",
         // "authorization":     getConf("authorization"),
@@ -25,18 +27,22 @@ const picacg = {
         // return crypto.createHmac('sha256', secret_key).update(raw).digest('hex')
         return CryptoJS.HmacSHA256(raw, picacg.secretKey).toString(CryptoJS.enc.Hex)
     },
-    httpRequest: (path, method) => {
+    httpRequest: (path, method, data) => {
         const request_url = picacg.BaseUrl + path
+        // const time = (new Date().getTime()/1000).toFixed(0)
         let headers = picacg.headers
         headers['api-key'] = picacg.apiKey
-        headers.time = (new Date().getTime()/1000).toFixed(0)
+        // headers.time = time
         headers.nonce = picacg.nonce
         headers.signature = picacg.encrypt(request_url, headers.time, method)
 
-        return fetch(request_url, {headers: headers})
+        if (method === 'GET')
+            return fetch(request_url, {headers: headers})
+        else
+            return fetch(request_url, {headers: headers, method: method, body: data})
     },
-    get: path => picacg.httpRequest(path, 'GET'),
-    post: path => picacg.httpRequest(path, 'POST'),
+    get: path => picacg.httpRequest(path, 'GET', {}),
+    post: (path, data) => picacg.httpRequest(path, 'POST', data),
     baseParse: () => {
         picacg.d.push({
             title: picacg.login(),
@@ -45,6 +51,10 @@ const picacg = {
         setResult(picacg.d);
     },
     login: () => {
-        return picacg.post('auth/sign-in')
+        return picacg.post('auth/sign-in', {
+            email: 'tyrantgenesis',
+            password: 'Genesis489449701'
+        })
     }
 }
+picacg.baseParse()
