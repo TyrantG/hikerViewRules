@@ -29,9 +29,11 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
   let timeout = setTimeout(() => {
     const md_content = fba.getVar('md_content')
     const reg = /\\u([\d\w]{4})/gi;
-    const res = md_content.replace(reg, function (match, grp) {
-      return String.fromCharCode(parseInt(grp, 16));
-    }).replace(/\\n/gi, '\n').replace(/\\t/gi, '\t').replace(/\\r/gi, '\r')
+    let res
+    eval('res = '+md_content)
+    /*res = md_content.replace(reg, function (match, grp) {
+       return String.fromCharCode(parseInt(grp, 16));
+     }).replace(/\\n/gi, '\n').replace(/\\t/gi, '\t').replace(/\\r/gi, '\r')*/
     document.getElementById('md').innerHTML =
             marked.parse(res);
     clearTimeout(timeout)
