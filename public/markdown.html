@@ -34,9 +34,9 @@ maximum-scale=1, minimum-scale=1, user-scalable=no"/>
       return String.fromCharCode(parseInt(grp, 16));
     })/*.replace(/\\n/gi, '\n').replace(/\\t/gi, '\t').replace(/\\r/gi, '\r')*/
 
-    eval('res = '+md_content)
-    document.getElementById('md').innerHTML =
-            marked.parse(res);
+    eval(`res = ${md_content}`)
+    fba.log(res)
+    document.getElementById('md').innerHTML = marked.parse(res);
     clearTimeout(timeout)
   }, 100)
 </script>
