@@ -19,17 +19,17 @@ const secParse = _ => {
 // 这个变量定义在下面执行 script 的上方，没有被读取执行，需要手动声明避免报错
   let playerObjList = {}
 // 获取视频播放地址的变量并执行
-  const js = parseDomForHtml(html,"[id=mobileContainer]&&script&&Html").replace(/var qualityItems_.*?=/,'var qualityItems =');
+  const js = parseDomForHtml(html,"[id=mobileContainer]&&script&&Html").replace(/var flashvars_.*?=/,'var flashvars =');
   eval(js);
-  const list = JSON.parse(qualityItems)
+  const list = JSON.parse(flashvars).mediaDefinitions
 
   list.forEach(item => {
     // 1080p 的 url 为空
-    if (item.url) {
+    if (item.videoUrl) {
       d.push({
-        title: item.text,
-        url: item.url,
-        col_type: 'text_2'
+        title: item.quality,
+        url: item.videoUrl,
+        col_type: 'text_4'
       });
     }
   })
