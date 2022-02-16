@@ -12,7 +12,7 @@ const secParse = _ => {
     title: des_title,
     desc: meta,
     pic_url: des_pic,
-    url: des_pic,
+    url: MY_URL,
     col_type: 'pic_1'
   });
 
