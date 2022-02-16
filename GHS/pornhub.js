@@ -24,8 +24,7 @@ const secParse = _ => {
   const list = flashvars.mediaDefinitions
 
   list.forEach(item => {
-    // 1080p 的 url 为空
-    if (item.videoUrl) {
+    if (typeof item.quality === 'string') {
       d.push({
         title: item.quality,
         url: item.videoUrl,
