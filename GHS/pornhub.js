@@ -20,9 +20,9 @@ const secParse = _ => {
   let playerObjList = {}
 // 获取视频播放地址的变量并执行
   const js = parseDomForHtml(html,"[id=mobileContainer]&&script&&Html").replace(/var flashvars_.*?=/, 'var flashvars =');
-  log(js)
   eval(js);
-  const list = JSON.parse(flashvars).mediaDefinitions
+  log(flashvars)
+  const list = flashvars.mediaDefinitions
 
   list.forEach(item => {
     // 1080p 的 url 为空
