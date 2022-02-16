@@ -19,7 +19,8 @@ const secParse = _ => {
 // 这个变量定义在下面执行 script 的上方，没有被读取执行，需要手动声明避免报错
   let playerObjList = {}
 // 获取视频播放地址的变量并执行
-  const js = parseDomForHtml(html,"[id=mobileContainer]&&script&&Html").replace(/var flashvars_.*?=/,'var flashvars =');
+  const js = parseDomForHtml(html,"[id=mobileContainer]&&script&&Html").replace(/var flashvars_.*?=/, 'var flashvars =');
+  log(js)
   eval(js);
   const list = JSON.parse(flashvars).mediaDefinitions
 
