@@ -21,7 +21,6 @@ const secParse = _ => {
 // 获取视频播放地址的变量并执行
   const js = parseDomForHtml(html,"[id=mobileContainer]&&script&&Html").replace(/var flashvars_.*?=/, 'var flashvars =');
   eval(js);
-  log(flashvars)
   const list = flashvars.mediaDefinitions
 
   list.forEach(item => {
