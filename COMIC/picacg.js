@@ -2,58 +2,63 @@ const picacg = {
     BaseUrl: "https://picaapi.picacomic.com/",
     empty: 'hiker://empty',
     picacg_path: "hiker://files/rules/js/TyrantGenesis_哔咔设置.js",
+    searchHistory: "hiker://files/rules/js/TyrantGenesis_哔咔搜索历史.js",
     apiKey: "C69BAF41DA5ABD1FFEDC6D2FEA56B",
     nonce: "b1ab87b4800d4d4590a11701b8551afa",
     secretKey: "~d}$Q7$eIni=V)9\\RK/P.RM4;9[7|@/CA}b~OW!3?EV`:<>M7pddUBL5n|0/*Cn",
     d: [],
+    data: {
+        rankTT: getItem('rankTT', 'H24'),
+        sort: getItem('sort', 'dd'),
+        searchValue: getItem('searchValue', ''),
+        searchHistoryShowStatus: getItem('searchHistoryShowStatus', '0'),
+        infoTab: getItem('infoTab', '1'),
+        infoReverse: getItem('infoReverse', '1'),
+    },
+    defaultConfig: {
+        searchHistoryMax: 100,
+        searchHistoryShowLimit: 20,
+    },
     images: [],
     episodes: [],
     headers: {
         "accept":            "application/vnd.picacomic.com.v1+json",
         "app-channel":       "2",
         "time":              (new Date().getTime()/1000).toFixed(0),
-        // "signature":         "",
         "app-version":       "2.2.1.2.3.3",
         "app-uuid":          "defaultUuid",
         "app-platform":      "android",
         "app-build-version": "44",
         "Content-Type":      "application/json; charset=UTF-8",
         "User-Agent":        "okhttp/3.8.1",
-        // "authorization":     getConf("authorization"),
         "image-quality":     "original",
     },
     encrypt: (url, ts, method) => {
         eval(getCryptoJS())
         let raw = url.replace(picacg.BaseUrl, "") + ts + picacg.nonce + method + picacg.apiKey
         raw = raw.toLocaleLowerCase()
-        // return crypto.createHmac('sha256', secret_key).update(raw).digest('hex')
         return CryptoJS.HmacSHA256(raw, picacg.secretKey).toString(CryptoJS.enc.Hex)
     },
     httpRequest: (path, method, data) => {
         let responseJson
         const request_url = picacg.BaseUrl + path
-        // const time = (new Date().getTime()/1000).toFixed(0)
         let headers = picacg.headers
         headers['api-key'] = picacg.apiKey
-        // headers.time = time
         headers.nonce = picacg.nonce
         headers.signature = picacg.encrypt(request_url, headers.time, method)
-
         try {
             if (fileExist(picacg.picacg_path)) headers.authorization = fetch(picacg.picacg_path).split('\n')[2]
         } catch (e) {}
-
         if (method === 'GET')
             responseJson = fetch(request_url, {headers: headers})
         else
             responseJson = fetch(request_url, {headers: headers, method: method, body: data})
-
         return JSON.parse(responseJson)
     },
-    get: (path, data) => picacg.httpRequest(path, 'GET', data),
+    get: path => picacg.httpRequest(path, 'GET', ''),
     post: (path, data) => picacg.httpRequest(path, 'POST', data),
     baseParse: () => {
-        if (! fileExist(picacg.picacg_path)) {
+        if (! fileExist(picacg.picacg_path) || ! fetch(picacg.picacg_path)) {
             picacg.d.push({
                 title: '登录哔咔',
                 url: $(picacg.empty).rule(() => {
@@ -73,6 +78,73 @@ const picacg = {
                 col_type: 'text_center_1'
             })
         } else {
+            const userInfo = picacg.get('users/profile').data.user
+
+            picacg.d.push({
+                title: '用户『'+userInfo.name+'』 # 个人中心',
+                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
+                url: $(picacg.empty).rule(() => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.settingPage()
+                    setResult(picacg.d)
+                }),
+                col_type: 'avatar',
+            })
+            picacg.d.push({
+                url: $(picacg.empty+"#fullTheme#$$fypage").rule(() => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.getSearch()
+                    setResult(picacg.d)
+                }),
+                title: '请输入关键词',
+                col_type: "icon_1_search",
+                extra: {
+                    newWindow: true,
+                    windowId: "哔咔搜索"
+                }
+            })
+            picacg.d.push({
+                title: '排行榜',
+                url: $(picacg.empty+"#fullTheme#").rule(() => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.getRanking()
+                    setResult(picacg.d)
+                }),
+                col_type: 'text_3',
+                extra: {
+                    newWindow: true,
+                    windowId: "哔咔排行榜"
+                }
+            })
+            picacg.d.push({
+                title: '随机本子',
+                url: $(picacg.empty+"#fullTheme#$$fypage").rule(() => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.getRandom()
+                    setResult(picacg.d)
+                }),
+                col_type: 'text_3',
+                extra: {
+                    newWindow: true,
+                    windowId: "随机本子"
+                }
+            })
+            picacg.d.push({
+                title: '我的收藏',
+                url: $(picacg.empty+"#fullTheme#$$fypage").rule(() => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.getFavourite()
+                    setResult(picacg.d)
+                }),
+                col_type: 'text_3',
+                extra: {
+                    newWindow: true,
+                    windowId: "哔咔收藏"
+                }
+            })
+            picacg.d.push({
+                col_type: 'line_blank'
+            })
             picacg.getCategories()
         }
 
@@ -193,13 +265,283 @@ const picacg = {
             }
         })
     },
+    getSearch: () => {
+        addListener('onClose', $.toString(() => {
+            clearItem('sort')
+            clearItem('searchValue')
+            clearItem('searchHistoryShowStatus')
+        }))
+
+        const page = MY_URL.split('$$')[1]
+
+        if (parseInt(page) === 1) {
+            picacg.d.push({
+                title: '搜索',
+                url: $.toString(() => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.setSearchHistory(input)
+                    setItem('searchValue', input)
+                    refreshPage(false)
+                    return "hiker://empty"
+                }),
+                desc: '请输入关键词',
+                col_type: 'input',
+                extra: {
+                    defaultValue: picacg.data.searchValue,
+                    onChange: $.toString(() => {
+                        if (getItem('searchValue', '') && ! input) {
+                            clearItem('searchValue')
+                            clearItem('searchHistoryShowStatus')
+                            refreshPage(false)
+                            return "hiker://empty"
+                        }
+                    })
+                }
+            })
+
+            if (! picacg.data.searchValue) {
+                if (fileExist(picacg.searchHistory) && fetch(picacg.searchHistory)) {
+                    const searchHistory = fetch(picacg.searchHistory).split('||').filter(item => item)
+                    picacg.d.push({
+                        title: '搜索记录：',
+                        url: picacg.empty,
+                        col_type: 'text_1',
+                        extra: {
+                            lineVisible: false
+                        },
+                    })
+
+                    let picacgConfig = picacg.defaultConfig
+                    searchHistory.forEach((history, index) => {
+                        if (picacg.data.searchHistoryShowStatus === '1' || (picacg.data.searchHistoryShowStatus === '0' && picacgConfig.searchHistoryShowLimit - index >= 1)) {
+                            picacg.d.push({
+                                title: history,
+                                url: $(picacg.empty).lazyRule(history => {
+                                    const picacg = $.require('hiker://page/picacg')
+                                    picacg.setSearchHistory(history)
+                                    setItem('searchValue', history)
+                                    refreshPage(false)
+                                    return "hiker://empty"
+                                }, history),
+                                col_type: 'flex_button'
+                            })
+                        }
+                    })
+
+                    picacg.d.push({
+                        title: picacg.data.searchHistoryShowStatus === '1' ? '折叠记录' : '展开记录',
+                        url: $(picacg.empty).lazyRule(params => {
+                            setItem('searchHistoryShowStatus', params.status ? '0' : '1')
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            status: picacg.data.searchHistoryShowStatus === '1'
+                        }),
+                        col_type: 'text_2',
+                    })
+                    picacg.d.push({
+                        title: '清除记录',
+                        url: $(picacg.empty).lazyRule(params => {
+                            writeFile(params.filename, '')
+                            refreshPage(true)
+                            return "hiker://empty"
+                        }, {
+                            filename: picacg.searchHistory
+                        }),
+                        col_type: 'text_2',
+                    })
+                }
+
+                const hot_data = picacg.get('keywords')
+                picacg.d.push({
+                    col_type: 'line_blank'
+                })
+                picacg.d.push({
+                    title: '热门搜索：',
+                    url: picacg.empty,
+                    col_type: 'text_1',
+                    extra: {
+                        lineVisible: false
+                    },
+                })
+                hot_data.data.keywords.forEach(hot => {
+                    picacg.d.push({
+                        title: hot,
+                        url: $(picacg.empty).lazyRule(hot => {
+                            const picacg = $.require('hiker://page/picacg')
+                            picacg.setSearchHistory(hot)
+                            setItem('searchValue', hot)
+                            refreshPage(false)
+                            return "hiker://empty"
+                        }, hot),
+                        col_type: 'flex_button'
+                    })
+                })
+            } else {
+                picacg.makeSort()
+            }
+        }
+
+        picacg.getSearchResult(page, '')
+    },
+    getSearchResult: (page, value) => {
+        const searchValue = value ? value : picacg.data.searchValue
+        if (searchValue) {
+            const response = picacg.post('comics/advanced-search?page='+page, {
+                keyword: searchValue,
+                sort: picacg.data.sort,
+            })
+            response.data.comics.docs.forEach(comic => {
+                picacg.d.push({
+                    title: comic.title,
+                    desc: comic.author,
+                    pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                    url: $(picacg.empty+'#immersiveTheme##noHistory#').rule((id) => {
+                        const picacg = $.require('hiker://page/picacg')
+                        picacg.getInfo(id)
+                        setResult(picacg.d);
+                    }, comic._id),
+                    col_type: 'movie_2'
+                })
+            })
+        }
+    },
+    setSearchHistory: value => {
+        let picacgConfig = picacg.defaultConfig
+        let searchHistory = fetch(picacg.searchHistory).split('||').filter(item => item)
+
+        if (searchHistory.includes(value)) {
+            for (let i in searchHistory) {
+                if (searchHistory[i] === value) {
+                    searchHistory.splice(i, 1)
+                    break
+                }
+            }
+        } else if (searchHistory.length >= picacgConfig.searchHistoryMax) {
+            searchHistory = searchHistory.slice(0, picacgConfig.searchHistoryMax - 1)
+        }
+
+        searchHistory.unshift(value)
+        writeFile(picacg.searchHistory, searchHistory.join('||'))
+    },
+    getRanking: () => {
+        addListener('onClose', $.toString(() => {
+            clearItem('rankTT')
+        }))
+        const tabs = [
+            {title: '24小时', id: 'H24'},
+            {title: '7天', id: 'D7'},
+            {title: '30天', id: 'D30'},
+        ]
+        picacg.d.push({
+            title: '排行榜',
+            url: picacg.empty,
+            col_type: 'text_center_1',
+            extra: {
+                lineVisible: false
+            },
+        })
+        picacg.d.push({
+            col_type: 'line_blank'
+        })
+        tabs.forEach(item => {
+            picacg.d.push({
+                title: picacg.data.rankTT === item.id ? '‘‘’’<strong><font color="#ff1493">'+item.title+'</font></strong>' : item.title,
+                url: $(picacg.empty).lazyRule((item) => {
+                    setItem('rankTT', item.id)
+                    refreshPage(false)
+                    return 'hiker://empty'
+                }, item),
+                col_type: 'text_3',
+            })
+        })
+        picacg.d.push({
+            col_type: 'line_blank'
+        })
+        const response = picacg.get('comics/leaderboard?tt='+picacg.data.rankTT+'&ct=VC')
+
+        response.data.comics.forEach(comic => {
+            picacg.d.push({
+                title: comic.title,
+                desc: comic.author,
+                pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                url: $(picacg.empty+'#immersiveTheme##noHistory#').rule((id) => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.getInfo(id)
+                    setResult(picacg.d);
+                }, comic._id),
+                col_type: 'movie_2'
+            })
+        })
+    },
+    getRandom: () => {
+        const page = MY_URL.split('$$')[1]
+        if (parseInt(page) === 1) {
+            picacg.d.push({
+                title: '随机本子',
+                url: picacg.empty,
+                col_type: 'text_center_1',
+                extra: {
+                    lineVisible: false
+                },
+            })
+            picacg.d.push({
+                col_type: 'line_blank'
+            })
+        }
+        const response = picacg.get('comics/random?page='+page)
+        response.data.comics.forEach(comic => {
+            picacg.d.push({
+                title: comic.title,
+                desc: comic.author,
+                pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                url: $(picacg.empty+'#immersiveTheme##noHistory#').rule((id) => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.getInfo(id)
+                    setResult(picacg.d);
+                }, comic._id),
+                col_type: 'movie_2'
+            })
+        })
+    },
+    getFavourite: () => {
+        const page = MY_URL.split('$$')[1]
+        if (parseInt(page) === 1) {
+            picacg.d.push({
+                title: '我的收藏',
+                url: picacg.empty,
+                col_type: 'text_center_1',
+                extra: {
+                    lineVisible: false
+                },
+            })
+            picacg.d.push({
+                col_type: 'line_blank'
+            })
+        }
+        const response = picacg.get('users/favourite?s=dd&page='+page)
+        response.data.comics.docs.forEach(comic => {
+            picacg.d.push({
+                title: comic.title,
+                desc: comic.author,
+                pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                url: $(picacg.empty+'#immersiveTheme##noHistory#').rule((id) => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.getInfo(id)
+                    setResult(picacg.d);
+                }, comic._id),
+                col_type: 'movie_2'
+            })
+        })
+    },
     getCategories: () => {
-        const response = picacg.get('categories', {})
+        const response = picacg.get('categories')
         if (response.code === 200) {
             const no_image = ['大家都在看', '那年今天', '官方都在看'];
             response.data.categories.forEach((cate, index) => {
                 let pic = no_image.includes(cate.title) ? 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg' : cate.thumb.fileServer+'/static/'+cate.thumb.path
-                let desc = no_image.includes(cate.title) ? '5' : '0'
+                // let desc = no_image.includes(cate.title) ? '5' : '0'
+                let desc = '3'
                 if (!cate.isWeb) {
                     picacg.d.push({
                         title: cate.title,
@@ -217,8 +559,12 @@ const picacg = {
         }
     },
     getComics: (title) => {
+        addListener('onClose', $.toString(() => {
+            clearItem('sort')
+        }))
         const page = MY_URL.split('$$')[1]
-        const response = picacg.get('comics?c='+encodeURIComponent(title)+'&page='+page+'&s=ua', {})
+        picacg.makeSort()
+        const response = picacg.get('comics?c='+encodeURIComponent(title)+'&page='+page+'&s='+picacg.data.sort)
         if (response.code === 200) {
             response.data.comics.docs.forEach((comic, index) => {
                 picacg.d.push({
@@ -249,27 +595,172 @@ const picacg = {
         }
     },
     getInfo: (id) => {
+        addListener('onClose', $.toString(() => {
+            clearItem('infoTab')
+            clearItem('infoReverse')
+        }))
         const response = picacg.get('comics/'+id)
-        const info = response.data.comic
-        picacg.d.push({
-            title: info.title,
-            desc: info.description,
-            pic_url: info.thumb.fileServer+'/static/'+info.thumb.path,
-            url: picacg.empty,
-            col_type: 'movie_1_vertical_pic_blur'
-        })
+        try {
+            const info = response.data.comic
 
-        picacg.getEpisodesPicture(id, 1)
-        picacg.episodes.reverse().forEach(ep => {
+            setPageTitle(info.title)
+
             picacg.d.push({
-                title: ep.title,
-                url: $(picacg.empty+'#noHistory#').lazyRule((id, order) => {
+                title: info.title,
+                desc:
+                    '✨ 分类：'+info.categories.join(' ')+'\n'+
+                    '❤️ 喜欢：'+info.likesCount+'    🌐 浏览：'+info.viewsCount+'\n'+
+                    '🎯 详情：'+info.description,
+                pic_url: info.thumb.fileServer+'/static/'+info.thumb.path,
+                url: $(picacg.empty).rule((description) => {
                     const picacg = $.require('hiker://page/picacg')
-                    return picacg.getPicture(id, order)
-                }, id, ep.order),
-                col_type: 'text_3'
+                    picacg.d.push({
+                        title: description,
+                        col_type: 'long_text'
+                    })
+                    setResult(picacg.d)
+                }, info.description),
+                col_type: 'movie_1_vertical_pic_blur'
             })
-        })
+
+            picacg.d.push({
+                col_type: 'line_blank'
+            })
+
+            if (info.tags.length > 0) {
+                info.tags.forEach(tag => {
+                    picacg.d.push({
+                        title: tag,
+                        url: $(picacg.empty+"#fullTheme##noHistory#$$fypage").rule((tag) => {
+                            addListener('onClose', $.toString(() => {
+                                clearItem('sort')
+                                clearItem('searchValue')
+                            }))
+                            const page = MY_URL.split('$$')[1]
+                            const picacg = $.require('hiker://page/picacg')
+                            picacg.setSearchHistory(tag)
+                            if (parseInt(page) === 1) {
+                                picacg.d.push({
+                                    title: '标签搜索：'+tag,
+                                    url: picacg.empty,
+                                    col_type: 'text_center_1',
+                                    extra: {
+                                        lineVisible: false
+                                    },
+                                })
+                                picacg.makeSort()
+                            }
+                            picacg.getSearchResult(page, tag)
+                            setResult(picacg.d)
+                        }, tag),
+                        col_type: 'flex_button',
+                        extra: {
+                            newWindow: true,
+                            windowId: "哔咔搜索"
+                        }
+                    })
+                })
+
+                picacg.d.push({
+                    col_type: 'line'
+                })
+            }
+
+            picacg.d.push({
+                title: info.isFavourite ? '‘‘’’<strong><font color="red">取消收藏</font></strong>' : '‘‘’’<strong><font color="#00bfff">收藏</font></strong>',
+                url: $(picacg.empty).lazyRule((id, isFavourite) => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.post('comics/'+id+'/favourite', {})
+                    toast(isFavourite?'取消收藏':'收藏成功')
+                    refreshPage(false)
+                    return picacg.empty
+                }, id, info.isFavourite),
+                col_type: 'text_2'
+            })
+
+            picacg.d.push({
+                title: info.isLiked ? '‘‘’’<strong><font color="red">取消点赞</font></strong>' : '‘‘’’<strong><font color="#00bfff">点赞</font></strong>',
+                url: $(picacg.empty).lazyRule((id, isLiked) => {
+                    const picacg = $.require('hiker://page/picacg')
+                    picacg.post('comics/'+id+'/like', {})
+                    toast(isLiked?'取消点赞':'点赞成功')
+                    refreshPage(false)
+                    return picacg.empty
+                }, id, info.isLiked),
+                col_type: 'text_2'
+            })
+
+            picacg.d.push({
+                col_type: 'line'
+            })
+
+            const tabs = [
+                {title: '章节', id: '1'},
+                // {title: '评论', id: '2'},
+                {title: '推荐', id: '3'},
+            ]
+
+            tabs.forEach(tab => {
+                picacg.d.push({
+                    title: picacg.data.infoTab === tab.id ? '‘‘’’<strong><font color="#ff1493">'+tab.title+'</font></strong>' : tab.title,
+                    url: $(picacg.empty).lazyRule((tab) => {
+                        setItem('infoTab', tab.id)
+                        refreshPage(false)
+                        return 'hiker://empty'
+                    }, tab),
+                    col_type: 'text_2',
+                })
+            })
+
+            switch (picacg.data.infoTab) {
+                case '1':
+                    picacg.d.push({
+                        title: picacg.data.infoReverse === '1' ? '当前排序：正序' : '当前排序：倒序',
+                        url: $(picacg.empty).lazyRule((infoReverse) => {
+                            setItem('infoReverse', infoReverse ? '2' : '1')
+                            refreshPage(false)
+                            return 'hiker://empty'
+                        }, picacg.data.infoReverse === '1'),
+                        col_type: 'text_center_1',
+                    })
+                    // 递归获取选集
+                    picacg.getEpisodesPicture(id, 1)
+
+                    const data = picacg.data.infoReverse === '1' ? picacg.episodes.reverse() : picacg.episodes
+
+                    data.forEach(ep => {
+                        picacg.d.push({
+                            title: ep.title,
+                            url: $(picacg.empty).lazyRule((id, order) => {
+                                const picacg = $.require('hiker://page/picacg')
+                                return picacg.getPicture(id, order)
+                            }, id, ep.order),
+                            col_type: 'text_3'
+                        })
+                    })
+                    break
+                case '3':
+                    const recommendationResponse = picacg.get('comics/'+id+'/recommendation')
+                    recommendationResponse.data.comics.forEach(comic => {
+                        picacg.d.push({
+                            title: comic.title,
+                            desc: comic.author,
+                            pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                            url: $(picacg.empty+'#immersiveTheme##noHistory#').rule((id) => {
+                                const picacg = $.require('hiker://page/picacg')
+                                picacg.getInfo(id)
+                                setResult(picacg.d);
+                            }, comic._id),
+                            col_type: 'movie_2'
+                        })
+                    })
+                    break
+            }
+
+        } catch (e) {
+            toast('数据错误')
+            back(false)
+        }
     },
     getRecursionPicture: (id, order, page) => {
         const response = picacg.get('comics/'+id+'/order/'+order+'/pages?page='+page)
@@ -282,9 +773,48 @@ const picacg = {
         }
     },
     getPicture: (id, order) => {
+        // 递归获取内容
         picacg.getRecursionPicture(id, order, 1)
         return 'pics://'+picacg.images.join('&&')
-    }
+    },
+    makeSort: () => {
+        const tabs = [
+            // {title: '默认排序', id: 'ua'},
+            {title: '新到旧', id: 'dd'},
+            {title: '旧到新', id: 'da'},
+            {title: '最多爱心', id: 'ld'},
+            {title: '最多指名', id: 'vd'},
+        ];
+
+        tabs.forEach(item => {
+            picacg.d.push({
+                title: picacg.data.sort === item.id ? '‘‘’’<strong><font color="#ff1493">'+item.title+'</font></strong>' : item.title,
+                url: $(picacg.empty).lazyRule((item) => {
+                    setItem('sort', item.id)
+                    refreshPage(false)
+                    return 'hiker://empty'
+                }, item),
+                col_type: 'scroll_button',
+            })
+        })
+
+        picacg.d.push({
+            col_type: 'blank_block',
+        })
+    },
+    settingPage: () => {
+        picacg.d.push({
+            title: '退出登录',
+            url: $(picacg.empty).lazyRule(() => {
+                const picacg = $.require('hiker://page/picacg')
+                writeFile(picacg.picacg_path, '')
+                toast('退出登录')
+                back(true)
+                return picacg.empty
+            }),
+            col_type: 'text_center_1'
+        })
+    },
 }
 
 $.exports = picacg
