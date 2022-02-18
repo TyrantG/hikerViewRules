@@ -563,7 +563,7 @@ const picacg = {
             clearItem('sort')
         }))
         const page = MY_URL.split('$$')[1]
-        picacg.makeSort()
+        if (parseInt(page) === 1) picacg.makeSort()
         const response = picacg.get('comics?c='+encodeURIComponent(title)+'&page='+page+'&s='+picacg.data.sort)
         if (response.code === 200) {
             response.data.comics.docs.forEach((comic, index) => {
@@ -641,7 +641,7 @@ const picacg = {
                             picacg.setSearchHistory(tag)
                             if (parseInt(page) === 1) {
                                 picacg.d.push({
-                                    title: '标签搜索：'+tag,
+                                    title: '标签搜索：‘‘’’<strong><font color="#ff1493">'+tag+'</font></strong>',
                                     url: picacg.empty,
                                     col_type: 'text_center_1',
                                     extra: {
