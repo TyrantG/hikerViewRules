@@ -10,7 +10,7 @@ const picacg = {
     d: [],
     data: {
         rankTT: getItem('rankTT', 'H24'),
-        sort: getItem('sort', 'dd'),
+        sort: getItem('sort', 'ua'),
         searchValue: getItem('searchValue', ''),
         searchHistoryShowStatus: getItem('searchHistoryShowStatus', '0'),
         infoTab: getItem('infoTab', '1'),
@@ -619,6 +619,10 @@ const picacg = {
 
         if (parseInt(page) === 1) {
             const response = picacg.get('comics/'+id)
+            if (! response.data) {
+                toast('漫画信息错误')
+                back(false)
+            }
 
             const info = response.data.comic
 
@@ -776,7 +780,8 @@ const picacg = {
             const tabs = [
                 {title: '章节', id: '1'},
                 {title: '推荐', id: '2'},
-                {title: '评论', id: '3'},
+                {title: '看评论', id: '3'},
+                {title: '写评论', id: '4'},
             ]
 
             tabs.forEach(tab => {
@@ -787,7 +792,7 @@ const picacg = {
                         refreshPage(false)
                         return 'hiker://empty'
                     }, tab),
-                    col_type: 'text_3',
+                    col_type: 'text_4',
                 })
             })
 
@@ -834,6 +839,43 @@ const picacg = {
                         })
                     })
                     break
+                case '4':
+                    picacg.d.push({
+                        desc: '请输入评论',
+                        col_type: 'input',
+                        extra: {
+                            type: 'textarea',
+                            height: 5,
+                            titleVisible: false,
+                            onChange: $.toString(() => {
+                                if (input) setItem('comment', input)
+                            })
+                        }
+                    })
+                    picacg.d.push({
+                        title: '提交评论',
+                        url: $(picacg.empty).lazyRule((id) => {
+                            const picacg = $.require('hiker://page/picacg')
+                            const comment = getItem('comment', '')
+                            if (! comment) {
+                                return 'toast://请填写评论'
+                            } else {
+                                const sendCommentResponse = picacg.post('comics/'+id+'/comments', {
+                                    content: comment
+                                })
+
+                                if (sendCommentResponse.code === 200) {
+                                    setItem('infoTab', '3')
+                                    refreshPage(true)
+                                    return 'toast://评论成功'
+                                } else {
+                                    return 'toast://'+(sendCommentResponse.message || sendCommentResponse.detail)
+                                }
+                            }
+                        }, id),
+                        col_type: 'text_center_1',
+                    })
+                    break
             }
 
         }
@@ -851,15 +893,117 @@ const picacg = {
                             col_type: 'avatar'
                         })
                     }
-                    picacg.d.push(
-                        {
-                            title: comment.content+'<br />'+ '❤️ 喜欢：'+comment.likesCount+'&nbsp;&nbsp;&nbsp;&nbsp;🌐 评论：'+comment.commentsCount,
-                            col_type: 'rich_text'
-                        },
-                        {
-                            col_type: 'line'
-                        },
-                    )
+                    picacg.d.push({
+                        title: comment.content+'<br />'+ '❤️ 喜欢：'+comment.likesCount+'&nbsp;&nbsp;&nbsp;&nbsp;🌐 回复：'+comment.commentsCount,
+                        col_type: 'rich_text'
+                    })
+                    picacg.d.push({
+                        title: comment.isLiked ? '取消点赞' : '点赞',
+                        url: $(picacg.empty).lazyRule((id) => {
+                            const picacg = $.require('hiker://page/picacg')
+                            picacg.post('comments/'+id+'/like', {})
+                            refreshPage(false)
+                            return 'toast://提交成功'
+                        }, comment._id),
+                        col_type: 'text_3',
+                    })
+                    picacg.d.push({
+                        title: '看回复',
+                        url: $(picacg.empty+'$$fypage').rule((id) => {
+                            const page = MY_URL.split('$$')[1]
+                            const picacg = $.require('hiker://page/picacg')
+                            const response = picacg.get('comments/'+id+'/childrens?page='+page)
+
+                            response.data.comments.docs.forEach(comment => {
+                                let user = comment._user
+                                if (user) {
+                                    picacg.d.push({
+                                        title: user.name,
+                                        pic_url: user.avatar ? /*user.avatar.fileServer+*/'https://storage.wikawika.xyz/static/'+user.avatar.path : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
+                                        url: picacg.empty,
+                                        col_type: 'avatar'
+                                    })
+                                }
+                                picacg.d.push({
+                                    title: comment.content+'<br />'+ '❤️ 喜欢：'+comment.likesCount,
+                                    col_type: 'rich_text'
+                                })
+                                picacg.d.push({
+                                    title: comment.isLiked ? '取消点赞' : '点赞',
+                                    url: $(picacg.empty).lazyRule((id) => {
+                                        const picacg = $.require('hiker://page/picacg')
+                                        picacg.post('comments/'+id+'/like', {})
+                                        refreshPage(false)
+                                        return 'toast://提交成功'
+                                    }, comment._id),
+                                    col_type: 'text_center_1',
+                                    extra: {
+                                        lineVisible: false
+                                    },
+                                })
+                                picacg.d.push({
+                                    col_type: 'line',
+                                })
+                            })
+
+                            setResult(picacg.d);
+                        }, comment._id),
+                        col_type: 'text_3',
+                    })
+                    picacg.d.push({
+                        title: '写回复',
+                        url: $(picacg.empty).rule((id) => {
+                            const picacg = $.require('hiker://page/picacg')
+                            picacg.d.push({
+                                desc: '请输入评论',
+                                col_type: 'input',
+                                extra: {
+                                    type: 'textarea',
+                                    height: 5,
+                                    titleVisible: false,
+                                    onChange: $.toString(() => {
+                                        if (input) setItem('comment', input)
+                                    })
+                                }
+                            })
+                            picacg.d.push({
+                                title: '提交评论',
+                                url: $(picacg.empty).lazyRule((id) => {
+                                    const picacg = $.require('hiker://page/picacg')
+                                    const comment = getItem('comment', '')
+                                    if (! comment) {
+                                        return 'toast://请填写评论'
+                                    } else {
+                                        const sendCommentResponse = picacg.post('comments/'+id, {
+                                            content: comment
+                                        })
+
+                                        if (sendCommentResponse.code === 200) {
+                                            back(false)
+                                            return 'toast://评论成功'
+                                        } else {
+                                            return 'toast://'+(sendCommentResponse.message || sendCommentResponse.detail)
+                                        }
+                                    }
+                                }, id),
+                                col_type: 'text_center_1',
+                            })
+                            setResult(picacg.d);
+                        }, comment._id),
+                        col_type: 'text_3',
+                    })
+                    /*picacg.d.push({
+                        title: '举报',
+                        url: $(picacg.empty).lazyRule((id) => {
+                            const picacg = $.require('hiker://page/picacg')
+                            picacg.post('comics/'+id+'/report', {})
+                            return 'toast://提交成功'
+                        }, id),
+                        col_type: 'text_4',
+                    })*/
+                    picacg.d.push({
+                        col_type: 'line',
+                    })
                 })
             }
         } catch (e) {}
@@ -882,7 +1026,7 @@ const picacg = {
     },
     makeSort: () => {
         const tabs = [
-            // {title: '默认排序', id: 'ua'},
+            {title: '默认排序', id: 'ua'},
             {title: '新到旧', id: 'dd'},
             {title: '旧到新', id: 'da'},
             {title: '最多爱心', id: 'ld'},
@@ -906,6 +1050,73 @@ const picacg = {
         })
     },
     settingPage: () => {
+        picacg.d.push({
+            title: '签到',
+            url: $(picacg.empty).lazyRule(() => {
+                const picacg = $.require('hiker://page/picacg')
+                const response = picacg.post('users/punch-in', {})
+                if (response.code === 200) {
+                    return 'toast://签到成功'
+                } else {
+                    return 'toast://'+ (response.message || response.detail)
+                }
+            }),
+            col_type: 'text_center_1'
+        })
+        picacg.d.push({
+            title: '我的评论',
+            url: $(picacg.empty+'$$fypage').rule(() => {
+                const page = MY_URL.split('$$')[1]
+                const picacg = $.require('hiker://page/picacg')
+                const response = picacg.get('users/my-comments?page='+page)
+
+                response.data.comments.docs.forEach(comment => {
+                    let user = comment._user
+                    if (user) {
+                        picacg.d.push({
+                            title: user.name,
+                            pic_url: user.avatar ? /*user.avatar.fileServer+*/'https://storage.wikawika.xyz/static/'+user.avatar.path : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
+                            url: picacg.empty,
+                            col_type: 'avatar'
+                        })
+                    }
+                    picacg.d.push({
+                        title: comment.content+'<br />'+ '❤️ 喜欢：'+comment.likesCount,
+                        col_type: 'rich_text'
+                    })
+                    picacg.d.push({
+                        title: comment.isLiked ? '取消点赞' : '点赞',
+                        url: $(picacg.empty).lazyRule((id) => {
+                            const picacg = $.require('hiker://page/picacg')
+                            picacg.post('comments/'+id+'/like', {})
+                            refreshPage(false)
+                            return 'toast://提交成功'
+                        }, comment._id),
+                        col_type: 'text_2',
+                        extra: {
+                            lineVisible: false
+                        },
+                    })
+                    picacg.d.push({
+                        title: '查看漫画',
+                        url: $(picacg.empty+'#immersiveTheme##noHistory#$$fypage').rule((id) => {
+                            const picacg = $.require('hiker://page/picacg')
+                            picacg.getInfo(id)
+                            setResult(picacg.d);
+                        }, comment._comic._id),
+                        col_type: 'text_2',
+                        extra: {
+                            lineVisible: false
+                        },
+                    })
+                    picacg.d.push({
+                        col_type: 'line',
+                    })
+                })
+                setResult(picacg.d)
+            }),
+            col_type: 'text_center_1'
+        })
         picacg.d.push({
             title: '退出登录',
             url: $(picacg.empty).lazyRule(() => {
