@@ -911,10 +911,10 @@ const gcores = {
 
         data.included.forEach(item => {
             if (item.type === 'medias') {
-                if (item.attributes.original-src) {
+                if (item.attributes['original-src']) {
                     gcores.dom.push({
                         title: '正片观看',
-                        url: item.attributes.original-src+'#noHistory#',
+                        url: item.attributes['original-src']+'#noHistory#',
                         col_type: 'text_center_1',
                         extra: {
                             lineVisible: false
