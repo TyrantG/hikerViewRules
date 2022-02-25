@@ -911,16 +911,27 @@ const gcores = {
 
         data.included.forEach(item => {
             if (item.type === 'medias') {
-                gcores.dom.push({
-                    title: '正片观看',
-                    url: $(item.attributes.playlist).lazyRule(() => {
-                        return JSON.parse(fetch(input)).m3u8+'#noHistory#'
-                    }),
-                    col_type: 'text_center_1',
-                    extra: {
-                        lineVisible: false
-                    },
-                })
+                if (item.attributes.original-src) {
+                    gcores.dom.push({
+                        title: '正片观看',
+                        url: item.attributes.original-src+'#noHistory#',
+                        col_type: 'text_center_1',
+                        extra: {
+                            lineVisible: false
+                        },
+                    })
+                }else{
+                    gcores.dom.push({
+                        title: '正片观看',
+                        url: $(item.attributes.playlist).lazyRule(() => {
+                            return JSON.parse(fetch(input)).m3u8+'#noHistory#'
+                        }),
+                        col_type: 'text_center_1',
+                        extra: {
+                            lineVisible: false
+                        },
+                    })
+                }
             }
         })
 
