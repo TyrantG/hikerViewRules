@@ -914,7 +914,9 @@ const gcores = {
                 if (item.attributes['original-src']) {
                     gcores.dom.push({
                         title: '正片观看',
-                        url: item.attributes['original-src']+'#noHistory#',
+                        url: $(item.attributes['original-src']).lazyRule(() => {
+                            return pdfh(fetch(input), 'video&&data-url')+'#noHistory#'
+                        }),
                         col_type: 'text_center_1',
                         extra: {
                             lineVisible: false
