@@ -54,14 +54,46 @@ const picacg = {
         headers.signature = picacg.encrypt(request_url, headers.time, method)
         try {
             if (fileExist(picacg.picacg_path)) headers.authorization = fetch(picacg.picacg_path).split('\n')[2]
-        } catch (e) {}
+        } catch (e) {
+            writeFile(picacg.picacg_path, '')
+            toast('账号异常,请重新登录')
+            refreshPage(false)
+        }
 
         responseJson = method === 'GET' ? fetch(request_url, {headers: headers}) : fetch(request_url, {headers: headers, method: method, body: data})
 
         const response = JSON.parse(responseJson)
 
+        // 自动登录
         if (response.code === 401 && response.error === '1005') {
-            // TODO 自动登录
+            let email, password
+            try {
+                if (fileExist(picacg.picacg_path)) {
+                    email = fetch(picacg.picacg_path).split('\n')[0]
+                    password = fetch(picacg.picacg_path).split('\n')[1]
+                }
+            } catch (e) {
+                writeFile(picacg.picacg_path, '')
+                toast('账号异常,请重新登录')
+                refreshPage(true)
+            }
+            if (! email || ! password) {
+                writeFile(picacg.picacg_path, '')
+                toast('账号异常,请重新登录')
+                refreshPage(true)
+            } else {
+                const autoLoginResponse = picacg.post('auth/sign-in', {
+                    email: email,
+                    password: password,
+                })
+                if (autoLoginResponse.code === 400) {
+                    return 'toast://'+ (autoLoginResponse.detail || autoLoginResponse.message)
+                } else {
+                    const setting = email + '\n' + password + '\n' +autoLoginResponse.data.token
+                    writeFile(picacg.picacg_path, setting)
+                    refreshPage(true)
+                }
+            }
         }
         return response
     },
@@ -96,18 +128,21 @@ const picacg = {
                 col_type: 'text_center_1'
             })
         } else {
-            const userInfo = picacg.get('users/profile').data.user
+            try {
+                const userInfo = picacg.get('users/profile').data.user
 
-            picacg.d.push({
-                title: '用户『'+userInfo.name+'』 # 个人中心',
-                pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
-                url: $(picacg.empty).rule(() => {
-                    const picacg = $.require('hiker://page/picacg')
-                    picacg.settingPage()
-                    setResult(picacg.d)
-                }),
-                col_type: 'avatar',
-            })
+                picacg.d.push({
+                    title: '用户『'+userInfo.name+'』 # 个人中心',
+                    pic_url: 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
+                    url: $(picacg.empty).rule(() => {
+                        const picacg = $.require('hiker://page/picacg')
+                        picacg.settingPage()
+                        setResult(picacg.d)
+                    }),
+                    col_type: 'avatar',
+                })
+            } catch (e) {}
+
             picacg.d.push({
                 url: $(picacg.empty+"#fullTheme#$$fypage").rule(() => {
                     const picacg = $.require('hiker://page/picacg')
@@ -417,7 +452,7 @@ const picacg = {
                         picacg.getInfo(id)
                         setResult(picacg.d);
                     }, comic._id),
-                    col_type: 'movie_2'
+                    col_type: 'movie_3'
                 })
             })
         }
@@ -486,7 +521,7 @@ const picacg = {
                     picacg.getInfo(id)
                     setResult(picacg.d);
                 }, comic._id),
-                col_type: 'movie_2'
+                col_type: 'movie_3'
             })
         })
     },
@@ -516,7 +551,7 @@ const picacg = {
                     picacg.getInfo(id)
                     setResult(picacg.d);
                 }, comic._id),
-                col_type: 'movie_2'
+                col_type: 'movie_3'
             })
         })
     },
@@ -546,7 +581,7 @@ const picacg = {
                     picacg.getInfo(id)
                     setResult(picacg.d);
                 }, comic._id),
-                col_type: 'movie_2'
+                col_type: 'movie_3'
             })
         })
     },
@@ -556,8 +591,8 @@ const picacg = {
             const no_image = ['大家都在看', '那年今天', '官方都在看'];
             response.data.categories.forEach((cate, index) => {
                 let pic = no_image.includes(cate.title) ? 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg' : /*cate.thumb.fileServer+*/'https://storage.wikawika.xyz/static/'+cate.thumb.path
-                // let desc = no_image.includes(cate.title) ? '5' : '0'
-                let desc = '3'
+                let desc = no_image.includes(cate.title) ? '0' : '5'
+                // let desc = '3'
                 if (!cate.isWeb) {
                     picacg.d.push({
                         title: cate.title,
@@ -568,7 +603,7 @@ const picacg = {
                             picacg.getComics(title)
                             setResult(picacg.d);
                         }, cate.title),
-                        col_type: 'card_pic_2'
+                        col_type: 'card_pic_3'
                     })
                 }
             })
@@ -592,7 +627,7 @@ const picacg = {
                         picacg.getInfo(id)
                         setResult(picacg.d);
                     }, comic._id),
-                    col_type: 'movie_2'
+                    col_type: 'movie_3'
                 })
             })
         }
@@ -835,7 +870,7 @@ const picacg = {
                                 picacg.getInfo(id)
                                 setResult(picacg.d);
                             }, comic._id),
-                            col_type: 'movie_2'
+                            col_type: 'movie_3'
                         })
                     })
                     break
