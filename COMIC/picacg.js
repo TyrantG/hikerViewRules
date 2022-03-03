@@ -638,7 +638,7 @@ const picacg = {
             episodesRes.data.eps.docs.forEach((ep, index) => {
                 picacg.episodes.push({
                     title: ep.title,
-                    order: ep.order,
+                    url: ep.order,
                 })
             })
             page = page+1
@@ -783,6 +783,8 @@ const picacg = {
                 }
             } catch (e) {}
 
+            // 递归获取选集
+            picacg.getEpisodesPicture(id, 1)
 
             picacg.d.push({
                 title: info.isFavourite ? '‘‘’’<strong><font color="red">取消收藏</font></strong>' : '‘‘’’<strong><font color="#00bfff">收藏</font></strong>',
@@ -793,7 +795,7 @@ const picacg = {
                     refreshPage(false)
                     return picacg.empty
                 }, id, info.isFavourite),
-                col_type: 'text_2'
+                col_type: 'text_3'
             })
 
             picacg.d.push({
@@ -805,7 +807,26 @@ const picacg = {
                     refreshPage(false)
                     return picacg.empty
                 }, id, info.isLiked),
-                col_type: 'text_2'
+                col_type: 'text_3'
+            })
+
+            picacg.d.push({
+                title: '‘‘’’<strong><font color="#ff1493">下载</font></strong>',
+                url: "hiker://page/download.view#noHistory##noRecordHistory##noRefresh#?rule=本地资源管理",
+                extra: {
+                    chapterList: picacg.episodes,
+                    info:{
+                        bookName: info.title,
+                        ruleName: MY_RULE.title,
+                        bookTopPic: 'https://storage.wikawika.xyz/static/'+info.thumb.path,
+                        parseCode: $.toString((id, ruleName) => {
+                            const picacg = $.require('hiker://page/picacg?rule='+ruleName)
+                            return picacg.getPicture(id, input)
+                        }, id, MY_RULE.title)
+                    },
+                    defaultView:"1"
+                },
+                col_type: 'text_3',
             })
 
             picacg.d.push({
@@ -842,8 +863,6 @@ const picacg = {
                         }, picacg.data.infoReverse === '1'),
                         col_type: 'text_center_1',
                     })
-                    // 递归获取选集
-                    picacg.getEpisodesPicture(id, 1)
 
                     const data = picacg.data.infoReverse === '1' ? picacg.episodes.reverse() : picacg.episodes
 
@@ -853,7 +872,7 @@ const picacg = {
                             url: $(picacg.empty).lazyRule((id, order) => {
                                 const picacg = $.require('hiker://page/picacg')
                                 return picacg.getPicture(id, order)
-                            }, id, ep.order),
+                            }, id, ep.url),
                             col_type: 'text_3'
                         })
                     })
@@ -1048,7 +1067,8 @@ const picacg = {
         const response = picacg.get('comics/'+id+'/order/'+order+'/pages?page='+page)
         if (response.code === 200 && response.data.pages.docs.length > 0) {
             response.data.pages.docs.forEach((page, index) => {
-                picacg.images.push(/*page.media.fileServer+*/'https://storage.wikawika.xyz/static/'+page.media.path)
+                // picacg.images.push(page.media.fileServer+'/static/'+page.media.path)
+                picacg.images.push('https://storage.wikawika.xyz/static/'+page.media.path)
             })
             page = page+1
             picacg.getRecursionPicture(id, order, page)
