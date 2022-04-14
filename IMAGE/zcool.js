@@ -5,17 +5,17 @@ const baseParse = _ => {
     const empty = "hiker://empty"
     const page = MY_URL.split('##')[1]
     const sort = [
-        {title: '编辑精选', url: 'recommendLevel=2&sort=9'},
-        {title: '首页推荐', url: 'recommendLevel=3&sort=9'},
-        {title: '全部推荐', url: 'recommendLevel=1&sort=9'},
-        {title: '最新发布', url: 'recommendLevel=0&sort=0'}]
+        {title: '编辑精选', url: 'recommend_level=2&sort=9'},
+        {title: '首页推荐', url: 'recommend_level=3&sort=9'},
+        {title: '全部推荐', url: 'recommend_level=1&sort=9'},
+        {title: '最新发布', url: 'recommend_level=0&sort=0'}]
 
     // 缓存
     let cate_1st = getVar("tyrantgenesis.zcool.cate_1st_select", "0")
     let cate_2nd = getVar("tyrantgenesis.zcool.cate_2nd_select", "0")
     let cate_sort = getVar("tyrantgenesis.zcool.cate_sort", "0")
 
-    const api_url = MY_URL.split('##')[0] + "?cate="+cate_1st+"&subCate="+cate_2nd+"&hasVideo=0&city=0&college=0&"+sort[cate_sort].url+"&limit=20&page="+page
+    const api_url = MY_URL.split('##')[0] + "?cate="+cate_1st+"&subCate="+cate_2nd+"&hasVideo=0&city=0&college=0&"+sort[cate_sort].url+"&ps=20&p="+page
 
     // 一级分类
     const category_json = fetch(cate_url, {headers:{"User-Agent": PC_UA}})
@@ -114,7 +114,7 @@ const baseParse = _ => {
 const secParse = MY_URL => {
     let d = [];
     const pageContent = fetch(MY_URL)
-    const html = parseDomForHtml(pageContent, '.work-content-wrap&&Html');
+    const html = parseDomForHtml(pageContent, '.detailContentBox&&Html');
 
     d.push({
         title: html.replace(/收藏/g, '').replace(/<script(.|\r|\n)*script>/, ''),
