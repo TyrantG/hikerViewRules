@@ -15,7 +15,7 @@ const baseParse = _ => {
     let cate_2nd = getVar("tyrantgenesis.zcool.cate_2nd_select", "0")
     let cate_sort = getVar("tyrantgenesis.zcool.cate_sort", "0")
 
-    const api_url = MY_URL.split('##')[0] + "?cate="+cate_1st+"&subCate="+cate_2nd+"&hasVideo=0&city=0&college=0&"+sort[cate_sort].url+"&ps=20&p="+page
+    const api_url = MY_URL.split('##')[0] + "?cate="+cate_1st+"&subCate="+cate_2nd+"&has_video=0&city=0&college=0&"+sort[cate_sort].url+"&ps=20&p="+page
 
     // 一级分类
     const category_json = fetch(cate_url, {headers:{"User-Agent": PC_UA}})
@@ -127,23 +127,22 @@ const secParse = MY_URL => {
 
 const searchParse = _ => {
     let d = [];
-    const list = JSON.parse(getResCode()).data.data
+    const list = JSON.parse(getResCode()).datas
 
     list.forEach(item => {
-        if (item.objectType === 78) {
-            let obj = item.object
-            if (obj.objectType === 3) {
-                d.push({
-                    title: obj.title.replace(/<[^>]+>/g, ""),
-                    desc: obj.creatorObj.username,
-                    pic_url: obj.cover,
-                    url: $(obj.pageUrl).rule(_ => {
-                        eval(fetch('hiker://files/TyrantG/IMAGE/zcool.js'))
-                        secParse(MY_URL)
-                    }),
-                    col_type: 'movie_2'
-                })
-            }
+        if (item.objectType === 3) {
+            let obj = item.content
+            log(obj.idStr)
+            d.push({
+                title: obj.title,
+                desc: obj.creatorObj.username,
+                pic_url: obj.cover,
+                url: $("https://www.zcool.com.cn/work/"+obj.idStr+".html").rule(_ => {
+                    eval(fetch('hiker://files/TyrantG/IMAGE/zcool.js'))
+                    secParse(MY_URL)
+                }),
+                col_type: 'movie_2'
+            })
         }
     })
 
