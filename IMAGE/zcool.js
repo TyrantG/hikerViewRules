@@ -125,7 +125,7 @@ const secParse = MY_URL => {
 }
 
 const searchParse = _ => {
-    log(MY_URL)
+    log(getResCode())
     let d = [];
     const list = JSON.parse(getResCode()).datas
 
