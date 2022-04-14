@@ -113,7 +113,7 @@ const baseParse = _ => {
 
 const secParse = MY_URL => {
     let d = [];
-    const pageContent = fetch(MY_URL)
+    const pageContent = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
     const html = parseDomForHtml(pageContent, '.detailContentBox&&Html');
 
     d.push({
