@@ -133,7 +133,7 @@ const searchParse = _ => {
         if (item.objectType === 3) {
             let obj = item.content
             d.push({
-                title: "‘‘’’"+obj.title,
+                title: obj.title,
                 desc: obj.creatorObj.username,
                 pic_url: obj.cover,
                 url: $("https://www.zcool.com.cn/work/"+obj.idStr+".html").rule(_ => {
