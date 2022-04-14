@@ -73,7 +73,7 @@ const secParse = _ => {
                         url: $(parseDomForHtml(data, 'a&&href')).lazyRule(_ => {
                             let video = parseDomForArray(request(input), '#playeroptionsul&&li')[0]
                             let fetch = request("https://www.4kvm.com/wp-json/dooplayer/v1/post/"+parseDomForHtml(video, 'li&&data-post')+"?type=movie&source=1")
-                            return "http://4kjx.dev.tyrantg.com/index.m3u8?url="+JSON.parse(fetch).embed_url+'#isVideo=true#'
+                            return "http://4kjx.dev.tyrantg.com/index.m3u8?url="+encodeURIComponent(JSON.parse(fetch).embed_url)+'#isVideo=true#'
                         }),
                         col_type: 'text_4',
                     })
@@ -85,7 +85,7 @@ const secParse = _ => {
                 sel_list.forEach(data => {
                     d.push({
                         title: "第"+data.name+"集",
-                        url: "http://4kjx.dev.tyrantg.com/index.m3u8?url="+data.url+'#isVideo=true#',
+                        url: "http://4kjx.dev.tyrantg.com/index.m3u8?url="+encodeURIComponent(data.url)+'#isVideo=true#',
                         col_type: 'text_4',
                     })
                 })
@@ -98,7 +98,7 @@ const secParse = _ => {
                 title: parseDomForHtml(item, '.title&&Text'),
                 url: $("https://www.4kvm.com/wp-json/dooplayer/v1/post/"+parseDomForHtml(item, 'li&&data-post')+"?type=movie&source=1").lazyRule(_ => {
                     let fetch = request(input)
-                    return "http://4kjx.dev.tyrantg.com/index.m3u8?url="+JSON.parse(fetch).embed_url+'#isVideo=true#'
+                    return "http://4kjx.dev.tyrantg.com/index.m3u8?url="+encodeURIComponent(JSON.parse(fetch).embed_url)+'#isVideo=true#'
                 }),
                 col_type: 'text_2',
             })

@@ -112,14 +112,13 @@ if (LIST_RESULT && LIST_RESULT.err_no === 0) {
             url: $(CATE_URL+'/post/'+item.article_id).rule(_ => {
                 const d = []
                 const html = fetch(MY_URL, {headers: {"User-Agent": PC_UA}})
-                const md = html.match(/mark_content:"(.*?)",/)
-
-                if (md) putVar('md_content', md[1])
-
+                const data_json = html.match(/{layout(.*?)globalRefs:{}}/)
+                let a,b,c,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D = {}
+                let data = {}
+                eval('data = '+data_json[0])
                 d.push({
-                    desc: '100% && float',
-                    url: 'file:///storage/emulated/0/Android/data/com.example.hikerview/files/Documents/TyrantG/public/markdown.html?md_content='+md[1],
-                    col_type:"x5_webview_single"
+                    title: data.state.view.column.entry.content,
+                    col_type: 'rich_text',
                 })
 
                 setResult(d)
