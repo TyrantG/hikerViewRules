@@ -95,11 +95,12 @@ const baseParse = _ => {
     list.forEach(item => {
         if (item.objectType === 3) {
             let obj = item.content
+            log(obj.idStr)
             d.push({
                 title: obj.title,
                 desc: obj.creatorObj.username,
                 pic_url: obj.cover,
-                url: $("https://www.zcool.com.cn/work/"+obj.idStr).rule(_ => {
+                url: $("https://www.zcool.com.cn/work/"+obj.idStr+".html").rule(_ => {
                     eval(fetch('hiker://files/TyrantG/IMAGE/zcool.js'))
                     secParse(MY_URL)
                 }),
@@ -113,11 +114,9 @@ const baseParse = _ => {
 
 const secParse = MY_URL => {
     let d = [];
-    log(MY_URL)
-    const pageContent = fetch(MY_URL)
-    const html = parseDomForHtml(pageContent, '.box-space&&Html');
+    const pageContent = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
+    const html = parseDomForHtml(pageContent, '.detailContentBox&&Html');
     log(html)
-
     d.push({
         title: html.replace(/收藏/g, '').replace(/<script(.|\r|\n)*script>/, ''),
         col_type: 'rich_text'
