@@ -113,6 +113,7 @@ const baseParse = _ => {
 
 const secParse = MY_URL => {
     let d = [];
+    log(MY_URL)
     const pageContent = fetch(MY_URL)
     const html = parseDomForHtml(pageContent, '.box-space&&Html');
     log(html)
