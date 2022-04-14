@@ -114,7 +114,7 @@ const baseParse = _ => {
 const secParse = MY_URL => {
     let d = [];
     const pageContent = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
-    const html = parseDomForHtml(pageContent, '.detailContentBox&&Html');
+    const html = parseDomForHtml(pageContent, '.workShowBox&&Html');
 
     d.push({
         title: html.replace(/收藏/g, '').replace(/<script(.|\r|\n)*script>/, ''),
