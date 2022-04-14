@@ -115,7 +115,7 @@ const secParse = MY_URL => {
     let d = [];
     const pageContent = fetch(MY_URL, {headers:{"User-Agent": PC_UA}})
     const html = parseDomForHtml(pageContent, '.detailContentBox&&Html');
-    log(html)
+
     d.push({
         title: html.replace(/收藏/g, '').replace(/<script(.|\r|\n)*script>/, ''),
         col_type: 'rich_text'
@@ -125,7 +125,6 @@ const secParse = MY_URL => {
 }
 
 const searchParse = _ => {
-    log(getResCode())
     let d = [];
     const list = JSON.parse(getResCode()).datas
 
