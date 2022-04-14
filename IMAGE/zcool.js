@@ -99,7 +99,7 @@ const baseParse = _ => {
                 title: obj.title,
                 desc: obj.creatorObj.username,
                 pic_url: obj.cover,
-                url: $(obj.pageUrl).rule(_ => {
+                url: $("https://www.zcool.com.cn/work/"+obj.idStr).rule(_ => {
                     eval(fetch('hiker://files/TyrantG/IMAGE/zcool.js'))
                     secParse(MY_URL)
                 }),
