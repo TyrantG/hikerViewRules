@@ -95,7 +95,6 @@ const baseParse = _ => {
     list.forEach(item => {
         if (item.objectType === 3) {
             let obj = item.content
-            log(obj.idStr)
             d.push({
                 title: obj.title,
                 desc: obj.creatorObj.username,
@@ -126,13 +125,13 @@ const secParse = MY_URL => {
 }
 
 const searchParse = _ => {
+    log(MY_URL)
     let d = [];
     const list = JSON.parse(getResCode()).datas
 
     list.forEach(item => {
         if (item.objectType === 3) {
             let obj = item.content
-            log(obj.idStr)
             d.push({
                 title: obj.title,
                 desc: obj.creatorObj.username,
