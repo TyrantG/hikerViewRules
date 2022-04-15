@@ -3,7 +3,9 @@ const baseParse = _ => {
         clearItem('buosn.fold')
         clearItem('buosn.cate_id')
         clearItem('buosn.click_url')
+        clearItem('buosn.category')
         clearItem('buosn.cate_tab')
+        clearItem('buosn.list_sort')
     }))
     let d = [];
     const empty = "hiker://empty"
@@ -104,11 +106,13 @@ const baseParse = _ => {
 const secParse = _ => {
     addListener('onClose', $.toString(() => {
         clearItem('buosn.cate_tab')
+        clearItem('buosn.list_sort')
     }))
     let d = [];
     const html = getResCode()
     const empty = "hiker://empty"
     const cate_tab  = getItem("buosn.cate_tab", "0")
+    const list_sort  = getItem("buosn.list_sort", "0")
 
     const video_array = pdfa(html, 'body&&.myui-panel-bg')
     const video_info = video_array[0]
@@ -125,9 +129,12 @@ const secParse = _ => {
     d.push({
         col_type: 'line_blank'
     })
+    d.push({
+        col_type: 'big_blank_block'
+    })
 
     const tabs = pdfa(list_box, 'ul&&li')
-    const playlist = pdfa(list_box, '.tab-content&&.tab-pane')
+    const playlistTab = pdfa(list_box, '.tab-content&&.tab-pane')
 
     if (tabs.length > 0) {
         tabs.forEach((tab, index) => {
@@ -142,11 +149,67 @@ const secParse = _ => {
                 col_type: 'scroll_button',
             })
         })
+
+        let playlist = pdfa(playlistTab[cate_tab], 'ul&&li')
+        if (list_sort === '1') playlist = playlist.reverse()
+
         d.push({
-            title: '',
-            col_type: 'avatar'
+            title: '当前线路：'+pdfh(tabs[cate_tab], 'a&&Text')+' 共'+playlist.length+'集',
+            pic_url: list_sort === '0' ? 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/sort-ascending.png' : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/icons/sort-descending.png',
+            url: $(empty).lazyRule((list_sort) => {
+                setItem("buosn.list_sort", list_sort === '0' ? '1' : '0')
+                refreshPage(true)
+                return "hiker://empty"
+            }, list_sort),
+            col_type: 'avatar',
+        })
+
+        playlist.forEach(item => {
+            d.push({
+                title: pdfh(item, 'a&&Text'),
+                url: $(pd(item, 'a&&href')).lazyRule(() => {
+                    try {
+                        eval(getCryptoJS())
+                        const html = fetch(input)
+                        const content = html.match(/var player_aaaa=(.*?)<\/script>/)
+                        const url = "https://jx.buosn.la/?url="+decodeURIComponent(base64Decode(JSON.parse(content[1]).url))
+
+                        const parseHtml = fetch(url)
+                        const le_token = parseHtml.match(/var le_token = "(.*?)";/)[1]
+                        const le_url = parseHtml.match(/"url": "(.*?)"/)[1]
+                        const _token_key = CryptoJS.enc.Utf8.parse("A42EAC0C2B408472");
+                        const _token_iv = CryptoJS.enc.Utf8.parse(le_token);
+                        return  CryptoJS.AES.decrypt(le_url, _token_key, {'iv': _token_iv}).toString(CryptoJS.enc.Utf8);
+                    } catch (e) {
+                        return 'toast://解析失败'
+                    }
+                }),
+                col_type: 'text_4',
+            })
+        })
+    } else {
+        d.push({
+            title: '暂无剧集',
+            col_type: 'text_center_1'
         })
     }
+
+    setResult(d);
+}
+
+const searchParse = () => {
+    let d = [];
+    const html = getResCode()
+
+    const list = pdfa(html, '.myui-vodlist__media&&li')
+    list.forEach(item => {
+        d.push({
+            title: pdfh(item, 'h4&&Text'),
+            desc: pdfh(item, '.text-muted&&Text'),
+            url: pd(item, 'a&&href')+'#immersiveTheme#',
+            pic_url: pd(item, '.myui-vodlist__thumb&&data-original'),
+        })
+    })
 
     setResult(d);
 }
