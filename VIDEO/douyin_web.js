@@ -268,6 +268,9 @@ const baseParse = _ => {
                     headers: {
                         "referer" : "https://www.douyin.com/",
                         "cookie": home_cookie,
+                        "Accept": 'application/json, text/plain, */*',
+                        "User-Agent": PC_UA,
+                        "Accept-Language": 'zh-CN,zh;q=0.9',
                     }
                 })
 
@@ -387,6 +390,9 @@ const baseParse = _ => {
                     headers: {
                         "referer" : "https://live.douyin.com",
                         "cookie": home_cookie,
+                        "Accept": 'application/json, text/plain, */*',
+                        "User-Agent": PC_UA,
+                        "Accept-Language": 'zh-CN,zh;q=0.9',
                     }
                 })
 
@@ -453,6 +459,9 @@ const baseParse = _ => {
                     headers: {
                         "referer" : "https://www.douyin.com/",
                         "cookie": home_cookie,
+                        "Accept": 'application/json, text/plain, */*',
+                        "User-Agent": PC_UA,
+                        "Accept-Language": 'zh-CN,zh;q=0.9',
                     }
                 })
 
@@ -531,6 +540,9 @@ const baseParse = _ => {
                     headers: {
                         "referer" : "https://www.douyin.com/",
                         "cookie": home_cookie,
+                        "Accept": 'application/json, text/plain, */*',
+                        "User-Agent": PC_UA,
+                        "Accept-Language": 'zh-CN,zh;q=0.9',
                     }
                 })
 
