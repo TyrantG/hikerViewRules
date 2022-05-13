@@ -6,15 +6,15 @@ const BASE_URL = "https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/maste
 * @param local_file String 本地文件路径
 * */
 const godWriteFile = (fetch_file, local_file) => {
-  let local = request(local_file);
-  let fetch = request(fetch_file);
-  if (!local || local !== fetch) writeFile(local_file, fetch)
+  let localFile = request(local_file);
+  let fetchFile = request(fetch_file);
+  if (!localFile || localFile !== fetchFile) writeFile(local_file, fetchFile)
 }
 
 const godSaveFile = (fetch_file, local_file) => {
-  let local = request(local_file);
-  let fetch = request(fetch_file);
-  if (!local) writeFile(local_file, fetch)
+  let localFile = request(local_file);
+  let fetchFile = request(fetch_file);
+  if (!localFile) writeFile(local_file, fetchFile)
 }
 
 const time = (new Date()).getTime()
