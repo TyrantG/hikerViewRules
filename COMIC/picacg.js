@@ -238,7 +238,7 @@ const picacg = {
             email: picacg.share_account.name,
             password: picacg.share_account.passwd,
         })
-        if (response.code === 400) {
+        if (response.code === 400 || response.code === 401) {
             return 'toast://'+ (response.detail || response.message)
         } else {
             const setting = getItem('email', '') + '\n' + getItem('password', '') + '\n' +response.data.token
