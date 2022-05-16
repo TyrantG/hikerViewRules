@@ -69,6 +69,7 @@ const gcores = {
     baseParse: () => {
         gcores.pluginInit()
 
+        log(fetch(gcores.plugins.attention))
         const attention = fetch(gcores.plugins.attention).split('\n').filter(item => item)
         log(attention)
         // const collection = fetch(gcores.plugins.collection).split('\n').filter(item => item)
