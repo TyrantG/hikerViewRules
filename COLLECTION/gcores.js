@@ -70,10 +70,10 @@ const gcores = {
         gcores.pluginInit()
 
         const attention = fetch(gcores.plugins.attention).split('\n').filter(item => item)
-        console.log(attention)
+        log(attention)
         // const collection = fetch(gcores.plugins.collection).split('\n').filter(item => item)
         const page = MY_URL.split('$$')[1]
-        console.log(page)
+        log(page)
 
         const tabs = [
             {title: '文章', type: 'articles'},
