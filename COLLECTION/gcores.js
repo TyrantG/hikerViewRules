@@ -69,12 +69,10 @@ const gcores = {
     baseParse: () => {
         gcores.pluginInit()
 
-        log(fetch(gcores.plugins.attention))
-        const attention = fetch(gcores.plugins.attention).split('\n').filter(item => item)
-        log(attention)
+        const attentionFetch = fetch(gcores.plugins.attention)
+        const attention = attentionFetch.split('\n').filter(item => item)
         // const collection = fetch(gcores.plugins.collection).split('\n').filter(item => item)
         const page = MY_URL.split('$$')[1]
-        log(page)
 
         const tabs = [
             {title: '文章', type: 'articles'},
