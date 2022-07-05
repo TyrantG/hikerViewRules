@@ -73,8 +73,7 @@ const secParse = params => {
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     // let live_url = ''
-    // return getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'https://')
-    return base64Decode(live.roomProfile.liveLineUrl).replace('//', 'https://')
+    return getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')
 
     /*if (parseInt(iGameId) === 2135) {
         return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
@@ -196,5 +195,5 @@ const getRealUrl = (live_url) => {
     let t = '0'
     let h = [p, t, s, f, ll].join('_')
     let m = md5(h)
-    return (i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+tmp2).replace('hls', 'flv').replace('m3u8', 'flv')
+    return (i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+tmp2.pop()).replace('hls', 'flv').replace('m3u8', 'flv')
 }
