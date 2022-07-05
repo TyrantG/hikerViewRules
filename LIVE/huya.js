@@ -73,7 +73,8 @@ const secParse = params => {
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     // let live_url = ''
-    return getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'https://')
+    // return getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'https://')
+    return base64Decode(live.roomProfile.liveLineUrl).replace('//', 'https://')
 
     /*if (parseInt(iGameId) === 2135) {
         return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
