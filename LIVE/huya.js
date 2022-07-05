@@ -22,7 +22,7 @@ const baseParse = _ => {
 
     list.forEach((cate, index) => {
         let group = cate.sName, current_cate, cate_id
-            
+
         try {
 
             let videoDom = cate.vItems.value
@@ -67,14 +67,15 @@ const secParse = params => {
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
 
-    let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
+    // let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
     // let gameName = live.roomInfo.tLiveInfo.sGameFullName
-    let iGameId = live.roomInfo.tLiveInfo.iGameId
+    // let iGameId = live.roomInfo.tLiveInfo.iGameId
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
-    let live_url = ''
+    // let live_url = ''
+    return getRealUrl(base64Decode(live.roomProfile.liveLineUrl))
 
-    if (parseInt(iGameId) === 2135) {
+    /*if (parseInt(iGameId) === 2135) {
         return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
     } else {
         streamInfo.forEach(info => {
@@ -83,7 +84,7 @@ const secParse = params => {
             }
         })
         return live_url ? getRealUrl(live_url) : 'toast://主播尚未开播'
-    }
+    }*/
 }
 
 const categoryParse = index =>{
