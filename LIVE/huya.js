@@ -195,5 +195,5 @@ const getRealUrl = (live_url) => {
     let t = '0'
     let h = [p, t, s, f, ll].join('_')
     let m = md5(h)
-    return (i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+tmp2.pop()).replace('hls', 'flv').replace('m3u8', 'flv')
+    return (i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+c_tmp2.pop()).replace('hls', 'flv').replace('m3u8', 'flv')
 }
