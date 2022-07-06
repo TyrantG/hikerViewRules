@@ -67,13 +67,27 @@ const secParse = params => {
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
 
+    let info = {};
+    let subsid_array = html.match(/var SUBSID = '(.*)';/);
+    let topsid_array = html.match(/var TOPSID = '(.*)';/);
+    let yyuid_array = html.match(/ayyuid: '(.*)',/);
+    let anthor_nick = html.match(/var ANTHOR_NICK = '(.*)';/)
+    info.subsid = subsid_array[1] === '' ? 0 : parseInt(subsid_array[1]);
+    info.topsid = topsid_array[1] === '' ? 0 : parseInt(topsid_array[1]);
+    info.yyuid = parseInt(yyuid_array[1]);
+    info.sGuid = "";
+    info.anthor_nick = anthor_nick[1] === '' ? '' : anthor_nick[1];
+
     // let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
     // let gameName = live.roomInfo.tLiveInfo.sGameFullName
     // let iGameId = live.roomInfo.tLiveInfo.iGameId
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     // let live_url = ''
-    return getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')
+    return JSON.stringify({
+        urls: [getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')],
+        danmu: 'web://http://huya_danmu.dev.tyrantg.com/?rid='+rid+'&info='+encodeURIComponent(JSON.stringify(params.info))+'&ver=1'
+    })
 
     /*if (parseInt(iGameId) === 2135) {
         return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
