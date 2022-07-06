@@ -83,6 +83,7 @@ const secParse = params => {
     // let iGameId = live.roomInfo.tLiveInfo.iGameId
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
+    log('web://http://huya_danmu.dev.tyrantg.com/?rid='+rid+'&info='+encodeURIComponent(JSON.stringify(params.info))+'&ver=1')
     // let live_url = ''
     return JSON.stringify({
         urls: [getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')],
