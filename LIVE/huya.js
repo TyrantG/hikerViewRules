@@ -75,7 +75,7 @@ const secParse = params => {
     // let live_url = ''
     return JSON.stringify({
         urls: [getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')],
-        danmu: 'web://http://huya_danmu.dev.tyrantg.com/?rid='+rid+'&ver=1'
+        // danmu: 'web://http://huya_danmu.dev.tyrantg.com/?rid='+rid+'&ver=1'
     })
 
     /*if (parseInt(iGameId) === 2135) {
