@@ -1,9 +1,9 @@
 const douyu = {
     empty: 'hiker://empty',
-    douyuFirstCate: getItem('TyrantGenesis.theStream.FirstCate', ''),
-    douyuSecondCate: getItem('TyrantGenesis.theStream.SecondCate', ''),
+    douyuFirstCate: getItem('TyrantGenesis.streamLab.FirstCate', ''),
+    douyuSecondCate: getItem('TyrantGenesis.streamLab.SecondCate', ''),
     baseParseLoad: (d, page) => {
-        let douyuSecondCate = getItem('TyrantGenesis.theStream.SecondCate', '')
+        let douyuSecondCate = getItem('TyrantGenesis.streamLab.SecondCate', '')
         const roomListJson = request(`https://m.douyu.com/api/room/list?page=${page}&type=${douyuSecondCate}`)
         const roomListList = JSON.parse(roomListJson).data.list
         roomListList.forEach(item => {
@@ -38,8 +38,8 @@ const douyu = {
             d.push({
                 title: douyu.douyuFirstCate === Category.shortName ? '‘‘’’<b><span style="color: #FF0000">'+Category.cate1Name+'</span></b>' : Category.cate1Name,
                 url: $(douyu.empty).lazyRule((shortName) => {
-                    setItem('TyrantGenesis.theStream.FirstCate', shortName)
-                    clearItem('TyrantGenesis.theStream.SecondCate')
+                    setItem('TyrantGenesis.streamLab.FirstCate', shortName)
+                    clearItem('TyrantGenesis.streamLab.SecondCate')
                     refreshPage(true)
                     return 'hiker://empty'
                 }, Category.shortName),
@@ -49,10 +49,10 @@ const douyu = {
         d.push({
             col_type: 'blank_block',
         })
-        let douyuSecondCate = getItem('TyrantGenesis.theStream.SecondCate', '')
+        let douyuSecondCate = getItem('TyrantGenesis.streamLab.SecondCate', '')
         if (douyu.douyuFirstCate === '') {
             if (douyuSecondCate === '') {
-                setItem('TyrantGenesis.theStream.SecondCate', baseRecommendCategory[0].cate2Url.slice(2))
+                setItem('TyrantGenesis.streamLab.SecondCate', baseRecommendCategory[0].cate2Url.slice(2))
                 douyuSecondCate = baseRecommendCategory[0].cate2Url.slice(2)
             }
             baseRecommendCategory.forEach((item, index) => {
@@ -60,7 +60,7 @@ const douyu = {
                 d.push({
                     title: (douyuSecondCate === cate2Url) ? '‘‘’’<b><span style="color: #FF0000">'+item.cate2Name+'</span></b>' : item.cate2Name,
                     url: $(douyu.empty).lazyRule((cate2Url) => {
-                        setItem('TyrantGenesis.theStream.SecondCate', cate2Url)
+                        setItem('TyrantGenesis.streamLab.SecondCate', cate2Url)
                         refreshPage(true)
                         return 'hiker://empty'
                     }, cate2Url),
@@ -72,7 +72,7 @@ const douyu = {
             const douyuSecondCateList = JSON.parse(douyuSecondCateListJson).data.list
 
             if (douyuSecondCate === '') {
-                setItem('TyrantGenesis.theStream.SecondCate', douyuSecondCateList[0].shortName)
+                setItem('TyrantGenesis.streamLab.SecondCate', douyuSecondCateList[0].shortName)
                 douyuSecondCate = douyuSecondCateList[0].shortName
             }
             douyuSecondCateList.forEach((item, index) => {
@@ -80,7 +80,7 @@ const douyu = {
                 d.push({
                     title: (douyuSecondCate === cate2Url) ? '‘‘’’<b><span style="color: #FF0000">'+item.cname2+'</span></b>' : item.cname2,
                     url: $(douyu.empty).lazyRule((cate2Url) => {
-                        setItem('TyrantGenesis.theStream.SecondCate', cate2Url)
+                        setItem('TyrantGenesis.streamLab.SecondCate', cate2Url)
                         refreshPage(true)
                         return 'hiker://empty'
                     }, cate2Url),

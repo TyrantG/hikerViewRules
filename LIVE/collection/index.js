@@ -1,62 +1,62 @@
-const theStream = {
+const streamLab = {
     d: [],
     empty: 'hiker://empty',
     streamNameList: [
         {title: '斗鱼', key: 'douyu',},
         {title: '虎牙', key: 'huya',},
     ],
-    streamKey: getItem('TyrantGenesis.theStream.streamKey', 'douyu'),
+    streamKey: getItem('TyrantGenesis.streamLab.streamKey', 'douyu'),
     baseParse: () => {
         addListener('onClose', $.toString(() => {
-            clearItem('TyrantGenesis.theStream.streamKey')
-            clearItem('TyrantGenesis.theStream.FirstCate')
-            clearItem('TyrantGenesis.theStream.SecondCate')
+            clearItem('TyrantGenesis.streamLab.streamKey')
+            clearItem('TyrantGenesis.streamLab.FirstCate')
+            clearItem('TyrantGenesis.streamLab.SecondCate')
         }))
         const page = MY_URL.split('##')[1]
         if (page === '1') {
-            theStream.d.push({
+            streamLab.d.push({
                 title: 'Search',
                 col_type: 'icon_1_search',
             })
-            theStream.d.push({
+            streamLab.d.push({
                 title: '⚙',
                 col_type: 'scroll_button',
             })
-            theStream.streamNameList.forEach((stream, index) => {
-                theStream.d.push({
-                    title: theStream.streamKey === stream.key ? '‘‘’’<b><span style="color: #FF0000">'+stream.title+'</span></b>' : stream.title,
-                    url: $(theStream.empty).lazyRule((key) => {
-                        setItem('TyrantGenesis.theStream.streamKey', key)
+            streamLab.streamNameList.forEach((stream, index) => {
+                streamLab.d.push({
+                    title: streamLab.streamKey === stream.key ? '‘‘’’<b><span style="color: #FF0000">'+stream.title+'</span></b>' : stream.title,
+                    url: $(streamLab.empty).lazyRule((key) => {
+                        setItem('TyrantGenesis.streamLab.streamKey', key)
                         refreshPage(true)
                         return 'hiker://empty'
                     }, stream.key),
                     col_type: 'scroll_button',
                 })
             })
-            theStream.d.push({
+            streamLab.d.push({
                 col_type: 'blank_block',
             })
-            theStream.categoryLoad()
+            streamLab.categoryLoad()
         }
-        theStream.baseParseLoad(page)
-        setResult(theStream.d);
+        streamLab.baseParseLoad(page)
+        setResult(streamLab.d);
     },
     categoryLoad: () => {
-        switch (theStream.streamKey) {
+        switch (streamLab.streamKey) {
             case 'douyu':
             {
-                $.require('hiker://page/douyu').categoryLoad(theStream.d)
+                $.require('hiker://page/douyu').categoryLoad(streamLab.d)
             }
         }
     },
     baseParseLoad: (page) => {
-        switch (theStream.streamKey) {
+        switch (streamLab.streamKey) {
             case 'douyu':
             {
-                $.require('hiker://page/douyu').baseParseLoad(theStream.d, page)
+                $.require('hiker://page/douyu').baseParseLoad(streamLab.d, page)
             }
         }
     },
 }
 
-$.exports = theStream
+$.exports = streamLab
