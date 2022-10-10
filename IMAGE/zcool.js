@@ -1,7 +1,7 @@
 const baseParse = _ => {
     // 初始化
     let d = [];
-    const cate_url = "https://www.zcool.com.cn/common/category"
+    const cate_url = "https://www.zcool.com.cn/p1/category/list-discover"
     const empty = "hiker://empty"
     const page = MY_URL.split('##')[1]
     const sort = [
@@ -19,7 +19,7 @@ const baseParse = _ => {
 
     // 一级分类
     const category_json = fetch(cate_url, {headers:{"User-Agent": PC_UA}})
-    const category = JSON.parse(category_json).data
+    const category = JSON.parse(category_json).datas
 
     if (parseInt(page) === 1) {
 
