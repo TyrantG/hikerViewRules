@@ -1,16 +1,17 @@
 const baseParse = _ => {
-  js:
-      let d = []
+  let d = []
+  let [url, page] = MY_URL.split('##')
   const class_url = getMyVar('400.tyrantgenesis.class_url')
   if (class_url !== MY_RULE.class_url) {
     clearMyVar('400.tyrantgenesis.url')
     putMyVar('400.tyrantgenesis.class_url', MY_RULE.class_url)
   }
 
-  const url = getMyVar('400.tyrantgenesis.url', MY_URL)
+  url = getMyVar('400.tyrantgenesis.url', url)
+  url = url.replace('.html', '-'+page+'.html')
   const html = fetch(url)
 
-  if (parseInt(MY_PAGE) === 1) {
+  if (parseInt(page) === 1) {
     const category = pdfa(html, '.gm-meta&&a')
     category.forEach(cate => {
       let className = pdfh(cate, 'a&&class')
