@@ -1,5 +1,6 @@
 const baseParse = _ => {
-  let d = []
+  js:
+      let d = []
   const class_url = getMyVar('400.tyrantgenesis.class_url')
   if (class_url !== MY_RULE.class_url) {
     clearMyVar('400.tyrantgenesis.url')
@@ -8,32 +9,36 @@ const baseParse = _ => {
 
   const url = getMyVar('400.tyrantgenesis.url', MY_URL)
   const html = fetch(url)
-  const category = pdfa(html, '.gm-meta&&a')
+
+  if (parseInt(MY_PAGE) === 1) {
+    const category = pdfa(html, '.gm-meta&&a')
+    category.forEach(cate => {
+      let className = pdfh(cate, 'a&&class')
+      let title = pdfh(cate, 'a&&Text')
+      d.push({
+        title: className === 'on' ? '““””<b><span style="color: #1cb96f">'+title+"</span></b>" : title,
+        url: $(pd(cate, 'a&&href')).lazyRule(() => {
+          putMyVar('400.tyrantgenesis.url', input)
+          refreshPage(true)
+          return "hiker://empty"
+        }),
+        col_type: 'scroll_button',
+      })
+    })
+
+    d.push({
+      col_type:"blank_block"
+    })
+  }
+
   const list = pdfa(html, '.gm-list&&.item')
 
-  category.forEach(cate => {
-    let className = pdfh(cate, 'a&&class')
-    let title = pdfh(cate, 'a&&Text')
-    d.push({
-      title: className === 'on' ? '““””<b><span style="color: #1cb96f">'+title+"</span></b>" : title,
-      url: $(pd(cate, 'a&&href')).lazyRule(() => {
-        putMyVar('400.tyrantgenesis.url', input)
-        refreshPage(true)
-        return "hiker://empty"
-      }),
-      col_type: 'scroll_button',
-    })
-  })
-
-  d.push({
-    col_type:"blank_block"
-  })
-
   list.forEach(item => {
+    let pic_url = pdfh(item, 'img&&data-src')
     d.push({
       title: pdfh(item, '.info&&.title&&Text'),
       desc: pdfh(item, '.tag2&&Text'),
-      pic_url: pdfh(item, 'img&&data-src'),
+      pic_url: pic_url.startsWith('http') ? pic_url : 'https:'+pic_url,
       url: pd(item, '.title&&href')+'#immersiveTheme#',
       col_type: 'movie_3_marquee',
     })
