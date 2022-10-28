@@ -69,6 +69,7 @@
             initData() {
                 const html = request("https://www.gcores.com")
                 const json = fba.parseDomForArray(html, '.slick-list&&.slick-item')
+                alert(json)
                 const arr = JSON.parse(json)
                 let list = []
                 arr.forEach(item => {
