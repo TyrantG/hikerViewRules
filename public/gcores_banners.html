@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Banners</title>
-    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.14.1/lib/theme-chalk/index.css">
     <style>
         html, body {
             margin: 0;
@@ -44,8 +44,8 @@
         </el-carousel-item>
     </el-carousel>
 </div>
-<script src="./js/vue.min.js"></script>
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/vue@2.6.12/dist/vue.min.js"></script>
+<script src="https://unpkg.com/element-ui@2.14.1/lib/index.js"></script>
 <script>
     new Vue({
         el: '#app',
@@ -68,11 +68,11 @@
             },
             initData() {
                 const html = request("https://www.gcores.com")
-                const json = fba.parseDomForArray(html, '.focusImages&&.focusImages_item')
+                const json = fba.parseDomForArray(html, '.slick-list&&.slick-item')
                 const arr = JSON.parse(json)
                 let list = []
                 arr.forEach(item => {
-                    let href = fba.parseDomForHtml(item, '.focusImages_item&&href')
+                    let href = fba.parseDomForHtml(item, '.slick-item&&href')
                     const [type, id] = href.split('/').filter(item => item)
                     list.push({
                         src: item.match(/url\((.*?)\)/)[1],
