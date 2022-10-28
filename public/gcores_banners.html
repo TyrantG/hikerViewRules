@@ -47,6 +47,8 @@
 <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 <script>
+    eval(fba.getInternalJs());
+    window.request = window.request00 || window.request
     new Vue({
         el: '#app',
         data() {
@@ -55,12 +57,11 @@
             }
         },
         created() {
-            eval(fba.getInternalJs());
-            // const saveTime = localStorage.getItem('time') || 0
-            // if (new Date().getTime() - parseInt(saveTime) > 1000*60*60*2)
-            this.initData()
-            // else
-            //     this.initImageList()
+            const saveTime = localStorage.getItem('time') || 0
+            if (new Date().getTime() - parseInt(saveTime) > 1000*60*60*2)
+                this.initData()
+            else
+                this.initImageList()
         },
         methods: {
             initImageList() {
