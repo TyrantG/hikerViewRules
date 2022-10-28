@@ -417,6 +417,7 @@ const secParse = params => {
     //
     // d.pop()
 
+    log('https://s4.save.tube/ajax/getLinks.php?video='+encodeURIComponent(ori_url))
     const res_json = fetch('https://s4.save.tube/ajax/getLinks.php?video='+encodeURIComponent(ori_url))
     log(res_json)
     const res = JSON.parse(res_json)
