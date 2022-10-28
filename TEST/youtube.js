@@ -426,7 +426,7 @@ const secParse = params => {
         data.forEach(item => {
             d.push({
                 title: item.quality+'.'+item.ext,
-                url: item.url,
+                url: item.url+'#isVideo=true#',
                 col_type: 'text_2'
             })
         })
