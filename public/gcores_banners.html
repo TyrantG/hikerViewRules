@@ -75,10 +75,10 @@
                     let list = []
                     arr.forEach(item => {
                         let href = fba.parseDomForHtml(item, 'a&&href')
-                        const [type, id] = href.split('/').filter(item => item)
-                        alert(item.match(/url\((.*?)\)/))
+                        let [type, id] = href.split('/').filter(item => item)
+                        let image = fba.parseDomForHtml(item, 'img&&src')
                         list.push({
-                            src: item.match(/url\((.*?)\)/)[1],
+                            src: image,
                             url: 'https://www.gcores.com'+href,
                             type: type,
                             id: id,
