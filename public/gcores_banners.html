@@ -74,7 +74,7 @@
                     const arr = JSON.parse(json)
                     let list = []
                     arr.forEach(item => {
-                        let href = fba.parseDomForHtml(item, '.slick-item&&href')
+                        let href = fba.parseDomForHtml(item, '.slick-item&&a&&href')
                         const [type, id] = href.split('/').filter(item => item)
                         list.push({
                             src: item.match(/url\((.*?)\)/)[1],
