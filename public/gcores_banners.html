@@ -56,7 +56,6 @@
         },
         created() {
             eval(fba.getInternalJs());
-            alert(123)
             // const saveTime = localStorage.getItem('time') || 0
             // if (new Date().getTime() - parseInt(saveTime) > 1000*60*60*2)
             this.initData()
@@ -68,23 +67,28 @@
                 this.imageList = JSON.parse(localStorage.getItem('imageList'))
             },
             initData() {
-                const html = request("https://www.gcores.com")
-                const json = fba.parseDomForArray(html, '.slick-list&&.slick-item')
-                const arr = JSON.parse(json)
-                let list = []
-                arr.forEach(item => {
-                    let href = fba.parseDomForHtml(item, '.slick-item&&href')
-                    const [type, id] = href.split('/').filter(item => item)
-                    list.push({
-                        src: item.match(/url\((.*?)\)/)[1],
-                        url: 'https://www.gcores.com'+href,
-                        type: type,
-                        id: id,
+                try {
+                    const html = request("https://www.gcores.com")
+                    const json = fba.parseDomForArray(html, '.slick-list&&.slick-item')
+                    const arr = JSON.parse(json)
+                    let list = []
+                    arr.forEach(item => {
+                        let href = fba.parseDomForHtml(item, '.slick-item&&href')
+                        const [type, id] = href.split('/').filter(item => item)
+                        list.push({
+                            src: item.match(/url\((.*?)\)/)[1],
+                            url: 'https://www.gcores.com'+href,
+                            type: type,
+                            id: id,
+                        })
                     })
-                })
-                localStorage.setItem('imageList', JSON.stringify(list))
-                localStorage.setItem('time', new Date().getTime().toString())
-                this.imageList = list
+                    localStorage.setItem('imageList', JSON.stringify(list))
+                    localStorage.setItem('time', new Date().getTime().toString())
+                    this.imageList = list
+                } catch (e) {
+                    alert(e)
+                }
+
             },
             imageClickHandle(index) {
                 const bannerItem = this.imageList[index]
