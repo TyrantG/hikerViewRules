@@ -149,7 +149,7 @@ const baseParse = _ => {
             });
             d.push({
                 title: "申请 Google YouTube API 教程",
-                url: "https://www.tyrantg.com/post/shen-qing-googleyoutubeapi/",
+                url: "https://www.tyrantg.com/post/7",
                 col_type: "text_1"
             })
             d.push({
