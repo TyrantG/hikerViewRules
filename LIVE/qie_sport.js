@@ -52,10 +52,12 @@ const baseParse = _ => {
   list.forEach(video => {
     d.push({
       title: video.room_name,
-      url: $('https://m.live.qq.com/'+video.room_id).lazyRule(_ => {
-        const html = fetch(input)
-        return html.match(/"hls_url":"(.*?)","use_p2p"/)[1]+"@Referer=https://m.live.qq.com/"
-      }),
+      url: $('https://m.live.qq.com/'+video.room_id).lazyRule((id) => {
+        const api_url = "https://live.qq.com/api/h5/room?room_id="+id
+        const res = JSON.parse(fetch(api_url)).data
+        return res.rtmp_url.replace('http', 'https') + '/' + res.rtmp_live
+        // return html.match(/"hls_url":"(.*?)","use_p2p"/)[1]+"@Referer="
+      }, video.room_id),
       pic_url: video.room_src+"@Referer=",
       col_type: 'movie_2'
     });
@@ -72,10 +74,13 @@ const searchParse = _ => {
   list.forEach(video => {
     d.push({
       title: video.room_name,
-      url: $('https://m.live.qq.com/'+video.room_id).lazyRule(_ => {
-        const html = fetch(input)
-        return html.match(/"hls_url":"(.*?)","use_p2p"/)[1]+"@Referer=https://m.live.qq.com/"
-      }),
+      url: $('https://m.live.qq.com/'+video.room_id).lazyRule((id) => {
+        const api_url = "https://live.qq.com/api/h5/room?room_id="+id
+        const res = JSON.parse(fetch(api_url)).data
+        return res.rtmp_url.replace('http', 'https') + '/' + res.rtmp_live
+        // const html = fetch(input)
+        // return html.match(/"hls_url":"(.*?)","use_p2p"/)[1]+"@Referer="
+      }, video.room_id),
       desc: video.nickname,
       pic_url: video.room_src+"@Referer=",
     });
