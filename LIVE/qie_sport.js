@@ -54,7 +54,7 @@ const baseParse = _ => {
       title: video.room_name,
       url: $('https://m.live.qq.com/'+video.room_id).lazyRule(_ => {
         const html = fetch(input)
-        return html.match(/"hls_url":"(.*?)","use_p2p"/)[1]
+        return html.match(/"hls_url":"(.*?)","use_p2p"/)[1]+"@Referer=https://m.live.qq.com/"
       }),
       pic_url: video.room_src+"@Referer=",
       col_type: 'movie_2'
@@ -74,7 +74,7 @@ const searchParse = _ => {
       title: video.room_name,
       url: $('https://m.live.qq.com/'+video.room_id).lazyRule(_ => {
         const html = fetch(input)
-        return html.match(/"hls_url":"(.*?)","use_p2p"/)[1]
+        return html.match(/"hls_url":"(.*?)","use_p2p"/)[1]+"@Referer=https://m.live.qq.com/"
       }),
       desc: video.nickname,
       pic_url: video.room_src+"@Referer=",
