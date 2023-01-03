@@ -1,7 +1,6 @@
 const miss = {
   empty: 'hiker://empty',
   url: 'https://missav888.com/cn/',
-  cdn: 'https://cdn.missav888.com/',
   d: [],
   data: {
     category: getMyVar('MissAV.category', '0'),
@@ -29,6 +28,12 @@ const miss = {
         sub: []
       },
       {
+        title: '中文字幕',
+        path: 'chinese-subtitle',
+        type: 'video',
+        sub: []
+      },
+      {
         title: '最近更新',
         path: 'new',
         type: 'video',
@@ -37,12 +42,6 @@ const miss = {
       {
         title: '新作上市',
         path: 'release',
-        type: 'video',
-        sub: []
-      },
-      {
-        title: '中文字幕',
-        path: 'chinese-subtitle',
         type: 'video',
         sub: []
       },
@@ -208,58 +207,199 @@ const miss = {
       col_type: 'pic_1',
     })
 
-    miss.d.push({
-      title: '演员',
-      url: miss.empty,
-      col_type: 'text_center_1',
-      extra: {lineVisible: false},
-    })
-
     const text_secondary_list = pdfa(html, 'body&&.text-secondary')
-    const actresses = pdfh(text_secondary_list[4], 'a&&Text')
+    let num, actressesList, tagsList, series, makers, directors, labelsList
 
-    miss.d.push({
-      title: actresses,
-      // pic_url: miss.cdn+'actress/'+html.match(/actresses\/(\d*?)\/tweets/)[0]+'.jpg?class=actress'+'@Referer='+miss.url,
-      url: $(pdfh(text_secondary_list[4], 'a&&href')+'?page=fypage#noHistory#').rule((actresses) => {
-        const miss = $.require('hiker://page/miss')
-        setPageTitle(actresses)
-        miss.avatarParse(MY_URL)
-        setResult(miss.d)
-      }, actresses),
-      col_type: 'avatar',
-    })
-    miss.d.push({
-      col_type: 'line_blank'
+    text_secondary_list.forEach(item => {
+      let current_title = pdfh(item, 'span&&Text')
+      if (current_title) log(current_title)
+
+      if (current_title === '番号:') {
+        num = pdfh(item, '.font-medium&&Text')
+      } else if (current_title === '女优:') {
+        actressesList = pdfa(item, '.text-secondary&&a')
+      } else if (current_title === '类型:') {
+        tagsList = pdfa(item, '.text-secondary&&a')
+      } else if (current_title === '系列:') {
+        series = pdfa(item, '.text-secondary&&a')[0]
+      } else if (current_title === '发行商:') {
+        makers = pdfa(item, '.text-secondary&&a')[0]
+      } else if (current_title === '导演:') {
+        directors = pdfa(item, '.text-secondary&&a')[0]
+      } else if (current_title === '标籤:') {
+        labelsList = pdfa(item, '.text-secondary&&a')
+      }
     })
 
-    const tagsList = pdfa(text_secondary_list[5], 'div&&a')
-
-    miss.d.push({
-      title: '标签',
-      url: miss.empty,
-      col_type: 'text_center_1',
-      extra: {lineVisible: false},
-    })
-    tagsList.forEach(tag => {
-      let tag_title = pdfh(tag, 'a&&Text')
+    if (num) {
       miss.d.push({
-        title: tag_title,
-        url: $(pdfh(tag, 'a&&href')+'?page=fypage#noHistory#').rule((tag_title) => {
+        title: '番号',
+        url: miss.empty,
+        col_type: 'text_center_1',
+        extra: {lineVisible: false},
+      })
+      miss.d.push({
+        title: num,
+        url: 'copy://'+num,
+        col_type: 'text_1',
+        extra: {lineVisible: false},
+      })
+      miss.d.push({
+        col_type: 'line_blank'
+      })
+    }
+
+    if (actressesList) {
+      miss.d.push({
+        title: '演员',
+        url: miss.empty,
+        col_type: 'text_center_1',
+        extra: {lineVisible: false},
+      })
+      actressesList.forEach(actresses => {
+        let title = pdfh(actresses, 'a&&Text')
+        let url = pdfh(actresses, 'a&&href')
+        let actressesHtml = fetch(url, {headers:{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0)'}})
+
+        miss.d.push({
+          title: title,
+          pic_url: pdfh(actressesHtml, '.object-cover.object-top.w-full.h-full&&src'),
+          url: $(url+'?page=fypage#noHistory#').rule((title) => {
+            const miss = $.require('hiker://page/miss')
+            setPageTitle(title)
+            miss.avatarParse(MY_URL)
+            setResult(miss.d)
+          }, title),
+          col_type: 'avatar',
+        })
+      })
+      miss.d.push({
+        col_type: 'line_blank'
+      })
+    }
+
+    if (tagsList) {
+      miss.d.push({
+        title: '类型',
+        url: miss.empty,
+        col_type: 'text_center_1',
+        extra: {lineVisible: false},
+      })
+      tagsList.forEach(tag => {
+        let tag_title = pdfh(tag, 'a&&Text')
+        miss.d.push({
+          title: tag_title,
+          url: $(pdfh(tag, 'a&&href')+'?page=fypage#noHistory#').rule((tag_title) => {
+            const miss = $.require('hiker://page/miss')
+            setPageTitle(tag_title)
+            miss.tagsParse(MY_URL)
+            setResult(miss.d)
+          }, tag_title),
+          col_type: 'flex_button'
+        })
+      })
+
+      miss.d.push({
+        col_type: 'line_blank'
+      })
+    }
+
+    if (series) {
+      miss.d.push({
+        title: '系列',
+        url: miss.empty,
+        col_type: 'text_center_1',
+        extra: {lineVisible: false},
+      })
+      let series_title = pdfh(series, 'a&&Text')
+      miss.d.push({
+        title: series_title,
+        url: $(pdfh(series, 'a&&href')+'?page=fypage#noHistory#').rule((series_title) => {
           const miss = $.require('hiker://page/miss')
-          setPageTitle(tag_title)
+          setPageTitle(series_title)
           miss.tagsParse(MY_URL)
           setResult(miss.d)
-        }, tag_title),
+        }, series_title),
         col_type: 'flex_button'
       })
-    })
+      miss.d.push({
+        col_type: 'line_blank'
+      })
+    }
 
-    miss.d.push({
-      col_type: 'line_blank'
-    })
+    if (makers) {
+      miss.d.push({
+        title: '发行商',
+        url: miss.empty,
+        col_type: 'text_center_1',
+        extra: {lineVisible: false},
+      })
+      let makers_title = pdfh(makers, 'a&&Text')
+      miss.d.push({
+        title: makers_title,
+        url: $(pdfh(makers, 'a&&href')+'?page=fypage#noHistory#').rule((makers_title) => {
+          const miss = $.require('hiker://page/miss')
+          setPageTitle(makers_title)
+          miss.tagsParse(MY_URL)
+          setResult(miss.d)
+        }, makers_title),
+        col_type: 'flex_button'
+      })
+      miss.d.push({
+        col_type: 'line_blank'
+      })
+    }
 
-    const videoList = pdfa(html, '.grid&&.relative')
+    if (directors) {
+      miss.d.push({
+        title: '导演',
+        url: miss.empty,
+        col_type: 'text_center_1',
+        extra: {lineVisible: false},
+      })
+      let directors_title = pdfh(directors, 'a&&Text')
+      miss.d.push({
+        title: directors_title,
+        url: $(pdfh(directors, 'a&&href')+'?page=fypage#noHistory#').rule((directors_title) => {
+          const miss = $.require('hiker://page/miss')
+          setPageTitle(directors_title)
+          miss.tagsParse(MY_URL)
+          setResult(miss.d)
+        }, directors_title),
+        col_type: 'flex_button'
+      })
+      miss.d.push({
+        col_type: 'line_blank'
+      })
+    }
+
+    if (labelsList) {
+      miss.d.push({
+        title: '类型',
+        url: miss.empty,
+        col_type: 'text_center_1',
+        extra: {lineVisible: false},
+      })
+      labelsList.forEach(label => {
+        let label_title = pdfh(label, 'a&&Text')
+        miss.d.push({
+          title: label_title,
+          url: $(pdfh(label, 'a&&href')+'?page=fypage#noHistory#').rule((label_title) => {
+            const miss = $.require('hiker://page/miss')
+            setPageTitle(label_title)
+            miss.tagsParse(MY_URL)
+            setResult(miss.d)
+          }, label_title),
+          col_type: 'flex_button'
+        })
+      })
+
+      miss.d.push({
+        col_type: 'line_blank'
+      })
+    }
+
+    const videoList = pdfa(html, '.grid.grid-cols-2.gap-5,0&&.thumbnail').concat(pdfa(html, '.grid.grid-cols-2.gap-5,1&&.thumbnail'))
 
     miss.d.push({
       title: '推荐视频',
@@ -327,7 +467,6 @@ const miss = {
     })
   },
   avatarType: (html) => {
-    log(html)
     const list = pdfa(html, 'ul&&li')
     list.forEach(item => {
       miss.d.push({
