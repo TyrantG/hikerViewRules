@@ -417,7 +417,7 @@ const secParse = params => {
     //
     // d.pop()
 
-    let res_json = fetch('https://s6.save.tube/ajax/getLinks.php?video='+encodeURIComponent(ori_url)+'&rand=xCAasG22rQg2XeV', {headers:{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0)'}})
+    let res_json = fetch('https://s6.save.tube/ajax/getLinks.php?video='+encodeURIComponent(ori_url)+'&rand=xCAasG22rQg2XeV', {headers:{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'}})
     log(res_json)
     let res = JSON.parse(res_json)
 
