@@ -518,8 +518,7 @@ const miss = {
   },
   updateAvatar: (param) => {
     const actressesHtml = fetch(param.url, {headers:{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0)'}})
-    log(pdfh(actressesHtml, '.object-cover.object-top.w-full.h-full&&src'))
-    log(param)
+
     updateItem({
       pic_url: pdfh(actressesHtml, '.object-cover.object-top.w-full.h-full&&src'),
       col_type: 'avatar',
