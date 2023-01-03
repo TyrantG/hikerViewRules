@@ -2,6 +2,7 @@ const miss = {
   empty: 'hiker://empty',
   url: 'https://missav888.com/cn/',
   d: [],
+  taskList: [],
   data: {
     category: getMyVar('MissAV.category', '0'),
     subCate: getMyVar('MissAV.subCate', '0'),
@@ -253,20 +254,28 @@ const miss = {
     }
 
     if (actressesList) {
+      let avatarTaskList = []
       miss.d.push({
         title: '演员',
         url: miss.empty,
         col_type: 'text_center_1',
         extra: {lineVisible: false},
       })
-      actressesList.forEach(actresses => {
+      actressesList.forEach((actresses, index) => {
         let title = pdfh(actresses, 'a&&Text')
         let url = pdfh(actresses, 'a&&href')
-        let actressesHtml = fetch(url, {headers:{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0)'}})
+        miss.taskList.push({
+          func: miss.updateAvatar,
+          param: {
+            url: url,
+            index: 'avatar_'+index
+          },
+          id: 'avatar_'+index,
+        })
 
         miss.d.push({
           title: title,
-          pic_url: pdfh(actressesHtml, '.object-cover.object-top.w-full.h-full&&src'),
+          pic_url: miss.empty,
           url: $(url+'?page=fypage#noHistory#').rule((title) => {
             const miss = $.require('hiker://page/miss')
             setPageTitle(title)
@@ -274,6 +283,9 @@ const miss = {
             setResult(miss.d)
           }, title),
           col_type: 'avatar',
+          extra: {
+            id: 'avatar_'+index,
+          }
         })
       })
       miss.d.push({
@@ -417,6 +429,9 @@ const miss = {
           const miss = $.require('hiker://page/miss')
           miss.videoParse(MY_URL)
           setResult(miss.d)
+          if (miss.taskList.length > 0) {
+            be(miss.taskList)
+          }
         }),
         pic_url: pdfh(item, '.lozad&&data-src')+'@Referer='+miss.url,
         desc: pdfh(item, '.absolute&&Text'),
@@ -441,6 +456,9 @@ const miss = {
           const miss = $.require('hiker://page/miss')
           miss.videoParse(MY_URL)
           setResult(miss.d)
+          if (miss.taskList.length > 0) {
+            be(miss.taskList)
+          }
         }),
         pic_url: pdfh(item, '.lozad&&data-src')+'@Referer='+miss.url,
         desc: pdfh(item, '.absolute&&Text'),
@@ -496,6 +514,18 @@ const miss = {
         }),
         col_type: 'text_4'
       })
+    })
+  },
+  updateAvatar: (param) => {
+    const actressesHtml = fetch(param.url, {headers:{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0)'}})
+    log(pdfh(actressesHtml, '.object-cover.object-top.w-full.h-full&&src'))
+    log(param)
+    updateItem({
+      pic_url: pdfh(actressesHtml, '.object-cover.object-top.w-full.h-full&&src'),
+      col_type: 'avatar',
+      extra: {
+        id: param.index
+      }
     })
   },
 }
