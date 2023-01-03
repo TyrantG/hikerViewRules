@@ -431,7 +431,9 @@ const secParse = params => {
             })
         })
     } else {
+        log(res)
         res_json = fetch(res.data)
+        log(res_json)
         res = JSON.parse(res_json)
         if (res.status === 'success') {
             let data = res.data.av
@@ -444,53 +446,11 @@ const secParse = params => {
                 })
             })
         } else {
-            res_json = fetch(res.data)
-            res = JSON.parse(res_json)
-            if (res.status === 'success') {
-                let data = res.data.av
-
-                data.forEach(item => {
-                    d.push({
-                        title: item.quality+'.'+item.ext,
-                        url: item.url+'#isVideo=true#',
-                        col_type: 'text_2'
-                    })
-                })
-            } else {
-                res_json = fetch(res.data)
-                res = JSON.parse(res_json)
-                if (res.status === 'success') {
-                    let data = res.data.av
-
-                    data.forEach(item => {
-                        d.push({
-                            title: item.quality+'.'+item.ext,
-                            url: item.url+'#isVideo=true#',
-                            col_type: 'text_2'
-                        })
-                    })
-                } else {
-                    res_json = fetch(res.data)
-                    res = JSON.parse(res_json)
-                    if (res.status === 'success') {
-                        let data = res.data.av
-
-                        data.forEach(item => {
-                            d.push({
-                                title: item.quality+'.'+item.ext,
-                                url: item.url+'#isVideo=true#',
-                                col_type: 'text_2'
-                            })
-                        })
-                    } else {
-                        d.push({
-                            title: '解析失败',
-                            url: 'hiker://empty',
-                            col_type: 'text_center_1',
-                        })
-                    }
-                }
-            }
+            d.push({
+                title: '解析失败',
+                url: 'hiker://empty',
+                col_type: 'text_center_1',
+            })
         }
     }
 
