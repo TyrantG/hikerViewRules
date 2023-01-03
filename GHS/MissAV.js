@@ -191,6 +191,10 @@ const miss = {
 
     setResult(miss.d)
   },
+  searchParse: () => {
+    miss.videoType(getResCode())
+    setResult(miss.d)
+  },
   videoParse: (url) => {
     const html = fetch(url, {headers:{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0)'}})
     const title = pdfh(html, 'h1&&Text')
@@ -212,7 +216,6 @@ const miss = {
 
     text_secondary_list.forEach(item => {
       let current_title = pdfh(item, 'span&&Text')
-      if (current_title) log(current_title)
 
       if (current_title === '番号:') {
         num = pdfh(item, '.font-medium&&Text')
