@@ -9,7 +9,9 @@ const miss = {
   },
   baseParse: () => {
     const page = parseInt(MY_URL.split('##')[1])
-    const categoryList = [
+
+    // 不能分享，加密处理
+    /*let categoryList = [
       {
         title: '今日热门',
         path: 'today-hot',
@@ -124,7 +126,8 @@ const miss = {
         type: 'tags',
         sub: []
       },
-    ]
+    ]*/
+    evalPrivateJS('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')
     const currentCate = categoryList[miss.data.category]
     let url
 
@@ -218,9 +221,13 @@ const miss = {
     text_secondary_list.forEach(item => {
       let current_title = pdfh(item, 'span&&Text')
 
+      // 不能分享，加密处理
+      // let actressName = '女优'
+      evalPrivateJS('Y4FQHeH7R/bBJkyYPhawFEQS4LgKSes2yWCehUiVbT4=')
+
       if (current_title === '番号:') {
         num = pdfh(item, '.font-medium&&Text')
-      } else if (current_title === '女优:') {
+      } else if (current_title === actressName+':') {
         actressesList = pdfa(item, '.text-secondary&&a')
       } else if (current_title === '类型:') {
         tagsList = pdfa(item, '.text-secondary&&a')
