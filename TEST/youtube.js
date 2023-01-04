@@ -374,50 +374,50 @@ const secParse = params => {
         })
     })*/
 
-    // const videoParse = fetch("https://www.y2mate.com/mates/analyze/ajax", {
-    //     headers: {
-    //         "User-Agent": PC_UA,
-    //     },
-    //     body: 'ajax=1&q_auto=1&url='+ori_url,
-    //     method: 'POST'
-    // })
-    //
-    // const html = JSON.parse(videoParse).result
-    //
-    // const id_res = html.match(/var k__id = "(.*?)"/)
-    // const _id = id_res ? id_res[1] : ''
-    //
-    // const video_list = parseDomForArray(html, 'tbody&&tr')
-    // video_list.forEach(video => {
-    //     let quality = parseDomForHtml(video, 'a&&Text').replace(/p.*/, '')
-    //     d.push({
-    //         title: quality + 'P',
-    //         url: $("").lazyRule(params => {
-    //             const videoParse = fetch("https://www.y2mate.com/mates/convert", {
-    //                 headers: {
-    //                     "User-Agent": PC_UA,
-    //                 },
-    //                 body: 'type=youtube&ftype=mp4&ajax=1&v_id='+params.v_id+'&fquality='+params.fquality+'&_id='+params._id,
-    //                 method: 'POST'
-    //             })
-    //
-    //             const html = JSON.parse(videoParse).result
-    //
-    //             const url_res = html.match(/<a href="(.*?)"/)
-    //
-    //             return url_res ? url_res[1]+"#isVideo=true#" : "toast://该清晰度解析失败，请使用更低清晰度"
-    //         }, {
-    //             v_id: params.video_id,
-    //             fquality: quality,
-    //             _id: _id,
-    //         }),
-    //         col_type: 'text_2'
-    //     })
-    // })
-    //
+    const videoParse = fetch("https://www.y2mate.com/mates/analyze/ajax", {
+        headers: {
+            "User-Agent": PC_UA,
+        },
+        body: 'ajax=1&q_auto=1&url='+ori_url,
+        method: 'POST'
+    })
+
+    const html = JSON.parse(videoParse).result
+
+    const id_res = html.match(/var k__id = "(.*?)"/)
+    const _id = id_res ? id_res[1] : ''
+
+    const video_list = parseDomForArray(html, 'tbody&&tr')
+    video_list.forEach(video => {
+        let quality = parseDomForHtml(video, 'a&&Text').replace(/p.*/, '')
+        d.push({
+            title: quality + 'P',
+            url: $("").lazyRule(params => {
+                const videoParse = fetch("https://www.y2mate.com/mates/convert", {
+                    headers: {
+                        "User-Agent": PC_UA,
+                    },
+                    body: 'type=youtube&ftype=mp4&ajax=1&v_id='+params.v_id+'&fquality='+params.fquality+'&_id='+params._id,
+                    method: 'POST'
+                })
+
+                const html = JSON.parse(videoParse).result
+
+                const url_res = html.match(/<a href="(.*?)"/)
+
+                return url_res ? url_res[1]+"#isVideo=true#" : "toast://该清晰度解析失败，请使用更低清晰度"
+            }, {
+                v_id: params.video_id,
+                fquality: quality,
+                _id: _id,
+            }),
+            col_type: 'text_2'
+        })
+    })
+
     // d.pop()
 
-    let res_json = fetch('https://s6.save.tube/ajax/getLinks.php?video='+encodeURIComponent(ori_url)+'&rand=xCAasG22rQg2XeV', {
+    /*let res_json = fetch('https://s6.save.tube/ajax/getLinks.php?video='+encodeURIComponent(ori_url)+'&rand=xCAasG22rQg2XeV', {
         headers: {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
             'Origin': 'https://save.tube',
@@ -459,7 +459,7 @@ const secParse = params => {
                 col_type: 'text_center_1',
             })
         }
-    }
+    }*/
 
     setResult(d);
 }
