@@ -386,7 +386,6 @@ const secParse = params => {
 
     const id_res = html.match(/var k__id = "(.*?)"/)
     const _id = id_res ? id_res[1] : ''
-    log(_id)
 
     const video_list = parseDomForArray(html, 'tbody&&tr')
 
@@ -402,7 +401,6 @@ const secParse = params => {
                     body: 'type=youtube&ftype=mp4&ajax=1&v_id='+params.v_id+'&fquality='+params.fquality+'&_id='+params._id,
                     method: 'POST'
                 })
-                log(videoParse)
 
                 const html = JSON.parse(videoParse).result
 
