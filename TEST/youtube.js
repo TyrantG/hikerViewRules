@@ -388,6 +388,7 @@ const secParse = params => {
     const _id = id_res ? id_res[1] : ''
 
     const video_list = parseDomForArray(html, 'tbody&&tr')
+    log(video_list)
     video_list.forEach(video => {
         let quality = parseDomForHtml(video, 'a&&Text').replace(/p.*/, '')
         d.push({
