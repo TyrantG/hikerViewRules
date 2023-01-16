@@ -2,6 +2,7 @@ const picacg = {
     // BaseUrl: "https://picaapi.picacomic.com/",
     // cdnUrl: "https://storage.wikawika.xyz/",
     // cdnUrl: "https://storage-b.diwodiwo.xyz/",
+    cdnUrl: "https://s3.picacomic.com",
     BaseUrl: "http://172.67.7.24/",
     empty: 'hiker://empty',
     picacg_path: "hiker://files/rules/js/TyrantGenesis_哔咔设置.js",
@@ -448,7 +449,7 @@ const picacg = {
                 picacg.d.push({
                     title: comic.title,
                     desc: comic.author,
-                    pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                    pic_url: /*comic.thumb.fileServer*/picacg.cdnUrl+'/static/'+comic.thumb.path,
                     url: $(picacg.empty+'#immersiveTheme##noHistory#$$fypage').rule((id) => {
                         const picacg = $.require('hiker://page/picacg')
                         picacg.getInfo(id)
@@ -514,11 +515,10 @@ const picacg = {
         const response = picacg.get('comics/leaderboard?tt='+picacg.data.rankTT+'&ct=VC')
 
         response.data.comics.forEach(comic => {
-            log(comic.thumb.fileServer)
             picacg.d.push({
                 title: comic.title,
                 desc: comic.author,
-                pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                pic_url: /*comic.thumb.fileServer*/picacg.cdnUrl+'/static/'+comic.thumb.path,
                 url: $(picacg.empty+'#immersiveTheme##noHistory#$$fypage').rule((id) => {
                     const picacg = $.require('hiker://page/picacg')
                     picacg.getInfo(id)
@@ -548,7 +548,7 @@ const picacg = {
             picacg.d.push({
                 title: comic.title,
                 desc: comic.author,
-                pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                pic_url: /*comic.thumb.fileServer*/picacg.cdnUrl+'/static/'+comic.thumb.path,
                 url: $(picacg.empty+'#immersiveTheme##noHistory#$$fypage').rule((id) => {
                     const picacg = $.require('hiker://page/picacg')
                     picacg.getInfo(id)
@@ -578,7 +578,7 @@ const picacg = {
             picacg.d.push({
                 title: comic.title,
                 desc: comic.author,
-                pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                pic_url: /*comic.thumb.fileServer*/picacg.cdnUrl+'/static/'+comic.thumb.path,
                 url: $(picacg.empty+'#immersiveTheme##noHistory#$$fypage').rule((id) => {
                     const picacg = $.require('hiker://page/picacg')
                     picacg.getInfo(id)
@@ -593,7 +593,7 @@ const picacg = {
         if (response.code === 200) {
             const no_image = ['大家都在看', '那年今天', '官方都在看'];
             response.data.categories.forEach((cate, index) => {
-                let pic = no_image.includes(cate.title) ? 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg' : cate.thumb.fileServer+'/static/'+cate.thumb.path
+                let pic = no_image.includes(cate.title) ? 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg' : /*cate.thumb.fileServer*/(picacg.cdnUrl+'/static/'+cate.thumb.path)
                 let desc = no_image.includes(cate.title) ? '0' : '5'
                 // let desc = '3'
                 if (!cate.isWeb) {
@@ -624,7 +624,7 @@ const picacg = {
                 picacg.d.push({
                     title: comic.title,
                     desc: comic.author,
-                    pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                    pic_url: /*comic.thumb.fileServer*/picacg.cdnUrl+'/static/'+comic.thumb.path,
                     url: $(picacg.empty+'#immersiveTheme##noHistory#$$fypage').rule((id) => {
                         const picacg = $.require('hiker://page/picacg')
                         picacg.getInfo(id)
@@ -672,7 +672,7 @@ const picacg = {
                     '✨ 分类：'+info.categories.join(' ')+'\n'+
                     '❤️ 喜欢：'+info.likesCount+'    🌐 浏览：'+info.viewsCount+'\n'+
                     '🎯 详情：'+info.description,
-                pic_url: info.thumb.fileServer+'/static/'+info.thumb.path,
+                pic_url: /*info.thumb.fileServer*/picacg.cdnUrl+'/static/'+info.thumb.path,
                 url: $(picacg.empty).rule((description, image) => {
                     const picacg = $.require('hiker://page/picacg')
                     setPageTitle('本子详情')
@@ -686,7 +686,7 @@ const picacg = {
                         col_type: 'long_text'
                     })
                     setResult(picacg.d)
-                }, info.description, info.thumb.fileServer+'/static/'+info.thumb.path),
+                }, info.description, /*info.thumb.fileServer*/picacg.cdnUrl+'/static/'+info.thumb.path),
                 col_type: 'movie_1_vertical_pic_blur'
             })
 
@@ -724,7 +724,7 @@ const picacg = {
                 })
                 picacg.d.push({
                     title: '上传：'+info._creator.name,
-                    pic_url: info._creator.avatar ? info._creator.avatar.fileServer+'/static/'+info._creator.avatar.path : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
+                    pic_url: info._creator.avatar ? /*info._creator.avatar.fileServer*/(picacg.cdnUrl+'/static/'+info._creator.avatar.path) : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
                     url: $(picacg.empty+"#fullTheme##noHistory#$$fypage").rule((name) => {
                         addListener('onClose', $.toString(() => {
                             clearItem('sort')
@@ -821,7 +821,7 @@ const picacg = {
                     info:{
                         bookName: info.title,
                         ruleName: MY_RULE.title,
-                        bookTopPic: info.thumb.fileServer+'/static/'+info.thumb.path,
+                        bookTopPic: /*info.thumb.fileServer*/picacg.cdnUrl+'/static/'+info.thumb.path,
                         parseCode: $.toString((id, ruleName) => {
                             const picacg = $.require('hiker://page/picacg?rule='+ruleName)
                             return picacg.getPicture(id, input)
@@ -886,7 +886,7 @@ const picacg = {
                         picacg.d.push({
                             title: comic.title,
                             desc: comic.author,
-                            pic_url: comic.thumb.fileServer+'/static/'+comic.thumb.path,
+                            pic_url: /*comic.thumb.fileServer*/picacg.cdnUrl+'/static/'+comic.thumb.path,
                             url: $(picacg.empty+'#immersiveTheme##noHistory#$$fypage').rule((id) => {
                                 const picacg = $.require('hiker://page/picacg')
                                 picacg.getInfo(id)
@@ -945,7 +945,7 @@ const picacg = {
                     if (user) {
                         picacg.d.push({
                             title: user.name,
-                            pic_url: user.avatar ? user.avatar.fileServer+'/static/'+user.avatar.path : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
+                            pic_url: user.avatar ?/* user.avatar.fileServer*/(picacg.cdnUrl+'/static/'+user.avatar.path) : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
                             url: picacg.empty,
                             col_type: 'avatar'
                         })
@@ -976,7 +976,7 @@ const picacg = {
                                 if (user) {
                                     picacg.d.push({
                                         title: user.name,
-                                        pic_url: user.avatar ? user.avatar.fileServer+'/static/'+user.avatar.path : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
+                                        pic_url: user.avatar ? (/*user.avatar.fileServer*/picacg.cdnUrl+'/static/'+user.avatar.path) : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
                                         url: picacg.empty,
                                         col_type: 'avatar'
                                     })
@@ -1070,7 +1070,7 @@ const picacg = {
         const response = picacg.get('comics/'+id+'/order/'+order+'/pages?page='+page)
         if (response.code === 200 && response.data.pages.docs.length > 0) {
             response.data.pages.docs.forEach((page, index) => {
-                picacg.images.push(page.media.fileServer+'/static/'+page.media.path)
+                picacg.images.push(/*page.media.fileServer*/picacg.cdnUrl+'/static/'+page.media.path)
             })
             page = page+1
             picacg.getRecursionPicture(id, order, page)
@@ -1132,7 +1132,7 @@ const picacg = {
                     if (user) {
                         picacg.d.push({
                             title: user.name,
-                            pic_url: user.avatar ? user.avatar.fileServer+'/static/'+user.avatar.path : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
+                            pic_url: user.avatar ? (/*user.avatar.fileServer*/picacg.cdnUrl+'/static/'+user.avatar.path) : 'https://git.tyrantg.com/tyrantgenesis/hikerViewRules/raw/master/assets/images/pica.jpg',
                             url: picacg.empty,
                             col_type: 'avatar'
                         })
