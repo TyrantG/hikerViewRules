@@ -1900,12 +1900,11 @@ function user_info(sec_user_id){
 
 }
 
-function makeSignatureUrl(host, e) {
-    var f = e.data
-        , d = e.headers;
+function makeSignatureUrl(e) {
+    var f = e.data, d = e.headers;
     r.isFormData(f) && delete d["Content-Type"];
     var h = new XMLHttpRequest;
-    var v = host + e.url;
+    var v = e.url;
     h.open(e.method.toUpperCase(), a(v, e.params, e.paramsSerializer), !0)
     h.send(f)
     return h._url
