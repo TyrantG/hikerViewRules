@@ -129,15 +129,15 @@ const douyin = {
         const interval = setInterval(() => {
             let login_status = getCookie('LOGIN_STATUS')
             if (login_status && login_status === '1') {
+                // fba.log(login_status)
                 alert('获取登录信息成功')
                 clearInterval(interval)
-                fba.writeFile('hiker://files/js/TyrantG/cookie/douyin.txt', document.cookie)
+                fba.writeFile('hiker://files/rules/TyrantG/cookie/douyin.txt', document.cookie)
                 fba.back()
             }
         }, 1000)
     },
     feedList: (cookie_content, page) => {
-        log(page)
         eval(JSON.parse(request('hiker://page/signature')).rule)
         let e = {
             "url": "/aweme/v1/web/channel/feed/",
@@ -152,7 +152,7 @@ const douyin = {
                 "aid": 6383,
                 "channel": "channel_pc_web",
                 "tag_id": "",
-                "count": 10,
+                "count": 20,
                 "refresh_index": page,
                 "pc_client_type": 1,
                 "version_code": "170400",
@@ -168,6 +168,7 @@ const douyin = {
             },
         }
         const url = makeSignatureUrl(douyin.variable.host, e)
+
         let data_json = fetch(url, {
             headers: {
                 "referer" : "https://www.douyin.com/",
