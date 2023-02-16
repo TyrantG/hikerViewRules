@@ -437,10 +437,10 @@ const douyin = {
             fba.writeFile('hiker://files/rules/TyrantG/cookie/douyin.txt', document.cookie)
             // let login_status = getCookie('passport_assist_user')
             // if (login_status) {
-                // alert('获取登录信息成功')
-                // clearInterval(interval)
+            // alert('获取登录信息成功')
+            // clearInterval(interval)
 
-                // fba.back()
+            // fba.back()
             // }
         }, 1000)
     },
