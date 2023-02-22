@@ -3,8 +3,8 @@ const baseParse = _ => {
   const category_json = fetch("https://live.qq.com/api/ajax/get_column_category")
   const page = MY_URL.match(/\?page\=(.*?)\&/)[1]
   const category = JSON.parse(category_json).data.leftNav
-  const current = getVar("tyrantgenesis.qie_sport.current_tab") || 0;
-  const current_child = getVar("tyrantgenesis.qie_sport.current_child_tab") || '';
+  const current = getMyVar("tyrantgenesis.qie_sport.current_tab") || 0;
+  const current_child = getMyVar("tyrantgenesis.qie_sport.current_child_tab") || '';
 
   const child_cate_url = "https://live.qq.com/app_api/v10/getChildList?short_name="+category[current].short_name
   const child_category_json = fetch(child_cate_url)
@@ -19,8 +19,8 @@ const baseParse = _ => {
       d.push({
         title: index==current? "““"+item.tag_name+"””":item.tag_name,
         url: $("#noLoading#").lazyRule((index)=>{
-          putVar("tyrantgenesis.qie_sport.current_tab",index);
-          putVar("tyrantgenesis.qie_sport.current_child_tab",'');
+          putMyVar("tyrantgenesis.qie_sport.current_tab",index);
+          putMyVar("tyrantgenesis.qie_sport.current_child_tab",'');
           refreshPage(false);
           return "hiker://empty"
         }, index)
@@ -32,7 +32,7 @@ const baseParse = _ => {
     d.push({
       title: current_child === '' ? "““全部””":"全部",
       url: $("#noLoading#").lazyRule(_ => {
-        putVar("tyrantgenesis.qie_sport.current_child_tab",'');
+        putMyVar("tyrantgenesis.qie_sport.current_child_tab",'');
         refreshPage(false);
         return "hiker://empty"
       })
@@ -41,7 +41,7 @@ const baseParse = _ => {
       d.push({
         title: child.child_id==current_child? "““"+child.child_name+"””":child.child_name,
         url: $("#noLoading#").lazyRule((key)=>{
-          putVar("tyrantgenesis.qie_sport.current_child_tab",key);
+          putMyVar("tyrantgenesis.qie_sport.current_child_tab",key);
           refreshPage(false);
           return "hiker://empty"
         }, child.child_id)
@@ -55,7 +55,8 @@ const baseParse = _ => {
       url: $('https://m.live.qq.com/'+video.room_id).lazyRule((id) => {
         const api_url = "https://live.qq.com/api/h5/room?room_id="+id
         const res = JSON.parse(fetch(api_url)).data
-        return res.rtmp_url.replace('http', 'https') + '/' + res.rtmp_live
+        // return res.rtmp_url.replace('http', 'https') + '/' + res.rtmp_live
+        return res.hls_url
         // return html.match(/"hls_url":"(.*?)","use_p2p"/)[1]+"@Referer="
       }, video.room_id),
       pic_url: video.room_src+"@Referer=",
@@ -77,7 +78,8 @@ const searchParse = _ => {
       url: $('https://m.live.qq.com/'+video.room_id).lazyRule((id) => {
         const api_url = "https://live.qq.com/api/h5/room?room_id="+id
         const res = JSON.parse(fetch(api_url)).data
-        return res.rtmp_url.replace('http', 'https') + '/' + res.rtmp_live
+        // return res.rtmp_url.replace('http', 'https') + '/' + res.rtmp_live
+        return res.hls_url
         // const html = fetch(input)
         // return html.match(/"hls_url":"(.*?)","use_p2p"/)[1]+"@Referer="
       }, video.room_id),
