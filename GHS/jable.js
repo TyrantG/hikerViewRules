@@ -27,14 +27,14 @@ const secParse = _ => {
       url: html.match(/hlsUrl = '(.*?)'/)[1]
     })
 
-    const models = pdfa(html, '.video-info&&.models&&a')
-
     d.push({
       title: '演员',
       url: miss.empty,
       col_type: 'text_center_1',
       extra: {lineVisible: false},
     })
+
+    const models = pdfa(html, '.video-info&&.models&&a')
 
     models.forEach(model => {
       d.push({
