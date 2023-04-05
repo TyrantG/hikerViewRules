@@ -32,7 +32,7 @@ const secParse = _ => {
     models.forEach(model => {
       d.push({
         title: pdfh(model, '.rounded-circle&&data-original-title'),
-        pic_url: pdfh(model, '.rounded-circle&&src'),
+        pic_url: pdfh(model, '.rounded-circle&&src')+"@Referer=https://jable.tv/",
         url: pdfh(model, 'a&&href'),
         col_type: 'avatar',
       })
