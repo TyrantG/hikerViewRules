@@ -28,7 +28,8 @@ const secParse = _ => {
       title: pdfh(html, '.header-left&&h4&&Text'),
       desc: pdfh(html, '.video-info&&.text-center&&.tags&&Text'),
       pic_url: pd(html, 'video&&poster'),
-      url: html.match(/hlsUrl = '(.*?)'/)[1]
+      url: html.match(/hlsUrl = '(.*?)'/)[1],
+      col_type: 'pic_1',
     })
 
     d.push({
