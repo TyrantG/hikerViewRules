@@ -40,7 +40,10 @@ const secParse = _ => {
       d.push({
         title: pdfh(model, '.rounded-circle&&title'),
         pic_url: pdfh(model, '.rounded-circle&&src')+"@Referer=https://jable.tv/",
-        url: pdfh(model, 'a&&href'),
+        url: $(pdfh(model, 'a&&href')).rule(() => {
+          eval(fetch("hiker://files/TyrantG/GHS/jable.js"))
+          baseParse()
+        }),
         col_type: 'avatar',
       })
     })
