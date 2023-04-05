@@ -7,7 +7,11 @@ const baseParse = _ => {
         title: pdfh(list[j], 'h6&&a&&Text'),
         desc: pdfh(list[j], '.label&&Text'),
         pic_url: pd(list[j], 'img&&data-src'),
-        url: pd(list[j],'a&&href')
+        url: $(pd(list[j],'a&&href')).rule(() => {
+          eval(fetch("hiker://files/TyrantG/GHS/jable.js"))
+          secParse()
+        }),
+        col_type: 'movie_2',
       })
     }
   } catch (e){}
