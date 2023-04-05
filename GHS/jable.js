@@ -29,9 +29,16 @@ const secParse = _ => {
 
     const models = pdfa(html, '.video-info&&.models&&a')
 
+    d.push({
+      title: '演员',
+      url: miss.empty,
+      col_type: 'text_center_1',
+      extra: {lineVisible: false},
+    })
+
     models.forEach(model => {
       d.push({
-        title: pdfh(model, '.rounded-circle&&dataOriginalTitle'),
+        title: pdfh(model, '.rounded-circle&&title'),
         pic_url: pdfh(model, '.rounded-circle&&src')+"@Referer=https://jable.tv/",
         url: pdfh(model, 'a&&href'),
         col_type: 'avatar',
