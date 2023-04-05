@@ -29,7 +29,7 @@ const secParse = _ => {
 
     d.push({
       title: '演员',
-      url: miss.empty,
+      url: 'hiker://empty',
       col_type: 'text_center_1',
       extra: {lineVisible: false},
     })
