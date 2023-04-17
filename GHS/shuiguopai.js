@@ -4,7 +4,7 @@ const list_json = fetch(MY_URL);
 const list = JSON.parse(list_json).data.data
 const cdn = JSON.parse(list_json).cdn
 
-if (MY_URL.includes('library')) {
+if (! MY_URL.includes('library')) {
   list.forEach(item => {
     d.push({
       title: item.title,
