@@ -1,6 +1,7 @@
 const nga = {
     BaseUrl: 'https://nga.178.com/app_api.php',
     NukeUrl: 'https://nga.178.com/nuke.php',
+    ThreadUrl: 'https://nga.178.com/thread.php',
     ReadUrl: 'https://nga.178.com/read.php',
     iconCDNUrl: 'https://img4.nga.178.com/proxy/cache_attach/ficon/',
     attachmentsCDNUrl: 'https://img.nga.178.com/attachments/',
@@ -12,9 +13,7 @@ const nga = {
     api: {
         HomeCategory: '__lib=home&__act=category&_v=2',
         SubjectList: '__lib=subject&__act=list',
-    },
-    NukeApi: {
-        HomeCategory: '__lib=home&__act=category&_v=2',
+        FavorAll: '__lib=favor&__act=all',
     },
     publicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyKzZWDimCN1OCprqWUhF\n\
 UPhcwxDE62/BFVP6LtQHJu+65dm4YNmDvzitmcfaXW9YbhXnd4oP7j+6vpcgJQ+p\n\
@@ -63,6 +62,7 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
                     back(true)
                 } else {
                     toast(res.msg)
+                    back(true)
                 }
             }
 
@@ -88,6 +88,16 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
             params[key] = data[key]
         })
         return nga.request(nga.NukeUrl, 'POST', params)
+    },
+    thread: (data) => {
+        const params = {
+            __output: '11',
+            __inchst: 'UTF8',
+        }
+        Object.keys(data).forEach(key => {
+            params[key] = data[key]
+        })
+        return nga.request(nga.ThreadUrl, 'POST', params)
     },
     read: (data) => {
         const params = {
@@ -203,19 +213,18 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
     },
     baseParse: () => {
         const userinfo = nga.getUserinfo()
-        const userInfo = nga.nuke({
-            __lib: 'ucp',
-            __act: 'get',
-            uid: userinfo.ngaPassportUid,
-        })
-        const categoryList = nga.get(nga.api.HomeCategory)
-        const result = categoryList.result
 
         if (userinfo) {
+            const userInfo = nga.nuke({
+                __lib: 'ucp',
+                __act: 'get',
+                uid: userinfo.ngaPassportUid,
+            })
             const user_detail = userInfo.data[0]
+
             nga.d.push({
                 title: '['+user_detail.group+'] '+user_detail.username,
-                pic_url: nga.defaultIconPath,
+                pic_url: user_detail.avatar || nga.defaultIconPath,
                 url: $(nga.empty).rule(() => {
                     const nga = $.require('hiker://page/nga')
                     nga.ownerParse()
@@ -223,46 +232,46 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
                 }),
                 col_type: 'avatar',
             })
-            nga.d.push({
+            /*nga.d.push({
                 title: '收藏板块',
                 pic_url: 'https://iconfont.tyrantg.com/like.svg',
-                url: $(nga.empty).rule(() => {
+                url: $(nga.empty+'##fypage').rule(() => {
                     const nga = $.require('hiker://page/nga')
-                    nga.ownerParse()
+                    nga.channelParse()
                     setResult(nga.d);
                 }),
                 col_type: 'icon_round_small_4',
-            })
+            })*/
             nga.d.push({
-                title: '我的收藏',
+                title: '收藏帖子',
                 pic_url: 'https://iconfont.tyrantg.com/like.svg',
-                url: $(nga.empty).rule(() => {
+                url: $(nga.empty+'##fypage#noHistory#').rule(() => {
                     const nga = $.require('hiker://page/nga')
-                    nga.ownerParse()
+                    nga.favorParse()
                     setResult(nga.d);
                 }),
                 col_type: 'icon_round_small_4',
             })
-            nga.d.push({
+            /*nga.d.push({
                 title: '我的主题',
                 pic_url: 'https://iconfont.tyrantg.com/like.svg',
-                url: $(nga.empty).rule(() => {
+                url: $(nga.empty+'##fypage').rule(() => {
                     const nga = $.require('hiker://page/nga')
                     nga.ownerParse()
                     setResult(nga.d);
                 }),
                 col_type: 'icon_round_small_4',
-            })
-            nga.d.push({
+            })*/
+            /*nga.d.push({
                 title: '精华主题',
                 pic_url: 'https://iconfont.tyrantg.com/like.svg',
-                url: $(nga.empty).rule(() => {
+                url: $(nga.empty+'##fypage').rule(() => {
                     const nga = $.require('hiker://page/nga')
                     nga.ownerParse()
                     setResult(nga.d);
                 }),
                 col_type: 'icon_round_small_4',
-            })
+            })*/
         } else {
             nga.d.push({
                 title: '尚未登录',
@@ -275,6 +284,9 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
                 col_type: 'avatar',
             })
         }
+
+        const categoryList = nga.get(nga.api.HomeCategory)
+        const result = categoryList.result
 
         nga.d.push({
             col_type: 'line_blank',
@@ -309,13 +321,56 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
     },
     ownerParse: () => {
         setPageTitle('个人中心')
-        const userinfo = nga.getUserinfo()
 
         nga.d.push({
-            title: '❤️ 我的收藏',
-            url: $(nga.empty).rule()
+            title: '退出',
+            url: $(nga.empty).lazyRule(() => {
+                const nga = $.require('hiker://page/nga')
+                deleteFile(nga.files.userinfoFilePath)
+                back(true)
+                return nga.empty
+            }),
+            col_type: 'text_1',
         })
+    },
+    channelParse: () => {
+        setPageTitle('收藏板块')
 
+        const res = nga.thread({
+
+        })
+    },
+    favorParse: () => {
+        setPageTitle('收藏帖子')
+        const page = MY_PAGE
+
+        const res = nga.get(nga.api.FavorAll+'&page='+page)
+
+        if (res.result) {
+            res.result.data.forEach(item => {
+                const url = $(nga.empty+'##fypage#noHistory#').rule((tid, title) => {
+                    const nga = $.require('hiker://page/nga')
+                    nga.readParse(tid, title)
+                    setResult(nga.d);
+                }, item.tid, item.subject)
+                nga.d.push({
+                    title: item.subject,
+                    url: url,
+                    col_type: 'text_1'
+                })
+
+                nga.d.push({
+                    title: item.author,
+                    pic_url: nga.defaultIconPath,
+                    url: url,
+                    col_type: 'avatar',
+                })
+
+                nga.d.push({
+                    col_type: 'line_blank',
+                })
+            })
+        }
     },
     forumParse: (fid) => {
         const page = MY_PAGE
@@ -326,42 +381,44 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
 
         const attachPrefix = res.result.attachPrefix
 
-        res.result.data.forEach(item => {
-            const url = $(nga.empty+'##fypage').rule((tid, title) => {
-                const nga = $.require('hiker://page/nga')
-                nga.readParse(tid, title)
-                setResult(nga.d);
-            }, item.tid, item.subject)
-            nga.d.push({
-                title: item.subject,
-                url: url,
-                col_type: 'text_1'
-            })
-
-            if (item.attachs && item.attachs.length > 0) {
-                item.attachs.forEach((item, index) => {
-                    if (index < 3) {
-                        nga.d.push({
-                            url: attachPrefix+item.attachurl,
-                            pic_url: attachPrefix+item.attachurl,
-                            col_type: 'pic_3'
-                        })
-                    }
+        if (res.result) {
+            res.result.data.forEach(item => {
+                const url = $(nga.empty+'##fypage').rule((tid, title) => {
+                    const nga = $.require('hiker://page/nga')
+                    nga.readParse(tid, title)
+                    setResult(nga.d);
+                }, item.tid, item.subject)
+                nga.d.push({
+                    title: item.subject,
+                    url: url,
+                    col_type: 'text_1'
                 })
-            }
 
-            nga.d.push({
-                title: item.author,
-                pic_url: nga.defaultIconPath,
-                url: url,
-                col_type: 'avatar',
+                if (item.attachs && item.attachs.length > 0) {
+                    item.attachs.forEach((item, index) => {
+                        if (index < 3) {
+                            nga.d.push({
+                                url: attachPrefix+item.attachurl,
+                                pic_url: attachPrefix+item.attachurl,
+                                col_type: 'pic_3'
+                            })
+                        }
+                    })
+                }
+
+                nga.d.push({
+                    title: item.author,
+                    pic_url: nga.defaultIconPath,
+                    url: url,
+                    col_type: 'avatar',
+                })
+
+                nga.d.push({
+                    col_type: 'line_blank',
+                })
+
             })
-
-            nga.d.push({
-                col_type: 'line_blank',
-            })
-
-        })
+        }
     },
     readParse: (tid, title) => {
         setPageTitle(title)
@@ -372,41 +429,45 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
             page: page,
         })
 
-        const userList = res.data.__U || res.data.__u
-        const list = res.data.__R || res.data.__r
+        if (res.data) {
+            const userList = res.data.__U || res.data.__u
+            const list = res.data.__R || res.data.__r
 
-        list.forEach(item => {
-            if (item.subject) {
+            list.forEach(item => {
+                if (item.subject) {
+                    nga.d.push({
+                        title: item.subject,
+                        url: nga.empty,
+                        col_type: 'text_1'
+                    })
+                }
+
+                const user = userList[item.authorid]
+
                 nga.d.push({
-                    title: item.subject,
-                    url: nga.empty,
-                    col_type: 'text_1'
+                    title: user.username,
+                    pic_url: user.avatar || nga.defaultIconPath,
+                    // url: url,
+                    col_type: 'avatar',
                 })
-            }
 
-            const user = userList[item.authorid]
+                const content = item.content
+                    .replace(/\[url](.*?)\[\/url]/g, '[url=$1][/url]')
+                    .replace(/\[img]\.\/(.*?)\[\/img]/g, '[img='+nga.attachmentsCDNUrl+'$1][/img]')
 
-            nga.d.push({
-                title: user.username,
-                pic_url: nga.defaultIconPath,
-                // url: url,
-                col_type: 'avatar',
+                nga.d.push({
+                    title: bbcode2Html.parser(content),
+                    col_type: 'rich_text',
+                })
+
+                nga.d.push({
+                    col_type: 'line_blank',
+                })
             })
-
-            const content = item.content
-                .replace(/\[url]\.\/(.*?)\[\/url]/g, '[url='+nga.attachmentsCDNUrl+'$1][/url]')
-                .replace(/\[img]\.\/(.*?)\[\/img]/g, '[img='+nga.attachmentsCDNUrl+'$1][/img]')
-                .replace(/\[color]\.\/(.*?)\[\/color]/g, '[color='+nga.attachmentsCDNUrl+'$1][/color]')
-
-            nga.d.push({
-                title: bbcode2Html.parser(content),
-                col_type: 'rich_text',
-            })
-
-            nga.d.push({
-                col_type: 'line_blank',
-            })
-        })
+        } else {
+            toast('接口异常')
+            back()
+        }
     },
 }
 

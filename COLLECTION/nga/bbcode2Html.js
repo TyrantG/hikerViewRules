@@ -5,6 +5,21 @@ const nodes = [
         html_close: "</a>"
     },
     {
+        tag: "uid",
+        html_open: "<a href='javascript: void(0);'>",
+        html_close: "</a>"
+    },
+    {
+        tag: "pid",
+        html_open: "<a href='javascript: void(0);'>",
+        html_close: "</a>"
+    },
+    {
+        tag: "tid",
+        html_open: "<a href='javascript: void(0);'>",
+        html_close: "</a>"
+    },
+    {
         tag: "b",
         html_open: "<strong>",
         html_close: "</strong>"
@@ -72,13 +87,23 @@ const nodes = [
     {
         tag: "*",
         html_open: "<li>",
-        html_close: ""
+        html_close: "</li>"
     },
     {
         tag: "img",
         html_open: attr => `<img src="${attr || "#"}" alt="${attr || "#"}" />`,
         html_close: ""
-    }
+    },
+    {
+        tag: "size",
+        html_open: attr => `<span style="font-size: ${attr || "100%"}">`,
+        html_close: "</span>"
+    },
+    {
+        tag: "quote",
+        html_open: '<quote style="background: #f9efd6; border: 1px solid #e6e1d3; margin: 0.8em; padding: 0.6em 0.8em; ">',
+        html_close: "</quote><p></p>"
+    },
 ];
 
 function get(tag) {
@@ -117,7 +142,7 @@ function parser(str) {
         }
     });
 
-    return html.replace(/(?:\r\n|\r|\n)/g, "</br>");
+    return html.replace(/(?:\r\n|\r|\n)/g, "<p></p>");
 }
 
 $.exports = {
