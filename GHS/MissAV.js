@@ -222,7 +222,7 @@ const miss = {
       let current_title = pdfh(item, 'span&&Text')
 
       // 不能分享，加密处理
-      // let actressName = '女优'
+      let actressName = '女优'
       evalPrivateJS('Y4FQHeH7R/bBJkyYPhawFEQS4LgKSes2yWCehUiVbT4=')
 
       if (current_title === '番号:') {
@@ -261,7 +261,6 @@ const miss = {
     }
 
     if (actressesList) {
-      let avatarTaskList = []
       miss.d.push({
         title: '演员',
         url: miss.empty,
@@ -421,7 +420,7 @@ const miss = {
       })
     }
 
-    const videoList = pdfa(html, '.grid.grid-cols-2.gap-5,0&&.thumbnail').concat(pdfa(html, '.grid.grid-cols-2.gap-5,1&&.thumbnail'))
+    /*const videoList = pdfa(html, '.grid.grid-cols-2.gap-5&&.relative')
 
     miss.d.push({
       title: '推荐视频',
@@ -444,7 +443,7 @@ const miss = {
         desc: pdfh(item, '.absolute&&Text'),
         col_type: 'movie_2'
       })
-    })
+    })*/
   },
   avatarParse: (url) => {
     const html = fetch(url, {headers:{'User-Agent': 'Mozilla/5.0 (Windows NT 10.0)'}})
