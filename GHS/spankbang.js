@@ -56,43 +56,45 @@ const baseParse = _ => {
 
   const list = parseDomForArray(html, '.video-list&&.video-item');
 
-  d.push({
-    title: '分类',
-    col_type: 'text_center_1',
-    url: $("https://spankbang.com/categories").rule(_ => {
-      var d = [];
+  if (Number(MY_PAGE) === 1) {
+    d.push({
+      title: '分类',
+      col_type: 'text_center_1',
+      url: $("https://spankbang.com/categories").rule(_ => {
+        var d = [];
 
-      var list = parseDomForArray(getResCode(), '#categories&&a');
-      list.forEach(item => {
-        d.push({
-          title: parseDomForHtml(item, 'a&&Text'),
-          pic_url: parseDomForHtml(item, '.cover&&src'),
-          url: $("https://spankbang.com"+parseDomForHtml(item,'a&&href').replace(/\?.*/, '')+"/fypage/").rule(_ => {
-            let d = [];
-            let html = getResCode();
-            let list = parseDomForArray(html, '.video-list&&.video-item');
+        var list = parseDomForArray(getResCode(), '#categories&&a');
+        list.forEach(item => {
+          d.push({
+            title: parseDomForHtml(item, 'a&&Text'),
+            pic_url: parseDomForHtml(item, '.cover&&src'),
+            url: $("https://spankbang.com"+parseDomForHtml(item,'a&&href').replace(/\?.*/, '')+"/fypage/").rule(_ => {
+              let d = [];
+              let html = getResCode();
+              let list = parseDomForArray(html, '.video-list&&.video-item');
 
-            list.forEach(item => {
-              d.push({
-                title: parseDomForHtml(item, '.name&&Text'),
-                desc: parseDomForHtml(item, '.l&&Text'),
-                pic_url: parseDom(item, '.cover&&data-src'),
-                url: $(parseDom(item,'a&&href')).rule(_ => {
-                  eval(fetch('hiker://files/TyrantG/GHS/spankbang.js'))
-                  secParse()
-                }),
-                col_type: 'movie_3',
-              });
-            })
+              list.forEach(item => {
+                d.push({
+                  title: parseDomForHtml(item, '.name&&Text'),
+                  desc: parseDomForHtml(item, '.l&&Text'),
+                  pic_url: parseDom(item, '.cover&&data-src'),
+                  url: $(parseDom(item,'a&&href')).rule(_ => {
+                    eval(fetch('hiker://files/TyrantG/GHS/spankbang.js'))
+                    secParse()
+                  }),
+                  col_type: 'movie_3',
+                });
+              })
 
-            setResult(d)
-          }),
-          col_type: 'movie_3',
-        });
+              setResult(d)
+            }),
+            col_type: 'movie_3',
+          });
+        })
+        setResult(d)
       })
-      setResult(d)
     })
-  })
+  }
 
   list.forEach(item => {
     d.push({
