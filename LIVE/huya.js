@@ -262,12 +262,10 @@ const process_anticode = (anticode, stream_name, uid, rand) => {
 
     antiMap['wsSecret'] = md5(fm)
 
-    delete antiMap['fm']
-
     let search = ''
 
     for (let key in antiMap) {
-        search += '&' + key + '=' + antiMap[key]
+        if (key !== 'fm') search += '&' + key + '=' + antiMap[key]
     }
 
     return search
@@ -284,7 +282,7 @@ const getAntiMap = (anticode) => {
 }
 
 const get_uuid = (now, rand) => {
-    return ((now % 10000000000 * 1000) + rand.toString()) % 4294967295
+    return ((now % 10000000000 * 1000) + rand) % 4294967295
 }
 
 function generateRandomNumber() {
