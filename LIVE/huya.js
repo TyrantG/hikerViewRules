@@ -69,7 +69,7 @@ const secParse = params => {
 
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
     // let gameName = live.roomInfo.tLiveInfo.sGameFullName
-    let iGameId = live.roomInfo.tLiveInfo.iGameId
+    // let iGameId = live.roomInfo.tLiveInfo.iGameId
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     let live_url = ''
@@ -86,7 +86,7 @@ const secParse = params => {
                 live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
             }
         })
-        return live_url ? getRealUrl(live_url) : 'toast://主播尚未开播'
+        return live_url/* ? getRealUrl(live_url) : 'toast://主播尚未开播'*/
     // }
 }
 
