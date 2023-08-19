@@ -268,7 +268,7 @@ const process_anticode = (anticode, stream_name, uid, rand) => {
         if (key !== 'fm') search += '&' + key + '=' + antiMap[key]
     }
 
-    return search
+    return search.substring(1)
 }
 
 const getAntiMap = (anticode) => {
