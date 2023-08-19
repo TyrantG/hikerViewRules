@@ -64,6 +64,17 @@ const secParse = params => {
     let rid = input.split('/').pop()
     let html = fetch(input, {headers:{"User-Agent": MOBILE_UA}})
 
+    const userinfoJson = post('https://udblgn.huya.com/web/anonymousLogin', {
+        "appId": 5002,
+        "byPass": 3,
+        "context": "",
+        "version": "2.4",
+        "data": {}
+    })
+
+    const userinfo = JSON.parse(userinfoJson).data.uid
+    log(userinfo)
+
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
 
