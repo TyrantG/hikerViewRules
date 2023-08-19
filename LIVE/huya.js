@@ -116,10 +116,14 @@ const secParse = params => {
 
             let anti_code = process_anticode(sFlvAntiCode, sStreamName, uid, rand)
 
-            live_url.push(sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + anti_code)
+            let url = sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + anti_code
+
+            log(url)
+
+            live_url.push(url)
         })
     // }
-    
+
     return JSON.stringify({
         urls: live_url,
         // urls: [base64Decode(live.roomProfile.liveLineUrl).replace('//', 'http://')],
