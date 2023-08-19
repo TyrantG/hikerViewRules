@@ -262,7 +262,7 @@ const process_anticode = (anticode, stream_name, uid, rand) => {
 
     antiMap['wsSecret'] = md5(fm)
 
-    log(antiMap)
+    delete antiMap['fm']
 
     let search = ''
 
