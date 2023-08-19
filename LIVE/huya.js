@@ -88,7 +88,7 @@ const secParse = params => {
     // let iGameId = live.roomInfo.tLiveInfo.iGameId
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
-    let live_url = ''
+    let live_url = []
     // return JSON.stringify({
     //     urls: [getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')],
     //     // urls: [base64Decode(live.roomProfile.liveLineUrl).replace('//', 'http://')],
@@ -116,7 +116,7 @@ const secParse = params => {
 
                 // let hls_url = sHlsUrl + '/' + sStreamName + '.' + sHlsUrlSuffix + '?' + hls_anti_code
                 // live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
-                live_url = sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + flv_anti_code
+                live_url.push(sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + flv_anti_code)
             }
 
             // live_url.push(flv_url)
@@ -124,7 +124,7 @@ const secParse = params => {
         })
     // }
 
-    return live_url
+    return live_url[0]
 }
 
 const categoryParse = index =>{
