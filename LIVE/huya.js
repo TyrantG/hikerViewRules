@@ -119,8 +119,8 @@ const secParse = params => {
             let flv_url = sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + flv_anti_code
             let hls_url = sHlsUrl + '/' + sStreamName + '.' + sHlsUrlSuffix + '?' + hls_anti_code
 
-            // live_url.push(flv_url)
-            live_url.push(hls_url)
+            live_url.push(flv_url)
+            // live_url.push(hls_url)
         })
     // }
 
@@ -243,10 +243,10 @@ const getRealUrl = (live_url) => {
 }
 
 const process_anticode = (anticode, stream_name, uid, rand) => {
-    const now = new Date().getTime().toString() + '0000';
+    const now = new Date().getTime();
     let antiMap = getAntiMap(anticode)
 
-    let seqid = uid.toString() + now
+    let seqid = Number(uid) + now * 1000
     let ctype = antiMap.ctype
     let t = antiMap.t
     let wsTime = antiMap.wsTime
