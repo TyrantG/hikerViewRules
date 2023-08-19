@@ -88,7 +88,7 @@ const secParse = params => {
     // let iGameId = live.roomInfo.tLiveInfo.iGameId
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
-    let live_url = []
+    let live_url = ''
     // return JSON.stringify({
     //     urls: [getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')],
     //     // urls: [base64Decode(live.roomProfile.liveLineUrl).replace('//', 'http://')],
@@ -109,26 +109,22 @@ const secParse = params => {
             let sHlsUrlSuffix = info.sHlsUrlSuffix
             let sHlsAntiCode = info.sHlsAntiCode
 
-            // if (info.sCdnType === 'TX') {
+            if (info.sCdnType === 'TX') {
+
+                let flv_anti_code = process_anticode(sFlvAntiCode, sStreamName, uid, rand)
+                // let hls_anti_code = process_anticode(sHlsAntiCode, sStreamName, uid, rand)
+
+                // let hls_url = sHlsUrl + '/' + sStreamName + '.' + sHlsUrlSuffix + '?' + hls_anti_code
                 // live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
-            // }
+                live_url = sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + flv_anti_code
+            }
 
-            let flv_anti_code = process_anticode(sFlvAntiCode, sStreamName, uid, rand)
-            let hls_anti_code = process_anticode(sHlsAntiCode, sStreamName, uid, rand)
-
-            let flv_url = sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + flv_anti_code
-            let hls_url = sHlsUrl + '/' + sStreamName + '.' + sHlsUrlSuffix + '?' + hls_anti_code
-
-            live_url.push(flv_url)
+            // live_url.push(flv_url)
             // live_url.push(hls_url)
         })
     // }
 
-    return JSON.stringify({
-        urls: live_url,
-        // urls: [base64Decode(live.roomProfile.liveLineUrl).replace('//', 'http://')],
-        // danmu: 'web://http://huya_danmu.dev.tyrantg.com/?rid='+rid+'&ver=1'
-    })
+    return live_url
 }
 
 const categoryParse = index =>{
@@ -265,6 +261,8 @@ const process_anticode = (anticode, stream_name, uid, rand) => {
     fm.replace('$3', wsTime)
 
     antiMap['wsSecret'] = md5(fm)
+
+    log(antiMap)
 
     let search = ''
 
