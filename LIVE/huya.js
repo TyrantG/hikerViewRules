@@ -243,7 +243,7 @@ const getRealUrl = (live_url) => {
 }
 
 const process_anticode = (anticode, stream_name, uid, rand) => {
-    const now = new Date().getTime().toString();
+    const now = new Date().getTime().toString() + '0000';
     let antiMap = getAntiMap(anticode)
 
     let seqid = uid.toString() + now
