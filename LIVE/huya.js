@@ -260,7 +260,7 @@ const process_anticode = (anticode, stream_name, uid, rand) => {
 
     let search = ''
 
-    for (const key in antiMap) {
+    for (let key in antiMap) {
         search += key + '=' + antiMap[key] + '&'
     }
 
