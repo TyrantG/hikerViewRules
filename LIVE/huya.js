@@ -242,7 +242,7 @@ const process_anticode = (anticode, stream_name, uid, rand) => {
     const now = new Date().getTime();
     let antiMap = getAntiMap(anticode)
 
-    let seqid = Number(uid) + now * 1000
+    let seqid = Number(uid) + Number(now) * 1000
     let ctype = antiMap.ctype
     let t = antiMap.t
     let wsTime = antiMap.wsTime
@@ -255,10 +255,8 @@ const process_anticode = (anticode, stream_name, uid, rand) => {
 
     let result = md5(seqid+'|'+ctype+'|'+t)
     let fm = base64Decode(decodeURIComponent(antiMap.fm))
-    fm.replace('$0', uid)
-    fm.replace('$1', stream_name)
-    fm.replace('$2', result)
-    fm.replace('$3', wsTime)
+
+    fm = fm.replace('$0', uid).replace('$1', stream_name).replace('$2', result).replace('$3', wsTime)
 
     antiMap['wsSecret'] = md5(fm)
 
