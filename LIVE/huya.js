@@ -109,7 +109,7 @@ const secParse = params => {
             let sHlsUrlSuffix = info.sHlsUrlSuffix
             let sHlsAntiCode = info.sHlsAntiCode
 
-            if (info.sCdnType === 'TX') {
+            // if (info.sCdnType === 'TX') {
 
                 let flv_anti_code = process_anticode(sFlvAntiCode, sStreamName, uid, rand)
                 // let hls_anti_code = process_anticode(sHlsAntiCode, sStreamName, uid, rand)
@@ -117,7 +117,7 @@ const secParse = params => {
                 // let hls_url = sHlsUrl + '/' + sStreamName + '.' + sHlsUrlSuffix + '?' + hls_anti_code
                 // live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
                 live_url.push(sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + flv_anti_code)
-            }
+            // }
 
             // live_url.push(flv_url)
             // live_url.push(hls_url)
