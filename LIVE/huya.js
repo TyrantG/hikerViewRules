@@ -83,9 +83,11 @@ const secParse = params => {
     // } else {
         streamInfo.forEach(info => {
             if (info.sCdnType === 'TX') {
+                log(info.sFlvAntiCode)
                 live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
             }
         })
+        log(live_url)
         return live_url/* ? getRealUrl(live_url) : 'toast://主播尚未开播'*/
     // }
 }
