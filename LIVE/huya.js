@@ -67,28 +67,28 @@ const secParse = params => {
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
 
-    // let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
+    let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
     // let gameName = live.roomInfo.tLiveInfo.sGameFullName
     // let iGameId = live.roomInfo.tLiveInfo.iGameId
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
-    // let live_url = ''
-    return JSON.stringify({
-        // urls: [getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')],
-        urls: [base64Decode(live.roomProfile.liveLineUrl).replace('//', 'http://')],
-        // danmu: 'web://http://huya_danmu.dev.tyrantg.com/?rid='+rid+'&ver=1'
-    })
+    let live_url = ''
+    // return JSON.stringify({
+    //     urls: [getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')],
+    //     // urls: [base64Decode(live.roomProfile.liveLineUrl).replace('//', 'http://')],
+    //     // danmu: 'web://http://huya_danmu.dev.tyrantg.com/?rid='+rid+'&ver=1'
+    // })
 
-    /*if (parseInt(iGameId) === 2135) {
-        return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
-    } else {
+    // if (parseInt(iGameId) === 2135) {
+    //     return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
+    // } else {
         streamInfo.forEach(info => {
             if (info.sCdnType === 'TX') {
                 live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
             }
         })
-        return live_url ? getRealUrl(live_url) : 'toast://主播尚未开播'
-    }*/
+        return live_url.replace('http', 'https')/* ? getRealUrl(live_url) : 'toast://主播尚未开播'*/
+    // }
 }
 
 const categoryParse = index =>{
