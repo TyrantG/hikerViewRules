@@ -88,12 +88,7 @@ const secParse = params => {
     // let iGameId = live.roomInfo.tLiveInfo.iGameId
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
-    let live_url = ''
-    let sFlvUrl = ''
-    let sStreamName = ''
-    let sFlvUrlSuffix = ''
-    let sFlvAntiCode = ''
-    let rand = generateRandomNumber()
+    let live_url = []
     // return JSON.stringify({
     //     urls: [getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')],
     //     // urls: [base64Decode(live.roomProfile.liveLineUrl).replace('//', 'http://')],
@@ -104,23 +99,32 @@ const secParse = params => {
     //     return fetch("https://hiker.dev.tyrantg.com/huya/live_parser.php?id="+rid)
     // } else {
         streamInfo.forEach(info => {
-            if (info.sCdnType === 'TX') {
+
+            let sFlvUrl = ''
+            let sStreamName = ''
+            let sFlvUrlSuffix = ''
+            let sFlvAntiCode = ''
+            let rand = generateRandomNumber()
+
+            // if (info.sCdnType === 'TX') {
                 sFlvUrl = info.sFlvUrl
                 sStreamName = info.sStreamName
                 sFlvUrlSuffix = info.sFlvUrlSuffix
                 sFlvAntiCode = info.sFlvAntiCode
                 // live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
-            }
+            // }
+
+            let anti_code = process_anticode(sFlvAntiCode, sStreamName, uid, rand)
+
+            live_url.push(sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + anti_code)
         })
     // }
-
-    const anti_code = process_anticode(sFlvAntiCode, sStreamName, uid, rand)
-
-    log(anti_code)
-
-    live_url = sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + anti_code
-
-    return live_url
+    
+    return JSON.stringify({
+        urls: live_url,
+        // urls: [base64Decode(live.roomProfile.liveLineUrl).replace('//', 'http://')],
+        // danmu: 'web://http://huya_danmu.dev.tyrantg.com/?rid='+rid+'&ver=1'
+    })
 }
 
 const categoryParse = index =>{
