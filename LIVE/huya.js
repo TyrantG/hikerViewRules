@@ -100,27 +100,27 @@ const secParse = params => {
     // } else {
         streamInfo.forEach(info => {
 
-            let sFlvUrl = ''
-            let sStreamName = ''
-            let sFlvUrlSuffix = ''
-            let sFlvAntiCode = ''
             let rand = generateRandomNumber()
+            let sStreamName = info.sStreamName
+            let sFlvUrl = info.sFlvUrl
+            let sFlvUrlSuffix = info.sFlvUrlSuffix
+            let sFlvAntiCode = info.sFlvAntiCode
+            let sHlsUrl = info.sHlsUrl
+            let sHlsUrlSuffix = info.sHlsUrlSuffix
+            let sHlsAntiCode = info.sHlsAntiCode
 
             // if (info.sCdnType === 'TX') {
-                sFlvUrl = info.sFlvUrl
-                sStreamName = info.sStreamName
-                sFlvUrlSuffix = info.sFlvUrlSuffix
-                sFlvAntiCode = info.sFlvAntiCode
                 // live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
             // }
 
-            let anti_code = process_anticode(sFlvAntiCode, sStreamName, uid, rand)
+            let flv_anti_code = process_anticode(sFlvAntiCode, sStreamName, uid, rand)
+            let hls_anti_code = process_anticode(sHlsAntiCode, sStreamName, uid, rand)
 
-            let url = sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + anti_code
+            let flv_url = sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + flv_anti_code
+            let hls_url = sHlsUrl + '/' + sStreamName + '.' + sHlsUrlSuffix + '?' + hls_anti_code
 
-            log(url)
-
-            live_url.push(url)
+            // live_url.push(flv_url)
+            live_url.push(hls_url)
         })
     // }
 
