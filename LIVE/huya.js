@@ -292,7 +292,7 @@ function generateRandomNumber() {
     var randomString = randomInteger.toString();
 
     // 如果字符串的长度小于4，就在字符串前面添加0，直到长度等于4
-    while (randomString.length < 4) {
+    for (let i = 0; i < 4; i++) {
         randomString = "0" + randomString;
     }
 
