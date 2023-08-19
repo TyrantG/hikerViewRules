@@ -79,7 +79,6 @@ const secParse = params => {
     })
 
     const uid = JSON.parse(userinfoJson).data.uid
-    log(uid)
 
     let live_json = html.match(/window.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
@@ -90,6 +89,11 @@ const secParse = params => {
     // let defaultLiveStreamUrl = live.roomInfo.tLiveInfo.tLiveStreamInfo.sDefaultLiveStreamUrl
 
     let live_url = ''
+    let sFlvUrl = ''
+    let sStreamName = ''
+    let sFlvUrlSuffix = ''
+    let sFlvAntiCode = ''
+    let rand = generateRandomNumber()
     // return JSON.stringify({
     //     urls: [getRealUrl(base64Decode(live.roomProfile.liveLineUrl)).replace('//', 'http://')],
     //     // urls: [base64Decode(live.roomProfile.liveLineUrl).replace('//', 'http://')],
@@ -101,11 +105,22 @@ const secParse = params => {
     // } else {
         streamInfo.forEach(info => {
             if (info.sCdnType === 'TX') {
-                live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
+                sFlvUrl = info.sFlvUrl
+                sStreamName = info.sStreamName
+                sFlvUrlSuffix = info.sFlvUrlSuffix
+                sFlvAntiCode = info.sFlvAntiCode
+                // live_url = info.sFlvUrl + '/' + info.sStreamName + '.' + info.sFlvUrlSuffix + '?' + info.sFlvAntiCode
             }
         })
-        return live_url.replace('http', 'https')/* ? getRealUrl(live_url) : 'toast://主播尚未开播'*/
     // }
+
+    const anti_code = process_anticode(sFlvAntiCode, sStreamName, uid, rand)
+
+    log(anti_code)
+
+    live_url = sFlvUrl + '/' + sStreamName + '.' + sFlvUrlSuffix + '?' + anti_code
+
+    return live_url
 }
 
 const categoryParse = index =>{
@@ -217,4 +232,70 @@ const getRealUrl = (live_url) => {
     let h = [p, t, s, f, ll].join('_')
     let m = md5(h)
     return (i+"?wsSecret="+m+"&wsTime="+ll+"&u="+t+"&seqid="+f+"&"+c_tmp2.pop()).replace('hls', 'flv').replace('m3u8', 'flv')
+}
+
+const process_anticode = (anticode, stream_name, uid, rand) => {
+    const now = new Date().getTime().toString();
+    let antiMap = getAntiMap(anticode)
+
+    let seqid = uid.toString() + now
+    let ctype = antiMap.ctype
+    let t = antiMap.t
+    let wsTime = antiMap.wsTime
+
+    antiMap['ver'] = '1';
+    antiMap['sv'] = '2110211124';
+    antiMap['seqid'] = seqid;
+    antiMap['uid'] = uid;
+    antiMap['uuid'] = get_uuid(now, rand);
+
+    let result = md5(seqid+'|'+ctype+'|'+t)
+    let fm = base64Decode(decodeURIComponent(antiMap.fm))
+    fm.replace('$0', uid)
+    fm.replace('$1', stream_name)
+    fm.replace('$2', result)
+    fm.replace('$3', wsTime)
+
+    antiMap['wsSecret'] = md5(fm)
+
+    let search = ''
+
+    for (const key in antiMap) {
+        search += key + '=' + antiMap[key] + '&'
+    }
+
+    return search
+}
+
+const getAntiMap = (anticode) => {
+    var keyValue = anticode.split("&"); // 将所有的参数放到一个数组里
+    let obj = {}; // 定义一个对象 用来存放所有参数
+    keyValue.map((e) => {
+        let key = e.split("=")[0];
+        obj[key] = e.split("=")[1];
+    });
+    return obj;
+}
+
+const get_uuid = (now, rand) => {
+    return ((now % 10000000000 * 1000) + rand.toString()) % 4294967295
+}
+
+function generateRandomNumber() {
+    // 生成0到1之间的随机小数
+    var randomNumber = Math.random();
+
+    // 将随机小数乘以10000，得到0到10000之间的随机整数
+    var randomInteger = Math.floor(randomNumber * 10000);
+
+    // 将随机整数转化为字符串
+    var randomString = randomInteger.toString();
+
+    // 如果字符串的长度小于4，就在字符串前面添加0，直到长度等于4
+    while (randomString.length < 4) {
+        randomString = "0" + randomString;
+    }
+
+    // 返回四位随机数
+    return randomString;
 }
