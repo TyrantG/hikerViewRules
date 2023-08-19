@@ -66,6 +66,9 @@ const secParse = params => {
 
     const userinfoJson = fetch('https://udblgn.huya.com/web/anonymousLogin', {
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+        },
         body: {
             "appId": 5002,
             "byPass": 3,
