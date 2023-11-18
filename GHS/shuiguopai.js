@@ -1,16 +1,25 @@
 js:
 let d = [];
-const list_json = fetch(MY_URL);
-const list = JSON.parse(list_json).data.data
-const cdn = JSON.parse(list_json).cdn
+const [url, page] = MY_URL.split('##')
+const list_json = fetch(url, {headers: {
+    'Content-Type': 'application/json',
+    'Referer': 'https://sgpai.cc/',
+    'User-Agent': MOBILE_UA
+  }, method:'POST', body: JSON.stringify({
+    "hm": "008-api",
+    "length": 12,
+    "type": 1,
+    "page": page,
+  })});
+const list = JSON.parse(list_json).data.list
 
-if (MY_URL.includes('library')) {
+if (url.includes('library')) {
   list.forEach(item => {
     d.push({
       title: item.title,
       desc: item.subtitle,
-      pic_url: cdn.image+item.img_url,
-      url: $("http://www.shuiguopai.com/play-details/1/"+item.id).lazyRule(_ => {
+      pic_url: item.img_url,
+      url: $("https://sgpai.cc/play-details/1/"+res.library_id+"/").lazyRule(_ => {
         const html = fetch(input)
         return (html.match(/url:"(.*?)index.m3u8"/)[1]).replace(/\\u002F/g, '/')+"index.m3u8"
       }),
@@ -21,9 +30,9 @@ if (MY_URL.includes('library')) {
   list.forEach(item => {
     item.cdn = cdn
     d.push({
-      title: item.name,
+      title: item.anchors_name,
       desc: item.library_count+'部作品',
-      pic_url: cdn.image+item.img,
+      pic_url: item.anchors_img,
       url: $("hiker://empty##fypage").rule(item => {
         let d = [];
         const params = {
@@ -34,7 +43,7 @@ if (MY_URL.includes('library')) {
         }
         const headers = {
           'Content-Type': 'application/json',
-          'Referer': 'http://shuiguopai.com/',
+          'Referer': 'https://sgpai.cc/',
           'User-Agent': MOBILE_UA
         }
         const data_json = fetch("https://api.cbbee0.com/v1_2/anchorsDetail", {headers: headers, method:'POST', body: JSON.stringify(params)})
@@ -44,7 +53,7 @@ if (MY_URL.includes('library')) {
             title: res.title,
             desc: res.subtitle,
             pic_url: res.img_url,
-            url: $("http://www.shuiguopai.com/play-details/1/"+res.library_id+"/").lazyRule(_ => {
+            url: $("https://sgpai.cc/play-details/1/"+res.library_id+"/").lazyRule(_ => {
               const html = fetch(input)
               return (html.match(/url:"(.*?)index.m3u8"/)[1]).replace(/\\u002F/g, '/')+"index.m3u8"
             }),
