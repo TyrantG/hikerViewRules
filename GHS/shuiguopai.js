@@ -11,17 +11,16 @@ const list_json = fetch(url, {headers: {
     "type": 1,
     "page": page,
   })});
-log(url)
-log(list_json)
+
 const list = JSON.parse(list_json).data.list
 
-if (url.includes('library')) {
+if (url.includes('homePage')) {
   list.forEach(item => {
     d.push({
       title: item.title,
       desc: item.subtitle,
       pic_url: item.img_url,
-      url: $("https://sgpai.cc/play-details/1/"+res.library_id+"/").lazyRule(_ => {
+      url: $("https://sgpai.cc/play-details/1/"+item.library_id+"/").lazyRule(_ => {
         const html = fetch(input)
         return (html.match(/url:"(.*?)index.m3u8"/)[1]).replace(/\\u002F/g, '/')+"index.m3u8"
       }),
@@ -30,7 +29,6 @@ if (url.includes('library')) {
   })
 } else {
   list.forEach(item => {
-    item.cdn = cdn
     d.push({
       title: item.anchors_name,
       desc: item.library_count+'部作品',
@@ -38,7 +36,7 @@ if (url.includes('library')) {
       url: $("hiker://empty##fypage").rule(item => {
         let d = [];
         const params = {
-          "anchors_id": item.id,
+          "anchors_id": item.anchors_id,
           "hm": "008-api",
           "length": 12,
           "page": MY_URL.split('##')[1],
