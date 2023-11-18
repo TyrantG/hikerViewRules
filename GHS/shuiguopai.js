@@ -11,6 +11,8 @@ const list_json = fetch(url, {headers: {
     "type": 1,
     "page": page,
   })});
+log(url)
+log(list_json)
 const list = JSON.parse(list_json).data.list
 
 if (url.includes('library')) {
