@@ -61,9 +61,9 @@ const baseParse = _ => {
 }
 
 const secParse = params => {
-    log(input)
     let rid = input.split('/').pop()
     let html = fetch(input, {headers:{"User-Agent": MOBILE_UA}})
+    log(html)
 
     const userinfoJson = fetch('https://udblgn.huya.com/web/anonymousLogin', {
         method: 'POST',
