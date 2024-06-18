@@ -61,6 +61,7 @@ const baseParse = _ => {
 }
 
 const secParse = params => {
+    log(input)
     let rid = input.split('/').pop()
     let html = fetch(input, {headers:{"User-Agent": MOBILE_UA}})
 
