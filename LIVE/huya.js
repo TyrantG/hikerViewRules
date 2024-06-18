@@ -81,7 +81,7 @@ const secParse = params => {
 
     const uid = JSON.parse(userinfoJson).data.uid
 
-    log(html.match(/window\.HNF_GLOBAL_INIT = (.*?)<\/script>/))
+    log(html.match(/window\.HNF_GLOBAL_INIT =(.|\n)*?(<\/script>)/))
 
     let live_json = html.match(/window\.HNF_GLOBAL_INIT = (.*?)<\/script>/)[1]
     let live  = JSON.parse(live_json)
