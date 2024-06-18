@@ -80,9 +80,10 @@ const secParse = params => {
 
     const uid = JSON.parse(userinfoJson).data.uid
 
-    let live_json = (html.match(/window\.HNF_GLOBAL_INIT = ((.|\n)*?)<\/script>/)[1]).replace(/function\(\)(.|\n)*?}/g, 'null')
-    log(live_json)
-    let live  = JSON.parse(live_json)
+    // let live_json = (html.match(/window\.HNF_GLOBAL_INIT = ((.|\n)*?)<\/script>/)[1]).replace(/function\(\)(.|\n)*?}/g, 'null')
+    let live_json = html.match(/window\.HNF_GLOBAL_INIT = ((.|\n)*?)<\/script>/)[1]
+    eval(`let live = ${live_json}`)
+    // let live = JSON.parse(live_json)
 
     let streamInfo = live.roomInfo.tLiveInfo.tLiveStreamInfo.vStreamInfo.value
     // let gameName = live.roomInfo.tLiveInfo.sGameFullName
