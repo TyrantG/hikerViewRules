@@ -14,6 +14,7 @@ const nga = {
         HomeCategory: '__lib=home&__act=category&_v=2',
         SubjectList: '__lib=subject&__act=list',
         FavorAll: '__lib=favor&__act=all',
+        FavorForum: '__lib=favorforum&__act=sync',
     },
     publicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyKzZWDimCN1OCprqWUhF\n\
 UPhcwxDE62/BFVP6LtQHJu+65dm4YNmDvzitmcfaXW9YbhXnd4oP7j+6vpcgJQ+p\n\
@@ -337,8 +338,11 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
         setPageTitle('收藏板块')
 
         const res = nga.thread({
-
+            __lib: 'forum_favor2',
+            __act: 'forum_favor',
         })
+
+        log(res)
     },
     favorParse: () => {
         setPageTitle('收藏帖子')
@@ -453,10 +457,15 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
 
                 const content = item.content
                     .replace(/\[url](.*?)\[\/url]/g, '[url=$1][/url]')
+                    .replace(/\[h](.*?)\[\/h]/g, '[url=$1][/url]')
                     .replace(/\[img]\.\/(.*?)\[\/img]/g, '[img='+nga.attachmentsCDNUrl+'$1][/img]')
 
+                const convert = bbcode2Html.parser(content)
+
+                log(convert)
+
                 nga.d.push({
-                    title: bbcode2Html.parser(content),
+                    title: convert,
                     col_type: 'rich_text',
                 })
 
