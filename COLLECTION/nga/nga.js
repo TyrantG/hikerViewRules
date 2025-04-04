@@ -352,7 +352,7 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
 
         if (res.result) {
             res.result.data.forEach(item => {
-                const url = $(nga.empty+'##fypage#noHistory#').rule((tid, title) => {
+                const url = $(nga.empty+'#fullTheme#').rule((tid, title) => {
                     const nga = $.require('hiker://page/nga')
                     nga.readParse(tid, title)
                     setResult(nga.d);
@@ -387,7 +387,7 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
 
         if (res.result) {
             res.result.data.forEach(item => {
-                const url = $(nga.empty+'##fypage').rule((tid, title) => {
+                const url = $(nga.empty+'#fullTheme#').rule((tid, title) => {
                     const nga = $.require('hiker://page/nga')
                     nga.readParse(tid, title)
                     setResult(nga.d);
@@ -425,58 +425,86 @@ l2V8zGh1j7ojZbt62hVjy6byK1E/2XYo97ZtL4KDW7F5jJMvSDRFR7901UR8hCdf\n\
         }
     },
     readParse: (tid, title) => {
-        setPageTitle(title)
-        const page = MY_PAGE
-        const bbcode2Html = $.require('hiker://page/bbcode2Html')
-        const res = nga.read({
-            tid: tid,
-            page: page,
+        // setPageTitle(title)
+        // const page = MY_PAGE
+        // const bbcode2Html = $.require('hiker://page/bbcode2Html')
+        // const res = nga.read({
+        //     tid: tid,
+        //     page: 1,
+        // })
+
+        const userinfo = nga.getUserinfo()
+        const cookie = userinfo ? 'ngaPassportUid='+userinfo.ngaPassportUid+'; ngaPassportCid='+userinfo.ngaPassportCid+';' : ''
+        
+        const params = {
+            url: nga.ReadUrl,
+            data: {
+                __output: '11',
+                __inchst: 'UTF8',
+                v2: '1',
+                tid: tid,
+            },
+            cookie: cookie,
+            ua: PC_UA,
+        }
+
+        // putVar('post-data', res)
+        // writeFile('hiker://files/TyrantG/a.json', JSON.stringify(res))
+
+        nga.d.push({
+            url: 'http://192.168.1.26:4396/nga/forum-parse?params='+encodeURIComponent(JSON.stringify(params)),
+            desc: 'float&&100%',
+            col_type: 'x5_webview_single',
+            extra: {
+                showProgress: false,
+                imgLongClick: false,
+            },
         })
 
-        if (res.data) {
-            const userList = res.data.__U || res.data.__u
-            const list = res.data.__R || res.data.__r
+        // if (res.data) {
+        //     const userList = res.data.__U || res.data.__u
+        //     const list = res.data.__R || res.data.__r
 
-            list.forEach(item => {
-                if (item.subject) {
-                    nga.d.push({
-                        title: item.subject,
-                        url: nga.empty,
-                        col_type: 'text_1'
-                    })
-                }
+        //     list.forEach(item => {
+        //         if (item.subject) {
+        //             nga.d.push({
+        //                 title: item.subject,
+        //                 url: nga.empty,
+        //                 col_type: 'text_1'
+        //             })
+        //         }
 
-                const user = userList[item.authorid]
+        //         const user = userList[item.authorid]
 
-                nga.d.push({
-                    title: user.username,
-                    pic_url: user.avatar || nga.defaultIconPath,
-                    // url: url,
-                    col_type: 'avatar',
-                })
+        //         nga.d.push({
+        //             title: user.username,
+        //             pic_url: user.avatar || nga.defaultIconPath,
+        //             // url: url,
+        //             col_type: 'avatar',
+        //         })
 
-                const content = item.content
-                    .replace(/\[url](.*?)\[\/url]/g, '[url=$1][/url]')
-                    .replace(/\[h](.*?)\[\/h]/g, '[url=$1][/url]')
-                    .replace(/\[img]\.\/(.*?)\[\/img]/g, '[img='+nga.attachmentsCDNUrl+'$1][/img]')
+        //         const content = item.content
+        //             .replace(/\[url](.*?)\[\/url]/g, '[url=$1][/url]')
+        //             .replace(/\[h](.*?)\[\/h]/g, '[url=$1][/url]')
+        //             .replace(/\[img]\.\/(.*?)\[\/img]/g, '[img='+nga.attachmentsCDNUrl+'$1][/img]')
 
-                const convert = bbcode2Html.parser(content)
+        //         const convert = bbcode2Html.parser(content)
 
-                log(convert)
+        //         log(convert)
 
-                nga.d.push({
-                    title: convert,
-                    col_type: 'rich_text',
-                })
+        //         nga.d.push({
+        //             title: convert,
+        //             col_type: 'rich_text',
+        //         })
 
-                nga.d.push({
-                    col_type: 'line_blank',
-                })
-            })
-        } else {
-            toast('接口异常')
-            back()
-        }
+        //         nga.d.push({
+        //             col_type: 'line_blank',
+        //         })
+        //     })
+        // } else {
+        //     toast('接口异常')
+        //     back()
+        // }
     },
 }
 

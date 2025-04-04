@@ -40,7 +40,7 @@ const nodes = [
 
   // 引用
   {
-    tag: "collapse",
+    tag: "quote",
     html_open: "<blockquote>",
     html_close: "</blockquote>"
   },
